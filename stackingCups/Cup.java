@@ -1,0 +1,216 @@
+
+/**
+ * Write a description of class Cup here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+
+public class Cup {
+    private int number;
+    private int height;
+    private int max;
+    private int min;
+    private int posx;
+    private int posy;
+    private String state;
+    private String color;
+    private boolean isVisible;
+    private Lid cover;
+    
+    /**
+     * Constructor de la clase Cup
+     * Crea una nueva taza con un número identificador
+     * 
+     * @param number identificador único de la taza
+     */
+    public Cup(int inumber) {
+        number = inumber;
+        height = inumber;
+        //hay que calcular min y max dependiendo del numero
+        max = 0;
+        min = 0;
+        state = "noCovered"; //opciones: Covered, noCovered 
+                             // no es booleano porque 
+                             //da posibilidad a extender despúes
+        color = "red";
+        isVisible = false;
+        cover = new Lid(height,color,this);
+    }
+    
+    /**
+     * Obtiene el número identificador de la taza
+     * 
+     * @return número identificador
+     */
+    public int getNumber() {
+        return number;
+    }
+    
+    /**
+     * Obtiene la altura de la taza
+     * 
+     * @return altura en centímetros
+     */
+    public int getHeight() {
+        return height;
+    }
+    
+    /**
+     * Obtiene el valor mínimo permitido
+     * 
+     * @return altura minima de la taza al colisionar
+     */
+    public int getMin() {
+        return min;
+    }
+    
+    /**
+     * Obtiene el valor máximo permitido
+     * 
+     * @return altura maxima de la taza al colisionar
+     */
+    public int getMax() {
+        return max;
+    }
+    
+    /**
+     * Obtiene el estado actual de la taza
+     * 
+     * @return estado actual de la taza sobre su covertura
+     */
+    public String getState() {
+        return state;
+    }
+    
+    /**
+     * Obtiene la tapa que cubre esta taza
+     * 
+     * @return la tapa (Lid)
+     */
+    public Lid getCover() {
+        return cover;
+    }
+    
+    /**
+     * Obtiene la posición X de la taza
+     * 
+     * @return coordenada X en píxeles
+     */
+    public int getPosx() {
+        return posx;
+    }
+    
+    /**
+     * Obtiene la posición Y de la taza
+     * 
+     * @return coordenada Y en píxeles
+     */
+    public int getPosy() {
+        return posy;
+    }
+    
+    /**
+     * Obtiene el color de la taza
+     * 
+     * @return color en formato RGB entero
+     */
+    public String getColor() {
+        return color;
+    }
+    
+    /**
+     * Cambia el color de la taza usando código RGB
+     * 
+     * @param ncolor nuevo color
+     */
+    public void changeColor(String ncolor) {
+        color = ncolor;
+        cover.changeColor(ncolor);
+    }
+    
+    /**
+     * Establece la posición de la taza en pantalla
+     * 
+     * @param posx coordenada X en píxeles
+     * @param posy coordenada Y en píxeles
+     */
+    public void setPosition(int posx, int posy) {
+        posx = posx;
+        posy = posy;
+    }
+    
+    /**
+     * Establece el estado de la taza
+     * 
+     * @param nstate nuevo estado (ej: "normal", "covered", "selected", "stacked")
+     */
+    public void setState(String nstate) {
+        state = nstate;
+    }
+
+    /**
+     * Establece el valor mínimo permitido
+     * 
+     * @param minValue valor mínimo a asignar
+     */
+    public void setMin(int minValue) {
+        min = minValue;
+    }
+    
+    /**
+     * Establece el valor máximo permitido
+     * 
+     * @param maxValue valor máximo a asignar
+     */
+    public void setMax(int maxValue) {
+        max = maxValue;
+    }
+    
+    /**
+     * Establece la altura de la taza
+     * 
+     * @param newHeight nueva altura en cm
+     */
+    private void setHeight(int newHeight) {
+        height = newHeight;
+    }
+    
+    /**
+     * Hace visible la taza en pantalla
+     */
+    public void makeVisible() {
+        isVisible = true;
+    }
+    
+    /**
+     * Hace invisible la taza (la oculta)
+     */
+    public void makeInvisible() {
+        isVisible = false;
+    }
+    
+    /**
+     * Verifica si la taza es visible
+     * 
+     * @return true si es visible, false en caso contrario
+     */
+    public boolean isVisible() {
+        return isVisible;
+    }
+   
+    /**
+     * Verifica si la taza está cubierta por una tapa
+     * 
+     * @return true si tiene una tapa, false si tiene otro estado
+     */
+    public boolean isCovered() {
+        return state=="Covered";
+    }
+    
+    public String getInfo(){
+        String info="informacion:"+number+", "+height+", "+state;
+        System.out.println(info);
+        return info;
+    }
+}
