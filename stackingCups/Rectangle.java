@@ -74,6 +74,11 @@ public class Rectangle{
         yPosition = nPosy;
     }
     
+    public void setP(int nPosy,int nPosx){
+        xPosition = nPosx;   
+        yPosition = nPosy;
+    }
+    
     /**
      * It calculates the Rectangle's perimeter.
      */

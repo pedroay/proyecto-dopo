@@ -1,3 +1,4 @@
+import java.util.Random;
 
 /**
  * Write a description of class Cup here.
@@ -17,6 +18,8 @@ public class Cup {
     private String color;
     private boolean isVisible;
     private Lid cover;
+    public Rectangle shape1;
+    public Rectangle shape2;
     
     /**
      * Constructor de la clase Cup
@@ -26,16 +29,27 @@ public class Cup {
      */
     public Cup(int inumber) {
         number = inumber;
-        height = inumber;
+        height = calculateHeight(inumber);
         //hay que calcular min y max dependiendo del numero
         max = 0;
         min = 0;
         state = "noCovered"; //opciones: Covered, noCovered 
                              // no es booleano porque 
                              //da posibilidad a extender despúes
-        color = "red";
+        color = randomColor();
         isVisible = false;
         cover = new Lid(height,color,this);
+    }
+    
+    private String randomColor(){
+        String[] colors = {"red","black","blue","yellow","green","magenta","white"};
+        Random random = new Random();
+        int index = random.nextInt(colors.length);
+        return colors[index];
+    }
+    
+    public int calculateHeight(int inumber){
+        return ((2*inumber)-1)*10;
     }
     
     /**
@@ -181,6 +195,7 @@ public class Cup {
      */
     public void makeVisible() {
         isVisible = true;
+        draw();
     }
     
     /**
@@ -188,6 +203,7 @@ public class Cup {
      */
     public void makeInvisible() {
         isVisible = false;
+        erase();
     }
     
     /**
@@ -212,5 +228,25 @@ public class Cup {
         String info="informacion:"+number+", "+height+", "+state;
         System.out.println(info);
         return info;
+    }
+    
+    public void draw(){
+        shape1= new Rectangle(height*4);
+        shape1.changeColor(color);
+        shape2= new Rectangle((height-20)*4);
+        shape2.moveHorizontal(10);
+        shape2.changeSize(height-10,height-20);//altura,ancho
+        shape2.changeColor("white");
+        shape1.makeVisible();
+        shape2.makeVisible(); 
+        if(isCovered()){
+            cover.draw();
+        }
+    }
+    
+    public void erase(){
+        shape1.makeInvisible();
+        shape2.makeInvisible();
+        cover.makeInvisible();
     }
 }

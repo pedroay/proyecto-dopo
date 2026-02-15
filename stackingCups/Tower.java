@@ -35,17 +35,19 @@ public class Tower
      * Agrega una taza al tope de la torre
      */
     public void pushCup(int i){
-        boolean alreadyexist = false;
-        if(!cups.isEmpty()){
+        boolean alreadyExist = false;
+        boolean isEmpty=cups.isEmpty();
+        if(!isEmpty){
             for (Cup c : cups) {
-                if (c.getNumber() == i) {
-                    alreadyexist = true;
+                int number=c.getNumber();
+                if (number == i) {
+                    alreadyExist = true;
                     isOK = false;
                     break;
                 }
             }
         }
-        if (!alreadyexist) {
+        if (!alreadyExist) {
             Cup ncup = new Cup(i);
             cups.push(ncup);
             Lid nlid=ncup.getCover();
@@ -58,8 +60,9 @@ public class Tower
      * Remueve y retorna la taza del tope
      */
     public Cup popCup()
-    {
-        if (!cups.isEmpty()) {
+    {   
+        boolean isEmpty=cups.isEmpty();
+        if (!isEmpty) {
             isOK = true;
             return cups.pop();
         } else {
@@ -76,16 +79,19 @@ public class Tower
         Stack<Cup> temp = new Stack<Cup>();
         Cup removedCup = null;
         boolean found = false;
-        while (!cups.isEmpty()) {
+        boolean isEmpty=cups.isEmpty();
+        while (!isEmpty) {
             Cup c = cups.pop();
-            if (c.getNumber() != i) {
+            int number=c.getNumber(); 
+            if (number != i) {
                 temp.push(c);
             } else {
                 found = true;
                 removedCup=c;
             }
         }
-        while (!temp.isEmpty()) {
+        boolean tIsEmpty=temp.isEmpty();
+        while (!tIsEmpty) {
             cups.push(temp.pop());
         } 
         if (found && removedCup != null) {
@@ -292,5 +298,14 @@ public class Tower
     public int getLidsSize()
     {
         return lids.size();
+    }
+    
+    public void drawRule(){
+        for (int i=0;i<=maxHeight;i++){
+            Rectangle r= new Rectangle();
+            r.changeSize(2,10);
+            r.setP(i*10,0);
+            r.makeVisible();
+        }
     }
 }

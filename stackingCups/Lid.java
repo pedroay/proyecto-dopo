@@ -16,6 +16,7 @@ public class Lid
     private String state;
     private boolean isVisible;
     private Cup cup;
+    private Rectangle shape;
     /**
      * Constructor de la clase Lid
      * Crea una nueva tapa con ancho y color especificados
@@ -164,5 +165,19 @@ public class Lid
     public void getInfo(){
         String info="informacion:"+cup.getNumber()+", "+width+", "+height+", "+state;
         System.out.println(info);
+    }
+    
+    public void draw(){
+        shape=new Rectangle();
+        shape.changeColor(color);
+        shape.changeSize(height*10,width);
+        posx=cup.shape1.getXP();
+        posy=cup.shape1.getYP();
+        shape.setP(posy,posx);
+        shape.makeVisible();
+        }
+    
+    public void erase(){
+        shape.makeInvisible();
     }
 }
