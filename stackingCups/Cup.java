@@ -39,10 +39,12 @@ public class Cup {
         color = randomColor();
         isVisible = false;
         cover = new Lid(height,color,this);
+        posx = 150 - (height/2);
+            
     }
     
     private String randomColor(){
-        String[] colors = {"red","black","blue","yellow","green","magenta","white"};
+        String[] colors = {"red","black","blue","yellow","green","magenta"};
         Random random = new Random();
         int index = random.nextInt(colors.length);
         return colors[index];
@@ -230,10 +232,12 @@ public class Cup {
         return info;
     }
     
-    public void draw(){
+    private void draw(){
         shape1= new Rectangle(height*4);
+        shape1.setP(posy,posx);
         shape1.changeColor(color);
         shape2= new Rectangle((height-20)*4);
+        shape2.setP(posy,posx);
         shape2.moveHorizontal(10);
         shape2.changeSize(height-10,height-20);//altura,ancho
         shape2.changeColor("white");
@@ -244,7 +248,7 @@ public class Cup {
         }
     }
     
-    public void erase(){
+    private void erase(){
         shape1.makeInvisible();
         shape2.makeInvisible();
         cover.makeInvisible();
