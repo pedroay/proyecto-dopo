@@ -40,12 +40,14 @@ public class Cup {
         isVisible = false;
         cover = new Lid(height,color,this);
         posx = 150 - (height/2);
+        posy = 300 - height;
             
     }
     
     private String randomColor(){
         String[] colors = {"red","black","blue","yellow","green","magenta"};
         Random random = new Random();
+
         int index = random.nextInt(colors.length);
         return colors[index];
     }

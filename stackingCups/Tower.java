@@ -35,28 +35,56 @@
          * Agrega una taza al tope de la torre
          */
         public void pushCup(int i){
-            boolean alreadyExist = false;
-            boolean isEmpty=cups.isEmpty();
-            if(!isEmpty){
-                for (Cup c : cups) {
-                    int number=c.getNumber();
-                    if (number == i) {
-                        alreadyExist = true;
-                        isOK = false;
-                        break;
-                    }
+
+
+            for(Cup c : cups){
+                if(c.getNumber() == i){
+                    isOK = false;
+                    return;
+                }
+        }
+
+        Cup newCup = new Cup(i);
+    
+        if(cups.isEmpty()){
+            cups.push(newCup);
+            Lid lid = newCup.getCover();
+            pushLid(lid);
+            isOK = true;
+            return;
+        }
+
+        //3️⃣ Obtener la copa anterior SIN sacarla
+        Cup anteriorCup = cups.peek();
+    
+        // 4️⃣ Validar regla de apilamiento
+        if(anteriorCup.getHeight() > newCup.getHeight() 
+           && !anteriorCup.isCovered()){
+    
+            // Ajustar posición (si tu diseño lo requiere)
+            newCup.setPosition(newCup.getPosx(), anteriorCup.getPosy() - 50);
+            cups.push(newCup);
+            Lid lid = newCup.getCover();
+            pushLid(lid);
+    
+            isOK = true;
+        }
+        else{
+            isOK = false;
+        }
+}
+
+      
+        private void towerHeight(Cup nCup){
+            for (Cup c:cups){
+                int cHeight = c.getHeight();
+                int nCHeight = nCup.getHeight();
+                if (cHeight > nCHeight){
+                    String cCover =c.getState();
+                    
                 }
             }
-            if (!alreadyExist) {
-                Cup ncup = new Cup(i);
-                cups.push(ncup);
-                Lid nlid=ncup.getCover();
-                pushLid(nlid);
-                isOK = true;
-            }
         }
-      
-        
      
         /**
          * Remueve y retorna la taza del tope
@@ -248,7 +276,9 @@
          * Hace visible la torre
          */
         public void makeVisible()
-        {
+        {   for(Cup c:cups){
+                c.makeVisible();
+            }
             isVisible = true;
         }
         
@@ -257,15 +287,18 @@
          */
         public void makeInvisible()
         {
+            for(Cup c:cups){
+            c.makeInvisible();
             isVisible = false;
+        }
         }
         
         /**
          * Verifica si la torre es visible
          */
-        public boolean isVisible()
-        {
+        public boolean isVisible(){   
             return isVisible;
+            
         }
         
         /**
