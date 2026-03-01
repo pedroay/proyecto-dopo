@@ -10,8 +10,6 @@ import java.util.Random;
 public class Cup {
     private int number;
     private int height;
-    private int max;
-    private int min;
     private int posx;
     private int posy;
     private String state;
@@ -20,6 +18,8 @@ public class Cup {
     private Lid cover;
     public Rectangle shape1;
     public Rectangle shape2;
+    private Cup inside;
+    private Cup above;
     
     /**
      * Constructor de la clase Cup
@@ -31,8 +31,6 @@ public class Cup {
         number = inumber;
         height = calculateHeight(inumber);
         //hay que calcular min y max dependiendo del numero
-        max = 0;
-        min = 0;
         state = "noCovered"; //opciones: Covered, noCovered 
                              // no es booleano porque 
                              //da posibilidad a extender despúes
@@ -74,23 +72,6 @@ public class Cup {
         return height;
     }
     
-    /**
-     * Obtiene el valor mínimo permitido
-     * 
-     * @return altura minima de la taza al colisionar
-     */
-    public int getMin() {
-        return min;
-    }
-    
-    /**
-     * Obtiene el valor máximo permitido
-     * 
-     * @return altura maxima de la taza al colisionar
-     */
-    public int getMax() {
-        return max;
-    }
     
     /**
      * Obtiene el estado actual de la taza
@@ -154,8 +135,8 @@ public class Cup {
      * @param posy coordenada Y en píxeles
      */
     public void setPosition(int posx, int posy) {
-        posx = posx;
-        posy = posy;
+        this.posx = posx;
+        this.posy = posy;
     }
     
     /**
@@ -167,23 +148,6 @@ public class Cup {
         state = nstate;
     }
 
-    /**
-     * Establece el valor mínimo permitido
-     * 
-     * @param minValue valor mínimo a asignar
-     */
-    public void setMin(int minValue) {
-        min = minValue;
-    }
-    
-    /**
-     * Establece el valor máximo permitido
-     * 
-     * @param maxValue valor máximo a asignar
-     */
-    public void setMax(int maxValue) {
-        max = maxValue;
-    }
     
     /**
      * Establece la altura de la taza
@@ -254,5 +218,21 @@ public class Cup {
         shape1.makeInvisible();
         shape2.makeInvisible();
         cover.makeInvisible();
+    }
+    
+    public void setCupInside(Cup nCup){
+         inside = nCup;
+    }
+    
+    public void setCupAbove(Cup nCup){
+         above =nCup;
+    }
+    
+    public Cup getCupInside(){
+        return this.inside;
+    }
+    
+    public Cup getCupAbove(){
+        return this.above;
     }
 }

@@ -144,6 +144,7 @@ public class Lid
      */
     public void makeVisible() {
         isVisible = true;
+        draw();
     }
     
     /**
@@ -151,6 +152,7 @@ public class Lid
      */
     public void makeInvisible() {
         isVisible = false;
+        erase();
     }
     
     /**
