@@ -99,7 +99,7 @@ public class Rectangle{
      * Make this rectangle invisible. If it was already invisible, do nothing.
      */
     public void makeInvisible(){
-        erase();
+        this.erase();
         isVisible = false;
     }
     
@@ -244,10 +244,9 @@ public class Rectangle{
      * Erase the rectangle on screen.
      */
     private void erase(){
-        if(isVisible) {
-            Canvas canvas = Canvas.getCanvas();
-            canvas.erase(this);
-        }
+        Canvas canvas = Canvas.getCanvas();
+        canvas.erase(this);
+        
     }
     
     /**

@@ -29,8 +29,7 @@
          * @param nwidth     The width of the tower
          * @param nmaxHeight The maximum allowed height of the tower
          */
-        public Tower(int nwidth, int nmaxHeight)
-        {
+        public Tower(int nwidth, int nmaxHeight){
             width = nwidth;
             maxHeight = nmaxHeight;
             isVisible = false;
@@ -43,7 +42,7 @@
          * Agrega una taza al tope de la torre
          */
         public void pushCup(int i){
-            if(isInCups(i)){
+            if(isInCups(i) ||i <=0){
                 isOK = false;
                 if(isVisible){
                     JOptionPane.showMessageDialog(null, "No se pudo hacer la acción de pushCup");
@@ -55,7 +54,6 @@
                 top = newCup;
                 cups.push(newCup);
                 Lid lid = newCup.getCover();
-                lids.push(lid);
                 isOK = true;
                 return;
             }
@@ -139,6 +137,10 @@
          * @param newCup  The cup to evaluate as a potential new top
          */
         private void setNewTop(Cup newCup){
+            if(top == null){
+                top = newCup;
+                return;
+            }
             int posyTop = top.getPosy();
             int posyNewCup = newCup.getPosy();
             if (posyTop > posyNewCup){
@@ -165,7 +167,7 @@
          * @param base    The cup on which another cup will be placed
          * @param apilar  The cup to be placed above the base cup
          */
-                private void setAbove(Cup base, Cup apilar){
+        private void setAbove(Cup base, Cup apilar){
            Cup baseAbove = base.getCupAbove(); 
            int posxApilar = apilar.getPosx();
             int posyBase = base.getPosy();
@@ -202,95 +204,138 @@
          *is displayed indicating that the pop operation could not be performed.
          *In that case, the method returns null and marks the operation as failed.
         */
-        public Cup popCup(){ 
+        public void popCup(){ 
             if(!cups.isEmpty()){
-                Cup tope = top;
-                this.top = null;
-                cups.remove(tope);
-                this.top = cups.get(0);
-                for( Cup c:cups){
-                    if(c.getCupAbove() ==tope ) c.setCupAbove(null);
-                    setNewTop(c);
+                Cup pop = cups.pop();
+                if(pop == top){
+                    this.top = null;}
+                  for( Cup c:cups){
+                    if(c.getCupAbove() == pop)c.setCupAbove(null);
+                    if(c.getCupInside() == pop)c.setCupInside(null);
+                    setNewTop(c);                  
                 }
-                tope.makeInvisible();
+                pop.makeInvisible();
                 isOK = true;
-                return tope;
-            }
+                }
+            
             if(isVisible()){
-                JOptionPane.showMessageDialog(null, "No se pudo hacer la acción de popCup");
+                showError();
             }
             isOK = false;
-            return null;
             }
         
         /**
-         * Remueve una taza específica por número
+         * Removes a specific cup identified by its number.
+         *
+         * The method searches for the cup with the given number. If it exists,
+         * the cup is removed from the stack and the structure is rebuilt to
+         * maintain correct relationships between the remaining cups.
+         * All cups above the removed one are temporarily extracted and then
+         * reinserted to preserve the stacking order.
+         *
+         * If the cup does not exist or the collection is empty, the operation
+         * fails and an error message may be displayed if the structure is visible.
+         *
+         * @param i the number of the cup to be removed
          */
         public void removeCup(int i){
             if(!cups.isEmpty()){
                 Stack<Cup> temp = new Stack();
-                Cup rCup = null;
-                for (Cup c:cups){
-                    int cI = c.getNumber();
-                    if(cI == i) {
-                       rCup = c;
-                       break;
-                    }
-                }
+                Cup rCup = findCupByNumber(i);
                 if(rCup == null){
-                   if(isVisible())JOptionPane.showMessageDialog(null, "No se pudo hacer la acción de removeCup");
-                   isOK = false;
+                   if(isVisible())
+                   showError();
                    return;
                 }
-                cups.remove(rCup);
-                for (Cup c: cups){
+                for (int j = cups.size();;j--){
+                    Cup c = cups.pop();
+                    if(c == rCup)break;
                     c.setCupInside(null);
                     c.setCupAbove(null);
                     temp.push(c);
                 }
-                cups.clear();
+                cups.remove(rCup);
                 top = null;
+                for(Cup c:cups){
+                    setNewTop(c);
+                }
+                top.setCupInside(null);
+                top.setCupAbove(null);
                 for(Cup t:temp){
                     int tI = t.getNumber();
                     pushCup(tI);
                 }
                 return;
             }
-            if(isVisible()){
-                JOptionPane.showMessageDialog(null, "No se pudo hacer la acción de removeCup");
- 
-            }
+            if(isVisible)showError();
             isOK = false;
         }
         
         /**
-         * Removes a cup identified by its number.
+         * Searches for a cup by its number.
          *
-         * If the cup exists, it is removed and the structure is rebuilt
-         * to update all relationships and the top cup.
-         * If the cup does not exist or the collection is empty,
-         * the operation fails.
+         * Iterates through the collection of cups and returns the cup
+         * whose number matches the given parameter.
          *
-         * @param i the number of the cup to remove
+         * @param i the number of the cup to search for
+         * @return the cup with the specified number, or null if not found
          */
-        public void pushLid(int i){
-            if(top != null){
-                int topNumber = top.getNumber();
-                if(topNumber == i){
-                    Lid topLid = top.getCover();
-                    top.setState("Covered");
-                    topLid.makeVisible();
-                    isOK = true;
-                    return;
+        private Cup findCupByNumber(int i) {
+            for (Cup c : cups) {
+                if (c.getNumber() == i) {
+                    return c;
                 }
             }
-            if(isVisible()){
-                JOptionPane.showMessageDialog(null, "No se pudo hacer la acción de pushLid");
- 
-            }
+            return null;
+        }
+        /**
+         * Displays an error message indicating that the requested action
+         * could not be completed and marks the operation as unsuccessful
+         * by setting the status flag to false.
+         */
+        private void showError(){
+            JOptionPane.showMessageDialog(null, "No se pudo hacer la acción");
             isOK = false;
         }
         
+        
+        /**
+         * Places a lid on the top cup if its number matches the given value.
+         *
+         * If the current top cup exists and its number is equal to the
+         * specified number, its lid is pushed onto the lids stack,
+         * the cup state is updated to "Covered", and the lid becomes visible.
+         * Otherwise, an error message is displayed (if visible) and the
+         * operation is marked as unsuccessful.
+         *
+         * @param i the number of the cup that should receive the lid
+         */
+        public void pushLid(){
+            if(top != null){
+                    Lid topLid = top.getCover();
+                    lids.push(topLid);
+                    isOK = true;
+                    return;
+            }
+            if(isVisible()){
+                showError();
+             }
+            isOK = false;
+        }
+        
+        public void pushLid(int i){
+            if(!cups.empty()){
+                Cup c = findCupByNumber(i);
+                Lid lidC = c.getCover();
+                lids.push(lidC);
+                isOK=true;
+                return;
+            }
+            if(isVisible()){
+                showError();
+             }
+            isOK = false;
+        }
         /**
          * Removes the lid from the top cup.
          *
@@ -305,6 +350,7 @@
                     Lid topLid = top.getCover();
                     topLid.makeInvisible();
                     top.setState("noCovered");
+                    lids.pop();
                     isOK = true;
                     return;
                 }
@@ -326,20 +372,49 @@
          * Remueve una tapa del stack
          */
         public void removeLid(int i){
-            Cup rLidCup = null;
-            for(Cup c : cups){
-                int cI = c.getNumber();
-                if(cI == i){
-                    rLidCup = c;
-                    break;
+            Stack<Cup> temp = new Stack();
+            Cup rLidCup = findCupByNumber(i);
+            if(rLidCup.isCovered()){
+                Lid rLid = rLidCup.getCover();
+                rLid.makeInvisible();
+                lids.remove(rLid);
+                rLidCup.setState("noCovered");
+                while (!cups.isEmpty()) {
+                    Cup c = cups.pop();
+                    temp.push(c);
+                    if(c == rLidCup)break;
+                    c.setCupInside(null);
+                    c.setCupAbove(null);
                 }
+                top = null;
+                for(Cup c:cups){
+                    setNewTop(c);
+                }
+                if (top != null) {
+                    top.setCupInside(null);
+                    top.setCupAbove(null);
+                } 
+        
+                for(Cup t:temp){
+                    int tI = t.getNumber();
+                    pushCup(tI);
+                }
+                return;
             }
-            Lid rLid = rLidCup.getCover();
-            rLidCup.setState("covered");
         }
         
         /**
-         * Ordena la torre de mayor a menor altura
+         * Sorts the tower in descending order based on the cup number
+         * (from largest to smallest).
+         *
+         * The method creates a temporary list containing the current cups,
+         * applies a bubble sort algorithm to reorder them by number in
+         * descending order, clears the original stack, and rebuilds the
+         * tower using the sorted cups. During reconstruction, all cup
+         * relationships are reset and reassigned.
+         *
+         * After rebuilding the structure, the tower is made visible and
+         * the operation status is marked as successful.
          */
         public void orderTower(){
             ArrayList<Cup> temp = new ArrayList<Cup>(cups);
@@ -365,7 +440,14 @@
             }
         
         /**
-         * Invierte el orden de la torre
+         * Reverses the order of the cups in the tower.
+         *
+         * The method removes all cups from the current stack, clears their
+         * structural relationships, and stores them temporarily in another stack.
+         * It then rebuilds the tower by pushing the cups back in reverse order,
+         * effectively inverting the original structure.
+         *
+         * After reconstruction, the operation status is marked as successful.
          */
         public void reverseTower()
         {
@@ -385,7 +467,16 @@
         }
         
         /**
-         * Retorna la altura total de elementos apilados
+         * Calculates and returns the current height of the tower.
+         *
+         * The height is determined based on the vertical position (posY)
+         * of the top cup. If a top cup exists, the height is computed as
+         * the difference between a fixed base value (300) and the top cup's
+         * Y position. If the tower is empty (top is null), the height is 0.
+         *
+         * The operation status flag is set to true in both cases.
+         *
+         * @return the height of the tower; 0 if the tower is empty
          */
         public int height(){
             int totalHeight;
@@ -400,7 +491,14 @@
         }
         
         /**
-         * Retorna array con números de tazas tapadas
+         * Returns an array containing the numbers of all covered cups.
+         *
+         * The method iterates through the collection of cups and collects
+         * the numbers of those that are currently covered with a lid.
+         * It then converts the collected values into an integer array.
+         *
+         * @return an array with the numbers of the covered cups;
+         *         an empty array if no cups are covered
          */
         public int[] lidedCups()
         {
@@ -419,7 +517,18 @@
         }
         
         /**
-         * Retorna matriz con tipo y número de elementos
+         * Returns a two-dimensional array representing the stacking elements
+         * in the tower.
+         *
+         * Each row of the returned array contains two values:
+         * - The type of element ("cup" or "lid").
+         * - The associated value (cup number or lid height).
+         *
+         * The method iterates through all cups in the structure and adds
+         * their information to the result. If a cup is covered, its lid
+         * information is also included immediately after the cup entry.
+         *
+         * @return a 2D array describing the stacking items in the tower
          */
         public String[][] stackingItems() {
              ArrayList<String[]> temp = new ArrayList<>();
@@ -448,8 +557,12 @@
         }
 
         
-        /**
-         * Hace visible la torre
+       /**
+         * Makes the tower visible.
+         *
+         * The method iterates through all cups in the structure and makes
+         * each cup visible if its vertical position is valid (posY >= 0).
+         * After updating the cups, the tower visibility state is set to true.
          */
         public void makeVisible()
         {   for(Cup c:cups){
@@ -521,4 +634,7 @@
                 r.makeVisible();
             }
         }
+        
+        
+        //cilco 2
     }

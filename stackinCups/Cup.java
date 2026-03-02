@@ -213,7 +213,7 @@ public class Cup {
             cover.draw();
         }
     }
-    
+     
     private void erase(){
         shape1.makeInvisible();
         shape2.makeInvisible();
