@@ -38,6 +38,12 @@
             isOK = true;
         }
         
+        public Tower(int i) {
+            cups = new Stack<Cup>();
+            lids = new Stack<Lid>();
+            isOK = true;
+        }
+        
         /**
          * Agrega una taza al tope de la torre
          */
@@ -216,6 +222,7 @@
                 }
                 pop.makeInvisible();
                 isOK = true;
+                return;
                 }
             
             if(isVisible()){
@@ -265,6 +272,7 @@
                     int tI = t.getNumber();
                     pushCup(tI);
                 }
+                isOK=true;
                 return;
             }
             if(isVisible)showError();
@@ -326,6 +334,11 @@
         public void pushLid(int i){
             if(!cups.empty()){
                 Cup c = findCupByNumber(i);
+                if(c == null){
+                    showError();
+                    isOK = false;
+                    return;
+                }
                 Lid lidC = c.getCover();
                 lids.push(lidC);
                 isOK=true;
@@ -636,5 +649,19 @@
         }
         
         
-        //cilco 2
+        //Ciclo 2
+        //swap,swap to reduce, cover
+
+        public void swap(int i, int j) {
+            isOK = false;
+        }
+ 
+        public String[][] swapToReduce(int i, int j) {
+            isOK = false;
+            return stackingItems();
+        }
+
+        public void cover() {
+            isOK = false;
+        }
     }
