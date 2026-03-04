@@ -657,8 +657,23 @@
         //Ciclo 2
         //swap,swap to reduce, cover
 
-        public void swap(int i, int j) {
-            isOK = false;
+        public void swap(String[] objeto1, String[] objeto2) {
+            Cup cup1 = findCupByNumber(Integer.parseInt(objeto1[1]));
+            int cup1Number = cup1.getNumber();
+            Cup cup2 = findCupByNumber(Integer.parseInt(objeto2[1]));
+            int cup2Number = cup2.getNumber();
+            Stack<Cup> temp = new Stack();
+            temp.addAll(cups);
+            cups.clear();
+            top = null;
+            for(Cup t:temp){
+                t.setCupAbove(null);
+                t.setCupInside(null);
+                int tNumber = t.getNumber();
+                if(tNumber != cup1Number && tNumber != cup2Number)pushCup(tNumber);
+                else if(tNumber == cup1Number)pushCup(cup2Number);
+                else if(tNumber == cup2Number)pushCup(cup1Number);                  
+            }
         }
  
         public String[][] swapToReduce(int i, int j) {

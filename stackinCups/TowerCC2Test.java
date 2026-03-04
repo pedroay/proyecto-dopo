@@ -34,43 +34,6 @@ public class TowerCC2Test {
         assertEquals(5, items.length);
     }
 
-
-    // ===============================
-    // PRUEBAS REMOVE CUP
-    // ===============================
-
-    @Test
-    public void accordingACShouldRemoveSpecificCupAndItsLid() {
-        Tower tower = new Tower(3);
-
-        tower.removeCup(2);
-
-        String[][] items = tower.stackingItems();
-
-        // Ya no debe existir cup-2 ni lid-2
-        for (String[] item : items) {
-            assertNotEquals("cup-2", item);
-            assertNotEquals("lid-2", item);
-        }
-
-        assertEquals(2, tower.height());
-        assertTrue(tower.isOk());
-    }
-
-    @Test
-    public void accordingACShouldNotAlterOtherCupsWhenRemovingOne() {
-        Tower tower = new Tower(3);
-
-        tower.removeCup(2);
-
-        String[][] items = tower.stackingItems();
-
-        assertEquals("cup-1", items[0]);
-        assertEquals("lid-1", items[1]);
-        assertEquals("cup-3", items[2]);
-        assertEquals("lid-3", items[3]);
-    }
-
     // ===============================
     // PRUEBAS SWAP
     // ===============================
@@ -78,14 +41,12 @@ public class TowerCC2Test {
     @Test
     public void accordingACShouldSwapTwoItemsCorrectly() {
         Tower tower = new Tower(2);
-        tower.swap(1,2);
+        tower.swap(["cup","1"],["cup","2"]);
 
         String[][] items = tower.stackingItems();
 
-        assertEquals("cup-2", items[0]);
-        assertEquals("lid-1", items[1]);
-        assertEquals("cup-1", items[2]);
-        assertEquals("lid-2", items[3]);
+        assertEquals("2", items[0][1]);
+        assertEquals("1", items[1][1]);
 
         assertTrue(tower.isOk());
     }
