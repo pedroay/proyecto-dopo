@@ -41,15 +41,30 @@ public class TowerCC2Test {
     @Test
     public void accordingACShouldSwapTwoItemsCorrectly() {
         Tower tower = new Tower(2);
-        tower.swap(["cup","1"],["cup","2"]);
+        tower.swap(new String[]{"cup","1"}, new String[]{"cup","3"});
 
         String[][] items = tower.stackingItems();
 
-        assertEquals("2", items[0][1]);
+        assertEquals("3", items[0][1]);
         assertEquals("1", items[1][1]);
-
+        assertEquals(3,tower.getTop().getNumber());
         assertTrue(tower.isOk());
     }
+    
+    @Test
+    public void accordingACShouldSwapThreeItemsCorrectly() {
+        Tower tower = new Tower(3);
+        tower.swap(new String[]{"cup","1"}, new String[]{"cup","5"});
+
+        String[][] items = tower.stackingItems();
+
+        assertEquals("5", items[0][1]);
+        assertEquals("1", items[2][1]);
+        assertEquals(5,tower.getTop().getNumber());
+        assertEquals(90,tower.height());
+        assertTrue(tower.isOk());
+    }
+    
 
     // ===============================
     // PRUEBAS COVER

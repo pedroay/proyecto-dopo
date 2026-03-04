@@ -675,7 +675,10 @@
                 else if(tNumber == cup2Number)pushCup(cup1Number);                  
             }
         }
- 
+        
+        public Cup getTop(){
+            return top;
+        }
         public String[][] swapToReduce(int i, int j) {
             isOK = false;
             return stackingItems();
