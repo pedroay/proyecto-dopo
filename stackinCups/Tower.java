@@ -672,16 +672,33 @@
                 int tNumber = t.getNumber();
                 if(tNumber != cup1Number && tNumber != cup2Number)pushCup(tNumber);
                 else if(tNumber == cup1Number)pushCup(cup2Number);
-                else if(tNumber == cup2Number)pushCup(cup1Number);                  
+                else if(tNumber == cup2Number)pushCup(cup1Number); 
+                isOK= true;
             }
         }
         
         public Cup getTop(){
             return top;
         }
-        public String[][] swapToReduce(int i, int j) {
-            isOK = false;
-            return stackingItems();
+        
+        public String[][] swapToReduce() {
+        
+            for (int i = 0; i < cups.size(); i++) {
+                Cup c = cups.get(i);
+        
+                for (int j = i + 1; j < cups.size(); j++) {
+                    Cup k = cups.get(j);
+        
+                    if (c.getNumber() < k.getNumber()) {
+                        return new String[][]{
+                            {"cup", String.valueOf(c.getNumber())},
+                            {"cup", String.valueOf(k.getNumber())}
+                        };
+                    }
+                }
+            }
+    
+            return new String[0][0]; 
         }
 
         public void cover() {

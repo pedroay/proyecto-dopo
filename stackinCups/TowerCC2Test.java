@@ -85,7 +85,36 @@ public class TowerCC2Test {
 
         assertTrue(tower.isOk());
     }
-
+    
+    
+    
+    //================================
+    // PRUEBAS SWAP TO REDUCE
+    //================================
+    
+    @Test
+    public void shouldReturnCupsToSwapToReduce(){
+        Tower tower = new Tower(3);
+        
+        String [][] reduce = tower.swapToReduce();
+        
+        assertEquals("1",reduce[0][1]);
+        assertEquals("3",reduce[1][1]);
+    }
+    
+    @Test
+    public void shouldNotReturnCupsToSwapToReduce() {
+        Tower tower = new Tower(0, 100);
+    
+        for (int i = 3; i <=1; i--) {
+            tower.pushCup(i);
+        }
+    
+        String[][] reduce = tower.swapToReduce();
+    
+        assertEquals(0, reduce.length);
+    }
+    
     // ===============================
     // PRUEBAS MAKE VISIBLE
     // ===============================
@@ -99,4 +128,6 @@ public class TowerCC2Test {
         assertTrue(tower.isOk());
         assertEquals(3, tower.height());
     }
+    
+    
 }
