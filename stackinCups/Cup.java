@@ -215,9 +215,15 @@ public class Cup {
     }
      
     private void erase(){
-        shape1.makeInvisible();
-        shape2.makeInvisible();
-        cover.makeInvisible();
+        if (shape1 != null) {
+            shape1.makeInvisible();
+        }
+        if (shape2 != null) {
+            shape2.makeInvisible();
+        }
+        if (cover != null) {
+            cover.makeInvisible();
+        }
     }
     
     public void setCupInside(Cup nCup){

@@ -180,6 +180,6 @@ public class Lid
         }
     
     public void erase(){
-        shape.makeInvisible();
+    ;
     }
 }

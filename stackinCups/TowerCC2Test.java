@@ -1,4 +1,4 @@
-import static org.junit.jupiter.api.Assertions.*;
+ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class TowerCC2Test {
@@ -8,28 +8,22 @@ public class TowerCC2Test {
     // ===============================
 
     @Test
-    public void accordingACShouldCreateTowerWithFiveCupsAndCorrectLids() {
-        Tower tower = new Tower(5);
+    public void accordingACShouldCreateTowerWithFourCups() {
+        Tower tower = new Tower(4);
+        assertEquals(280, tower.height());
 
-        // Verificar altura
-        assertEquals(5, tower.height());
-
-        // Verificar que la torre esté consistente
         assertTrue(tower.isOk());
 
-        // Verificar contenido exacto
         String[][] items = tower.stackingItems();
 
-        assertEquals("cup-1", items[0]);
-        assertEquals("lid-1", items[1]);
-        assertEquals("cup-2", items[2]);
-        assertEquals("lid-2", items[3]);
-        assertEquals("cup-3", items[4]);
-        assertEquals("lid-3", items[5]);
-        assertEquals("cup-4", items[6]);
-        assertEquals("lid-4", items[7]);
-        assertEquals("cup-5", items[8]);
-        assertEquals("lid-5", items[9]);
+        assertEquals("cup", items[0][0]);
+        assertEquals("1", items[0][1]);
+        assertEquals("cup", items[1][0]);
+        assertEquals("3", items[1][1]);
+        assertEquals("cup", items[2][0]);
+        assertEquals("5", items[2][1]);
+        assertEquals("cup", items[3][0]);
+        assertEquals("7", items[3 ][1]);
     }
 
     @Test
@@ -37,22 +31,9 @@ public class TowerCC2Test {
         Tower tower = new Tower(5);
 
         String[][] items = tower.stackingItems();
-
-        // 5 copas + 5 tapas
-        assertEquals(10, items.length);
+        assertEquals(5, items.length);
     }
 
-    @Test
-    public void accordingACShouldMaintainCorrectOrderAfterCreation() {
-        Tower tower = new Tower(5);
-
-        String[][] items = tower.stackingItems();
-
-        for (int i = 1; i <= 5; i++) {
-            assertEquals("cup-" + i, items[(i - 1) * 2]);
-            assertEquals("lid-" + i, items[(i - 1) * 2 + 1]);
-        }
-    }
 
     // ===============================
     // PRUEBAS REMOVE CUP

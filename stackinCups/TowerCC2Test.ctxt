@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=TowerCC2Test
 comment1.params=
-comment1.target=void\ accordingACShouldCreateTowerWithFiveCupsAndCorrectLids()
+comment1.target=void\ accordingACShouldCreateTowerWithFourCups()
 comment2.params=
 comment2.target=void\ accordingACShouldCreateCorrectNumberOfElementsInStack()
 comment3.params=

@@ -1,4 +1,4 @@
-    import java.util.Stack;
+     import java.util.Stack;
     import java.util.ArrayList;
     import javax.swing.JOptionPane;
 
@@ -41,6 +41,11 @@
         public Tower(int i) {
             cups = new Stack<Cup>();
             lids = new Stack<Lid>();
+            isVisible = false;
+            for(int j= 1; j <=i; j ++){
+                int k = j*2-1;
+                pushCup(k);
+            }
             isOK = true;
         }
         
@@ -59,7 +64,7 @@
             if(top == null){
                 top = newCup;
                 cups.push(newCup);
-                Lid lid = newCup.getCover();
+
                 isOK = true;
                 return;
             }
@@ -594,8 +599,8 @@
         {
             for(Cup c:cups){
                 c.makeInvisible();
-                isVisible = false;
             }
+            isVisible = false;
         }
         
         /**
