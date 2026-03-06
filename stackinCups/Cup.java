@@ -9,7 +9,6 @@ import java.util.Random;
 
 public class Cup extends Elements {
     
-    private static String type = "cup";
     private int height;
     private String state;
     private Lid cover;
@@ -27,8 +26,9 @@ public class Cup extends Elements {
      */
     public Cup(int inumber,Lid lid) {
         super(inumber);
-        height = width;
+        height = calculateWidth(inumber);
         state = "noCovered";
+        type = "cup";
         color = lid.getColor();
         hisLid = lid;
         posy = 300 - height;
@@ -43,8 +43,9 @@ public class Cup extends Elements {
      */     
     public Cup(int inumber) {
         super(inumber);
-        height = width;
-        state = "noCovered"; 
+        height =  calculateWidth(inumber);;
+        state = "noCovered";
+        type = "cup";
         color = randomColor();
         hisLid = new Lid(inumber,this);
         posy = 300 - height;
@@ -141,12 +142,11 @@ public class Cup extends Elements {
     }
     
     
-    
+    @Override
     public Elements getInside(){
         return this.inside;
         }
-    
-    
+        
     public void cover(){
         Lid l = getCover();
         l.isVisible();
@@ -155,6 +155,10 @@ public class Cup extends Elements {
     
     public Lid getHisLid(){
         return hisLid;
+    }
+    
+    public int getHeight() {
+        return height;
     }
     
 }

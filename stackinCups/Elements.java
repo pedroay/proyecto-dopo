@@ -89,7 +89,7 @@ public class Elements
      * @return altura siempre retorna 1 (1 cm)
      */
     public int getHeight() {
-        return height;  // Siempre retorna 1
+        return height;
     }
     
         /**
@@ -155,5 +155,9 @@ public class Elements
     
         public void setAbove(Elements above){
         this.above = above;
+    }
+    
+        public Elements getInside(){
+        return null;
     }
 }

@@ -83,16 +83,16 @@
                 return;
             }
             else{
-                int sizeTop = top.getHeight();
-                int sizeNewCup = newCup.getHeight();
-                if (sizeTop > sizeNewCup){
+                int sizeTop = top.getWidth();
+                int sizeNewCup = newCup.getWidth();
+                if (sizeTop > sizeNewCup && top.getType().equals("cup")){
                     setInside((Cup)top,newCup);
                     cups.push(newCup);
                     objects.push(newCup);
                     setNewTop(newCup);
                 }
                 else if(sizeTop < sizeNewCup ){
-                    setAbove((Cup)top,newCup);
+                    setAbove(top,newCup);
                     cups.push(newCup);
                     setNewTop(newCup);
                     objects.push(newCup);
@@ -241,4 +241,7 @@
             isVisible = true;
             }
         
+        public Elements getTop(){
+            return top;
+        }
     }
