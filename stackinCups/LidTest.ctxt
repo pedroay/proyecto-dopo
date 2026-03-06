@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=LidTest
+comment0.text=\r\n\ The\ test\ class\ LidTest.\r\n\r\n\ @author\ \ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=void\ deberiaCrearUnaTapaDeUnAnchoDe50()
+comment2.params=
+comment2.target=void\ deberiaFallarSiNOMeDaunAnchoDe50()
+comment3.params=
+comment3.target=void\ deberiaTenerUnaCopaConElMismoAncho()
+comment4.params=
+comment4.target=void\ debenTenerElMismoColor()
+numComments=5

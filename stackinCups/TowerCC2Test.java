@@ -72,18 +72,32 @@ public class TowerCC2Test {
 
     @Test
     public void accordingACShouldCoverAllCupsWithCorrectLids() {
-        Tower tower = new Tower(3);
-
+        Tower tower = new Tower(0,100);
+        tower.pushCup(3);
+        tower.pushLid(3);
+        tower.pushCup(2);
+        tower.pushLid(2);
         tower.cover();
-
-        String[][] items = tower.stackingItems();
-
-        for (int i = 0; i < items.length; i += 2) {
-            assertEquals("cup", items[i][0]);
-            assertEquals("lid", items[i + 1][0]);
-        }
-
-        assertTrue(tower.isOk());
+        tower.pushCup(1);
+        assertEquals(true,tower.getCups().get(0).isCovered());
+        assertEquals(1,tower.getTop().getNumber());
+    }
+    
+    @Test
+    public void shouldNotCover() {
+        Tower tower = new Tower(0,100);
+        tower.pushCup(7);
+        tower.pushLid(7);
+        tower.pushCup(1);
+        tower.pushLid(1);
+        tower.pushCup(2);
+        tower.pushLid(2);
+        tower.pushCup(3);
+        tower.pushLid(3);
+        tower.pushCup(4);
+        tower.pushLid(4);
+        tower.cover();
+        tower.makeVisible();
     }
     
     

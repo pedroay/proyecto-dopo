@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=CupTest
+comment0.text=\r\n\ La\ clase\ de\ prueba\ CupTest.\r\n\r\n\ @author\ \ (tu\ nombre)\r\n\ @version\ (una\ versi\u00F3n\ o\ fecha)\r\n
+comment1.params=
+comment1.target=void\ deberiaCrearUnaCopaConAlturaCorrecta()
+comment2.params=
+comment2.target=void\ deberiaIniciarEnEstadoNoCubierto()
+comment3.params=
+comment3.target=void\ deberiaTenerUnaTapaConElMismoNumero()
+comment4.params=
+comment4.target=void\ deberiaTenerElMismoColorQueSuTapa()
+comment5.params=
+comment5.target=void\ deberiaFallarSiElEstadoEsDiferenteDeNoCovered()
+comment6.params=
+comment6.target=void\ deberiaPosicionarseEnElEjeXCorrecto()
+comment7.params=
+comment7.target=void\ deberiaDejarmeSetUnaCopaAdentro()
+comment8.params=
+comment8.target=void\ deberiaDejarmeSetUnaTapaAdentro()
+comment9.params=
+comment9.target=void\ noDeberiatenerUnaCopaAdentroDeSiMismaMayorASi()
+numComments=10

@@ -7,70 +7,50 @@ import java.util.Random;
  * @version (a version number or a date)
  */
 
-public class Cup {
-    private int number;
+public class Cup extends Elements {
+    
+    private static String type = "cup";
     private int height;
-    private int posx;
-    private int posy;
     private String state;
-    private String color;
-    private boolean isVisible;
     private Lid cover;
+    private final Lid hisLid;
     public Rectangle shape1;
     public Rectangle shape2;
-    private Cup inside;
-    private Cup above;
+    private Elements inside;
     
     /**
-     * Constructor de la clase Cup
-     * Crea una nueva taza con un número identificador
-     * 
-     * @param number identificador único de la taza
+     * Constructor de la clase Cup asociado a una tapa existente.
+     * Crea una nueva taza calculando su altura en base al identificador numérico.
+     * Se asocia directamente con la tapa (Lid) proporcionada y toma el color de esta.
+     * * @param inumber El identificador único de la taza, utilizado para calcular su altura.
+     * @param lid El objeto Lid (tapa) que cubrirá esta taza.
      */
-    public Cup(int inumber) {
-        number = inumber;
-        height = calculateHeight(inumber);
-        //hay que calcular min y max dependiendo del numero
-        state = "noCovered"; //opciones: Covered, noCovered 
-                             // no es booleano porque 
-                             //da posibilidad a extender despúes
-        color = randomColor();
-        isVisible = false;
-        cover = new Lid(height,color,this);
-        posx = 150 - (height/2);
+    public Cup(int inumber,Lid lid) {
+        super(inumber);
+        height = width;
+        state = "noCovered";
+        color = lid.getColor();
+        hisLid = lid;
         posy = 300 - height;
             
     }
     
-    private String randomColor(){
-        String[] colors = {"red","black","blue","yellow","green","magenta"};
-        Random random = new Random();
-
-        int index = random.nextInt(colors.length);
-        return colors[index];
-    }
-    
-    public int calculateHeight(int inumber){
-        return ((2*inumber)-1)*10;
-    }
-    
     /**
-     * Obtiene el número identificador de la taza
-     * 
-     * @return número identificador
-     */
-    public int getNumber() {
-        return number;
-    }
+     * Constructor principal de la clase Cup.
+     * Crea una nueva taza independiente calculando su altura base. Genera un color 
+     * aleatorio para la taza y crea automáticamente una tapa (Lid) asociada a ella.
+     * * @param inumber El identificador único de la taza, utilizado para calcular su altura.
+     */     
+    public Cup(int inumber) {
+        super(inumber);
+        height = width;
+        state = "noCovered"; 
+        color = randomColor();
+        hisLid = new Lid(inumber,this);
+        posy = 300 - height;
+            
+    }    
     
-    /**
-     * Obtiene la altura de la taza
-     * 
-     * @return altura en centímetros
-     */
-    public int getHeight() {
-        return height;
-    }
     
     
     /**
@@ -92,57 +72,9 @@ public class Cup {
     }
     
     /**
-     * Obtiene la posición X de la taza
-     * 
-     * @return coordenada X en píxeles
-     */
-    public int getPosx() {
-        return posx;
-    }
-    
-    /**
-     * Obtiene la posición Y de la taza
-     * 
-     * @return coordenada Y en píxeles
-     */
-    public int getPosy() {
-        return posy;
-    }
-    
-    /**
-     * Obtiene el color de la taza
-     * 
-     * @return color en formato RGB entero
-     */
-    public String getColor() {
-        return color;
-    }
-    
-    /**
-     * Cambia el color de la taza usando código RGB
-     * 
-     * @param ncolor nuevo color
-     */
-    public void changeColor(String ncolor) {
-        color = ncolor;
-        cover.changeColor(ncolor);
-    }
-    
-    /**
-     * Establece la posición de la taza en pantalla
-     * 
-     * @param posx coordenada X en píxeles
-     * @param posy coordenada Y en píxeles
-     */
-    public void setPosition(int posx, int posy) {
-        this.posx = posx;
-        this.posy = posy;
-    }
-    
-    /**
      * Establece el estado de la taza
      * 
-     * @param nstate nuevo estado (ej: "normal", "covered", "selected", "stacked")
+     * @param nstate nuevo estado (ej: "normal", ", "selected", "stacked")
      */
     public void setState(String nstate) {
         state = nstate;
@@ -158,30 +90,6 @@ public class Cup {
         height = newHeight;
     }
     
-    /**
-     * Hace visible la taza en pantalla
-     */
-    public void makeVisible() {
-        isVisible = true;
-        draw();
-    }
-    
-    /**
-     * Hace invisible la taza (la oculta)
-     */
-    public void makeInvisible() {
-        isVisible = false;
-        erase();
-    }
-    
-    /**
-     * Verifica si la taza es visible
-     * 
-     * @return true si es visible, false en caso contrario
-     */
-    public boolean isVisible() {
-        return isVisible;
-    }
    
     /**
      * Verifica si la taza está cubierta por una tapa
@@ -198,7 +106,8 @@ public class Cup {
         return info;
     }
     
-    private void draw(){
+    @Override
+    public void draw(){
         shape1= new Rectangle(height*4);
         shape1.setP(posy,posx);
         shape1.changeColor(color);
@@ -213,8 +122,9 @@ public class Cup {
             cover.draw();
         }
     }
-     
-    private void erase(){
+    
+    @Override
+    public void erase(){
         if (shape1 != null) {
             shape1.makeInvisible();
         }
@@ -226,19 +136,25 @@ public class Cup {
         }
     }
     
-    public void setCupInside(Cup nCup){
-         inside = nCup;
+    public void setInside(Elements inside){
+         this.inside = inside;
     }
     
-    public void setCupAbove(Cup nCup){
-         above =nCup;
-    }
     
-    public Cup getCupInside(){
+    
+    public Elements getInside(){
         return this.inside;
+        }
+    
+    
+    public void cover(){
+        Lid l = getCover();
+        l.isVisible();
+        setState("Covered");
     }
     
-    public Cup getCupAbove(){
-        return this.above;
+    public Lid getHisLid(){
+        return hisLid;
     }
+    
 }
