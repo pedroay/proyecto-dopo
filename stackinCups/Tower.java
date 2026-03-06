@@ -100,6 +100,55 @@
                 isOK = true;
             }
             }
+        
+        public void pushLid(int i) {
+            if (isInElements(i, "lid") || i <= 0) {
+                isOK = false;
+                if (isVisible) {
+                    showError();
+                }
+                return;
+            }
+        
+            Lid newLid;
+        
+            if (isInCups(i)) {
+                newLid = findLidByNumberOfCup(i);
+            } else {
+                newLid = new Lid(i);
+            }
+        
+            if (top == null) {
+                top = newLid;
+                lids.push(newLid);
+                objects.push(newLid);
+                isOK = true;
+                return;
+            } else {
+                int sizeTop = top.getWidth();
+                int sizeNewLid = newLid.getWidth();
+        
+                if (sizeTop > sizeNewLid && top.getType().equals("cup")) {
+                    setInside((Cup) top, newLid);
+                    lids.push(newLid);
+                    objects.push(newLid);
+                    setNewTop(newLid);
+                } else if (sizeTop < sizeNewLid) {
+                    setAbove(top, newLid);
+                    lids.push(newLid);
+                    objects.push(newLid);
+                    setNewTop(newLid);
+                } else if (sizeTop == sizeNewLid && top.getType().equals("cup")) {
+                    Cup matchingCup = (Cup) top;
+                    matchingCup.setState("Covered");
+                    newLid.setPosition(matchingCup.getPosx(), matchingCup.getPosy() - newLid.getHeight());
+                    lids.push(newLid);
+                    objects.push(newLid);
+                    setNewTop(newLid);
+                }
+                isOK = true;
+            }
+        }
             
         /**
         /**
@@ -212,10 +261,19 @@
             return false;
         } 
         
-        private Cup findCupByNumberOfLid(int i) {
+        protected Cup findCupByNumberOfLid(int i) {
             for (Lid l : lids) {
                 if (l.getNumber() == i) {
                     return l.getHisCup();
+                }
+            }
+            return null;
+        }
+        
+        private Lid findLidByNumberOfCup(int i) {
+            for (Cup c : cups) {
+                if (c.getNumber() == i) {
+                    return c.getHisLid();
                 }
             }
             return null;
@@ -243,5 +301,9 @@
         
         public Elements getTop(){
             return top;
+        }
+        
+        public boolean isOK(){
+            return isOK;
         }
     }

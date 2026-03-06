@@ -51,4 +51,67 @@ public class TowerTest {
         assertEquals(4,tower.getTop().getNumber());
         assertEquals(170,tower.getTop().getPosy());
     }
+    
+    @Test
+    public void debeAgregarUnaTapaDentroDeUnaCopa(){
+        tower.pushCup(5);
+        tower.pushLid(3);
+        
+        Elements top = tower.getTop();
+        Elements inside = top.getInside();
+        
+        assertEquals(5, top.getNumber());    
+        assertEquals(3, inside.getNumber()); 
+        assertEquals("lid", inside.getType());
+    }
+    
+    @Test
+    public void debeAgregarUnaTabaQueCobraUnaCopa(){
+        tower.pushCup(5);
+        tower.pushLid(5);
+        
+        Elements top = tower.getTop();
+        int l_number=top.getNumber();
+        Cup cup=tower.findCupByNumberOfLid(l_number);
+        
+        assertEquals(5, top.getNumber()); 
+        assertEquals("lid", top.getType());  
+        assertEquals("Covered", cup.getState()); 
+    }
+    
+    @Test
+    public void debeDarmeElTopCorrectoConTapasYCopas(){
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.pushLid(4);
+        
+        Elements top = tower.getTop();
+        
+        assertEquals(4, top.getNumber());
+        assertEquals("lid", top.getType());
+    }
+    
+    @Test
+    public void noDebeAgregarUnaTapaDuplicada(){
+        tower.pushCup(5);
+        tower.pushLid(3);
+        tower.pushLid(3);
+        
+        assertFalse(tower.isOK());
+    }
+    
+    @Test
+    public void debeAgregarVariasTabasCorrectamente(){
+        tower.pushCup(5);  
+        tower.pushLid(3);
+        tower.pushLid(4); 
+        
+        Elements top = tower.getTop();
+        Elements below = top.getAbove(); 
+        
+        assertEquals(4, top.getNumber());     
+        assertEquals("lid", top.getType());
+        assertEquals(3, below.getNumber());    
+        assertTrue(top.getPosy() < below.getPosy()); 
+    }
     }
