@@ -255,5 +255,156 @@ public class TowerTest {
         assertNotNull(inside);
         assertEquals(4, inside.getNumber());
     }
+    
+    //swap, swap to reduce y cover
+    @Test
+    public void debeIntercambiarPrimeraCopaPorUltima() {
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.pushCup(1);
 
+        tower.swap(new String[]{"cup","5"}, new String[]{"cup","1"});
+
+        String[][] staking = tower.stakingItems();
+        assertEquals("cup", staking[0][0]); assertEquals("1", staking[0][1]);
+        assertEquals("cup", staking[1][0]); assertEquals("3", staking[1][1]);
+        assertEquals("cup", staking[2][0]); assertEquals("5", staking[2][1]);
+        assertTrue(tower.isOK());
+    }
+    
+    @Test
+    public void debeIntercambiarCopayTapa() {
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.pushLid(3);
+
+        tower.swap(new String[]{"cup","3"}, new String[]{"lid","3"});
+
+        String[][] staking = tower.stakingItems();
+        assertEquals("cup", staking[0][0]); assertEquals("5", staking[0][1]);
+        assertEquals("lid", staking[1][0]); assertEquals("3", staking[1][1]);
+        assertEquals("cup", staking[2][0]); assertEquals("3", staking[2][1]);
+        assertTrue(tower.isOK());
+    }
+    
+    @Test
+    public void debeIntercambiarDosTapas() {
+        tower.pushCup(5);
+        tower.pushLid(3);
+        tower.pushLid(4);
+        tower.swap(new String[]{"lid","3"}, new String[]{"lid","4"});
+        String[][] staking = tower.stakingItems();
+        assertEquals("cup", staking[0][0]); assertEquals("5", staking[0][1]);
+        assertEquals("lid", staking[1][0]); assertEquals("4", staking[1][1]);
+        assertEquals("lid", staking[2][0]); assertEquals("3", staking[2][1]);
+        assertTrue(tower.isOK());
+    }
+    
+    @Test
+    public void swapMismoElementoNoAlteraElOrden() {
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.pushCup(1);
+        tower.swap(new String[]{"cup","3"}, new String[]{"cup","3"});
+        String[][] staking = tower.stakingItems();
+        assertEquals("5", staking[0][1]);
+        assertEquals("3", staking[1][1]);
+        assertEquals("1", staking[2][1]);
+        assertFalse(tower.isOK());
+    }
+    
+    @Test
+    public void noDebeIntercambiarSiPrimerElementoNoExiste() {
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.swap(new String[]{"cup","9"}, new String[]{"cup","3"});
+        assertFalse(tower.isOK());
+        String[][] staking = tower.stakingItems();
+        assertEquals("5", staking[0][1]);
+        assertEquals("3", staking[1][1]);
+    }
+    
+    //swap to reduce
+    @Test
+    public void debeRetornarVacioConTorreVacia() {
+        String[][] result = tower.swapToReduce();
+        assertEquals(0, result.length);
+    }
+    
+    @Test
+    public void debeRetornarVacioConUnSoloElemento() {
+        tower.pushCup(5);
+        String[][] result = tower.swapToReduce();
+        assertEquals(0, result.length);
+    }
+    
+    @Test
+    public void debeRetornarVacioSiObjectsOrdenadoDescendente() {
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.pushCup(1);
+        String[][] result = tower.swapToReduce();
+        assertEquals(0, result.length);
+    }
+    
+    //Cover
+    @Test
+    public void coverConTorreVaciaNoFalla() {
+        tower.cover();
+        assertNull(tower.getTop());
+        assertEquals(0, tower.stakingItems().length);
+    }
+    
+    @Test
+    public void coverSinTapasNoAlteraElOrden() {
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.pushCup(1);
+        tower.cover();
+        String[][] staking = tower.stakingItems();
+        assertEquals(3, staking.length);
+        assertEquals("5", staking[0][1]);
+        assertEquals("3", staking[1][1]);
+        assertEquals("1", staking[2][1]);
+    }
+    
+    @Test
+    public void coverCubreUnaCopaCuandoHaySuTapa() {
+        tower.pushLid(5);
+        tower.pushCup(5);
+        tower.cover();
+        String[][] staking = tower.stakingItems();
+        assertEquals(2, staking.length);
+        assertEquals("cup", staking[0][0]); assertEquals("5", staking[0][1]);
+        assertEquals("lid", staking[1][0]); assertEquals("5", staking[1][1]);
+        Cup cup5 = tower.findCupByNumberOfLid(5);
+        assertEquals("Covered", cup5.getState());
+    }
+    
+    @Test
+    public void coverCubreSoloCopasConSuTapaEnLaTorre() {
+        tower.pushCup(5);
+        tower.pushLid(3);
+        tower.pushCup(3);
+        tower.cover();
+        String[][] staking = tower.stakingItems();
+        assertEquals(3, staking.length);
+        assertEquals("cup", staking[0][0]); assertEquals("5", staking[0][1]);
+        assertEquals("cup", staking[1][0]); assertEquals("3", staking[1][1]);
+        assertEquals("lid", staking[2][0]); assertEquals("3", staking[2][1]);
+        Cup cup3 = tower.findCupByNumber(3);
+        Cup cup5 = tower.findCupByNumber(5);
+        assertEquals("Covered", cup3.getState());
+        assertNotEquals("Covered", cup5.getState());
+    }
+    
+    @Test
+    public void coverMantieneTamanoDeLaTorre() {
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.pushLid(3);
+        int tamanoAntes = tower.stakingItems().length;
+        tower.cover();
+        assertEquals(tamanoAntes, tower.stakingItems().length);
+    }
     }

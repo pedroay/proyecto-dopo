@@ -112,7 +112,26 @@
             }
             }
         
-        
+        /**
+         * Removes the cup located at the top of the tower.
+         *
+         * This method checks whether the last element stored in the stack of objects
+         * is a cup. If it is not a cup, the operation fails and the tower state is
+         * marked as invalid. If the tower is visible, an error message is displayed.
+         *
+         * If the top element is a cup, the method removes it from the internal stacks
+         * that store the tower elements and cups. The removed cup is also made invisible.
+         *
+         * After removal, the method updates all references in the remaining elements:
+         * - If any element had the removed cup as its inner element, the reference is cleared.
+         * - If any element had the removed cup above it, that reference is also cleared.
+         *
+         * Finally, the method recalculates the top element of the tower based on the
+         * remaining elements.
+         *
+         * If the operation completes successfully, the tower structure is updated
+         * accordingly. Otherwise, the state flag {@code isOK} is set to {@code false}.
+         */
         public void popCup(){
             if(!objects.get(objects.size()-1).getType().equals("cup")){
                 if(isVisible)showError();
@@ -131,9 +150,31 @@
                 }
             }
         }    
-           
+        
+        
+        /**
+         * Removes a specific cup from the tower based on its identifier.
+         *
+         * The method searches for a cup with the given number and removes it from the
+         * tower structure. If the tower has no elements, the operation fails and the
+         * state flag {@code isOK} is set to {@code false}. If the tower is visible,
+         * an error message is displayed.
+         *
+         * When a cup is removed, the tower is temporarily cleared and then rebuilt
+         * with the remaining elements in order to maintain the correct stacking rules.
+         * During this reconstruction:
+         * <ul>
+         * <li>All references between elements (inside and above) are cleared.</li>
+         * <li>Each remaining element is reinserted using {@code pushCup()} or {@code pushLid()}.</li>
+         * </ul>
+         *
+         * The removed cup is also deleted from the internal stacks that store cups
+         * and general elements.
+         *
+         * @param i the identifier (number) of the cup to be removed from the tower
+         */
         public void removeCup(int i){
-            if(objects.isEmpty() ){
+            if(objects.isEmpty() || !isInElements(i,"cup") ){
                 if(isVisible)showError();
                 isOK = false;
             }
@@ -157,6 +198,35 @@
             }
         }
         
+        /**
+         * Adds a lid to the top of the tower following the stacking rules.
+         *
+         * The method first verifies whether a lid with the same identifier already
+         * exists in the tower or if the provided number is invalid (less than or
+         * equal to zero). If so, the operation fails and the tower state is marked
+         * as invalid. If the tower is visible, an error message is displayed.
+         *
+         * If the identifier corresponds to an existing cup, the lid associated
+         * with that cup is retrieved. Otherwise, a new lid is created.
+         *
+         * If the tower is empty, the new lid becomes the top element and is added
+         * to the internal stacks of lids and objects.
+         *
+         * If the tower already contains elements, the method compares the width
+         * of the current top element with the width of the new lid in order to
+         * determine how it should be placed:
+         * If the top element is wider and it is a cup, the lid is placed inside it.
+         * If the new lid is wider or equal in width, it is placed above the current top element.
+         * If the top element is a lid and wider than the new lid, the new lid is stacked above it.         * 
+         *
+         * When a lid is placed above its corresponding cup (same identifier),
+         * the cup is marked as covered by that lid.
+         *
+         * Finally, the method updates the reference to the top element of the tower
+         * if necessary and marks the operation as successful.
+         *
+         * @param i the identifier (number) of the lid to be added to the tower
+         */
         public void pushLid(int i) {
             if (isInElements(i, "lid") || i <= 0) {
                 isOK = false;
@@ -201,7 +271,27 @@
             isOK = true;
         }
           
-        
+        /**
+         * Removes the lid located at the top of the tower.
+         *
+         * The method verifies whether the last element stored in the stack of objects
+         * is a lid. If the top element is not a lid, the operation cannot be performed.
+         * In that case, the tower state is marked as invalid ({@code isOK = false}) and,
+         * if the tower is visible, an error message is displayed.
+         *
+         * If the top element is a lid, it is removed from the internal stacks that store
+         * lids and general elements. The removed lid is also made invisible.
+         *
+         * After removing the lid, the method iterates through the remaining elements of
+         * the tower and clears any references that pointed to the removed lid, either as
+         * an element placed inside another or as an element placed above another.
+         *
+         * Finally, the method recalculates the top element of the tower based on the
+         * vertical positions of the remaining elements.
+         *
+         * If the operation completes successfully, the internal structure of the tower
+         * is updated accordingly.
+         */
         public void popLid(){
             if(!objects.get(objects.size()-1).getType().equals("lid") ){
                 if(isVisible)showError();
@@ -221,7 +311,29 @@
             }
         }
         
-        public void removeLid(int i){
+        
+        /**
+         * Removes the lid located at the top of the tower.
+         *
+         * The method verifies whether the last element stored in the stack of objects
+         * is a lid. If the top element is not a lid, the operation cannot be performed.
+         * In that case, the tower state is marked as invalid ({@code isOK = false}) and,
+         * if the tower is visible, an error message is displayed.
+         *
+         * If the top element is a lid, it is removed from the internal stacks that store
+         * lids and general elements. The removed lid is also made invisible.
+         *
+         * After removing the lid, the method iterates through the remaining elements of
+         * the tower and clears any references that pointed to the removed lid, either as
+         * an element placed inside another or as an element placed above another.
+         *
+         * Finally, the method recalculates the top element of the tower based on the
+         * vertical positions of the remaining elements.
+         *
+         * If the operation completes successfully, the internal structure of the tower
+         * is updated accordingly.
+         */
+                public void removeLid(int i){
             if(objects.isEmpty() ){
                 if(isVisible)showError();
                 isOK = false;
@@ -246,6 +358,33 @@
             }
         }
         
+        /**
+         * Reorders the tower by arranging its cups and lids according to their identifiers.
+         *
+         * This method reorganizes the structure of the tower so that cups and lids are
+         * stacked following a consistent order based on their numeric identifiers.
+         *
+         * First, all cups currently in the tower are copied into a temporary list and
+         * sorted in descending order of their numbers using a simple bubble sort.
+         * The same sorting process is applied to the lids.
+         *
+         * After sorting, the internal stacks of cups, lids, and objects are cleared,
+         * and the reference to the current top element is reset.
+         *
+         * The tower is then rebuilt from scratch:
+         * <ul>
+         * <li>Each cup is reinserted using {@code pushCup()} following the sorted order.</li>
+         * <li>Each lid is reinserted using {@code pushLid()} so that they are correctly
+         * positioned relative to their corresponding cups.</li>
+         * </ul>
+         *
+         * During reconstruction, all previous structural relationships between elements
+         * (inside and above references) are cleared to ensure that the tower is rebuilt
+         * according to the stacking rules.
+         *
+         * Finally, the tower is made visible again and the operation is marked as
+         * successful by setting {@code isOK = true}.
+         */
         public void orderTower(){
             ArrayList<Cup> temp = new ArrayList<Cup>(cups);
             for (int i = 0; i < temp.size(); i++) {
@@ -287,7 +426,28 @@
             makeVisible();
             isOK = true;
             }
-            
+           
+        /**
+         * Reverses the order of the elements in the tower.
+         *
+         * This method reconstructs the tower by reversing the order in which its
+         * elements were originally stacked. All current elements of the tower are
+         * first copied into a temporary stack. Then, the internal stacks that store
+         * the tower elements (objects, cups, and lids) are cleared and the reference
+         * to the top element is reset.
+         *
+         * The elements are then reinserted into the tower in reverse order, starting
+         * from the last element of the temporary stack. Before reinserting each
+         * element, its structural references (inside and above) are cleared to avoid
+         * inconsistencies in the tower structure.
+         *
+         * Cups are reinserted using {@code pushCup()}, while lids are reinserted
+         * using {@code pushLid()}, ensuring that the stacking rules of the tower
+         * are respected during reconstruction.
+         *
+         * As a result, the tower maintains a valid structure but with the order of
+         * its elements reversed.
+         */    
         public void reverseTower(){
             Stack<Elements> temp = new Stack();
             temp.addAll(objects);
@@ -304,6 +464,12 @@
             }
         }
         
+        
+        /**
+         * return the total height of the tower whci is calculated in the next way
+         * we have the postion of the top and we have the max siz eof the canvas which is 300 we rest
+         * to 300 the posy
+         */
         public int height(){
             int totalHeight;
                 if(top != null){
@@ -316,6 +482,19 @@
             return totalHeight = 0;
         }
         
+        /**
+         * Returns the identifiers of the cups that are currently covered by lids.
+         *
+         * The method iterates through all cups stored in the tower and checks
+         * their state. If a cup is marked as "Covered", its identifier (number)
+         * is stored in an array.
+         *
+         * The resulting array contains the numbers of the cups that have a lid
+         * placed on them. Cups that are not covered are ignored.
+         *
+         * @return an array containing the identifiers of the cups that are covered
+         *         by lids in the tower
+         */
         public int[] lindedCups() {
             int[] copas = new int[cups.size()];
             int index = 0;
@@ -343,6 +522,10 @@
          public void swap(String[] objeto1, String[] objeto2) {
             Elements o1 = buscarElemento(objeto1);
             Elements o2 = buscarElemento(objeto2);
+            if(o1 == null || o2 == null || o1 == o2){
+                isOK = false;
+                return;
+            }
             Stack<Elements> temp = new Stack();
             temp.addAll(objects);
             objects.clear();
@@ -355,11 +538,11 @@
                 int tNumber = t.getNumber();
                 if(tNumber != o1.getNumber() && tNumber != o2.getNumber() && t.getType().equals("cup"))pushCup(tNumber);
                 else if(tNumber != o1.getNumber() && tNumber != o2.getNumber() && t.getType().equals("lid"))pushLid(tNumber);
-                else if(tNumber == o1.getNumber()){
+                else if(tNumber == o1.getNumber() && t != o2){
                     if(o2.getType().equals("cup"))pushCup(o2.getNumber());
                     else if(o2.getType().equals("lid"))pushLid(o2.getNumber());
                 }
-                else if(tNumber == o2.getNumber()){
+                else if(tNumber == o2.getNumber() && t != o1){
                     if(o1.getType().equals("cup"))pushCup(o1.getNumber());
                     else if(o1.getType().equals("lid"))pushLid(o1.getNumber());
                 }
