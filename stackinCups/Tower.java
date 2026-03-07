@@ -58,7 +58,18 @@
         }
         
         /**
-         * Agrega una taza al tope de la torre
+         * Adds a cup to the top of the element tower.
+         *
+         * This method validates that the provided ID is positive and unique. 
+         * If the tower is empty, the cup becomes the new top. If the tower contains elements, 
+         * the method determines whether to place the cup inside the current top (if the top 
+         * is a larger cup) or above it (if the new cup is larger or the top is a lid).
+         * 
+         *
+         * @param i The identification number (and size) of the cup to be added. 
+         * Must be a unique positive integer.
+         * @return This method does not return a value (void), but it updates the 
+         * {@code isOK} flag to true upon successful execution, or false if an error occurs.
          */
         public void pushCup(int i){
             if(isInElements(i,"cup") ||i <=0){
@@ -328,7 +339,80 @@
             }
             return staking;
         }
-
+        
+         public void swap(String[] objeto1, String[] objeto2) {
+            Elements o1 = buscarElemento(objeto1);
+            Elements o2 = buscarElemento(objeto2);
+            Stack<Elements> temp = new Stack();
+            temp.addAll(objects);
+            objects.clear();
+            cups.clear();
+            lids.clear();
+            top = null;
+            for(Elements t:temp){
+                t.setAbove(null);
+                t.setInside(null);
+                int tNumber = t.getNumber();
+                if(tNumber != o1.getNumber() && tNumber != o2.getNumber() && t.getType().equals("cup"))pushCup(tNumber);
+                else if(tNumber != o1.getNumber() && tNumber != o2.getNumber() && t.getType().equals("lid"))pushLid(tNumber);
+                else if(tNumber == o1.getNumber()){
+                    if(o2.getType().equals("cup"))pushCup(o2.getNumber());
+                    else if(o2.getType().equals("lid"))pushLid(o2.getNumber());
+                }
+                else if(tNumber == o2.getNumber()){
+                    if(o1.getType().equals("cup"))pushCup(o1.getNumber());
+                    else if(o1.getType().equals("lid"))pushLid(o1.getNumber());
+                }
+                isOK= true;
+            }
+        }
+        
+       public void cover() {
+            top = null; 
+            Stack<Elements> tem = new Stack<>(); 
+            Stack<Cup> temp = new Stack<>();
+            Stack<Lid> tempo = new Stack<>();
+            for (Elements e : objects) {
+                e.setInside(null);
+                e.setAbove(null);
+            }
+            tem.addAll(objects);
+            temp.addAll(cups);
+            tempo.addAll(lids);
+            objects.clear();
+            cups.clear();
+            for (Cup c : temp) {
+                int i = c.getNumber();
+                pushCup(i);
+                Lid f = findLidByNumber(i);
+                if (f != null) {
+                    pushLid(f.getNumber());
+                    lids.remove(f); 
+                }
+            }
+            for (Lid l : tempo) {
+                int j = l.getNumber();
+                pushLid(j);
+            }
+        }
+        
+        public String[][] swapToReduce() {       
+            for (int i = 0; i < objects.size(); i++) {
+                Elements e = objects.get(i);        
+                for (int j = i + 1; j < objects.size(); j++) {
+                    Elements k = objects.get(j);        
+                    if (e.getHeight() < k.getHeight() ) {
+                        return new String[][]{
+                            {e.getType(), String.valueOf(e.getNumber())},
+                            {k.getType(), String.valueOf(k.getNumber())}
+                        };
+                    }
+                }
+            }
+    
+            return new String[0][0]; 
+        }
+        
         /**
         /**
          * Places a cup inside another cup following stacking rules.
@@ -522,5 +606,22 @@
                 c.makeInvisible();
             }
             isVisible = false;
+        }
+        
+        private Elements buscarElemento(String[] objeto) {
+            if (objeto == null || objeto.length < 2) {
+                showError();
+            }
+        
+            String tipo = objeto[0];
+            int numero = Integer.parseInt(objeto[1]);
+        
+            if (tipo.equals("cup")) {
+                return findCupByNumber(numero);
+            } else if (tipo.equals("lid")) {
+                return findLidByNumber(numero);
+            } else {
+                return null; 
+            }
         }
     }
