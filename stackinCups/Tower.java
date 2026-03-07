@@ -124,30 +124,45 @@
                 objects.push(newLid);
                 isOK = true;
                 return;
-            } else {
-                int sizeTop = top.getWidth();
-                int sizeNewLid = newLid.getWidth();
-        
-                if (sizeTop > sizeNewLid && top.getType().equals("cup")) {
-                    setInside((Cup) top, newLid);
-                    lids.push(newLid);
-                    objects.push(newLid);
-                    setNewTop(newLid);
-                } else if (sizeTop < sizeNewLid) {
-                    setAbove(top, newLid);
-                    lids.push(newLid);
-                    objects.push(newLid);
-                    setNewTop(newLid);
-                } else if (sizeTop == sizeNewLid && top.getType().equals("cup")) {
-                    Cup matchingCup = (Cup) top;
-                    matchingCup.setState("Covered");
-                    newLid.setPosition(matchingCup.getPosx(), matchingCup.getPosy() - newLid.getHeight());
-                    lids.push(newLid);
-                    objects.push(newLid);
-                    setNewTop(newLid);
-                }
-                isOK = true;
             }
+            // justo antes de los if de ubicación, establece posición base
+            newLid.setPosition(150 - (newLid.getWidth() / 2), top.getPosy() - newLid.getHeight());
+            
+            int sizeTop = top.getWidth();
+            int sizeNewLid = newLid.getWidth();
+            
+            if (sizeTop == sizeNewLid && top.getType().equals("cup")) {
+                Cup matchingCup = (Cup) top;
+                matchingCup.setState("Covered");
+                // posición: encima de la copa que cubre
+                newLid.setPosition(matchingCup.getPosx(), matchingCup.getPosy() - newLid.getHeight());
+                lids.push(newLid);
+                objects.push(newLid);
+                setNewTop(newLid);
+            
+            } else if (sizeTop > sizeNewLid && top.getType().equals("cup")) {
+                // va adentro, setInside calcula la posición
+                setInside((Cup) top, newLid);
+                lids.push(newLid);
+                objects.push(newLid);
+                // NO setNewTop
+            
+            } else if (sizeTop < sizeNewLid) {
+                // va encima, setAbove calcula la posición
+                setAbove(top, newLid);
+                lids.push(newLid);
+                objects.push(newLid);
+                setNewTop(newLid);
+            
+            } else if (sizeTop > sizeNewLid && top.getType().equals("lid")) {
+                // top es lid y nueva es más pequeña → encima del top
+                setAbove(top, newLid);
+                lids.push(newLid);
+                objects.push(newLid);
+                setNewTop(newLid);
+            }
+            
+            isOK = true;
         }
             
         /**
@@ -168,23 +183,22 @@
          * @param base    The cup that will contain another cup
          * @param apilar  The cup to be placed inside the base cup
          */
-        private void setInside(Cup base,Elements apilar){
+        private void setInside(Cup base, Elements apilar) {
             Elements insideBase = base.getInside();
-            int posxApilar = apilar.getPosx();
+            int posxBase = base.getPosx();   // ✅ usa posx de la copa contenedora
             int posyBase = base.getPosy();
             int baseHeight = base.getHeight();
             int apilarHeight = apilar.getHeight();
-            if(insideBase == null){
-                apilar.setPosition(posxApilar,posyBase+baseHeight-10-apilarHeight);
+        
+            if (insideBase == null) {
+                apilar.setPosition(posxBase, posyBase + baseHeight - 10 - apilarHeight); // ✅
                 base.setInside(apilar);
-            }
-            else{
+            } else {
                 int insideBaseHeight = insideBase.getHeight();
-                if(insideBaseHeight > apilarHeight && insideBase instanceof Cup){
-                    setInside((Cup)insideBase,apilar);    
-                }
-                else if(insideBaseHeight <= apilarHeight ){
-                    setAbove(insideBase,apilar);
+                if (insideBaseHeight > apilarHeight && insideBase instanceof Cup) {
+                    setInside((Cup) insideBase, apilar);
+                } else {
+                    setAbove(insideBase, apilar);
                 }
             }
             isOK = true;
@@ -192,25 +206,24 @@
     
         
         
-        private void setAbove(Elements base, Elements apilar){
-           Elements baseAbove = base.getAbove(); 
-           int posxApilar = apilar.getPosx();
+        private void setAbove(Elements base, Elements apilar) {
+            Elements baseAbove = base.getAbove();
+            int posxApilar = apilar.getPosx();
             int posyBase = base.getPosy();
             int apilarHeight = apilar.getHeight();
-           if(baseAbove == null){
-               base.setAbove(apilar);
-               apilar.setPosition(posxApilar,posyBase-apilarHeight);
-            }
-           else{
-               int baseAboveHeight = baseAbove.getHeight();
-               if(baseAboveHeight > apilarHeight ){
-                   setInside((Cup) baseAbove,apilar);
+            
+            if (baseAbove == null) {
+                base.setAbove(apilar);
+                apilar.setPosition(posxApilar, posyBase - apilarHeight);
+            } else {
+                int baseAboveHeight = baseAbove.getHeight();
+                if (baseAboveHeight > apilarHeight && baseAbove instanceof Cup) {
+                    setInside((Cup) baseAbove, apilar); // ✅ solo castea si ES Cup
+                } else {
+                    setAbove(baseAbove, apilar); // ✅ si es Lid, sigue subiendo
                 }
-               else if( baseAboveHeight <= apilarHeight ){
-                   setAbove(baseAbove,apilar);
-               }
-               }
-           isOK = true;
+            }
+            isOK = true;
         }
         
         /**
@@ -234,7 +247,7 @@
             }
         }
         
-         private boolean isInElements(int i,String tipo){
+         protected boolean isInElements(int i,String tipo){
             for(Elements e : objects){
                 if(e.getNumber() == i && e.getType().equals(tipo)){
                     return true;
@@ -262,9 +275,9 @@
         } 
         
         protected Cup findCupByNumberOfLid(int i) {
-            for (Lid l : lids) {
-                if (l.getNumber() == i) {
-                    return l.getHisCup();
+            for (Cup c : cups) {
+                if (c.getNumber() == i) {
+                    return c;
                 }
             }
             return null;
@@ -293,8 +306,8 @@
         {   for(Elements l:objects){
                 int lPosy = l.getPosy();
                 if (lPosy >= 0){
-                l.makeVisible();
-            }
+                    l.makeVisible(); 
+                }
             }
             isVisible = true;
             }

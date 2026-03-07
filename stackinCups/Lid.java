@@ -8,7 +8,6 @@ import java.util.Random;
 public class Lid extends Elements
 {
 
-    private static String type = "lid";
     private String state;
     private Cup hisCup;
     private Rectangle shape;
@@ -22,8 +21,9 @@ public class Lid extends Elements
      */
     public Lid(int number) {
         super(number);
-        posy = 300-height;
+        type="lid";
         height = 1;
+        posy = 300-height;
         state = "normal";
         color = randomColor();
         hisCup= new Cup(number,this);
@@ -38,8 +38,8 @@ public class Lid extends Elements
      */
     public Lid(int number,Cup cup) {
         super(number);
+        height = 10;
         posy = 300-height;
-        height = 1;
         state = "normal";
         color = cup.getColor();
         hisCup= cup;
@@ -54,9 +54,7 @@ public class Lid extends Elements
     public Cup getHisCup() {
         return hisCup;
     }
-    
-    
-    
+
     /**
      * Obtiene el estado actual de la tapa
      * 
@@ -65,8 +63,7 @@ public class Lid extends Elements
     public String getState() {
         return state;
     }
-    
-    
+ 
     /**
      * Establece el estado de la tapa
      * 
@@ -75,9 +72,6 @@ public class Lid extends Elements
     public void setState(String nstate) {
         state = nstate;
     }
-    
-    
-    
     
     public void getInfo(){
         String info="informacion:"+hisCup.getNumber()+", "+width+", "+height+", "+state;
@@ -88,7 +82,7 @@ public class Lid extends Elements
     public void draw(){
         shape=new Rectangle();
         shape.changeColor(color);
-        shape.changeSize(height*10,width);
+        shape.changeSize(height,width);
         shape.setP(posy,posx);
         shape.makeVisible();
         }

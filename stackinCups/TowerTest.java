@@ -66,7 +66,7 @@ public class TowerTest {
     }
     
     @Test
-    public void debeAgregarUnaTabaQueCobraUnaCopa(){
+    public void debeAgregarUnaTapaQueCubraUnaCopa(){
         tower.pushCup(5);
         tower.pushLid(5);
         
@@ -87,8 +87,8 @@ public class TowerTest {
         
         Elements top = tower.getTop();
         
-        assertEquals(4, top.getNumber());
-        assertEquals("lid", top.getType());
+        assertEquals(5, top.getNumber());
+        assertEquals("cup", top.getType());
     }
     
     @Test
@@ -101,17 +101,16 @@ public class TowerTest {
     }
     
     @Test
-    public void debeAgregarVariasTabasCorrectamente(){
+    public void debeAgregarVariasTapasCorrectamente(){
         tower.pushCup(5);  
         tower.pushLid(3);
         tower.pushLid(4); 
         
         Elements top = tower.getTop();
-        Elements below = top.getAbove(); 
         
-        assertEquals(4, top.getNumber());     
-        assertEquals("lid", top.getType());
-        assertEquals(3, below.getNumber());    
-        assertTrue(top.getPosy() < below.getPosy()); 
+        assertEquals(5, top.getNumber());     
+        assertEquals("cup", top.getType());
+        assertTrue(tower.isInElements(3,"lid"));
+        assertTrue(tower.isInElements(4,"lid"));
     }
     }
