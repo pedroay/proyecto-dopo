@@ -175,5 +175,85 @@ public class TowerTest {
         assertEquals(5,top.getNumber());
     }
     
+    @Test
+    public void debeRemoverUnaCopaSinElementos() {
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.removeCup(3);
+        assertTrue(tower.isOK());
+        assertEquals(5, tower.getTop().getNumber());
+        assertEquals("cup", tower.getTop().getType());
+    }
+    
+    @Test
+    public void debeRemoverLaUnicaCopa() {
+        tower.pushCup(5);
+        tower.removeCup(5);
+        assertTrue(tower.isOK());
+        assertNull(tower.getTop());
+    }
+    
+    @Test
+    public void debeRemoverCopayReubicarCopasInternas() {
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.pushCup(1);
+        tower.removeCup(3);
+        assertTrue(tower.isOK());
+        assertEquals(5, tower.getTop().getNumber());
+        assertEquals(1, tower.getTop().getInside().getNumber());
+    }
+    
+    @Test
+    public void noDebeRemoverCopaQueNoExiste() {
+        tower.pushCup(5);
+        tower.removeCup(9);
+        assertFalse(tower.isOK());
+        assertEquals(5, tower.getTop().getNumber());
+    }
+    
+    @Test
+    public void debeRemoverCopaDelMedio() {
+        tower.pushCup(7);
+        tower.pushCup(5);
+        tower.pushCup(3);
+        tower.removeCup(5);
+        assertTrue(tower.isOK());
+        assertEquals(7, tower.getTop().getNumber());
+        assertEquals(3, tower.getTop().getInside().getNumber());
+    }
+    
+    @Test
+    public void debeRemoverUnaTapaSinElementos() {
+        tower.pushCup(5);
+        tower.pushLid(3);
+        tower.removeLid(3);
+        assertTrue(tower.isOK());
+        assertFalse(tower.isInElements(3,"lid"));
+    }
+    
+    @Test
+    public void debeRemoverTapaQueCubreYDescubrirCopa() {
+        tower.pushCup(5);
+        tower.pushLid(5);
+        Cup cup = tower.findCupByNumberOfLid(5);
+        assertEquals("Covered", cup.getState());
+        tower.removeLid(5);
+        assertTrue(tower.isOK());
+        cup = tower.findCupByNumber(5);
+        assertEquals("noCovered", cup.getState());
+    }
+    
+    @Test
+    public void debeRemoverTapaEntreDosElementos() {
+        tower.pushCup(5);
+        tower.pushLid(3);
+        tower.pushLid(4);
+        tower.removeLid(3);
+        assertTrue(tower.isOK());
+        Elements inside = tower.getTop().getInside();
+        assertNotNull(inside);
+        assertEquals(4, inside.getNumber());
+    }
 
     }

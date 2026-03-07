@@ -91,7 +91,7 @@
                     objects.push(newCup);
                     setNewTop(newCup);
                 }
-                else if(sizeTop < sizeNewCup ){
+                else if(sizeTop < sizeNewCup || top.getType().equals("lid")){
                     setAbove(top,newCup);
                     cups.push(newCup);
                     setNewTop(newCup);
@@ -276,7 +276,59 @@
             makeVisible();
             isOK = true;
             }
+            
+        public void reverseTower(){
+            Stack<Elements> temp = new Stack();
+            temp.addAll(objects);
+            objects.clear();
+            cups.clear();
+            lids.clear();
+            top = null;
+            for(int i = temp.size() -1 ; i >= 0;i--){
+                Elements a = temp.get(i);
+                a.setInside(null);
+                a.setAbove(null);
+                if(a.getType().equals("cup"))pushCup(a.getNumber());
+                else if(a.getType().equals("lid"))pushLid(a.getNumber());
+            }
+        }
         
+        public int height(){
+            int totalHeight;
+                if(top != null){
+                    totalHeight= 300- top.getPosy();
+                    isOK = true;
+                    return totalHeight;
+                
+            }
+            isOK = true;
+            return totalHeight = 0;
+        }
+        
+        public int[] lindedCups() {
+            int[] copas = new int[cups.size()];
+            int index = 0;
+            
+            for (Cup c : cups) {
+                if ("Covered".equals(c.getState())) {
+                    copas[index] = c.getNumber();
+                    index++;
+                }
+            }
+            return copas; 
+        }
+        
+        public String[][] stakingItems(){
+            String[][] staking = new String[objects.size()][2];
+            int index = 0;
+            for(Elements o:objects){
+                staking[index][0] = o.getType();
+                staking[index][1] = Integer.toString(o.getNumber());
+                index ++;
+            }
+            return staking;
+        }
+
         /**
         /**
          * Places a cup inside another cup following stacking rules.
@@ -308,7 +360,7 @@
             } else {
                 int insideBaseWidth = insideBase.getWidth();
                 int apilarWidth = apilar.getWidth();
-                if (insideBaseWidth > apilarWidth ) {
+                if (insideBaseWidth > apilarWidth && insideBase.getType().equals("cup")) {
                     setInside((Cup) insideBase, apilar);
                 } else {
                     setAbove(insideBase, apilar);
@@ -328,7 +380,11 @@
             if (baseAbove == null) {
                 base.setAbove(apilar);
                 if(apilar.getType().equals("cup") || apilar.getNumber()> base.getNumber())apilar.setPosition(posxApilar, posyBase - apilarHeight);
-                else if(apilar.getType().equals("lid") || apilar.getNumber() == base.getNumber())apilar.setPosition(posxApilar, posyBase);
+                else if(apilar.getType().equals("lid") && apilar.getNumber() == base.getNumber()){
+                apilar.setPosition(posxApilar, posyBase);
+                base.setCover((Lid)apilar);
+                }
+                else if(apilar.getType().equals("lid") && apilar.getNumber() < base.getNumber())apilar.setPosition(posxApilar, posyBase-10);
             } else {
                 int baseAboveHeight = baseAbove.getHeight();
                 if (baseAboveHeight > apilarHeight && baseAbove instanceof Cup) {
@@ -388,7 +444,7 @@
             return false;
         } 
         
-        protected Cup findCupByNumberOfLid(int i) {
+        public Cup findCupByNumberOfLid(int i) {
             for (Lid l : lids) {
                 if (l.getNumber() == i) {
                     return l.getHisCup();
@@ -397,7 +453,7 @@
             return null;
         }
         
-        private Lid findLidByNumberOfCup(int i) {
+        public Lid findLidByNumberOfCup(int i) {
             for (Cup c : cups) {
                 if (c.getNumber() == i) {
                     return c.getHisLid();
@@ -406,7 +462,7 @@
             return null;
         }
         
-        private Cup findCupByNumber(int i){
+        public Cup findCupByNumber(int i){
             Cup ca = null;
             for (Cup c : cups) {
                 if (c.getNumber() == i) {
@@ -417,7 +473,7 @@
             return ca;
         }
         
-        private Lid findLidByNumber(int i){
+        public Lid findLidByNumber(int i){
             Lid la = null;
             for (Lid l : lids) {
                 if (l.getNumber() == i) {

@@ -164,4 +164,6 @@ public class Elements
     public void setCover(Lid i){}
     
     public void setInside(Elements i){}
+    
+    public void cover(){}
 }
