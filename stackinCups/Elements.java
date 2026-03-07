@@ -160,4 +160,8 @@ public class Elements
         public Elements getInside(){
         return null;
     }
+    
+    public void setCover(Lid i){}
+    
+    public void setInside(Elements i){}
 }

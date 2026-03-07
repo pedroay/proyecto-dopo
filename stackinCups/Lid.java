@@ -21,12 +21,12 @@ public class Lid extends Elements
      */
     public Lid(int number) {
         super(number);
-        type="lid";
-        height = 1;
+        height = 10;
         posy = 300-height;
         state = "normal";
         color = randomColor();
         hisCup= new Cup(number,this);
+        type = "lid";
     }
     
     /**
@@ -43,6 +43,7 @@ public class Lid extends Elements
         state = "normal";
         color = cup.getColor();
         hisCup= cup;
+        type = "lid";
     }    
     
     
@@ -87,10 +88,12 @@ public class Lid extends Elements
         shape.makeVisible();
         }
     
-        @Override
+    @Override
     public void erase(){
-     shape.makeInvisible();
-     isVisible = false;
+         if(shape != null){   
+         shape.makeInvisible();
+         isVisible = false;
+        }
     }
     
     

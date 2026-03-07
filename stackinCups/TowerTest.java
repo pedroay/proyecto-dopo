@@ -1,6 +1,9 @@
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+     import java.util.Stack;
+    import java.util.ArrayList;
+    import javax.swing.JOptionPane;
 
 public class TowerTest {
 
@@ -77,6 +80,7 @@ public class TowerTest {
         assertEquals(5, top.getNumber()); 
         assertEquals("lid", top.getType());  
         assertEquals("Covered", cup.getState()); 
+        tower.makeVisible();
     }
     
     @Test
@@ -113,4 +117,63 @@ public class TowerTest {
         assertTrue(tower.isInElements(3,"lid"));
         assertTrue(tower.isInElements(4,"lid"));
     }
+    
+    @Test
+    public void debeCrearmeUnaTorreSoloDeTapas(){
+        tower.pushLid(3);
+        tower.pushLid(4); 
+        Elements top = tower.getTop();
+        assertEquals(4,top.getNumber());
+    }
+    
+    @Test
+    public void debeCrearmeUnaTorreDeTapasConCopas(){
+        tower.pushCup(4);
+        tower.pushLid(3);
+        tower.pushLid(4);
+        tower.pushCup(5);
+        tower.pushLid(2);
+        Elements top = tower.getTop();
+        assertEquals(5,top.getNumber());
+    }
+    
+    @Test
+    public void debeEliminarmeElTopeDeUnaTorreSoloDeCopas(){
+        tower.pushCup(3);
+        tower.pushCup(4);
+        tower.pushCup(2);
+        tower.popCup();
+        Elements top = tower.getTop();
+        Stack<Elements> a = tower.getObjects();
+        assertEquals(4,a.get(a.size()-1).getNumber());
+        assertEquals(4,top.getNumber());
+        tower.makeVisible();
+    }
+    
+    @Test
+    public void deveEliminarmeElTopeDeUnaTorreQueEsUnaLId(){
+        tower.pushCup(1);
+        tower.pushCup(3);
+        tower.pushLid(5);
+        tower.popLid();
+        Elements top = tower.getTop();
+        Stack<Elements> a = tower.getObjects();
+        assertEquals(3,a.get(a.size()-1).getNumber());
+        assertEquals(3,top.getNumber());
+    
+    }
+    
+    @Test
+    public void debeEliminarUnaTapa(){
+        tower.pushCup(1);
+        tower.pushCup(5);
+        tower.pushLid(3);
+        tower.popLid();
+        Elements top = tower.getTop();
+        Stack<Elements> a = tower.getObjects();
+        assertEquals(5,a.get(a.size()-1).getNumber());
+        assertEquals(5,top.getNumber());
+    }
+    
+
     }

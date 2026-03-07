@@ -161,4 +161,9 @@ public class Cup extends Elements {
         return height;
     }
     
+    @Override
+    public void setCover(Lid i){
+        cover = i;
+        setState("Covered");
+        }
 }
