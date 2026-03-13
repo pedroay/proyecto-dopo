@@ -20,15 +20,16 @@
          * asociada a ella.
          * * @param number El número identificador único que determina el tamaño (ancho) de la tapa.
          */
-        public Lid(int number) {
+        public Lid(int number,Tower t) {
             super(number);
             height = 10;
             posy = 300-height;
             state = "normal";
             color = randomColor();
-            hisCup= new Cup(number,this);
+            hisCup= new Cup(number,getTower());
             type = "lid";
             super.canIn = false;
+            torre = t;
         }
         
         /**

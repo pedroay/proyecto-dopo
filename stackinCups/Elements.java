@@ -5,7 +5,7 @@ import java.util.Random;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Elements
+public abstract class Elements
 {
     protected int width;
     protected String color;
@@ -17,6 +17,7 @@ public class Elements
     protected String type;
     protected Elements above;
     protected boolean canIn;
+    protected Tower torre;
     
     public Elements(int number){
         width = calculateWidth(number);
@@ -171,4 +172,10 @@ public class Elements
     public boolean isCanIn(){
         return canIn;
     }
+    
+    public Tower getTower(){
+        return torre;
+    }
+    
+    public abstract void rePush(Element elemento);
 }
