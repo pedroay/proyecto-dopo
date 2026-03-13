@@ -11,6 +11,7 @@
         private String state;
         private Cup hisCup;
         private Rectangle shape;
+        private final static boolean canIN = false;
         
         /**
          * Constructor principal de la clase Lid.
@@ -27,6 +28,7 @@
             color = randomColor();
             hisCup= new Cup(number,this);
             type = "lid";
+            super.canIn = false;
         }
         
         /**
@@ -44,6 +46,7 @@
             color = cup.getColor();
             hisCup= cup;
             type = "lid";
+            super.canIn = false;
         }    
         
         

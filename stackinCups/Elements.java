@@ -16,6 +16,7 @@ public class Elements
     protected int height;
     protected String type;
     protected Elements above;
+    protected boolean canIn;
     
     public Elements(int number){
         width = calculateWidth(number);
@@ -166,4 +167,8 @@ public class Elements
     public void setInside(Elements i){}
     
     public void cover(){}
+    
+    public boolean isCanIn(){
+        return canIn;
+    }
 }

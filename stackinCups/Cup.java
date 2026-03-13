@@ -32,7 +32,7 @@ public class Cup extends Elements {
         color = lid.getColor();
         hisLid = lid;
         posy = 300 - height;
-            
+        super.canIn = true;    
     }
     
     /**
@@ -49,7 +49,7 @@ public class Cup extends Elements {
         color = randomColor();
         hisLid = new Lid(inumber,this);
         posy = 300 - height;
-            
+        super.canIn = true;  
     }    
     
     

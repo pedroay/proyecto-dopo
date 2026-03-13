@@ -96,13 +96,13 @@
             else{
                 int sizeTop = top.getWidth();
                 int sizeNewCup = newCup.getWidth();
-                if (sizeTop > sizeNewCup && top.getType().equals("cup")){
+                if (sizeTop > sizeNewCup && top.isCanIn()){
                     setInside((Cup)top,newCup);
                     cups.push(newCup);
                     objects.push(newCup);
                     setNewTop(newCup);
                 }
-                else if(sizeTop < sizeNewCup || top.getType().equals("lid")){
+                else if(sizeTop < sizeNewCup || !top.isCanIn()){
                     setAbove(top,newCup);
                     cups.push(newCup);
                     setNewTop(newCup);
@@ -251,7 +251,7 @@
             }
             int sizeTop = top.getWidth();
             int sizeNewLid = newLid.getWidth();
-            if (sizeTop > sizeNewLid && top.getType().equals("cup")) {
+            if (sizeTop > sizeNewLid && top.isCanIn()) {
                 setInside((Cup) top, newLid);
                 lids.push(newLid);
                 objects.push(newLid);
@@ -261,7 +261,7 @@
                 objects.push(newLid);
                 if(top.getType().equals("cup") && top.getNumber() == newLid.getNumber())top.setCover(newLid);
                 setNewTop(newLid);
-            } else if (sizeTop > sizeNewLid && top.getType().equals("lid")) {
+            } else if (sizeTop > sizeNewLid && !top.isCanIn()) {
                 setAbove(top, newLid);
                 lids.push(newLid);
                 objects.push(newLid);
