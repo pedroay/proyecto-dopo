@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Lid
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Lib\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=number
-comment1.target=Lid(int)
+comment1.params=number\ t
+comment1.target=Lid(int,\ Tower)
 comment1.text=\r\n\ Constructor\ principal\ de\ la\ clase\ Lid.\r\n\ Crea\ una\ nueva\ tapa\ bas\u00E1ndose\ en\ un\ n\u00FAmero\ identificador.\ Este\ n\u00FAmero\ determina\ \r\n\ su\ ancho.\ Adem\u00E1s,\ le\ asigna\ un\ color\ aleatorio\ y\ crea\ autom\u00E1ticamente\ una\ taza\ (Cup)\r\n\ asociada\ a\ ella.\r\n\ *\ @param\ number\ El\ n\u00FAmero\ identificador\ \u00FAnico\ que\ determina\ el\ tama\u00F1o\ (ancho)\ de\ la\ tapa.\r\n
 comment10.params=above
 comment10.target=void\ setAbove(Lid)

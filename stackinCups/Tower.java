@@ -84,7 +84,7 @@
             if(isInLids(i)){
                 newCup = findCupByNumberOfLid(i);
             }else{
-                newCup = new Cup(i,this);
+                newCup = new Cup(i);
             }
             if(top == null){
                 top = newCup;
@@ -192,12 +192,32 @@
                 for(Elements o:temp){
                     o.setInside(null);
                     o.setAbove(null);
-                    push((Elements)o);
+                    push1(o);
                 }
             }
         }
         
         
+        private void push1(Elements e){
+            if(e.getType().equals("cup")){
+                pushCup( e.getNumber());
+            }
+            else{
+                push2(e);
+            }
+            
+        }
+        
+        private void push2(Elements e){
+            if(e.getType().equals("lid")){
+                pushLid( e.getNumber());
+            }
+            else{
+                push3(e);
+            }
+        }
+        
+        private void push3(Elements e){}
         
         /**
          * Adds a lid to the top of the tower following the stacking rules.

@@ -26,10 +26,9 @@
             posy = 300-height;
             state = "normal";
             color = randomColor();
-            hisCup= new Cup(number,getTower());
+            hisCup= new Cup(number);
             type = "lid";
             super.canIn = false;
-            torre = t;
         }
         
         /**
@@ -108,4 +107,6 @@
         public void setAbove(Lid above){
             this.above = above;
         }
+
+
     }
