@@ -51,8 +51,7 @@
             objects = new Stack<Elements>();
             isVisible = false;
             for(int j= 1; j <=i; j ++){
-                int k = j*2-1;
-                pushCup(k);
+                pushCup(j);
             }
             isOK = true;
         }
@@ -163,10 +162,10 @@
          * When a cup is removed, the tower is temporarily cleared and then rebuilt
          * with the remaining elements in order to maintain the correct stacking rules.
          * During this reconstruction:
-         * <ul>
-         * <li>All references between elements (inside and above) are cleared.</li>
-         * <li>Each remaining element is reinserted using {@code pushCup()} or {@code pushLid()}.</li>
-         * </ul>
+         * 
+         * All references between elements (inside and above) are cleared.
+         * Each remaining element is reinserted using {@code pushCup()} or {@code pushLid()}.
+         * 
          *
          * The removed cup is also deleted from the internal stacks that store cups
          * and general elements.
@@ -393,11 +392,11 @@
          * and the reference to the current top element is reset.
          *
          * The tower is then rebuilt from scratch:
-         * <ul>
-         * <li>Each cup is reinserted using {@code pushCup()} following the sorted order.</li>
-         * <li>Each lid is reinserted using {@code pushLid()} so that they are correctly
-         * positioned relative to their corresponding cups.</li>
-         * </ul>
+         * 
+         * Each cup is reinserted using {@code pushCup()} following the sorted order.
+        * Each lid is reinserted using {@code pushLid()} so that they are correctly
+         * positioned relative to their corresponding cups.
+         * 
          *
          * During reconstruction, all previous structural relationships between elements
          * (inside and above references) are cleared to ensure that the tower is rebuilt
@@ -529,6 +528,22 @@
             return copas; 
         }
         
+        /**
+         * Returns a two-dimensional array representing the stored elements,
+         * where each row contains the type and quantity of an object.
+         *
+         * The method iterates through all elements in the collection and
+         * extracts their type and number. The type is stored as a String,
+         * and the number is converted to a String before being stored.
+         *
+         * The resulting matrix has as many rows as elements in the collection
+         * and exactly two columns:
+         * - Column 0: the type of the element
+         * - Column 1: the quantity of the element as a String
+         *
+         * @return a matrix containing the type and quantity of each element
+         */
+            
         public String[][] stakingItems(){
             String[][] staking = new String[objects.size()][2];
             int index = 0;
@@ -540,6 +555,25 @@
             return staking;
         }
         
+        /**
+         * Swaps the positions of two elements within the structure.
+         *
+         * The method receives two arrays representing the elements to be swapped
+         * and attempts to locate them in the collection. If either element is not found,
+         * or both references correspond to the same element, the operation is aborted
+         * and the state flag is set to false.
+         *
+         * To perform the swap, the method temporarily stores all elements in a stack,
+         * clears the current structure, and then rebuilds it. During reconstruction,
+         * the positions of the two target elements are exchanged while preserving
+         * the relative order of the remaining elements.
+         *
+         * Additionally, all relational references (such as "above" and "inside")
+         * are reset before reinserting the elements.
+         *
+         * @param objeto1 array representing the first element to be swapped
+         * @param objeto2 array representing the second element to be swapped
+         */
          public void swap(String[] objeto1, String[] objeto2) {
             Elements o1 = buscarElemento(objeto1);
             Elements o2 = buscarElemento(objeto2);
@@ -557,20 +591,31 @@
                 t.setAbove(null);
                 t.setInside(null);
                 int tNumber = t.getNumber();
-                if(tNumber != o1.getNumber() && tNumber != o2.getNumber() && t.getType().equals("cup"))pushCup(tNumber);
-                else if(tNumber != o1.getNumber() && tNumber != o2.getNumber() && t.getType().equals("lid"))pushLid(tNumber);
+                if(tNumber != o1.getNumber() && tNumber != o2.getNumber() )push1(t);
                 else if(tNumber == o1.getNumber() && t != o2){
-                    if(o2.getType().equals("cup"))pushCup(o2.getNumber());
-                    else if(o2.getType().equals("lid"))pushLid(o2.getNumber());
+                    push1(o2);
                 }
                 else if(tNumber == o2.getNumber() && t != o1){
-                    if(o1.getType().equals("cup"))pushCup(o1.getNumber());
-                    else if(o1.getType().equals("lid"))pushLid(o1.getNumber());
+                    push1(o1);
                 }
                 isOK= true;
             }
         }
         
+       /**
+         * Reorganizes the structure by placing lids on top of their corresponding cups.
+         *
+         * The method resets the current structure and clears all relationships between
+         * elements (such as "inside" and "above"). It then temporarily stores all elements,
+         * cups, and lids in auxiliary stacks to rebuild the structure from scratch.
+         *
+         * During reconstruction, each cup is reinserted and, if a lid with the same
+         * identifier exists, that lid is placed on top of the cup. Lids that do not
+         * correspond to any cup are added afterward.
+         *
+         * This ensures that matching cups and lids are properly paired, while maintaining
+         * the rest of the elements in a consistent state.
+         */ 
        public void cover() {
             top = null; 
             Stack<Elements> tem = new Stack<>(); 
@@ -827,5 +872,17 @@
             } else {
                 return null; 
             }
+        }
+        
+        public int findIndexOfACupNumberInStackin(int number){
+            int index;
+            String numberS = Integer.toString(number);
+            String [][] s = stakingItems();
+            for(int i = s.length;i >= 0; i--){
+               if(s[i][0].equals("cup") && s[i][1].equals(numberS)){
+                   
+               }
+            }
+            return index;
         }
     }

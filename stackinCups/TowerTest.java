@@ -259,17 +259,18 @@ public class TowerTest {
     //swap, swap to reduce y cover
     @Test
     public void debeIntercambiarPrimeraCopaPorUltima() {
-        tower.pushCup(5);
-        tower.pushCup(3);
         tower.pushCup(1);
+        tower.pushCup(3);
+        tower.pushCup(7);
 
-        tower.swap(new String[]{"cup","5"}, new String[]{"cup","1"});
+        tower.swap(new String[]{"cup","7"}, new String[]{"cup","1"});
 
         String[][] staking = tower.stakingItems();
-        assertEquals("cup", staking[0][0]); assertEquals("1", staking[0][1]);
+        assertEquals("cup", staking[0][0]); assertEquals("7", staking[0][1]);
         assertEquals("cup", staking[1][0]); assertEquals("3", staking[1][1]);
-        assertEquals("cup", staking[2][0]); assertEquals("5", staking[2][1]);
+        assertEquals("cup", staking[2][0]); assertEquals("1", staking[2][1]);
         assertTrue(tower.isOK());
+        tower.makeVisible();
     }
     
     @Test
