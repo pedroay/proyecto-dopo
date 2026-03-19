@@ -19,7 +19,8 @@ public class TowerContest
             int altura = torre.findCupByNumber(i).getHeight();
             int reduccion = altura - 20;
             if(actual - reduccion >= nh){
-                actual = actual - reduccion
+                actual = actual - reduccion;
+                //aqui toca buscar el que es inmediatamente menor para meterlo dentro 
             }
         }
     }

@@ -875,12 +875,12 @@
         }
         
         public int findIndexOfACupNumberInStackin(int number){
-            int index;
+            int index = -10;
             String numberS = Integer.toString(number);
             String [][] s = stakingItems();
             for(int i = s.length;i >= 0; i--){
                if(s[i][0].equals("cup") && s[i][1].equals(numberS)){
-                   
+                   index = i;
                }
             }
             return index;
