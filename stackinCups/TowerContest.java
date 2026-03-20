@@ -104,14 +104,13 @@ public class TowerContest
             return respuesta;
         }
         Tower torre = new Tower(n);
-        while (torre.height() > nh) {
+        while (torre.height() != nh) {
             String[][] par = torre.swapToReduce();
             if (par.length == 0) {
                 return respuesta;
             }
             torre.swap(par[0], par[1]);
         }
-        
         String[][] items = torre.stakingItems();
         String result = "";
         for (int i = 0; i < items.length; i++) {
@@ -121,5 +120,17 @@ public class TowerContest
         result = result.trim();
         return respuesta;
         
+    }
+    
+    public Tower auxiliar2(int n, int h){
+        ArrayList<Integer> respuesta = auxiliar(n,h);
+        Tower torre = new Tower(0);
+        if(respuesta.size() == 0){
+            JOptionPane.showMessageDialog(null, "Impossible");
+        }
+        for(int r:respuesta){
+            torre.pushCup(r);
+        }
+        return torre;
     }
 }
