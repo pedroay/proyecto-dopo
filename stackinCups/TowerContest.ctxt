@@ -2,5 +2,7 @@
 comment0.target=TowerContest
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ TowerContest\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=n\ h
-comment1.target=void\ solve(int,\ int)
-numComments=2
+comment1.target=java.lang.String\ solve(int,\ int)
+comment2.params=n\ h
+comment2.target=void\ simulate(int,\ int)
+numComments=3
