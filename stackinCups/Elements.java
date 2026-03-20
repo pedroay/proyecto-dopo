@@ -30,10 +30,8 @@ public abstract class Elements
         return ((2*inumber)-1)*10;
     }
     
-    public void draw(){
-        }
-    public void erase(){
-    }
+    public abstract void draw();
+    public abstract void erase();
     public int getNumber(){
         return number;
     }
