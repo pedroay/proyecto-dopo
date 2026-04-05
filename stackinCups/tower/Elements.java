@@ -18,6 +18,7 @@ public abstract class Elements
     protected String type;
     protected Elements above;
     protected boolean canIn;
+    protected Tower torre;
     
     public Elements(int number){
         width = calculateWidth(number);
@@ -171,5 +172,9 @@ public abstract class Elements
         return canIn;
     }
     
+    public Tower getTower(){
+        return torre;
+    }
     
+    public abstract void push(int i);
 }

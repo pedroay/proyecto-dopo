@@ -34,7 +34,8 @@ public class Cup extends Elements {
         color = lid.getColor();
         hisLid = lid;
         posy = 300 - height;
-        super.canIn = true;  
+        super.canIn = true;
+        torre = lid.getTower();
 
     }
     
@@ -44,15 +45,16 @@ public class Cup extends Elements {
      * aleatorio para la taza y crea automáticamente una tapa (Lid) asociada a ella.
      * * @param inumber El identificador único de la taza, utilizado para calcular su altura.
      */     
-    public Cup(int inumber) {
+    public Cup(int inumber,Tower torre) {
         super(inumber);
         height =  calculateWidth(inumber);;
         state = "noCovered";
         type = "cup";
         color = randomColor();
+        this.torre = torre;         // asignar torre ANTES de crear hisLid
         hisLid = new Lid(inumber,this);
         posy = 300 - height;
-        super.canIn = true;  
+        super.canIn = true; 
     }    
     
     
@@ -171,5 +173,7 @@ public class Cup extends Elements {
         }
         
     
-        
+    public void push(int i){
+        torre.pushCup(i);
+    }
 }

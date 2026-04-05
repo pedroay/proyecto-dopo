@@ -22,13 +22,14 @@ public class Lid extends Elements
      * asociada a ella.
      * * @param number El número identificador único que determina el tamaño (ancho) de la tapa.
      */
-    public Lid(int number) {
+    public Lid(int number,Tower torre) {
         super(number);
         height = 10;
         posy = 300-height;
         state = "normal";
         color = randomColor();
-        hisCup= new Cup(number);
+        this.torre = torre;  // asignar torre ANTES de crear el Cup
+        hisCup= new Cup(number,getTower());
         type = "lid";
         super.canIn = false;
     }
@@ -49,6 +50,7 @@ public class Lid extends Elements
         hisCup= cup;
         type = "lid";
         super.canIn = false;
+        this.torre = cup.getTower();
     }    
     
     
@@ -110,5 +112,7 @@ public class Lid extends Elements
         this.above = above;
     }
 
-
+    public void push(int i){
+        torre.pushLid(i);
+    }
 }

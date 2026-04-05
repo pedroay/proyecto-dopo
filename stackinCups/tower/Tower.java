@@ -72,19 +72,12 @@ public Tower(int i) {
  * {@code isOK} flag to true upon successful execution, or false if an error occurs.
  */
 public void pushCup(int i){
-    if(isInElements(i,"cup") ||i <=0){
-        isOK = false;
-        if(isVisible){
-            showError();
-            }
-        return;
-    }
+    if(cupInTower(i))return;   
     Cup newCup;
-
     if(isInLids(i)){
         newCup = findCupByNumberOfLid(i);
     }else{
-        newCup = new Cup(i);
+        newCup = new Cup(i,this);
     }
     if(top == null){
         top = newCup;
@@ -192,32 +185,15 @@ public void removeCup(int i){
         for(Elements o:temp){
             o.setInside(null);
             o.setAbove(null);
-            push1(o);
+            push(o);
         }
     }
 }
 
 
-private void push1(Elements e){
-    if(e.getType().equals("cup")){
-        pushCup( e.getNumber());
-    }
-    else{
-        push2(e);
-    }
-    
+private void push(Elements e){
+    e.push(e.getNumber());
 }
-
-private void push2(Elements e){
-    if(e.getType().equals("lid")){
-        pushLid( e.getNumber());
-    }
-    else{
-        push3(e);
-    }
-}
-
-private void push3(Elements e){}
 
 /**
  * Adds a lid to the top of the tower following the stacking rules.
@@ -288,7 +264,6 @@ public void pushLid(int i) {
         objects.push(newLid);
         setNewTop(newLid);
     }
-    
     isOK = true;
 }
   
@@ -373,8 +348,7 @@ public void popLid(){
         for(Elements o:temp){
             o.setInside(null);
             o.setAbove(null);
-            if(o.getType().equals("cup"))pushCup(o.getNumber());
-            else if(o.getType().equals("lid"))pushLid(o.getNumber());
+            push(o);
         }
     }
 }
@@ -480,8 +454,7 @@ public void reverseTower(){
         Elements a = temp.get(i);
         a.setInside(null);
         a.setAbove(null);
-        if(a.getType().equals("cup"))pushCup(a.getNumber());
-        else if(a.getType().equals("lid"))pushLid(a.getNumber());
+        push(a);
     }
 }
 
@@ -592,12 +565,12 @@ public String[][] stakingItems(){
         t.setAbove(null);
         t.setInside(null);
         int tNumber = t.getNumber();
-        if(tNumber != o1.getNumber() && tNumber != o2.getNumber() )push1(t);
+        if(tNumber != o1.getNumber() && tNumber != o2.getNumber() )push(t);
         else if(tNumber == o1.getNumber() && t != o2){
-            push1(o2);
+            push(o2);
         }
         else if(tNumber == o2.getNumber() && t != o1){
-            push1(o1);
+            push(o1);
         }
         isOK= true;
     }
@@ -885,5 +858,20 @@ public int findIndexOfACupNumberInStackin(int number){
        }
     }
     return index;
+}
+
+/**
+ * dice si una copa esta o no en la torres
+ */
+private boolean cupInTower(int i){
+    boolean is = false;
+    if(isInElements(i,"cup") ||i <=0){
+        isOK = false;
+        if(isVisible){
+            showError();
+            }
+        is = true;
+    }
+    return is;
 }
 }
