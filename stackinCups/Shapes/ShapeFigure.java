@@ -11,7 +11,7 @@ package Shapes;
  * @author Michael Kolling and David J. Barnes (Modified)
  * @version 2.0
  */
-public abstract class Shape {
+public abstract class ShapeFigure {
 
     // Campos protected para que las subclases puedan acceder directamente
     // sin necesidad de llamar a getters/setters en cada operación interna.
@@ -25,7 +25,7 @@ public abstract class Shape {
      * Las posiciones (70, 15) y el color "magenta" sirven como punto de
      * partida; cada subclase puede sobreescribirlos en su propio constructor.
      */
-    public Shape() {
+    public ShapeFigure() {
         xPosition = 70;
         yPosition = 15;
         color     = "magenta";

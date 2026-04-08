@@ -11,7 +11,7 @@ import java.awt.geom.Ellipse2D;
  * @author  Michael Kolling and David J. Barnes (Modified)
  * @version 2.0
  */
-public class Circle extends Shape {
+public class Circle extends ShapeFigure {
 
     /** Constante matemática PI usada para cálculos de área/perímetro. */
     public static final double PI = 3.1416;

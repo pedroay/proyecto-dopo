@@ -11,7 +11,7 @@ import java.awt.*;
  * @author  Michael Kolling and David J. Barnes (Modified)
  * @version 2.0
  */
-public class Triangle extends Shape {
+public class Triangle extends ShapeFigure {
 
     /** Número de vértices de un triángulo. */
     public static final int VERTICES = 3;

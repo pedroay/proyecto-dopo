@@ -1,8 +1,8 @@
 #BlueJ class context
-comment0.target=Shape
+comment0.target=ShapeFigure
 comment0.text=\r\n\ Clase\ base\ abstracta\ para\ todas\ las\ figuras\ del\ paquete\ Shapes.\r\n\ Centraliza\ los\ atributos\ comunes\ (posici\u00F3n,\ color,\ visibilidad)\ y\r\n\ los\ m\u00E9todos\ de\ movimiento,\ delegando\ el\ dibujado\ concreto\ a\ las\ subclases\r\n\ mediante\ los\ m\u00E9todos\ abstractos\ draw()\ y\ erase().\r\n\r\n\ Refactorizaci\u00F3n\ 1DOPO-I04\ \u2013\ Entrega\ 4\:\ aprovechamiento\ de\ herencia.\r\n\r\n\ @author\ Michael\ Kolling\ and\ David\ J.\ Barnes\ (Modified)\r\n\ @version\ 2.0\r\n
 comment1.params=
-comment1.target=Shape()
+comment1.target=ShapeFigure()
 comment1.text=\r\n\ Constructor\ base\:\ establece\ posici\u00F3n\ y\ color\ por\ defecto.\r\n\ Las\ posiciones\ (70,\ 15)\ y\ el\ color\ "magenta"\ sirven\ como\ punto\ de\r\n\ partida;\ cada\ subclase\ puede\ sobreescribirlos\ en\ su\ propio\ constructor.\r\n
 comment10.params=
 comment10.target=void\ moveLeft()

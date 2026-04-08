@@ -13,11 +13,13 @@ public class Cup extends Elements {
     
     private int height;
     private String state;
-    private     Lid cover;
+    private Lid cover;
     private final Lid hisLid;
     public Rectangle shape1;
     public Rectangle shape2;
     private Elements inside;
+    private boolean eliminaTapas;
+    private boolean desplazaElementos;
     
     /**
      * Constructor de la clase Cup asociado a una tapa existente.
@@ -36,7 +38,9 @@ public class Cup extends Elements {
         posy = 300 - height;
         super.canIn = true;
         torre = lid.getTower();
-
+        isQuitable=true;
+        eliminaTapas=false;
+        desplazaElementos=false;
     }
     
     /**
@@ -51,13 +55,14 @@ public class Cup extends Elements {
         state = "noCovered";
         type = "cup";
         color = randomColor();
-        this.torre = torre;         // asignar torre ANTES de crear hisLid
+        this.torre = torre;
         hisLid = new Lid(inumber,this);
         posy = 300 - height;
         super.canIn = true; 
+        isQuitable=true;
+        eliminaTapas=false;
+        desplazaElementos=false;
     }    
-    
-    
     
     /**
      * Obtiene el estado actual de la taza
@@ -120,7 +125,7 @@ public class Cup extends Elements {
         shape2= new Rectangle((height-20)*4);
         shape2.setP(posy,posx);
         shape2.moveHorizontal(10);
-        shape2.changeSize(height-10,height-20);//altura,ancho
+        shape2.changeSize(height-10,height-20);
         shape2.changeColor("white");
         shape1.makeVisible();
         shape2.makeVisible(); 
@@ -145,7 +150,6 @@ public class Cup extends Elements {
     public void setInside(Elements inside){
          this.inside = inside;
     }
-    
     
     @Override
     public Elements getInside(){
@@ -172,8 +176,31 @@ public class Cup extends Elements {
         setState("Covered");
         }
         
-    
     public void push(int i){
         torre.pushCup(i);
+    }
+    
+    public void setIsQuitable(boolean value){
+        isQuitable=value;
+    }
+    
+    public boolean getIsQuitable(){
+        return isQuitable;
+    }
+    
+    public void setEliminaTapas(boolean value){
+        eliminaTapas=value;
+    }
+    
+    public boolean getEliminaTapas(){
+        return eliminaTapas;
+    }
+    
+    public void setDesplazaElementos(boolean value){
+        desplazaElementos=value;
+    }
+    
+    public boolean getDesplazaElementos(){
+        return desplazaElementos;
     }
 }

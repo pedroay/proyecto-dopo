@@ -11,7 +11,7 @@ import java.awt.*;
  * @author  Michael Kolling and David J. Barnes (Modified)
  * @version 2.0
  */
-public class Rectangle extends Shape {
+public class Rectangle extends ShapeFigure {
 
     /** Número de lados de un rectángulo. */
     public static final int EDGES = 4;

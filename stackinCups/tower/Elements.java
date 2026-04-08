@@ -19,6 +19,7 @@ public abstract class Elements
     protected Elements above;
     protected boolean canIn;
     protected Tower torre;
+    protected boolean isQuitable;
     
     public Elements(int number){
         width = calculateWidth(number);

@@ -14,6 +14,8 @@ public class Lid extends Elements
     private Cup hisCup;
     private Rectangle shape;
     private final static boolean canIN = false;
+    private boolean isFearful;
+    private boolean isCrazy;
     
     /**
      * Constructor principal de la clase Lid.
@@ -28,7 +30,7 @@ public class Lid extends Elements
         posy = 300-height;
         state = "normal";
         color = randomColor();
-        this.torre = torre;  // asignar torre ANTES de crear el Cup
+        this.torre = torre;
         hisCup= new Cup(number,getTower());
         type = "lid";
         super.canIn = false;
@@ -53,6 +55,9 @@ public class Lid extends Elements
         this.torre = cup.getTower();
     }    
     
+    public void setHisCup(Cup cup) {
+        this.hisCup = cup;
+    }
     
     /**
      * Obtiene la taza que cubre esta tapa
@@ -103,6 +108,21 @@ public class Lid extends Elements
         }
     }
     
+    public boolean getIsFearful() {
+        return isFearful;
+    }
+    
+    public void setIsFearful(boolean value) {
+        isFearful=value;
+    }
+    
+    public boolean getIsCrazy() {
+        return isCrazy;
+    }
+    
+    public void setIsCrazy(boolean value) {
+        isCrazy=value;
+    }
     
     public void setAbove(Cup above){
         this.above = above;
