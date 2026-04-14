@@ -20,6 +20,10 @@ public abstract class Elements
     protected boolean canIn;
     protected Tower torre;
     protected boolean isQuitable;
+    protected boolean eliminaTapas;
+    protected boolean desplazaElementos;
+    protected boolean isCrazy;
+    protected boolean isFearful;
     
     public Elements(int number){
         width = calculateWidth(number);
@@ -27,6 +31,11 @@ public abstract class Elements
         posy = 0;
         isVisible = false;
         this.number = number;
+        eliminaTapas = false;
+        desplazaElementos = false;
+        isCrazy = false;
+        isFearful = false;
+        isQuitable = true;
     }
     
     public int calculateWidth(int inumber){
@@ -43,16 +52,11 @@ public abstract class Elements
         return width;
     }
     
-        /**
-     * Obtiene el color del elemento como cadena de texto
-     * 
-     * @return nombre del color (ej: "red", "blue", etc)
-     */
     public String getColor() {
         return color;
     }
     
-        /**
+    /**
      * retorna un color apartir de una lista 
      */
     protected String randomColor(){
@@ -67,82 +71,41 @@ public abstract class Elements
         color=ncolor;
     }
     
-        /**
-     * Obtiene la posición X de la tapa
-     * 
-     * @return coordenada X en píxeles
-     */
     public int getPosx() {
         return posx;
     }
     
-        /**
-     * Obtiene la posición Y de la tapa
-     * 
-     * @return coordenada Y en píxeles
-     */
     public int getPosy() {
         return posy;
     }
     
-     /**
-     * Obtiene la altura de la tapa
-     * 
-     * @return altura siempre retorna 1 (1 cm)
-     */
     public int getHeight() {
         return height;
     }
     
-        /**
-     * Establece la posición X de la tapa
-     * 
-     * @param newPosx nueva coordenada X en píxeles
-     */
     public void setPosx(int newPosx) {
         posx = newPosx;
     }
-        /**
-     * Establece la posición Y de la tapa
-     * 
-     * @param newPosy nueva coordenada Y en píxeles
-     */
+
     public void setPosy(int newPosy) {
         posy = newPosy;
     }
     
-       /**
-     * Establece la posición X y Y de la tapa
-     * 
-     * @param newPosx nueva coordenada X en píxeles
-     * @param newPosy nueva coordenada Y en píxeles
-     */
     public void setPosition(int newPosx, int newPosy) {
         posx = newPosx;
         posy = newPosy;
     }
     
-        /**
-     * Hace visible la taza en pantalla
-     */
     public void makeVisible() {
         isVisible = true;
         draw();
     }
     
-        /**
-     * Hace invisible la taza (la oculta)
-     */
     public void makeInvisible() {
         isVisible = false;
         erase();
     }
     
-        /**
-     * Verifica si la taza es visible
-     * 
-     * @return true si es visible, false en caso contrario
-     */
     public boolean isVisible() {
         return isVisible;
     }
@@ -177,5 +140,71 @@ public abstract class Elements
         return torre;
     }
     
+    public boolean getEliminaTapas() {
+        return eliminaTapas;
+    }
+    
+    public void setEliminaTapas(boolean value) {
+        eliminaTapas = value;
+    }
+    
+    public boolean getDesplazaElementos() {
+        return desplazaElementos;
+    }
+    
+    public void setDesplazaElementos(boolean value) {
+        desplazaElementos = value;
+    }
+
+    public boolean isDangerous() {
+        return eliminaTapas;
+    }
+
+    public boolean canDesplace() {
+        return desplazaElementos;
+    }
+
+    /**
+     * Returns whether this element can damage the given target element.
+     * Subclasses override this to define specific damage rules.
+     *
+     * @param e the element to evaluate
+     * @return true if this element can damage {@code e}
+     */
+    public abstract boolean canDamage(Elements e);
+
+    /**
+     * Returns whether this element can displace the given target element.
+     * Subclasses override this to define specific displacement rules.
+     *
+     * @param e the element to evaluate
+     * @return true if this element can displace {@code e}
+     */
+    public abstract boolean canDesplace(Elements e);
+
     public abstract void push(int i);
+
+    public boolean isQuitable() {
+        return isQuitable;
+    }
+
+    public void setQuitable(boolean value) {
+        isQuitable = value;
+    }
+
+    public boolean isCrazy() {
+        return isCrazy;
+    }
+
+    public void setIsCrazy(boolean value) {
+        isCrazy = value;
+    }
+
+    public boolean isFearful() {
+        return isFearful;
+    }
+
+    public void setIsFearful(boolean value) {
+        isFearful = value;
+    }
 }

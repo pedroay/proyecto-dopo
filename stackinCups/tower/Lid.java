@@ -135,4 +135,26 @@ public class Lid extends Elements
     public void push(int i){
         torre.pushLid(i);
     }
-}
+
+    /**
+     * Lids do not damage other elements.
+     *
+     * @param e the element to evaluate
+     * @return always false
+     */
+    @Override
+    public boolean canDamage(Elements e) {
+        return false;
+    }
+
+    /**
+     * Lids do not displace other elements.
+     *
+     * @param e the element to evaluate
+     * @return always false
+     */
+    @Override
+    public boolean canDesplace(Elements e) {
+        return false;
+    }
+}

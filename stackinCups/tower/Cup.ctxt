@@ -27,14 +27,12 @@ comment19.target=boolean\ getIsQuitable()
 comment2.params=inumber\ torre
 comment2.target=Cup(int,\ Tower)
 comment2.text=\r\n\ Constructor\ principal\ de\ la\ clase\ Cup.\r\n\ Crea\ una\ nueva\ taza\ independiente\ calculando\ su\ altura\ base.\ Genera\ un\ color\ \r\n\ aleatorio\ para\ la\ taza\ y\ crea\ autom\u00E1ticamente\ una\ tapa\ (Lid)\ asociada\ a\ ella.\r\n\ *\ @param\ inumber\ El\ identificador\ \u00FAnico\ de\ la\ taza,\ utilizado\ para\ calcular\ su\ altura.\r\n
-comment20.params=value
-comment20.target=void\ setEliminaTapas(boolean)
-comment21.params=
-comment21.target=boolean\ getEliminaTapas()
-comment22.params=value
-comment22.target=void\ setDesplazaElementos(boolean)
-comment23.params=
-comment23.target=boolean\ getDesplazaElementos()
+comment20.params=e
+comment20.target=boolean\ canDamage(Elements)
+comment20.text=\r\n\ A\ Cup\ cannot\ damage\ other\ elements\ by\ default.\r\n\ Opener\ overrides\ this\ by\ setting\ eliminaTapas\ \=\ true.\r\n\r\n\ @param\ e\ the\ element\ to\ evaluate\r\n\ @return\ true\ if\ this\ cup\ can\ damage\ {@code\ e}\r\n
+comment21.params=e
+comment21.target=boolean\ canDesplace(Elements)
+comment21.text=\r\n\ A\ Cup\ cannot\ displace\ other\ elements\ by\ default.\r\n\ Hierarchical\ overrides\ this\ by\ setting\ desplazaElementos\ \=\ true.\r\n\r\n\ @param\ e\ the\ element\ to\ evaluate\r\n\ @return\ true\ if\ this\ cup\ can\ displace\ {@code\ e}\r\n
 comment3.params=
 comment3.target=java.lang.String\ getState()
 comment3.text=\r\n\ Obtiene\ el\ estado\ actual\ de\ la\ taza\r\n\ \r\n\ @return\ estado\ actual\ de\ la\ taza\ sobre\ su\ covertura\r\n
@@ -54,4 +52,4 @@ comment8.params=
 comment8.target=java.lang.String\ getInfo()
 comment9.params=
 comment9.target=void\ draw()
-numComments=24
+numComments=22

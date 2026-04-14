@@ -153,16 +153,8 @@ import javax.swing.JOptionPane;
      * state flag {@code isOK} is set to {@code false}. If the tower is visible,
      * an error message is displayed.
      *
-     * When a cup is removed, the tower is temporarily cleared and then rebuilt
-     * with the remaining elements in order to maintain the correct stacking rules.
-     * During this reconstruction:
-     * 
-     * All references between elements (inside and above) are cleared.
-     * Each remaining element is reinserted using {@code pushCup()} or {@code pushLid()}.
-     * 
-     *
-     * The removed cup is also deleted from the internal stacks that store cups
-     * and general elements.
+     * Only the elements above the removed cup are reconstructed, since the elements
+     * below it remain unchanged in position and structure.
      *
      * @param i the identifier (number) of the cup to be removed from the tower
      */
@@ -173,20 +165,29 @@ import javax.swing.JOptionPane;
         }
         else{
             Elements a = findCupByNumber(i);
+            int indexA = objects.indexOf(a);
             makeInvisible();
+            Stack<Elements> above = new Stack<>();
+            for(int j = indexA + 1; j < objects.size(); j++){
+                above.push(objects.get(j));
+            }
+            for(Elements o : above){
+                objects.remove(o);
+                if(o.getType().equals("cup")) cups.remove(o);
+                else lids.remove(o);
+            }
             objects.remove(a);
             cups.remove(a);
             top = null;
-            Stack<Elements> temp = new Stack();
-            temp.addAll(objects);
-            objects.clear();
-            cups.clear();
-            lids.clear();
-            for(Elements o:temp){
+            for(Elements o : objects){
+                setNewTop(o);
+            }
+            for(Elements o : above){
                 o.setInside(null);
                 o.setAbove(null);
                 push(o);
             }
+            isOK = true;
         }
     }
     
@@ -309,50 +310,53 @@ import javax.swing.JOptionPane;
     
     
     /**
-     * Removes the lid located at the top of the tower.
+     * Removes a specific lid from the tower based on its identifier.
      *
-     * The method verifies whether the last element stored in the stack of objects
-     * is a lid. If the top element is not a lid, the operation cannot be performed.
-     * In that case, the tower state is marked as invalid ({@code isOK = false}) and,
-     * if the tower is visible, an error message is displayed.
+     * The method searches for a lid with the given number and removes it from the
+     * tower structure. If the tower has no elements, the operation fails and the
+     * state flag {@code isOK} is set to {@code false}. If the tower is visible,
+     * an error message is displayed.
      *
-     * If the top element is a lid, it is removed from the internal stacks that store
-     * lids and general elements. The removed lid is also made invisible.
+     * Only the elements above the removed lid are reconstructed, since the elements
+     * below it remain unchanged in position and structure.
      *
-     * After removing the lid, the method iterates through the remaining elements of
-     * the tower and clears any references that pointed to the removed lid, either as
-     * an element placed inside another or as an element placed above another.
-     *
-     * Finally, the method recalculates the top element of the tower based on the
-     * vertical positions of the remaining elements.
-     *
-     * If the operation completes successfully, the internal structure of the tower
-     * is updated accordingly.
+     * @param i the identifier (number) of the lid to be removed from the tower
      */
     public void removeLid(int i){
-        if(objects.isEmpty() ){
+        if(objects.isEmpty()){
             if(isVisible)showError();
             isOK = false;
         }
-         else{
+        else{
             Elements a = findLidByNumber(i);
+            int indexA = objects.indexOf(a);
             makeInvisible();
+            Stack<Elements> above = new Stack<>();
+            for(int j = indexA + 1; j < objects.size(); j++){
+                above.push(objects.get(j));
+            }
+            for(Elements o : above){
+                objects.remove(o);
+                if(o.getType().equals("cup")) cups.remove(o);
+                else lids.remove(o);
+            }
             objects.remove(a);
             lids.remove(a);
             top = null;
-            Stack<Elements> temp = new Stack();
-            temp.addAll(objects);
-            objects.clear();
-            cups.clear();
-            lids.clear();
-            for(Elements o:temp){
+            for(Elements o : objects){
+                setNewTop(o);
+            }
+            for(Elements o : above){
                 o.setInside(null);
                 o.setAbove(null);
                 push(o);
             }
+            isOK = true;
         }
     }
-
+    
+    
+    
     /**
      * Reorders the tower by arranging its cups and lids according to their identifiers.
      *
@@ -724,7 +728,18 @@ import javax.swing.JOptionPane;
         }
     }
     
-    public boolean isInElements(int i,String tipo){
+    /**
+     * Checks if an element with the given identifier and type exists in the tower.
+     * 
+     * Iterates through the collection of all elements currently in the tower
+     * and evaluates each element's number and type against the provided parameters.
+     * 
+     * @param i    The identifier (number) of the element to search for.
+     * @param tipo A string representing the type of the element (e.g., "cup" or "lid").
+     * @return     {@code true} if an element matching both the identifier and type is found; 
+     *             {@code false} otherwise.
+     */
+    protected boolean isInElements(int i,String tipo){
         for(Elements e : objects){
             if(e.getNumber() == i && e.getType().equals(tipo)){
                 return true;
@@ -733,7 +748,16 @@ import javax.swing.JOptionPane;
         return false;
     }  
     
-     private boolean isInCups(int i){
+    /**
+     * Checks if a cup with the given identifier exists in the tower.
+     * 
+     * Iterates through the stack of cups to determine if any cup matches
+     * the provided identifier number.
+     * 
+     * @param i The identifier (number) of the cup to search for.
+     * @return  {@code true} if a matching cup is found; {@code false} otherwise.
+     */
+    private boolean isInCups(int i){
         for(Cup c : cups){
             if(c.getNumber() == i){
                 return true;
@@ -742,7 +766,16 @@ import javax.swing.JOptionPane;
         return false;
     }
     
-     private boolean isInLids(int i){
+    /**
+     * Checks if a lid with the given identifier exists in the tower.
+     * 
+     * Iterates through the stack of lids to determine if any lid matches
+     * the provided identifier number.
+     * 
+     * @param i The identifier (number) of the lid to search for.
+     * @return  {@code true} if a matching lid is found; {@code false} otherwise.
+     */
+    private boolean isInLids(int i){
         for(Lid l : lids){
             if(l.getNumber() == i){
                 return true;
@@ -751,6 +784,16 @@ import javax.swing.JOptionPane;
         return false;
     } 
     
+    /**
+     * Retrieves the cup associated with a specific lid identifier.
+     * 
+     * Searches through the lids currently in the tower for one matching the 
+     * given identifier, and returns its linked cup object.
+     * 
+     * @param i The identifier number of the lid whose associated cup is sought.
+     * @return  The {@code Cup} associated with the specified lid, or {@code null}
+     *          if no such lid is found or if it does not have an associated cup.
+     */
     public Cup findCupByNumberOfLid(int i) {
         for (Lid l : lids) {
             if (l.getNumber() == i) {
@@ -760,6 +803,16 @@ import javax.swing.JOptionPane;
         return null;
     }
     
+    /**
+     * Retrieves the lid associated with a specific cup identifier.
+     * 
+     * Searches through the cups currently in the tower for one matching the 
+     * given identifier, and returns its linked lid object.
+     * 
+     * @param i The identifier number of the cup whose associated lid is sought.
+     * @return  The {@code Lid} associated with the specified cup, or {@code null}
+     *          if no such cup is found or if it does not have an associated lid.
+     */
     public Lid findLidByNumberOfCup(int i) {
         for (Cup c : cups) {
             if (c.getNumber() == i) {
@@ -769,6 +822,15 @@ import javax.swing.JOptionPane;
         return null;
     }
     
+    /**
+     * Finds and returns a specific cup by its identifier number.
+     * 
+     * Iterates through the stack of cups and returns the first cup
+     * matching the given number.
+     * 
+     * @param i The identifier number of the cup to locate.
+     * @return  The matching {@code Cup} object, or {@code null} if not found.
+     */
     public Cup findCupByNumber(int i){
         Cup ca = null;
         for (Cup c : cups) {
@@ -780,6 +842,15 @@ import javax.swing.JOptionPane;
         return ca;
     }
     
+    /**
+     * Finds and returns a specific lid by its identifier number.
+     * 
+     * Iterates through the stack of lids and returns the first lid
+     * matching the given number.
+     * 
+     * @param i The identifier number of the lid to locate.
+     * @return  The matching {@code Lid} object, or {@code null} if not found.
+     */
     public Lid findLidByNumber(int i){
         Lid la = null;
         for (Lid l : lids) {
@@ -831,6 +902,19 @@ import javax.swing.JOptionPane;
         isVisible = false;
     }
     
+    /**
+     * Searches for and returns a specific element from the tower based on text information.
+     * The array must have at least two positions: the first for the element's type
+     * (e.g., "cup" or "lid"), and the second for its identifier number.
+     * 
+     * If the provided array is null or contains fewer than two elements, it invokes
+     * the error function. Returns the corresponding {@code Elements} object if found,
+     * or {@code null} if the provided type is invalid or the element does not exist.
+     *
+     * @param objeto A String array where objeto[0] contains the type ("cup", "lid")
+     *               and objeto[1] contains the String representation of its identifier number.
+     * @return The {@code Elements} object matching the search, or {@code null} if not found.
+     */
     private Elements buscarElemento(String[] objeto) {
         if (objeto == null || objeto.length < 2) {
             showError();
@@ -886,17 +970,27 @@ import javax.swing.JOptionPane;
         removeLidsBelowCup(cup);
     }
     
-    private void displaceElements(Cup cup) {
-        if (cup == null || !cup.getDesplazaElementos()) return;
-        int cupIndex = objects.indexOf(cup);
-        if (cupIndex <= 0) {
-            cup.setIsQuitable(false);
-            return;
-        }
-        Elements below = objects.get(cupIndex - 1);
-        if (below.getNumber() < cup.getNumber()) {
-            swap(new String[]{cup.getType(),   String.valueOf(cup.getNumber())},new String[]{below.getType(), String.valueOf(below.getNumber())});
-            displaceElements(cup);
+    /**
+     * Displaces elements after an element with the desplaza-flag is inserted.
+     * Iterates through all objects; for each element that is not the
+     * inserted element, asks whether it can displace the other. If it can,
+     * the loop stops. Otherwise, the two elements are swapped.
+     *
+     * @param elementE the element that must displace others
+     */
+    private void desplaceElements(Elements elementE) {
+        if (elementE == null || !elementE.canDesplace()) return;
+        for (Elements e : new java.util.ArrayList<>(objects)) {
+            if (e.equals(elementE)) continue;
+            boolean cDesplace = elementE.canDesplace(e);
+            if (cDesplace) {
+                break;
+            } else {
+                swap(
+                    new String[]{e.getType(),       String.valueOf(e.getNumber())},
+                    new String[]{elementE.getType(), String.valueOf(elementE.getNumber())}
+                );
+            }
         }
     }
     
@@ -916,19 +1010,38 @@ import javax.swing.JOptionPane;
         }
     }
     
+    /**
+     * Adds a cup of the specified type to the tower.
+     * Delegates positioning to {@code pushCupLogica} and then
+     * triggers post-insertion behaviour via {@code afterPush}.
+     *
+     * @param type   the type of cup (e.g. "cup", "opener", "hierarchical")
+     * @param number the identifier of the cup
+     */
     public void pushCup(String type, int number) {
         if (cupInTower(number)) return;
-        Cup newCup= createElement(type, number); 
-        linkExistingLid(newCup);          
+        Cup newCup = createElement(type, number);
+        linkExistingLid(newCup);
+        pushCupLogica(newCup);
+        afterPush(newCup);
+        isOK = true;
+    }
+
+    /**
+     * Handles the physical insertion of a cup into the tower structure,
+     * calculating whether it goes inside or above the current top.
+     *
+     * @param newCup the cup to insert
+     */
+    private void pushCupLogica(Cup newCup) {
         if (top == null) {
-            top= newCup;
+            top = newCup;
             cups.push(newCup);
             objects.push(newCup);
-            isOK = true;
             return;
         }
-        int sizeTop= top.getWidth();
-        int sizeNewCup= newCup.getWidth();
+        int sizeTop    = top.getWidth();
+        int sizeNewCup = newCup.getWidth();
         if (sizeTop > sizeNewCup && top.isCanIn()) {
             setInside((Cup) top, newCup);
             cups.push(newCup);
@@ -940,10 +1053,102 @@ import javax.swing.JOptionPane;
             setNewTop(newCup);
             objects.push(newCup);
         }
-        removeLidsBelowCup(newCup);
-        isOK= true;
+    }
+
+    /**
+     * Called after a cup has been inserted into the tower.
+     * Decides the post-insertion behaviour based on the element's capabilities:
+     * - If the element is dangerous, triggers {@code dangerousElement}.
+     * - Else if the element can displace others, triggers {@code desplaceElements}.
+     *
+     * @param element the element that was just inserted
+     */
+    private void afterPush(Elements element) {
+        if (element.isDangerous()) {
+            dangerousElement(element);
+        } else if (element.canDesplace()) {
+            desplaceElements(element);
+        } else if (element.isCrazy()) {
+            crazyElement(element);
+        }
+    }
+
+    /**
+     * crazyElement procedure: removes the added element, reverses the tower,
+     * pushes the element back onto the reversed tower (the pure beginning),
+     * and reverses the tower back to its original state.
+     */
+    private void crazyElement(Elements element) {
+        if (!element.isCrazy()) return;
+        
+        objects.remove(element);
+        if (element.getType().equals("cup")) {
+            cups.remove(element);
+        } else {
+            lids.remove(element);
+        }
+        
+        top = null;
+        for (Elements e : objects) {
+            setNewTop(e);
+        }
+        reverseTower();       
+        element.setInside(null);
+        element.setAbove(null);
+        push(element);     
+        reverseTower();
+        
+        Elements newlyAdded;
+        if (element.getType().equals("cup")) {
+            newlyAdded = findCupByNumber(element.getNumber());
+        } else {
+            newlyAdded = findLidByNumber(element.getNumber());
+        }
+        if (newlyAdded != null) {
+            newlyAdded.setIsCrazy(true);
+        }
+    }
+
+    /**
+     * Handles the behaviour of a dangerous element after insertion.
+     * Iterates through all objects in the tower; for each element that is
+     * not the inserted element itself, checks whether it can damage the other.
+     * If it can damage the element, the loop stops. Otherwise, the two
+     * elements are swapped and the damaged element (if it is a lid) is popped.
+     *
+     * @param elementE the dangerous element that was just inserted
+     */
+    private void dangerousElement(Elements elementE) {
+        for (Elements e : new java.util.ArrayList<>(objects)) {
+            if (e.equals(elementE)) continue;
+            boolean cDamage = elementE.canDamage(e);
+            if (cDamage) {
+                break;
+            } else {
+                swap(
+                    new String[]{e.getType(),       String.valueOf(e.getNumber())},
+                    new String[]{elementE.getType(), String.valueOf(elementE.getNumber())}
+                );
+                if (e.getType().equals("lid")) {
+                    popLid();
+                }
+            }
+        }
     }
     
+     /**
+     * Factory method to create different types of lid elements.
+     * 
+     * Based on the specified type, this method instantiates and returns the 
+     * corresponding subclass of Lid. If the type is not recognized 
+     * or is specified as "lid", a standard Lid is created.
+     * 
+     * @param type   A string indicating the specific type of lid to create 
+     *               (e.g., "fearful", "crazy", or "lid").
+     * @param number The identifier number that defines the size and pairing 
+     *               of the lid element.
+     * @return       A newly instantiated Lid object or one of its subclasses.
+     */
     private Lid createLidElement(String type, int number) {
         switch (type) {
             case "fearful": return new Fearful(number, this);
@@ -953,6 +1158,11 @@ import javax.swing.JOptionPane;
         }
     }
     
+    /**
+     * Links a newly created lid to its corresponding cup, if one already exists in the tower.
+     * 
+     * @param lid The lid element that needs to be associated with an existing cup.
+     */
     private void linkExistingCup(Lid lid) {
         Cup existing = findCupByNumber(lid.getNumber());
         if (existing != null) {
@@ -960,6 +1170,15 @@ import javax.swing.JOptionPane;
         }
     }
     
+    /**
+     * Validates whether a fearful lid can be placed, and enforces its rules upon insertion.
+     * 
+     * A fearful lid requires its matching cup to already exist in the tower.
+     * If the cup does not exist, the lid is removed, and the operation fails.
+     * If the cup exists and is already covered, the lid becomes unable to be removed.
+     * 
+     * @param lid The newly added lid to validate, which should have fearful properties.
+     */
     private void validateFearful(Lid lid) {
         if (lid == null || !(lid.getIsFearful())) return;
         if (!isInElements(lid.getNumber(), "cup")) {
@@ -975,9 +1194,22 @@ import javax.swing.JOptionPane;
     }
     
     private void relocateCrazy(Lid Lid){
-        
+        if (Lid != null && Lid.isCrazy()) {
+            crazyElement(Lid);
+        }
     }
     
+    /**
+     * Adds a customized lid of the specified type to the tower.
+     * 
+     * Instances the corresponding Lid subclass based on the provided type, checks whether 
+     * a matching cup exists to link them, and physically stacks it based on size comparisons.
+     * It also invokes post-insertion behaviours for specific elements like fearful 
+     * or crazy lids.
+     * 
+     * @param type   The specific type of lid to instantiate (e.g., "fearful", "crazy", "lid").
+     * @param number The identifier of the lid.
+     */
     public void pushLid(String type, int number) {
         if (isInElements(number, "lid") || number <= 0) {
             isOK = false;

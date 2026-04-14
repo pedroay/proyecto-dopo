@@ -21,4 +21,18 @@ public class Hierarchical extends Cup
         super(inumber,torre);
         setDesplazaElementos(true);
     }
+
+    @Override
+    public boolean canDamage(Elements e) {
+        return false;
+    }
+
+    @Override
+    public boolean canDesplace(Elements e) {
+        boolean canDesplace = false;
+        if(e.isQuitable() && e.getNumber() <this.number){
+            canDesplace = true;
+        }
+        return canDesplace;
+    }
 }

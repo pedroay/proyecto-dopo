@@ -18,8 +18,6 @@ public class Cup extends Elements {
     public Rectangle shape1;
     public Rectangle shape2;
     private Elements inside;
-    private boolean eliminaTapas;
-    private boolean desplazaElementos;
     
     /**
      * Constructor de la clase Cup asociado a una tapa existente.
@@ -39,8 +37,6 @@ public class Cup extends Elements {
         super.canIn = true;
         torre = lid.getTower();
         isQuitable=true;
-        eliminaTapas=false;
-        desplazaElementos=false;
     }
     
     /**
@@ -60,8 +56,6 @@ public class Cup extends Elements {
         posy = 300 - height;
         super.canIn = true; 
         isQuitable=true;
-        eliminaTapas=false;
-        desplazaElementos=false;
     }    
     
     /**
@@ -174,6 +168,7 @@ public class Cup extends Elements {
     public void setCover(Lid i){
         cover = i;
         setState("Covered");
+        i.setHisCup(this); 
         }
         
     public void push(int i){
@@ -187,20 +182,30 @@ public class Cup extends Elements {
     public boolean getIsQuitable(){
         return isQuitable;
     }
-    
-    public void setEliminaTapas(boolean value){
-        eliminaTapas=value;
+
+    /**
+     * A Cup cannot damage other elements by default.
+     * Opener overrides this by setting eliminaTapas = true.
+     *
+     * @param e the element to evaluate
+     * @return true if this cup can damage {@code e}
+     */
+    @Override
+    public boolean canDamage(Elements e) {
+        if (!eliminaTapas) return false;
+        return e.getType().equals("lid") && e.getNumber() < this.number;
     }
-    
-    public boolean getEliminaTapas(){
-        return eliminaTapas;
-    }
-    
-    public void setDesplazaElementos(boolean value){
-        desplazaElementos=value;
-    }
-    
-    public boolean getDesplazaElementos(){
-        return desplazaElementos;
+
+    /**
+     * A Cup cannot displace other elements by default.
+     * Hierarchical overrides this by setting desplazaElementos = true.
+     *
+     * @param e the element to evaluate
+     * @return true if this cup can displace {@code e}
+     */
+    @Override
+    public boolean canDesplace(Elements e) {
+        if (!desplazaElementos) return false;
+        return e.getNumber() >= this.number;
     }
 }

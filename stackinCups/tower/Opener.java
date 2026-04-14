@@ -1,12 +1,5 @@
 package tower;
 
-
-/**
- * Write a description of class Opener here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Opener extends Cup
 {
     public Opener(int inumber,Lid lid)
@@ -18,5 +11,15 @@ public class Opener extends Cup
     public Opener(int inumber,Tower torre){
         super(inumber,torre);
         setEliminaTapas(true);
+    }
+
+    @Override
+    public boolean canDamage(Elements e) {
+        return e.getType().equals("lid") && e.isQuitable();
+    }
+
+    @Override
+    public boolean canDesplace(Elements e) {
+        return false;
     }
 }
