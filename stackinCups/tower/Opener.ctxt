@@ -1,8 +1,11 @@
 #BlueJ class context
 comment0.target=Opener
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Opener\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=inumber\ lid
 comment1.target=Opener(int,\ Lid)
 comment2.params=inumber\ torre
 comment2.target=Opener(int,\ Tower)
-numComments=3
+comment3.params=e
+comment3.target=boolean\ canDamage(Elements)
+comment4.params=e
+comment4.target=boolean\ canDesplace(Elements)
+numComments=5

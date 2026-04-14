@@ -983,13 +983,14 @@ import javax.swing.JOptionPane;
         for (Elements e : new java.util.ArrayList<>(objects)) {
             if (e.equals(elementE)) continue;
             boolean cDesplace = elementE.canDesplace(e);
-            if (cDesplace) {
+            if (!cDesplace) {
                 break;
             } else {
                 swap(
                     new String[]{e.getType(),       String.valueOf(e.getNumber())},
                     new String[]{elementE.getType(), String.valueOf(elementE.getNumber())}
                 );
+                System.out.println("Analizando elemento: " + e.getNumber() + " tipo: " + e.getType());
             }
         }
     }
@@ -1119,12 +1120,16 @@ import javax.swing.JOptionPane;
      * @param elementE the dangerous element that was just inserted
      */
     private void dangerousElement(Elements elementE) {
-        for (Elements e : new java.util.ArrayList<>(objects)) {
+        ArrayList<Elements> copy = new java.util.ArrayList<>(objects);
+        for (int i = copy.size() - 1; i >= 0; i--) {
+            Elements e = copy.get(i);
+            System.out.println("Analizando elemento: " + e.getNumber() + " tipo: " + e.getType());
             if (e.equals(elementE)) continue;
             boolean cDamage = elementE.canDamage(e);
-            if (cDamage) {
+            if (!cDamage) {
                 break;
             } else {
+                System.out.println("¡Dañando elemento!: " + e.getNumber()+ e.getType());
                 swap(
                     new String[]{e.getType(),       String.valueOf(e.getNumber())},
                     new String[]{elementE.getType(), String.valueOf(elementE.getNumber())}
@@ -1243,8 +1248,7 @@ import javax.swing.JOptionPane;
             objects.push(newLid);
             setNewTop(newLid);
         }
-        validateFearful(newLid);
-        relocateCrazy(newLid);
+        afterPush(newLid);
         isOK = true;
     }
 }
