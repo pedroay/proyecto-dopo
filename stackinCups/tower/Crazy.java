@@ -1,5 +1,6 @@
 package tower;
-
+import java.util.Random;
+import Shapes.*;
 
 /**
  * Write a description of class Crazy here.
@@ -9,9 +10,8 @@ package tower;
  */
 public class Crazy extends Lid
 {
-    /**
-     * Constructor for objects of class Fearful
-     */
+    private Rectangle shapeExtra;
+
     public Crazy(int number,Tower torre)
     {
         super(number,torre);
@@ -22,5 +22,16 @@ public class Crazy extends Lid
     {
         super(number,cup);
         setIsCrazy(true);
+    }
+    
+    @Override
+    public void draw(){
+        super.draw();
+        shapeExtra = new Rectangle();
+        shapeExtra.changeColor("Orange");
+        shapeExtra.changeSize(height-5,width-10);
+        shapeExtra.setP(posy+2,150 -((width-10)/2));
+        shapeExtra.makeVisible();
+        
     }
 }
