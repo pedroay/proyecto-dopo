@@ -24,6 +24,7 @@ public abstract class Elements
     protected boolean desplazaElementos;
     protected boolean isCrazy;
     protected boolean isFearful;
+    protected ArrayList<Integer> notQuitablePosition;
     
     public Elements(int number){
         width = calculateWidth(number);
@@ -36,6 +37,7 @@ public abstract class Elements
         isCrazy = false;
         isFearful = false;
         isQuitable = true;
+        notQuitablePosition = new ArrayList<Integer>();
     }
     
     public int calculateWidth(int inumber){
@@ -206,5 +208,17 @@ public abstract class Elements
 
     public void setIsFearful(boolean value) {
         isFearful = value;
+    }
+
+    public void setNotQuitablePosition(int i){
+        notQuitablePosition.add(i);
+    }
+
+    public boolean isNotQuitablePosition(int i){
+        return notQuitablePosition.contains(i);
+    }
+
+    public ArrayList<Integer> getNotQuitablePosition(){
+        return notQuitablePosition;
     }
 }

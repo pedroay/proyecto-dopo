@@ -168,7 +168,6 @@ public class Cup extends Elements {
     public void setCover(Lid i){
         cover = i;
         setState("Covered");
-        i.setHisCup(this); 
         }
         
     public void push(int i){

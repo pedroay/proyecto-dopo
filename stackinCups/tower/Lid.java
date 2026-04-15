@@ -107,15 +107,7 @@ public class Lid extends Elements
          isVisible = false;
         }
     }
-    
-    public boolean getIsFearful() {
-        return isFearful;
-    }
-    
-    public void setIsFearful(boolean value) {
-        isFearful=value;
-    }
-    
+
     public boolean getIsCrazy() {
         return isCrazy;
     }
@@ -157,4 +149,4 @@ public class Lid extends Elements
     public boolean canDesplace(Elements e) {
         return false;
     }
-}
+}

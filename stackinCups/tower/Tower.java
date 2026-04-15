@@ -159,38 +159,28 @@ import javax.swing.JOptionPane;
      * @param i the identifier (number) of the cup to be removed from the tower
      */
     public void removeCup(int i){
-        if(objects.isEmpty() || !isInElements(i,"cup") ){
-            if(isVisible)showError();
-            isOK = false;
-        }
-        else{
-            Elements a = findCupByNumber(i);
-            int indexA = objects.indexOf(a);
-            makeInvisible();
-            Stack<Elements> above = new Stack<>();
-            for(int j = indexA + 1; j < objects.size(); j++){
-                above.push(objects.get(j));
-            }
-            for(Elements o : above){
-                objects.remove(o);
-                if(o.getType().equals("cup")) cups.remove(o);
-                else lids.remove(o);
-            }
-            objects.remove(a);
-            cups.remove(a);
-            top = null;
-            for(Elements o : objects){
-                setNewTop(o);
-            }
-            for(Elements o : above){
-                o.setInside(null);
-                o.setAbove(null);
-                push(o);
-            }
-            isOK = true;
+    if(objects.isEmpty() || !isInElements(i,"cup") ){
+        if(isVisible)showError();
+        isOK = false;
+    }
+    else{
+        Elements a = findCupByNumber(i);
+        makeInvisible();
+        objects.remove(a);
+        cups.remove(a);
+        top = null;
+        Stack<Elements> temp = new Stack();
+        temp.addAll(objects);
+        objects.clear();
+        cups.clear();
+        lids.clear();
+        for(Elements o:temp){
+            o.setInside(null);
+            o.setAbove(null);
+            push(o);
         }
     }
-    
+    }
     
     private void push(Elements e){
         e.push(e.getNumber());
@@ -322,37 +312,28 @@ import javax.swing.JOptionPane;
      *
      * @param i the identifier (number) of the lid to be removed from the tower
      */
-    public void removeLid(int i){
-        if(objects.isEmpty()){
-            if(isVisible)showError();
-            isOK = false;
+     public void removeLid(int i){
+    if(objects.isEmpty() ){
+        if(isVisible)showError();
+        isOK = false;
+    }
+     else{
+        Elements a = findLidByNumber(i);
+        makeInvisible();
+        objects.remove(a);
+        lids.remove(a);
+        top = null;
+        Stack<Elements> temp = new Stack();
+        temp.addAll(objects);
+        objects.clear();
+        cups.clear();
+        lids.clear();
+        for(Elements o:temp){
+            o.setInside(null);
+            o.setAbove(null);
+            push(o);
         }
-        else{
-            Elements a = findLidByNumber(i);
-            int indexA = objects.indexOf(a);
-            makeInvisible();
-            Stack<Elements> above = new Stack<>();
-            for(int j = indexA + 1; j < objects.size(); j++){
-                above.push(objects.get(j));
-            }
-            for(Elements o : above){
-                objects.remove(o);
-                if(o.getType().equals("cup")) cups.remove(o);
-                else lids.remove(o);
-            }
-            objects.remove(a);
-            lids.remove(a);
-            top = null;
-            for(Elements o : objects){
-                setNewTop(o);
-            }
-            for(Elements o : above){
-                o.setInside(null);
-                o.setAbove(null);
-                push(o);
-            }
-            isOK = true;
-        }
+    }
     }
     
     
@@ -384,7 +365,7 @@ import javax.swing.JOptionPane;
      * Finally, the tower is made visible again and the operation is marked as
      * successful by setting {@code isOK = true}.
      */
-    public void orderTower(){
+        public void orderTower(){
         ArrayList<Cup> temp = new ArrayList<Cup>(cups);
         for (int i = 0; i < temp.size(); i++) {
             for (int j = 0; j < temp.size() - 1; j++) {
@@ -739,7 +720,7 @@ import javax.swing.JOptionPane;
      * @return     {@code true} if an element matching both the identifier and type is found; 
      *             {@code false} otherwise.
      */
-    protected boolean isInElements(int i,String tipo){
+    public boolean isInElements(int i,String tipo){
         for(Elements e : objects){
             if(e.getNumber() == i && e.getType().equals(tipo)){
                 return true;
@@ -1072,6 +1053,9 @@ import javax.swing.JOptionPane;
         } else if (element.isCrazy()) {
             crazyElement(element);
         }
+        else if(element.isFearful()){
+            validateFearful((Lid) element);
+        }
     }
 
     /**
@@ -1185,16 +1169,15 @@ import javax.swing.JOptionPane;
      * @param lid The newly added lid to validate, which should have fearful properties.
      */
     private void validateFearful(Lid lid) {
-        if (lid == null || !(lid.getIsFearful())) return;
+        if (lid == null || !lid.isFearful()) return;
         if (!isInElements(lid.getNumber(), "cup")) {
-            objects.remove(lid);
-            lids.remove(lid);
+            popLid();
             isOK = false;
             return;
         }
-        Cup companion = findCupByNumber(lid.getNumber());
+        Cup companion = findCupByNumberOfLid(lid.getNumber());
         if (companion != null && companion.isCovered()) {
-            lid.isQuitable = false;
+            lid.setQuitable(false);
         }
     }
     
@@ -1227,6 +1210,7 @@ import javax.swing.JOptionPane;
             top = newLid;
             lids.push(newLid);
             objects.push(newLid);
+            afterPush(newLid);
             isOK = true;
             return;
         }

@@ -11,7 +11,7 @@ import Shapes.*;
  */
 public class Fearful extends Lid
 {
-    private Rectangle shapeExtra;
+    private Rectangle shapeExtra = new Rectangle();
     
     public Fearful(int number,Tower torre)
     {
@@ -21,14 +21,13 @@ public class Fearful extends Lid
     
     public Fearful(int number,Cup cup)
     {
-        super(number,cup);
+        super(number,cup);  
         setIsFearful(true);
     }
     
     @Override
     public void draw(){
         super.draw();
-        shapeExtra = new Rectangle();
         shapeExtra.changeColor("Gray");
         shapeExtra.changeSize(height-5,width-10);
         shapeExtra.setP(posy+2,150 -((width-10)/2));
