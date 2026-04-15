@@ -15,6 +15,7 @@ public class Hierarchical extends Cup
     {
         super(inumber,lid);
         setDesplazaElementos(true);
+        setNotQuitablePosition(0);
     }
     
     public Hierarchical(int inumber,Tower torre){

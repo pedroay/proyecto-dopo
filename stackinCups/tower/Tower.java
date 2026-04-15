@@ -965,6 +965,7 @@ import javax.swing.JOptionPane;
             if (e.equals(elementE)) continue;
             boolean cDesplace = elementE.canDesplace(e);
             if (!cDesplace) {
+                checkQuitablePosition(e);
                 break;
             } else {
                 swap(
@@ -976,6 +977,15 @@ import javax.swing.JOptionPane;
         }
     }
     
+    private void checkQuitablePosition(Elements element) {
+        int i = objects.indexOf(element);
+        if(element.isNotQuitablePosition(i)){
+            element.setIsQuitable(false);
+        }
+        else element.setIsQuitable(true);
+    }
+
+            
     private Cup createElement(String type, int number) {
         switch (type) {
             case "opener": return new Opener(number, this);
