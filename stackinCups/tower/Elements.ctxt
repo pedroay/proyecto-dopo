@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Elements
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ elements\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=+\ Write\ a\ description\ of\ class\ elements\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=number
 comment1.target=Elements(int)
 comment10.params=
@@ -77,6 +77,12 @@ comment41.params=
 comment41.target=boolean\ isFearful()
 comment42.params=value
 comment42.target=void\ setIsFearful(boolean)
+comment43.params=i
+comment43.target=void\ setNotQuitablePosition(int)
+comment44.params=i
+comment44.target=boolean\ isNotQuitablePosition(int)
+comment45.params=
+comment45.target=java.util.ArrayList\ getNotQuitablePosition()
 comment5.params=
 comment5.target=int\ getNumber()
 comment6.params=
@@ -88,4 +94,4 @@ comment8.target=java.lang.String\ randomColor()
 comment8.text=\r\n\ retorna\ un\ color\ apartir\ de\ una\ lista\ \r\n
 comment9.params=ncolor
 comment9.target=void\ changeColor(java.lang.String)
-numComments=43
+numComments=46

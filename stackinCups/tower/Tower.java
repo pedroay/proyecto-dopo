@@ -980,9 +980,9 @@ import javax.swing.JOptionPane;
     private void checkQuitablePosition(Elements element) {
         int i = objects.indexOf(element);
         if(element.isNotQuitablePosition(i)){
-            element.setIsQuitable(false);
+            element.setQuitable(false);
         }
-        else element.setIsQuitable(true);
+        else element.setQuitable(true);
     }
 
             
