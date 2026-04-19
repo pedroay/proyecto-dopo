@@ -10,7 +10,7 @@ import Shapes.*;
  */
 public class Crazy extends Lid
 {
-    private Rectangle shapeExtra;
+    private Rectangle shapeExtra = new Rectangle();
 
     public Crazy(int number,Tower torre)
     {
@@ -27,11 +27,16 @@ public class Crazy extends Lid
     @Override
     public void draw(){
         super.draw();
-        shapeExtra = new Rectangle();
         shapeExtra.changeColor("Orange");
         shapeExtra.changeSize(height-5,width-10);
         shapeExtra.setP(posy+2,150 -((width-10)/2));
         shapeExtra.makeVisible();
         
+    }
+
+    @Override
+    public void makeInvisible(){
+        super.makeInvisible();
+        shapeExtra.makeInvisible();
     }
 }

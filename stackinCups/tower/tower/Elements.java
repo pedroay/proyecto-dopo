@@ -26,6 +26,8 @@ public abstract class Elements
     protected boolean isCrazy;
     protected boolean isFearful;
     protected ArrayList<Integer> notQuitablePosition;
+    protected boolean isBox;
+    protected boolean isInABox;
     
     public Elements(int number){
         width = calculateWidth(number);
@@ -39,6 +41,8 @@ public abstract class Elements
         isFearful = false;
         isQuitable = true;
         notQuitablePosition = new ArrayList<Integer>();
+        isBox = false;
+        isInABox = false;
     }
     
     public int calculateWidth(int inumber){
@@ -222,4 +226,20 @@ public abstract class Elements
     public ArrayList<Integer> getNotQuitablePosition(){
         return notQuitablePosition;
     }
+    public void setIsBox(boolean value) {
+        isBox = value;
+    }
+
+    public boolean isBox() {
+        return isBox;
+    }
+
+    public void setIsInABox(boolean value) {
+        isInABox = value;
+    }
+
+    public boolean isInABox() {
+        return isInABox;
+    }
+    public void createHisLid(){}
 }

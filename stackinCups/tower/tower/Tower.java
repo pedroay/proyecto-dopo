@@ -1032,7 +1032,7 @@ import javax.swing.JOptionPane;
             objects.push(newCup);
             return;
         }
-        int sizeTop    = top.getWidth();
+        int sizeTop = top.getWidth();
         int sizeNewCup = newCup.getWidth();
         if (sizeTop > sizeNewCup && top.isCanIn()) {
             setInside((Cup) top, newCup);

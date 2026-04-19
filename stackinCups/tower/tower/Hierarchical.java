@@ -1,4 +1,5 @@
 package tower;
+import Shapes.*;
 
 /**
  * Write a description of class Hierarchical here.
@@ -8,6 +9,8 @@ package tower;
  */
 public class Hierarchical extends Cup
 {
+    private Rectangle shapeExtra = new Rectangle();
+
     /**
      * Constructor for objects of class Hierarchical
      */
@@ -21,6 +24,23 @@ public class Hierarchical extends Cup
     public Hierarchical(int inumber,Tower torre){
         super(inumber,torre);
         setDesplazaElementos(true);
+    }
+
+    @Override
+    public void draw(){
+        super.draw();
+        shapeExtra.changeColor("darkGreen");
+        shapeExtra.changeSize(10, width - 10);
+        shapeExtra.setP(posy + getHeight() - 2, 150 - ((width - 10) / 2));
+        shapeExtra.makeVisible();
+    }
+
+    @Override
+    public void erase(){
+        super.erase();
+        if(shapeExtra != null) {
+            shapeExtra.makeInvisible();
+        }
     }
 
     @Override

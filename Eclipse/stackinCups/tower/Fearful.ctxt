@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Fearful
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Fearful\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=number\ torre
+comment1.target=Fearful(int,\ Tower)
+comment2.params=number\ cup
+comment2.target=Fearful(int,\ Cup)
+comment3.params=
+comment3.target=void\ draw()
+comment4.params=
+comment4.target=void\ erase()
+numComments=5
