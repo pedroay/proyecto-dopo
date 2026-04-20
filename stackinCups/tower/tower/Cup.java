@@ -1,30 +1,29 @@
 package tower;
-import java.util.Random;
 import Shapes.*;
 
 /**
- * Write a description of class Cup here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+* this class represents a cup that can be on the tower
  */
 
 public class Cup extends Elements {
     
-    private int height;
-    private String state;
-    private Lid cover;
-    private final Lid hisLid;
-    public Rectangle shape1;
-    public Rectangle shape2;
-    private Elements inside;
+    private int height;//the height of the cup
+    private String state;//the state of the cup
+    private Lid cover;//the cover of the cup
+    private final Lid hisLid;//the lid of the cup
+    public Rectangle shape1;//the first shape of the cup
+    public Rectangle shape2;//the second shape of the cup
+    private Elements inside;//the element inside the cup
     
     /**
-     * Constructor de la clase Cup asociado a una tapa existente.
-     * Crea una nueva taza calculando su altura en base al identificador numérico.
-     * Se asocia directamente con la tapa (Lid) proporcionada y toma el color de esta.
-     * * @param inumber El identificador único de la taza, utilizado para calcular su altura.
-     * @param lid El objeto Lid (tapa) que cubrirá esta taza.
+     * Constructor for the Cup class 
+     * associated with an existing lid.
+     * Creates a new cup by calculating its
+     *  height based on the numeric identifier.
+     * It directly associates with the provided 
+     * Lid object and inherits its color.
+     * @param inumber The unique identifier for the cup, used to calculate its height.
+     * @param lid The Lid object that will cover this cup.
      */
     public Cup(int inumber,Lid lid) {
         super(inumber);
@@ -40,11 +39,12 @@ public class Cup extends Elements {
     }
     
     /**
-     * Constructor principal de la clase Cup.
-     * Crea una nueva taza independiente calculando su altura base. Genera un color 
-     * aleatorio para la taza y crea automáticamente una tapa (Lid) asociada a ella.
-     * * @param inumber El identificador único de la taza, utilizado para calcular su altura.
-     */     
+     * Main constructor for the Cup class.
+     * Creates a new independent cup by calculating its base height.
+     * It generates a random color for the cup and automatically creates 
+     * an associated Lid for it.
+     * * @param inumber The unique identifier for the cup, used to calculate its height.
+     */   
     public Cup(int inumber,Tower torre) {
         super(inumber);
         height =  calculateWidth(inumber);;

@@ -51,15 +51,15 @@ public abstract class Elements
     
     public abstract void draw();
     public abstract void erase();
-    public int getNumber(){
+    public final int getNumber(){
         return number;
     }
     
-    public int getWidth() {
+    public final int getWidth() {
         return width;
     }
     
-    public String getColor() {
+    public final String getColor() {
         return color;
     }
     
@@ -78,27 +78,27 @@ public abstract class Elements
         color=ncolor;
     }
     
-    public int getPosx() {
+    public final int getPosx() {
         return posx;
     }
     
-    public int getPosy() {
+    public final int getPosy() {
         return posy;
     }
     
-    public int getHeight() {
+    public final int getHeight() {
         return height;
     }
     
-    public void setPosx(int newPosx) {
+    public final void setPosx(int newPosx) {
         posx = newPosx;
     }
 
-    public void setPosy(int newPosy) {
+    public final void setPosy(int newPosy) {
         posy = newPosy;
     }
     
-    public void setPosition(int newPosx, int newPosy) {
+    public final void setPosition(int newPosx, int newPosy) {
         posx = newPosx;
         posy = newPosy;
     }
@@ -113,57 +113,57 @@ public abstract class Elements
         erase();
     }
     
-    public boolean isVisible() {
+    public final boolean isVisible() {
         return isVisible;
     }
     
-    public String getType(){
+    public final String getType(){
         return type;
     }
     
-    public Elements getAbove(){
+    public final Elements getAbove(){
         return this.above;
     }
     
-        public void setAbove(Elements above){
+        public final void setAbove(Elements above){
         this.above = above;
     }
     
-        public Elements getInside(){
+        public final Elements getInside(){
         return null;
     }
     
-    public void setCover(Lid i){}
+    public final void setCover(Lid i){}
     
-    public void setInside(Elements i){}
+    public final void setInside(Elements i){}
     
     public void cover(){}
     
-    public boolean isCanIn(){
+    public final boolean isCanIn(){
         return canIn;
     }
     
-    public Tower getTower(){
+    public final Tower getTower(){
         return torre;
     }
     
-    public boolean getEliminaTapas() {
+    public final boolean getEliminaTapas() {
         return eliminaTapas;
     }
     
-    public void setEliminaTapas(boolean value) {
+    public final void setEliminaTapas(boolean value) {
         eliminaTapas = value;
     }
     
-    public boolean getDesplazaElementos() {
+    public final boolean getDesplazaElementos() {
         return desplazaElementos;
     }
     
-    public void setDesplazaElementos(boolean value) {
+    public final void setDesplazaElementos(boolean value) {
         desplazaElementos = value;
     }
 
-    public boolean isDangerous() {
+    public final boolean isDangerous() {
         return eliminaTapas;
     }
 
@@ -191,54 +191,54 @@ public abstract class Elements
 
     public abstract void push(int i);
 
-    public boolean isQuitable() {
+    public final boolean isQuitable() {
         return isQuitable;
     }
 
-    public void setQuitable(boolean value) {
+    public final void setQuitable(boolean value) {
         isQuitable = value;
     }
 
-    public boolean isCrazy() {
+    public final boolean isCrazy() {
         return isCrazy;
     }
 
-    public void setIsCrazy(boolean value) {
+    public final void setIsCrazy(boolean value) {
         isCrazy = value;
     }
 
-    public boolean isFearful() {
+    public final boolean isFearful() {
         return isFearful;
     }
 
-    public void setIsFearful(boolean value) {
+    public final void setIsFearful(boolean value) {
         isFearful = value;
     }
 
-    public void setNotQuitablePosition(int i){
+    public final void setNotQuitablePosition(int i){
         notQuitablePosition.add(i);
     }
 
-    public boolean isNotQuitablePosition(int i){
+    public final boolean isNotQuitablePosition(int i){
         return notQuitablePosition.contains(i);
     }
 
-    public ArrayList<Integer> getNotQuitablePosition(){
+    public final ArrayList<Integer> getNotQuitablePosition(){
         return notQuitablePosition;
     }
-    public void setIsBox(boolean value) {
+    public final void setIsBox(boolean value) {
         isBox = value;
     }
 
-    public boolean isBox() {
+    public final boolean isBox() {
         return isBox;
     }
 
-    public void setIsInABox(boolean value) {
+    public final void setIsInABox(boolean value) {
         isInABox = value;
     }
 
-    public boolean isInABox() {
+    public final boolean isInABox() {
         return isInABox;
     }
     public void createHisLid(){}

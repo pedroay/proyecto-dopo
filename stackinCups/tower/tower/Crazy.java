@@ -1,29 +1,45 @@
 package tower;
-import java.util.Random;
 import Shapes.*;
 
 /**
- * Write a description of class Crazy here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Represents a "Crazy" element within the tower.
+ * Unlike standard elements that cover a cup, this element 
+ * positions itself as a base instead.
  */
 public class Crazy extends Lid
 {
-    private Rectangle shapeExtra = new Rectangle();
+    /**
+     * The extra shape for the box used to mark de new box
+     */
+    private final Rectangle shapeExtra = new Rectangle();
 
-    public Crazy(int number,Tower torre)
+    /**
+     * Constructs a Crazy element using tower coordinates.
+     * @param number The identification number of the element.
+     * @param torre The tower instance where this element is registered.
+     */
+    public Crazy(final int number,final Tower torre)
     {
         super(number,torre);
-        setIsCrazy(true);
+        this.isCrazy = true;
+
     }
     
-    public Crazy(int number,Cup cup)
+    /**
+     * Constructs a Crazy element associated with a specific cup.
+     * * @param number The identification number of the element.
+     * @param cup The cup object that this element interacts with.
+     */
+    public Crazy(final int number,final Cup cup)
     {
         super(number,cup);
-        setIsCrazy(true);
+        this.isCrazy = true;
     }
     
+    /**
+     * Renders the Crazy element's visual representation.
+     * Overrides the default drawing to show the element as a structural base.
+     */
     @Override
     public void draw(){
         super.draw();
@@ -34,6 +50,10 @@ public class Crazy extends Lid
         
     }
 
+
+    /**
+     * Removes the Crazy element's visual representation from the canvas.
+     */
     @Override
     public void makeInvisible(){
         super.makeInvisible();
