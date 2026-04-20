@@ -29,7 +29,7 @@ public abstract class Elements
     protected boolean isBox;
     protected boolean isInABox;
     
-    public Elements(int number,Tower torre){
+    public Elements(int number){
         width = calculateWidth(number);
         posx = 150 -(width/2);
         posy = 0;
@@ -43,7 +43,6 @@ public abstract class Elements
         notQuitablePosition = new ArrayList<Integer>();
         isBox = false;
         isInABox = false;
-        this.torre = torre;
     }
     
     public final int calculateWidth(int inumber){

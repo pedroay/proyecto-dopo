@@ -45,8 +45,8 @@ public class Cup extends Elements {
      * @param inumber The unique identifier for the cup, used to calculate its height.
      * @param lid The Lid object that will cover this cup.
      */
-    public Cup(final int inumber,final Lid lid,final Tower torre) {
-        super(inumber,torre);
+    public Cup(int inumber,Lid lid) {
+        super(inumber);
         height = calculateWidth(inumber);
         state = "noCovered";
         type = "cup";
@@ -54,6 +54,7 @@ public class Cup extends Elements {
         hisLid = lid;
         posy = 300 - height;
         super.canIn = true;
+        torre = lid.getTower();
         isQuitable=true;
     }
     
