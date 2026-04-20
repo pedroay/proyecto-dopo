@@ -6,10 +6,18 @@ import Shapes.*;
  * Once created, this box cannot be opened or closed.
  */
 public class Box extends Cup
-{
-    private final Rectangle shapeExtra = new Rectangle(); // The extra shape for the box used to mark de new box
-
-    public Box(int iNumber,Tower torre){
+{	
+	/**
+	 * The extra shape for the box used to mark de new box
+	 */
+    private final Rectangle shapeExtra = new Rectangle(); 
+    
+    /**
+     * this contructor creat a box
+     * @param iNumber: is the number which we indentify the cup
+     * @param torre: is the tower where the box will apile
+     */
+    public Box(final int iNumber,final Tower torre){
         super(iNumber, torre);
         setIsBox(true);
     }

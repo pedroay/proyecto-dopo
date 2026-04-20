@@ -9,19 +9,28 @@ import Shapes.*;
  */
 public class Hierarchical extends Cup
 {
-    private Rectangle shapeExtra = new Rectangle();
-
+	/**
+	 * The extra shape for the box used to mark de new box
+	 */
+    private final Rectangle shapeExtra = new Rectangle(); 
     /**
      * Constructor for objects of class Hierarchical
+     * @param inumber: number which we identify a cup
+     * @param lid:is the lid of the cup
      */
-    public Hierarchical(int inumber,Lid lid)
+    public Hierarchical(final int inumber,final Lid lid)
     {
         super(inumber,lid);
         setDesplazaElementos(true);
         setNotQuitablePosition(0);
     }
     
-    public Hierarchical(int inumber,Tower torre){
+    /**
+     * Create the cup and link himself with a tower
+     * @param inumber:number which we identify a cup
+     * @param torre:tower where the cup will apil
+     */
+    public Hierarchical(final int inumber,final Tower torre){
         super(inumber,torre);
         setDesplazaElementos(true);
     }
@@ -44,14 +53,14 @@ public class Hierarchical extends Cup
     }
 
     @Override
-    public boolean canDamage(Elements e) {
+    public boolean canDamage(Elements element) {
         return false;
     }
 
     @Override
-    public boolean canDesplace(Elements e) {
+    public boolean canDesplace(Elements element) {
         boolean canDesplace = false;
-        if(e.isQuitable() && e.getNumber() <this.number){
+        if(element.isQuitable() && element.getNumber() <this.number){
             canDesplace = true;
         }
         return canDesplace;

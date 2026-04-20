@@ -6,15 +6,35 @@ import Shapes.*;
  */
 
 public class Cup extends Elements {
+    /**
+     * the height of the cup
+     */
+    private int height;
     
-    private int height;//the height of the cup
-    private String state;//the state of the cup
-    private Lid cover;//the cover of the cup
-    private final Lid hisLid;//the lid of the cup
-    public Rectangle shape1;//the first shape of the cup
-    public Rectangle shape2;//the second shape of the cup
-    private Elements inside;//the element inside the cup
-    
+    /**
+     * the state of the cup
+     */
+    private String state;
+    /**
+     * the cover of the cup
+     */
+    private Lid hisCover;
+    /**
+     * the lid of the cup
+     */
+    private final Lid hisLid;
+    /**
+     * the first shape of the cup
+     */
+    public Rectangle shape1;
+    /**
+     * the second shape of the cup
+     */
+    public Rectangle shape2;
+    /**
+     * the element inside the cup
+     */
+    private Elements inside;
     /**
      * Constructor for the Cup class 
      * associated with an existing lid.
@@ -25,8 +45,8 @@ public class Cup extends Elements {
      * @param inumber The unique identifier for the cup, used to calculate its height.
      * @param lid The Lid object that will cover this cup.
      */
-    public Cup(int inumber,Lid lid) {
-        super(inumber);
+    public Cup(final int inumber,final Lid lid,final Tower torre) {
+        super(inumber,torre);
         height = calculateWidth(inumber);
         state = "noCovered";
         type = "cup";
@@ -34,7 +54,6 @@ public class Cup extends Elements {
         hisLid = lid;
         posy = 300 - height;
         super.canIn = true;
-        torre = lid.getTower();
         isQuitable=true;
     }
     
@@ -73,7 +92,7 @@ public class Cup extends Elements {
      * @return la tapa (Lid)
      */
     public Lid getCover() {
-        return cover;
+        return hisCover;
     }
     
     /**
@@ -124,7 +143,7 @@ public class Cup extends Elements {
         shape1.makeVisible();
         shape2.makeVisible(); 
         if(isCovered()){
-            cover.draw();
+            hisCover.draw();
         }
     }
     
@@ -136,8 +155,8 @@ public class Cup extends Elements {
         if (shape2 != null) {
             shape2.makeInvisible();
         }
-        if (cover != null) {
-            cover.makeInvisible();
+        if (hisCover != null) {
+            hisCover.makeInvisible();
         }
     }
     
@@ -166,7 +185,7 @@ public class Cup extends Elements {
     
     @Override
     public void setCover(Lid i){
-        cover = i;
+        hisCover = i;
         setState("Covered");
         }
         

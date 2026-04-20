@@ -29,7 +29,7 @@ public abstract class Elements
     protected boolean isBox;
     protected boolean isInABox;
     
-    public Elements(int number){
+    public Elements(int number,Tower torre){
         width = calculateWidth(number);
         posx = 150 -(width/2);
         posy = 0;
@@ -43,23 +43,24 @@ public abstract class Elements
         notQuitablePosition = new ArrayList<Integer>();
         isBox = false;
         isInABox = false;
+        this.torre = torre;
     }
     
-    public int calculateWidth(int inumber){
+    public final int calculateWidth(int inumber){
         return ((2*inumber)-1)*10;
     }
     
     public abstract void draw();
     public abstract void erase();
-    public final int getNumber(){
+    public  int getNumber(){
         return number;
     }
     
-    public final int getWidth() {
+    public int getWidth() {
         return width;
     }
     
-    public final String getColor() {
+    public String getColor() {
         return color;
     }
     
@@ -78,27 +79,27 @@ public abstract class Elements
         color=ncolor;
     }
     
-    public final int getPosx() {
+    public  int getPosx() {
         return posx;
     }
     
-    public final int getPosy() {
+    public int getPosy() {
         return posy;
     }
     
-    public final int getHeight() {
+    public int getHeight() {
         return height;
     }
     
-    public final void setPosx(int newPosx) {
+    public  void setPosx(int newPosx) {
         posx = newPosx;
     }
 
-    public final void setPosy(int newPosy) {
+    public void setPosy(int newPosy) {
         posy = newPosy;
     }
     
-    public final void setPosition(int newPosx, int newPosy) {
+    public void setPosition(int newPosx, int newPosy) {
         posx = newPosx;
         posy = newPosy;
     }
@@ -113,49 +114,49 @@ public abstract class Elements
         erase();
     }
     
-    public final boolean isVisible() {
+    public boolean isVisible() {
         return isVisible;
     }
     
-    public final String getType(){
+    public String getType(){
         return type;
     }
     
-    public final Elements getAbove(){
+    public Elements getAbove(){
         return this.above;
     }
     
-        public final void setAbove(Elements above){
+        public void setAbove(Elements above){
         this.above = above;
     }
     
-        public final Elements getInside(){
+        public  Elements getInside(){
         return null;
     }
     
-    public final void setCover(Lid i){}
+    public void setCover(Lid i){}
     
-    public final void setInside(Elements i){}
+    public  void setInside(Elements i){}
     
     public void cover(){}
     
-    public final boolean isCanIn(){
+    public  boolean isCanIn(){
         return canIn;
     }
     
-    public final Tower getTower(){
+    public  Tower getTower(){
         return torre;
     }
     
-    public final boolean getEliminaTapas() {
+    public boolean getEliminaTapas() {
         return eliminaTapas;
     }
     
-    public final void setEliminaTapas(boolean value) {
+    public void setEliminaTapas(boolean value) {
         eliminaTapas = value;
     }
     
-    public final boolean getDesplazaElementos() {
+    public boolean getDesplazaElementos() {
         return desplazaElementos;
     }
     
@@ -163,7 +164,7 @@ public abstract class Elements
         desplazaElementos = value;
     }
 
-    public final boolean isDangerous() {
+    public boolean isDangerous() {
         return eliminaTapas;
     }
 
@@ -191,27 +192,27 @@ public abstract class Elements
 
     public abstract void push(int i);
 
-    public final boolean isQuitable() {
+    public boolean isQuitable() {
         return isQuitable;
     }
 
-    public final void setQuitable(boolean value) {
+    public void setQuitable(boolean value) {
         isQuitable = value;
     }
 
-    public final boolean isCrazy() {
+    public boolean isCrazy() {
         return isCrazy;
     }
 
-    public final void setIsCrazy(boolean value) {
+    public void setIsCrazy(boolean value) {
         isCrazy = value;
     }
 
-    public final boolean isFearful() {
+    public boolean isFearful() {
         return isFearful;
     }
 
-    public final void setIsFearful(boolean value) {
+    public void setIsFearful(boolean value) {
         isFearful = value;
     }
 
@@ -219,26 +220,26 @@ public abstract class Elements
         notQuitablePosition.add(i);
     }
 
-    public final boolean isNotQuitablePosition(int i){
+    public boolean isNotQuitablePosition(int i){
         return notQuitablePosition.contains(i);
     }
 
-    public final ArrayList<Integer> getNotQuitablePosition(){
+    public ArrayList<Integer> getNotQuitablePosition(){
         return notQuitablePosition;
     }
     public final void setIsBox(boolean value) {
         isBox = value;
     }
 
-    public final boolean isBox() {
+    public boolean isBox() {
         return isBox;
     }
 
-    public final void setIsInABox(boolean value) {
+    public void setIsInABox(boolean value) {
         isInABox = value;
     }
 
-    public final boolean isInABox() {
+    public boolean isInABox() {
         return isInABox;
     }
     public void createHisLid(){}
