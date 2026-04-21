@@ -987,10 +987,14 @@ import javax.swing.JOptionPane;
 
             
     private Cup createElement(String type, int number) {
+        int height = height();
+        double heightBox = (height +10) / 20.0;
+        int heightBox = (int) Math.ceil(heightBox);
         switch (type) {
             case "opener": return new Opener(number, this);
             case "cup": return new Cup(number, this);
             case "hierarchical": return new Hierarchical(number, this);
+            case "box": return new Box(heightBox, this);
             default:       return new Cup(number, this);
         }
     }
@@ -1060,12 +1064,41 @@ import javax.swing.JOptionPane;
             dangerousElement(element);
         } else if (element.canDesplace()) {
             desplaceElements(element);
-        } else if (element.isCrazy()) {
+        } else if (element.thisIsCrazy()) {
             crazyElement(element);
         }
-        else if(element.isFearful()){
+        else if(element.thisIsFearful()){
             validateFearful((Lid) element);
         }
+        else if(element.thisIsBox()){
+            validateBox((Box) element);
+        }
+    }
+
+    private void validateBox(Box box){
+        if (box == null || !box.thisIsBox()) return;
+        objects.remove(element);
+        if (element.getType().equals("cup")) {
+            cups.remove(element);
+        } else {
+            lids.remove(element);
+        }
+
+        box.createHisLid()
+        reverseTower();
+        push(box);
+        reverseTower();
+
+        for(Elements e : objects){
+            if(e != box){
+                e.setIsInABox(true);
+                e.setQuitable(false);
+            }
+        }
+
+
+
+        
     }
 
     /**
@@ -1074,7 +1107,7 @@ import javax.swing.JOptionPane;
      * and reverses the tower back to its original state.
      */
     private void crazyElement(Elements element) {
-        if (!element.isCrazy()) return;
+        if (!element.thisIsCrazy()) return;
         
         objects.remove(element);
         if (element.getType().equals("cup")) {
@@ -1179,7 +1212,7 @@ import javax.swing.JOptionPane;
      * @param lid The newly added lid to validate, which should have fearful properties.
      */
     private void validateFearful(Lid lid) {
-        if (lid == null || !lid.isFearful()) return;
+        if (lid == null || !lid.thisIsFearful()) return;
         if (!isInElements(lid.getNumber(), "cup")) {
             popLid();
             isOK = false;
@@ -1192,7 +1225,7 @@ import javax.swing.JOptionPane;
     }
     
     private void relocateCrazy(Lid Lid){
-        if (Lid != null && Lid.isCrazy()) {
+        if (Lid != null && Lid.thisIsCrazy()) {
             crazyElement(Lid);
         }
     }
@@ -1245,4 +1278,5 @@ import javax.swing.JOptionPane;
         afterPush(newLid);
         isOK = true;
     }
+
 }

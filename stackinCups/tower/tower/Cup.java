@@ -2,14 +2,16 @@ package tower;
 import Shapes.*;
 
 /**
-* this class represents a cup that can be on the tower
+ * Represents a cup that can be placed in the tower.
+ * A cup has a height calculated from its identifier, a color,
+ * and can contain other elements inside it or be covered by a lid.
  */
 
 public class Cup extends Elements {
     /**
      * the height of the cup
      */
-    private int height;
+    private final int height;
     
     /**
      * the state of the cup
@@ -35,37 +37,41 @@ public class Cup extends Elements {
      * the element inside the cup
      */
     private Elements inside;
+
     /**
-     * Constructor for the Cup class 
-     * associated with an existing lid.
-     * Creates a new cup by calculating its
-     *  height based on the numeric identifier.
-     * It directly associates with the provided 
-     * Lid object and inherits its color.
+     * Constructor for the Cup class associated with an existing lid.
+     * Receives color and tower explicitly to avoid calling methods on the
+     * Lid parameter (Law of Demeter).
+     * Used by subclasses such as {@link Hierarchical} via
+     *  {@code super(inumber, lid, color, torre)}.
+     *
      * @param inumber The unique identifier for the cup, used to calculate its height.
-     * @param lid The Lid object that will cover this cup.
+     * @param lid     The Lid object permanently associated with this cup.
+     * @param color   The color to assign to this cup.
+     * @param torre   The tower this cup belongs to.
      */
-    public Cup(int inumber,Lid lid) {
+    public Cup(final int inumber, final Lid lid, final String color, final Tower torre) {
         super(inumber);
         height = calculateWidth(inumber);
         state = "noCovered";
         type = "cup";
-        color = lid.getColor();
+        this.color = color;
         hisLid = lid;
         posy = 300 - height;
         super.canIn = true;
-        torre = lid.getTower();
-        isQuitable=true;
+        this.torre = torre;
+        isQuitable = true;
     }
-    
+
     /**
      * Main constructor for the Cup class.
      * Creates a new independent cup by calculating its base height.
      * It generates a random color for the cup and automatically creates 
      * an associated Lid for it.
-     * * @param inumber The unique identifier for the cup, used to calculate its height.
+     * * @param inumber The unique identifier for the cup,
+     *  used to calculate its height.
      */   
-    public Cup(int inumber,Tower torre) {
+    public Cup(final int inumber,final Tower torre) {
         super(inumber);
         height =  calculateWidth(inumber);;
         state = "noCovered";
@@ -75,62 +81,53 @@ public class Cup extends Elements {
         hisLid = new Lid(inumber,this);
         posy = 300 - height;
         super.canIn = true; 
-        isQuitable=true;
     }    
     
-    /**
-     * Obtiene el estado actual de la taza
-     * 
-     * @return estado actual de la taza sobre su covertura
-     */
     public String getState() {
         return state;
     }
     
     /**
-     * Obtiene la tapa que cubre esta taza
+     * returns the cover of a cup
      * 
-     * @return la tapa (Lid)
+     * @return hiscover, return a lid
      */
     public Lid getCover() {
         return hisCover;
     }
     
-    /**
-     * Establece el estado de la taza
-     * 
-     * @param nstate nuevo estado (ej: "normal", ", "selected", "stacked")
-     */
-    public void setState(String nstate) {
+    public void setState(final String nstate) {
         state = nstate;
     }
 
     
-    /**
-     * Establece la altura de la taza
-     * 
-     * @param newHeight nueva altura en cm
-     */
-    private void setHeight(int newHeight) {
-        height = newHeight;
-    }
     
    
     /**
-     * Verifica si la taza está cubierta por una tapa
-     * 
-     * @return true si tiene una tapa, false si tiene otro estado
+     * Returns whether this cup is currently covered by a lid.
+     *
+     * @return {@code true} if the cup state is "Covered", {@code false} otherwise
      */
     public boolean isCovered() {
-        return state=="Covered";
+        return "Covered".equals(state);
     }
     
+    /**
+     * Returns a string with the cup's basic information: number, height, and state.
+     *
+     * @return a formatted string with the cup's identifier, height, and current state
+     */
     public String getInfo(){
-        String info="informacion:"+number+", "+height+", "+state;
+        final String info="informacion:"+number+", "+height+", "+state;
         System.out.println(info);
         return info;
     }
     
+    /**
+     * Draws the cup on the canvas using two overlapping rectangles.
+     * The outer rectangle uses the cup's color and the inner one is white,
+     * creating a hollow cup effect. If the cup is covered, its lid is also drawn.
+     */
     @Override
     public void draw(){
         shape1= new Rectangle(height*4);
@@ -148,6 +145,9 @@ public class Cup extends Elements {
         }
     }
     
+    /**
+     * Erases the cup from the canvas by hiding its shapes and its cover lid, if any.
+     */
     @Override
     public void erase(){
         if (shape1 != null) {
@@ -161,7 +161,8 @@ public class Cup extends Elements {
         }
     }
     
-    public void setInside(Elements inside){
+    @Override
+    public void setInside(final Elements inside){
          this.inside = inside;
     }
     
@@ -169,10 +170,14 @@ public class Cup extends Elements {
     public Elements getInside(){
         return this.inside;
         }
-        
+    
+    /**
+     * Marks this cup as covered and makes its cover lid visible.
+     */
+    @Override
     public void cover(){
-        Lid l = getCover();
-        l.isVisible();
+        final Lid lid = getCover();
+        lid.draw();
         setState("Covered");
     }
     
@@ -180,21 +185,38 @@ public class Cup extends Elements {
         return hisLid;
     }
     
+    @Override
     public int getHeight() {
         return height;
     }
     
+    /**
+     * Sets the lid that covers this cup and marks the cup as covered.
+     *
+     * @param i the lid to assign as the cover of this cup
+     */
     @Override
-    public void setCover(Lid i){
-        hisCover = i;
+    public void setCover(final Lid lid){
+        hisCover = lid;
         setState("Covered");
-        }
+    }
         
-    public void push(int i){
-        torre.pushCup(i);
+
+    /**
+     * Pushes a cup with the given identifier onto the tower.
+     *
+     * @param i the identifier of the cup to push
+     */
+    @Override
+    public void push(final int number){
+        torre.pushCup(number);
     }
     
-    public void setIsQuitable(boolean value){
+    /**
+     * set the statequitable of a cup
+     * @param value
+     */
+    public void setIsQuitable(final boolean value){
         isQuitable=value;
     }
     
@@ -210,9 +232,15 @@ public class Cup extends Elements {
      * @return true if this cup can damage {@code e}
      */
     @Override
-    public boolean canDamage(Elements e) {
-        if (!eliminaTapas) return false;
-        return e.getType().equals("lid") && e.getNumber() < this.number;
+    public boolean canDamage(final Elements element) {
+    	final boolean can ;
+        if (eliminaTapas) {
+        	can = "lid".equals(element.getType()) && element.getNumber() < this.number;
+        }
+        else {
+        	can = false;
+        }
+        return can;
     }
 
     /**
@@ -223,8 +251,15 @@ public class Cup extends Elements {
      * @return true if this cup can displace {@code e}
      */
     @Override
-    public boolean canDesplace(Elements e) {
-        if (!desplazaElementos) return false;
-        return e.getNumber() >= this.number;
+    public boolean canDesplace(final Elements element) {
+    	final boolean can;
+        if (desplazaElementos) {
+        	can = element.getNumber() >= this.number;
+        }
+        else {
+        	can = false;
+        }
+        
+        return can;
     }
 }

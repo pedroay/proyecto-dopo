@@ -410,4 +410,100 @@ public class TowerTest {
         tower.cover();
         assertEquals(tamanoAntes, tower.stakingItems().length);
     }
+
+    // ---------------------------------------------------------------
+    // Box tests
+    // ---------------------------------------------------------------
+
+    @Test
+    public void boxDebeCrearseEnLaTorre() {
+        tower.pushCup(1);
+        tower.pushCup(2);
+        tower.pushCup(3);
+        tower.pushCup("box", 4);
+        assertTrue(tower.isInElements(4, "cup"));
     }
+
+    @Test
+    public void boxDebeDejarLaTorreEnEstadoValido() {
+        tower.pushCup(1);
+        tower.pushCup(2);
+        tower.pushCup(3);
+        tower.pushCup("box", 4);
+        assertTrue(tower.isOK());
+    }
+
+    @Test
+    public void boxDebeMarcartodosLosElementosInternosComoIsInABox() {
+        tower.pushCup(1);
+        tower.pushCup(2);
+        tower.pushCup(3);
+        tower.pushCup("box", 4);
+        for (Elements e : tower.getObjects()) {
+            if (!e.getIsBox()) {
+                assertTrue("Element " + e.getNumber() + " should be marked isInABox",
+                    e.isInABox());
+            }
+        }
+    }
+
+    @Test
+    public void boxDebeMarcartodosLosElementosInternosComoNoQuitables() {
+        tower.pushCup(1);
+        tower.pushCup(2);
+        tower.pushCup(3);
+        tower.pushCup("box", 4);
+        for (Elements e : tower.getObjects()) {
+            if (!e.getIsBox()) {
+                assertFalse("Element " + e.getNumber() + " should not be quitable",
+                    e.isQuitable());
+            }
+        }
+    }
+
+    @Test
+    public void boxDebeCrearSuTapaAutomaticamente() {
+        tower.pushCup(1);
+        tower.pushCup(2);
+        tower.pushCup(3);
+        tower.pushCup("box", 4);
+        Cup box = tower.findCupByNumber(4);
+        assertTrue(tower.isInElements(box.getNumber(), "lid"));
+    }
+
+    @Test
+    public void noSeDebePoderEliminarUnElementoDentroDelBox() {
+        tower.pushCup(1);
+        tower.pushCup(2);
+        tower.pushCup(3);
+        tower.pushCup("box", 4);
+        tower.removeCup(1);
+        assertFalse(tower.isOK());
+    }
+
+    @Test
+    public void boxDebeSerSuficientementeGrandeParaEncerrarTodaLaTorre() {
+        tower.pushCup(1);
+        tower.pushCup(2);
+        tower.pushCup(3);
+        tower.pushCup("box", 4);
+        Cup box = tower.findCupByNumber(4);
+        int boxWidth = box.getWidth();
+        for (Elements e : tower.getObjects()) {
+            if (!e.getIsBox()) {
+                assertTrue("Element " + e.getNumber() + " width=" + e.getWidth()
+                    + " exceeds box width=" + boxWidth, e.getWidth() <= boxWidth);
+            }
+        }
+    }
+
+    @Test
+    public void boxDebeTenerElFlagGetIsBoxEnTrue() {
+        tower.pushCup(1);
+        tower.pushCup(2);
+        tower.pushCup(3);
+        tower.pushCup("box", 4);
+        Cup box = tower.findCupByNumber(4);
+        assertTrue(box.getIsBox());
+    }
+}

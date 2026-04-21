@@ -1,30 +1,31 @@
 package tower;
-import java.util.Random;
 import Shapes.*;
 /**
- * Write a description of class Lib here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Represents a Lid that covers a Cup in the tower.
  */
 public class Lid extends Elements
 {
-
+    /** The current state of the lid. */
     private String state;
+    /** The cup associated with this lid, if any. */
     private Cup hisCup;
+    /** The visual shape of the lid used for drawing. */
     private Rectangle shape;
-    private final static boolean canIN = false;
-    private boolean isFearful;
-    private boolean isCrazy;
+    
+ 
+
     
     /**
-     * Constructor principal de la clase Lid.
-     * Crea una nueva tapa basándose en un número identificador. Este número determina 
-     * su ancho. Además, le asigna un color aleatorio y crea automáticamente una taza (Cup)
-     * asociada a ella.
-     * * @param number El número identificador único que determina el tamaño (ancho) de la tapa.
+     * Main constructor for the Lid class.
+     * Creates a new lid based on a unique identifier 
+     * number which determines its width.
+     * It assigns a random color and automatically 
+     * creates a new Cup associated with it.
+     * 
+     * @param number The unique identifier that determines the lid's size (width).
+     * @param torre  The tower this lid belongs to.
      */
-    public Lid(int number,Tower torre) {
+    public Lid(final int number,final Tower torre) {
         super(number);
         height = 10;
         posy = 300-height;
@@ -37,57 +38,58 @@ public class Lid extends Elements
     }
     
     /**
-     * Constructor sobrecargado de la clase Lid.
-     * Crea una nueva tapa a partir de un número identificador y una taza (Cup) ya existente.
-     * La tapa heredará el color de la taza proporcionada.
-     * * @param number El número identificador único que determina el tamaño (ancho) de la tapa.
-     * @param cup El objeto Cup al que se asociará esta tapa y del cual tomará su color.
+     * Overloaded constructor for the Lid class.
+     * Creates a new lid from a unique identifier number and an existing Cup.
+     * The lid will inherit the color and tower context from the provided Cup.
+     * 
+     * @param number The unique identifier that determines the lid's size (width).
+     * @param cup    The Cup object to which this lid will be associated.
      */
-    public Lid(int number,Cup cup) {
+    public Lid(final int number,final Cup cup,final String color, final Tower torre) {
         super(number);
         height = 10;
         posy = 300-height;
         state = "normal";
-        color = cup.getColor();
+        this.color = color;
         hisCup= cup;
         type = "lid";
         super.canIn = false;
-        this.torre = cup.getTower();
+        this.torre = torre;
     }    
     
-    public void setHisCup(Cup cup) {
+    public void setHisCup(final Cup cup) {
         this.hisCup = cup;
     }
     
     /**
-     * Obtiene la taza que cubre esta tapa
+     * Gets the cup that this lid covers.
      * 
-     * @return referencia a Cup si está cubriendo, null en caso contrario
+     * @return a reference to the Cup, or null if not associated with one.
      */
     public Cup getHisCup() {
         return hisCup;
     }
 
     /**
-     * Obtiene el estado actual de la tapa
+     * Gets the current state of the lid.
      * 
-     * @return estado
+     * @return the state of the lid.
      */
     public String getState() {
         return state;
     }
  
     /**
-     * Establece el estado de la tapa
+     * Sets the state of the lid.
      * 
-     * @param nstate nuevo estado 
+     * @param nstate the new state to set.
      */
-    public void setState(String nstate) {
+    public void setState(final String nstate) {
         state = nstate;
     }
     
     public void getInfo(){
-        String info="informacion:"+hisCup.getNumber()+", "+width+", "+height+", "+state;
+        final String info="informacion:"+hisCup.getNumber()+", "+width+", "+height+", "+state;
         System.out.println(info);
     }
     
@@ -108,21 +110,9 @@ public class Lid extends Elements
         }
     }
 
-    public boolean getIsCrazy() {
-        return isCrazy;
-    }
+   
     
-    public void setIsCrazy(boolean value) {
-        isCrazy=value;
-    }
     
-    public void setAbove(Cup above){
-        this.above = above;
-    }
-    
-    public void setAbove(Lid above){
-        this.above = above;
-    }
 
     public void push(int i){
         torre.pushLid(i);

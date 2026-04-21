@@ -20,7 +20,7 @@ public class Hierarchical extends Cup
      */
     public Hierarchical(final int inumber,final Lid lid)
     {
-        super(inumber,lid);
+        super(inumber,lid,lid.getColor(),lid.getTower());
         setDesplazaElementos(true);
         setNotQuitablePosition(0);
     }
@@ -58,9 +58,9 @@ public class Hierarchical extends Cup
     }
 
     @Override
-    public boolean canDesplace(Elements element) {
+    public boolean canDesplace(final Elements element) {
         boolean canDesplace = false;
-        if(element.isQuitable() && element.getNumber() <this.number){
+        if(element.thisIsQuitable() && element.getNumber() <this.number){
             canDesplace = true;
         }
         return canDesplace;
