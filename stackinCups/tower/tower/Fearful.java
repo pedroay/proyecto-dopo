@@ -1,27 +1,42 @@
 package tower;
-import java.util.Random;
 import Shapes.*;
 
 
 /**
- * Write a description of class Fearful here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Fearful represents a specific behavior for a Cup.
+ * This element only enters the tower if its companion cup is present,
+ * and only exits if it is not currently covering its companion.
  */
 public class Fearful extends Lid
-{
-    private Rectangle shapeExtra = new Rectangle();
+{	
+	/**
+	 * The extra shape for the box used to mark de new box
+	 */
+    private final  Rectangle shapeExtra = new Rectangle();
     
-    public Fearful(int number,Tower torre)
+    /**
+     * Constructs a Fearful cup with its identifier and associated tower.
+     * Sets the fearful state to true upon initialization.
+     *
+     * @param number The unique numeric identifier for this cup.
+     * @param torre  The tower instance where this cup belongs.
+     */
+    public Fearful(final int number,final Tower torre)
     {
         super(number,torre);
         setIsFearful(true);
     }
     
-    public Fearful(int number,Cup cup)
+    /**
+     * Constructs a Fearful cup based on an existing cup's properties.
+     * Inherits the color and tower from the provided cup instance.
+     *
+     * @param number The unique numeric identifier for this cup.
+     * @param cup    The cup instance to copy attributes from.
+     */
+    public Fearful(final int number,final Cup cup)
     {
-        super(number,cup);  
+        super(number,cup,cup.getColor(),cup.getTower());  
         setIsFearful(true);
     }
     

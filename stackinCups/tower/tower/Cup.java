@@ -73,12 +73,12 @@ public class Cup extends Elements {
      */   
     public Cup(final int inumber,final Tower torre) {
         super(inumber);
-        height =  calculateWidth(inumber);;
+        height =  calculateWidth(inumber);
         state = "noCovered";
         type = "cup";
         color = randomColor();
         this.torre = torre;
-        hisLid = new Lid(inumber,this);
+        hisLid = new Lid(inumber,this,getColor(),getTower());
         posy = 300 - height;
         super.canIn = true; 
     }    
@@ -212,17 +212,7 @@ public class Cup extends Elements {
         torre.pushCup(number);
     }
     
-    /**
-     * set the statequitable of a cup
-     * @param value
-     */
-    public void setIsQuitable(final boolean value){
-        isQuitable=value;
-    }
     
-    public boolean getIsQuitable(){
-        return isQuitable;
-    }
 
     /**
      * A Cup cannot damage other elements by default.

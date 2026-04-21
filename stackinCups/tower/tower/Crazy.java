@@ -32,7 +32,7 @@ public class Crazy extends Lid
      */
     public Crazy(final int number,final Cup cup)
     {
-        super(number,cup);
+        super(number,cup,cup.getColor(),cup.getTower());
         this.isCrazy = true;
     }
     

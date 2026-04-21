@@ -1,39 +1,85 @@
 
 package tower;
 import java.util.Random;
-import java.util.ArrayList;
-/**
- * Write a description of class elements here.
+import java.util.List;
 import java.util.ArrayList;
 
- /*+ Write a description of class elements here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+
+
+/**
+ * Elements is the abstract base class for all objects in the tower simulation.
+ * It defines common physical properties, visibility, and behavioral flags 
+ * for specialized elements like Cups and Lids.
+ * * @author (Your Name) 
+ * @version 2026.04.21
  */
-public abstract class Elements
-{
+public abstract class Elements {
+    /** Width of the element in pixels. */
     protected int width;
+    
+    /** Color representation of the element. */
     protected String color;
+    
+    /** Horizontal position on the canvas. */
     protected int posx;
+    
+    /** Vertical position on the canvas. */
     protected int posy;
+    
+    /** Current visibility state. */
     protected boolean isVisible;
+    
+    /** Unique numeric identifier for the element. */
     protected int number;
+    
+    /** Height of the element in pixels. */
     protected int height;
+    
+    /** Category type (e.g., "cup", "lid"). */
     protected String type;
+    
+    /** Reference to the element stacked immediately above this one. */
     protected Elements above;
+    
+    /** Flag indicating if other elements can be placed inside this one. */
     protected boolean canIn;
+    
+    /** Reference to the tower container. */
     protected Tower torre;
+    
+    /** Indicates if the element is allowed to be removed. */
     protected boolean isQuitable;
+    
+    /** Behavioral flag for elements that can remove lids. */
     protected boolean eliminaTapas;
+    
+    /** Behavioral flag for elements that can move others upon entry. */
     protected boolean desplazaElementos;
+    
+    /** Flag for the Crazy specialized behavior. */
     protected boolean isCrazy;
+    
+    /** Flag for the Fearful specialized behavior. */
     protected boolean isFearful;
+    
+    /** Flag indicating if the element is a Box. */
     protected boolean isBox;
+    
+    /** State flag for elements currently contained within a box. */
     protected boolean isInABox;
+    
+    /** * List of positions where the element cannot be removed.
+     * Use List instead of ArrayList to avoid LooseCoupling violations.
+     */
     protected ArrayList<Integer> notQuitablePosition;
 
-    public Elements(int number){
+    /**
+     * Constructs an Element with a specific identifier.
+     * Initializes default physical properties and behavioral flags.
+     *
+     * @param number The unique numeric identifier for the element.
+     */
+    public Elements(final int number){
         width = calculateWidth(number);
         posx = 150 -(width/2);
         posy = 0;
@@ -46,14 +92,32 @@ public abstract class Elements
         isQuitable = true;
         isBox = false;
         isInABox = false;
-        notQuitablePosition = new ArrayList<Integer>();
+        notQuitablePosition = new ArrayList<>();
     }
-
-    public final int calculateWidth(int inumber){
+    
+    /**
+    * Calculates the width of the element based on its numeric ID.
+    * Uses the formula: ((2 * n) - 1) * 10.
+    *
+    * @param inumber The number used for the calculation.
+    * @return The calculated width as an integer.
+    */
+    public final int calculateWidth(final int inumber){
         return ((2*inumber)-1)*10;
     }
-
+    
+    /**
+     * Draws the element on the graphical canvas.
+     * Each subclass must implement this method to define its 
+     * specific visual representation using shapes.
+     */
     public abstract void draw();
+    
+    /**
+     * Erases the element from the graphical canvas.
+     * This method should make all shapes associated with the 
+     * element invisible or remove them from the screen.
+     */
     public abstract void erase();
     public int getNumber(){
         return number;
@@ -63,7 +127,7 @@ public abstract class Elements
         return width;
     }
 
-    public String getColor() {
+    public final String getColor() {
         return color;
     }
 
@@ -71,14 +135,15 @@ public abstract class Elements
      * retorna un color apartir de una lista 
      */
     protected final String randomColor(){
-        String[] colors = {"red","black","blue","yellow","green","magenta"};
-        Random random = new Random();
+        final String[] colors = {"red","black","blue","yellow","green","magenta"};
+        final Random random = new Random();
 
-        int index = random.nextInt(colors.length);
+        final int index = random.nextInt(colors.length);
         return colors[index];
     }
 
-    protected void changeColor(String ncolor){
+   
+    protected void setColor(final String ncolor){
         color=ncolor;
     }
 
@@ -94,30 +159,47 @@ public abstract class Elements
         return height;
     }
 
-    public void setPosx(int newPosx) {
+    public void setPosx(final int newPosx) {
         posx = newPosx;
     }
 
-    public void setPosy(int newPosy) {
+    public void setPosy(final int newPosy) {
         posy = newPosy;
     }
-
-    public void setPosition(int newPosx, int newPosy) {
+    
+    /**
+     * Updates the coordinates of the element on the canvas.
+     * * @param newPosx The new horizontal coordinate.
+     * @param newPosy The new vertical coordinate.
+     */
+    public void setPosition(final int newPosx,final int newPosy) {
         posx = newPosx;
         posy = newPosy;
     }
-
+    
+    /**
+     * Changes the visibility state to true and renders the element
+     * on the graphical interface by calling the draw method.
+     */
     public void makeVisible() {
         isVisible = true;
         draw();
     }
-
+    
+    /**
+     * Changes the visibility state to false and removes the element
+     * from the graphical interface by calling the erase method.
+     */
     public void makeInvisible() {
         isVisible = false;
         erase();
     }
-
-    public boolean isVisible() {
+    
+    /**
+     * say if a element is visible
+     * @return
+     */
+    public boolean thisIsVisible() {
         return isVisible;
     }
 
@@ -129,24 +211,38 @@ public abstract class Elements
         return this.above;
     }
 
-        public void setAbove(Elements above){
+    public void setAbove(final Elements above){
         this.above = above;
     }
-
-        public Elements getInside(){
-        return null;
-    }
-
-    public void setCover(Lid i){}
-
-    public void setInside(Elements i){}
     
-    public void cover(){}
+    /**
+     * Retrieves the element currently contained inside this element.
+     * * @return The Elements instance located inside, or null if empty.
+     */
+    public abstract Elements getInside();
+    
+    /**
+     * Sets a specific lid to cover this element.
+     * * @param lid The Lid instance that will cover this element.
+     */
+    public abstract void setCover(Lid lid);
+    
+    /**
+     * Places an element inside this one.
+     * * @param element The Elements instance to be placed inside.
+     */
+    public abstract void setInside(Elements element);
+    
+    public abstract void cover();
 
     public boolean isCanIn(){
         return canIn;
     }
-
+    
+    /**
+     * returns the tower
+     * @return
+     */
     public final Tower getTower(){
         return torre;
     }
@@ -155,7 +251,7 @@ public abstract class Elements
         return eliminaTapas;
     }
 
-    public final void setEliminaTapas(boolean value) {
+    public final void setEliminaTapas(final boolean value) {
         eliminaTapas = value;
     }
 
@@ -163,14 +259,22 @@ public abstract class Elements
         return desplazaElementos;
     }
 
-    public final void setDesplazaElementos(boolean value) {
+    public final void setDesplazaElementos(final boolean value) {
         desplazaElementos = value;
     }
-
+    
+    /**
+     * tell us if a element is dangerous
+     * @return eliminaTapas
+     */
     public boolean isDangerous() {
         return eliminaTapas;
     }
-
+    
+    /**
+     * tell us if a element can desplace
+     * @return
+     */
     public boolean canDesplace() {
         return desplazaElementos;
     }
@@ -182,7 +286,7 @@ public abstract class Elements
      * @param e the element to evaluate
      * @return true if this element can damage {@code e}
      */
-    public abstract boolean canDamage(Elements e);
+    public abstract boolean canDamage(Elements element);
 
     /**
      * Returns whether this element can displace the given target element.
@@ -191,31 +295,46 @@ public abstract class Elements
      * @param e the element to evaluate
      * @return true if this element can displace {@code e}
      */
-    public abstract boolean canDesplace(Elements e);
-
-    public abstract void push(int i);
-
+    public abstract boolean canDesplace(Elements element);
+    
+    /**
+     * push a element in a towe with his number
+     * @param number
+     */
+    public abstract void push(int number);
+    
+    /**
+     * tell us if a element is quitable
+     * @return
+     */
     public boolean thisIsQuitable() {
         return isQuitable;
     }
-
-    public void setQuitable(boolean value) {
+    
+    /**
+     * set if a element is quitable
+     * @param value
+     */
+    public void setQuitable(final boolean value) {
         isQuitable = value;
     }
-
-    public boolean isCrazy() {
+    /**
+     * return if a element is crazy
+     * @return isCrazy
+     */
+    public boolean thisIsCrazy() {
         return isCrazy;
     }
 
-    public void setIsCrazy(boolean value) {
+    public void setIsCrazy(final boolean value) {
         isCrazy = value;
     }
 
-    public boolean isFearful() {
+    public boolean thisIsFearful() {
         return isFearful;
     }
 
-    public void setIsFearful(boolean value) {
+    public final void setIsFearful(boolean value) {
         isFearful = value;
     }
 
@@ -227,7 +346,7 @@ public abstract class Elements
         return notQuitablePosition.contains(i);
     }
 
-    public ArrayList<Integer> getNotQuitablePosition(){
+    public List<Integer> getNotQuitablePosition(){
         return notQuitablePosition;
     }
 
@@ -239,10 +358,11 @@ public abstract class Elements
         isBox = value;
     }
 
-    public boolean isInABox() {
+    public boolean thisIsInABox() {
         return isInABox;
     }
 
     public void setIsInABox(boolean value) {
         isInABox = value;
     }
+}

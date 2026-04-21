@@ -87,8 +87,10 @@ public class Lid extends Elements
     public void setState(final String nstate) {
         state = nstate;
     }
-    
-    public void getInfo(){
+    /**
+     * show the user in a terminal the info of a lid
+     */
+    public void showInfo(){
         final String info="informacion:"+hisCup.getNumber()+", "+width+", "+height+", "+state;
         System.out.println(info);
     }
@@ -113,9 +115,14 @@ public class Lid extends Elements
    
     
     
-
-    public void push(int i){
-        torre.pushLid(i);
+    /**
+     * this method we use to make extensible the tower
+     * recives de number of a lid and it decides if the the push
+     * 
+     */
+    @Override
+    public void push(final int inumber){
+        torre.pushLid(inumber);
     }
 
     /**
@@ -125,7 +132,7 @@ public class Lid extends Elements
      * @return always false
      */
     @Override
-    public boolean canDamage(Elements e) {
+    public boolean canDamage(Elements element) {
         return false;
     }
 
@@ -136,7 +143,19 @@ public class Lid extends Elements
      * @return always false
      */
     @Override
-    public boolean canDesplace(Elements e) {
+    public boolean canDesplace(Elements element) {
         return false;
     }
+    
+    @Override
+    public Elements getInside() {
+    	return null;
+    }
+    
+    public void setCover(Lid lid) {}
+    
+    public void setInside(Elements element) {}
+    
+    public void cover() {}
+    
 }

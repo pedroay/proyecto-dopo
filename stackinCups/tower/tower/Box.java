@@ -51,7 +51,7 @@ public class Box extends Cup
      * Creates the lid for the box.
      * This method overrides the createHisLid method of the Cup class.
      */
-    @Override
+
     public void createHisLid(){
         torre.pushLid(number);
     }
