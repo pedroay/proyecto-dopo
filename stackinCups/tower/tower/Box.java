@@ -20,6 +20,7 @@ public class Box extends Cup
     public Box(final int iNumber,final Tower torre){
         super(iNumber, torre);
         setIsBox(true);
+        setQuitable(false);
     }
 
     /**

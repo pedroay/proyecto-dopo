@@ -117,7 +117,7 @@ public class Lid extends Elements
     
     /**
      * this method we use to make extensible the tower
-     * recives de number of a lid and it decides if the the push
+     *  number of a lid and it decides if the the push
      * 
      */
     @Override

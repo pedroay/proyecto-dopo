@@ -233,6 +233,9 @@ public abstract class Elements {
      */
     public abstract void setInside(Elements element);
     
+    /**
+     * Marks this cup as covered and makes its cover lid visible.
+     */
     public abstract void cover();
 
     public boolean isCanIn(){
@@ -329,23 +332,47 @@ public abstract class Elements {
     public void setIsCrazy(final boolean value) {
         isCrazy = value;
     }
-
+    
+    /**
+     * return if a element is fearful
+     * @return
+     */
     public boolean thisIsFearful() {
         return isFearful;
     }
-
-    public final void setIsFearful(boolean value) {
+    
+    /**
+     * set if a element is a fearful
+     * @param value
+     */
+    public final void setIsFearful(final boolean value) {
         isFearful = value;
     }
 
-    public final void setNotQuitablePosition(int i){
-        notQuitablePosition.add(i);
+    /**
+     * Adds a position to the list of positions where this element cannot be removed.
+     *
+     * @param i The position index to be added.
+     */
+    public final void setNotQuitablePosition(final int position){
+        notQuitablePosition.add(position);
     }
 
-    public boolean isNotQuitablePosition(int i){
-        return notQuitablePosition.contains(i);
+    /**
+     * Checks if the element cannot be removed from a specific position.
+     *
+     * @param i The position index to check.
+     * @return true if the position is in the not quitable list, false otherwise.
+     */
+    public boolean isNotQuitablePosition(final int position){
+        return notQuitablePosition.contains(position);
     }
 
+    /**
+     * Retrieves the list of positions where the element cannot be removed.
+     *
+     * @return A list containing the not quitable positions.
+     */
     public List<Integer> getNotQuitablePosition(){
         return notQuitablePosition;
     }
@@ -354,15 +381,30 @@ public abstract class Elements {
         return isBox;
     }
 
-    public final void setIsBox(boolean value) {
+    /**
+     * Sets whether this element functions as a Box.
+     *
+     * @param value true if the element is a Box, false otherwise.
+     */
+    public final void setIsBox(final boolean value) {
         isBox = value;
     }
 
+    /**
+     * Checks if this element is currently inside a Box.
+     *
+     * @return true if the element is enclosed in a Box, false otherwise.
+     */
     public boolean thisIsInABox() {
         return isInABox;
     }
 
-    public void setIsInABox(boolean value) {
+    /**
+     * Sets the state indicating whether this element is inside a Box.
+     *
+     * @param value true if the element is inside a Box, false otherwise.
+     */
+    public void setIsInABox(final boolean value) {
         isInABox = value;
     }
 }

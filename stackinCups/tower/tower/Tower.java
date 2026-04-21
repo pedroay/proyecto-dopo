@@ -5,53 +5,73 @@ import javax.swing.JOptionPane;
 
 
 /**
-* Write a description of class Tower here.
-* 
-* @author (your name) 
-* @version (a version number or a date)
-*/
-    public class Tower
-    {
+ * The Tower class represents the core simulation environment where Elements 
+ * (such as Cups and Lids) are stacked according to specific physical rules.
+ * It manages the structural integrity, positioning, and validation of 
+ * all elements contained within the tower.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Tower {
+    /** The overall width of the tower canvas. */
     private int width;
+    
+    /** The current calculated height of the complete tower. */
     private int height;
+    
+    /** The maximum allowed height or vertical capacity of the tower. */
     private int maxHeight;
+    
+    /** Indicates whether the tower visually exists or is displayed on the canvas. */
     private boolean isVisible;
-    private Stack<Cup> cups;
-    private Stack<Lid> lids;
-    private Stack<Elements> objects;
+    
+    /** Collection tracking all Cup elements currently in the tower. */
+    private final Stack<Cup> cups;
+    
+    /** Collection tracking all Lid elements currently in the tower. */
+    private final Stack<Lid> lids;
+    
+    /** Comprehensive collection of all elements in the tower, ordered by insertion. */
+    private final Stack<Elements> objects;
+    
+    /** State flag indicating if the tower's last operation completed 
+     * successfully without errors. */
     private boolean isOK;
+    
+    /** Reference to the topmost Element currently placed in the tower. */
     private Elements top;
     /**
      * Constructs a new Tower with the specified width and maximum height.
-     *
      * The tower is initialized as not visible, with empty stacks of cups
      * and lids. The initial state of the tower is considered valid (isOK = true).
-     *
      * @param nwidth     The width of the tower
      * @param nmaxHeight The maximum allowed height of the tower
      */
-    public Tower(int nwidth, int nmaxHeight){
+    public Tower(final int nwidth, final int nmaxHeight){
         width = nwidth;
         maxHeight = nmaxHeight;
         isVisible = false;
-        cups = new Stack<Cup>();
-        lids = new Stack<Lid>();
-        objects = new Stack<Elements>();
+        cups = new Stack<>();
+        lids = new Stack<>();
+        objects = new Stack<>();
         isOK = true;
     }
     
     /**
-     * constructs a new tower with the specified number of cups which thie number will increase
+     * constructs a new tower with the specified
+     *  number of cups 
+     * which thie number will increase
      * in odd numbers "1,3,5,.."
      * 
-     * @param i number of cups tha will have the new tower
+     * @param number number of cups tha will have the new tower
      */
-    public Tower(int i) {
-        cups = new Stack<Cup>();
-        lids = new Stack<Lid>();
-        objects = new Stack<Elements>();
+    public Tower(final int number) {
+        cups = new Stack<>();
+        lids = new Stack<>();
+        objects = new Stack<>();
         isVisible = false;
-        for(int j= 1; j <=i; j ++){
+        for(int j= 1; j <=number; j ++){
             pushCup(j);
         }
         isOK = true;
@@ -59,36 +79,35 @@ import javax.swing.JOptionPane;
     
     /**
      * Adds a cup to the top of the element tower.
-     *
      * This method validates that the provided ID is positive and unique. 
-     * If the tower is empty, the cup becomes the new top. If the tower contains elements, 
-     * the method determines whether to place the cup inside the current top (if the top 
+     * If the tower is empty, the cup becomes the new top.
+     *  If the tower contains elements, 
+     * the method determines whether to place the cup inside
+     *  the current top (if the top 
      * is a larger cup) or above it (if the new cup is larger or the top is a lid).
-     * 
-     *
      * @param i The identification number (and size) of the cup to be added. 
      * Must be a unique positive integer.
      * @return This method does not return a value (void), but it updates the 
-     * {@code isOK} flag to true upon successful execution, or false if an error occurs.
+     * {@code isOK} flag to true upon successful execution, 
+     * or false if an error occurs.
      */
-    public void pushCup(int i){
-        if(cupInTower(i))return;   
-        Cup newCup;
-        if(isInLids(i)){
-            newCup = findCupByNumberOfLid(i);
+    public final void pushCup(final int number){
+        if(cupInTower(number)){return;   }
+        final Cup newCup;
+        if(isInLids(number)){
+            newCup = findCupByNumberOfLid(number);
         }else{
-            newCup = new Cup(i,this);
+            newCup = new Cup(number,this);
         }
         if(top == null){
             top = newCup;
             cups.push(newCup);
             objects.push(newCup);
             isOK = true;
-            return;
         }
         else{
-            int sizeTop = top.getWidth();
-            int sizeNewCup = newCup.getWidth();
+            final int sizeTop = top.getWidth();
+            final int sizeNewCup = newCup.getWidth();
             if (sizeTop > sizeNewCup && top.isCanIn()){
                 setInside((Cup)top,newCup);
                 cups.push(newCup);
@@ -116,7 +135,8 @@ import javax.swing.JOptionPane;
      * that store the tower elements and cups. The removed cup is also made invisible.
      *
      * After removal, the method updates all references in the remaining elements:
-     * - If any element had the removed cup as its inner element, the reference is cleared.
+     * - If any element had the removed cup as its inner element, the reference
+     *  is cleared.
      * - If any element had the removed cup above it, that reference is also cleared.
      *
      * Finally, the method recalculates the top element of the tower based on the
@@ -126,12 +146,8 @@ import javax.swing.JOptionPane;
      * accordingly. Otherwise, the state flag {@code isOK} is set to {@code false}.
      */
     public void popCup(){
-        if(!objects.get(objects.size()-1).getType().equals("cup")){
-            if(isVisible)showError();
-            isOK = false;
-        }
-        else{
-            Elements  popeado = objects.get(objects.size()-1);
+        if("cup".equals(objects.get(objects.size()-1).getType())){
+        	Elements  popeado = objects.get(objects.size()-1);
             objects.remove(popeado);
             cups.remove(popeado);
             top = null;
@@ -140,9 +156,14 @@ import javax.swing.JOptionPane;
                 if(o.getInside() != null && o.getInside().getNumber() == popeado.getNumber())o.setInside(null);
                 if(o.getAbove() != null && o.getAbove().getNumber() == popeado.getNumber())o.setAbove(null);
                 setNewTop(o);
-            }
-        }
-    }    
+            if(isVisible)showError();
+            isOK = false;}}
+        else{
+        	 if(isVisible)showError();
+             isOK = false;}}
+    
+
+       
     
     
     /**
@@ -158,23 +179,23 @@ import javax.swing.JOptionPane;
      *
      * @param i the identifier (number) of the cup to be removed from the tower
      */
-    public void removeCup(int i){
-    if(objects.isEmpty() || !isInElements(i,"cup") ){
+    public void removeCup(int number){
+    if(objects.isEmpty() || !isInElements(number,"cup") ){
         if(isVisible)showError();
         isOK = false;
     }
     else{
-        Elements a = findCupByNumber(i);
+        Elements a = findCupByNumber(number);
         makeInvisible();
         objects.remove(a);
         cups.remove(a);
         top = null;
-        Stack<Elements> temp = new Stack();
+        Stack<Elements> temp = new Stack<>();
         temp.addAll(objects);
         objects.clear();
         cups.clear();
         lids.clear();
-        for(Elements o:temp){
+        for(final Elements o:temp){
             o.setInside(null);
             o.setAbove(null);
             push(o);
@@ -182,8 +203,8 @@ import javax.swing.JOptionPane;
     }
     }
     
-    private void push(Elements e){
-        e.push(e.getNumber());
+    private void push(final Elements element){
+        element.push(element.getNumber());
     }
     
     /**
@@ -204,8 +225,10 @@ import javax.swing.JOptionPane;
      * of the current top element with the width of the new lid in order to
      * determine how it should be placed:
      * If the top element is wider and it is a cup, the lid is placed inside it.
-     * If the new lid is wider or equal in width, it is placed above the current top element.
-     * If the top element is a lid and wider than the new lid, the new lid is stacked above it.         * 
+     * If the new lid is wider or equal in width,
+     *  it is placed above the current top element.
+     * If the top element is a lid and wider than
+     *  the new lid, the new lid is stacked above it.         * 
      *
      * When a lid is placed above its corresponding cup (same identifier),
      * the cup is marked as covered by that lid.
@@ -215,8 +238,8 @@ import javax.swing.JOptionPane;
      *
      * @param i the identifier (number) of the lid to be added to the tower
      */
-    public void pushLid(int i) {
-        if (isInElements(i, "lid") || i <= 0) {
+    public void pushLid(final int number) {
+        if (isInElements(number, "lid") || number <= 0) {
             isOK = false;
             if (isVisible) {
                 showError();
@@ -224,11 +247,11 @@ import javax.swing.JOptionPane;
             return;
         }
     
-        Lid newLid;        
-        if (isInCups(i)) {
-            newLid = findLidByNumberOfCup(i);
+        final Lid newLid;        
+        if (isInCups(number)) {
+            newLid = findLidByNumberOfCup(number);
         } else {
-            newLid = new Lid(i,this);
+            newLid = new Lid(number,this);
         }
         if (top == null) {
             top = newLid;
@@ -540,7 +563,7 @@ import javax.swing.JOptionPane;
             isOK = false;
             return;
         }
-        Stack<Elements> temp = new Stack();
+        Stack<Elements> temp = new Stack<>();
         temp.addAll(objects);
         objects.clear();
         cups.clear();
@@ -720,7 +743,7 @@ import javax.swing.JOptionPane;
      * @return     {@code true} if an element matching both the identifier and type is found; 
      *             {@code false} otherwise.
      */
-    public boolean isInElements(int i,String tipo){
+    public final boolean isInElements(int i,String tipo){
         for(Elements e : objects){
             if(e.getNumber() == i && e.getType().equals(tipo)){
                 return true;
@@ -775,7 +798,7 @@ import javax.swing.JOptionPane;
      * @return  The {@code Cup} associated with the specified lid, or {@code null}
      *          if no such lid is found or if it does not have an associated cup.
      */
-    public Cup findCupByNumberOfLid(int i) {
+    public final Cup findCupByNumberOfLid(int i) {
         for (Lid l : lids) {
             if (l.getNumber() == i) {
                 return l.getHisCup();
@@ -928,7 +951,7 @@ import javax.swing.JOptionPane;
     /**
      * dice si una copa esta o no en la torres
      */
-    private boolean cupInTower(int i){
+    private final boolean cupInTower(int i){
         boolean is = false;
         if(isInElements(i,"cup") ||i <=0){
             isOK = false;
@@ -988,8 +1011,8 @@ import javax.swing.JOptionPane;
             
     private Cup createElement(String type, int number) {
         int height = height();
-        double heightBox = (height +10) / 20.0;
-        int heightBox = (int) Math.ceil(heightBox);
+        double nheight = (height +10) / 20.0;
+        int heightBox = (int) Math.ceil(nheight);
         switch (type) {
             case "opener": return new Opener(number, this);
             case "cup": return new Cup(number, this);
@@ -1070,21 +1093,19 @@ import javax.swing.JOptionPane;
         else if(element.thisIsFearful()){
             validateFearful((Lid) element);
         }
-        else if(element.thisIsBox()){
+        else if(element.getIsBox()){
             validateBox((Box) element);
         }
     }
 
     private void validateBox(Box box){
-        if (box == null || !box.thisIsBox()) return;
-        objects.remove(element);
-        if (element.getType().equals("cup")) {
-            cups.remove(element);
-        } else {
-            lids.remove(element);
-        }
+        if (box == null || !box.getIsBox()) return;
+        objects.remove(box);
+        if ("cup".equals(box.getType())) {
+            cups.remove(box);
+        
 
-        box.createHisLid()
+        box.createHisLid();
         reverseTower();
         push(box);
         reverseTower();
@@ -1095,10 +1116,7 @@ import javax.swing.JOptionPane;
                 e.setQuitable(false);
             }
         }
-
-
-
-        
+       }
     }
 
     /**
@@ -1224,11 +1242,7 @@ import javax.swing.JOptionPane;
         }
     }
     
-    private void relocateCrazy(Lid Lid){
-        if (Lid != null && Lid.thisIsCrazy()) {
-            crazyElement(Lid);
-        }
-    }
+    
     
     /**
      * Adds a customized lid of the specified type to the tower.

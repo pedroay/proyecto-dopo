@@ -30,15 +30,14 @@ public class LidTest {
     @Test
     public void deberiaCrearTapaConCupAsociada() {
         Cup copa = new Cup(3, torre);
-        Lid tapa = new Lid(3, copa);
-        
+        Lid tapa = new Lid(3, copa,copa.getColor(),copa.getTower());        
         assertEquals(copa, tapa.getHisCup());
     }
     
     @Test
     public void deberiaTenerElMismoColorQueSuCopa() {
         Cup copa = new Cup(3, torre);
-        Lid tapa = new Lid(3, copa);
+        Lid tapa = new Lid(3, copa,copa.getColor(),copa.getTower());
         
         assertEquals(copa.getColor(), tapa.getColor());
     }
@@ -46,7 +45,7 @@ public class LidTest {
     @Test
     public void deberiaTenerElMismoNumeroQueSuCopa() {
         Cup copa = new Cup(3, torre);
-        Lid tapa = new Lid(3, copa);
+        Lid tapa = new Lid(3, copa,copa.getColor(),copa.getTower());
         
         assertEquals(copa.getNumber(), tapa.getNumber());
     }
@@ -54,7 +53,7 @@ public class LidTest {
     @Test
     public void deberiaFallarSiEstadoInicialNoEsNormal() {
         Cup copa = new Cup(3, torre);
-        Lid tapa = new Lid(3, copa);
+        Lid tapa = new Lid(3, copa,copa.getColor(),copa.getTower());
         
         assertEquals("normal", tapa.getState());
     }
@@ -62,7 +61,7 @@ public class LidTest {
     @Test
     public void deberiaCambiarEstado() {
         Cup copa = new Cup(3, torre);
-        Lid tapa = new Lid(3, copa);
+        Lid tapa = new Lid(3, copa,copa.getColor(),copa.getTower());
         tapa.setState("fearful");
         
         assertEquals("fearful", tapa.getState());

@@ -421,6 +421,7 @@ public class TowerTest {
         tower.pushCup(2);
         tower.pushCup(3);
         tower.pushCup("box", 4);
+        Lid 
         assertTrue(tower.isInElements(4, "cup"));
     }
 
@@ -442,7 +443,7 @@ public class TowerTest {
         for (Elements e : tower.getObjects()) {
             if (!e.getIsBox()) {
                 assertTrue("Element " + e.getNumber() + " should be marked isInABox",
-                    e.isInABox());
+                    e.thisIsInABox());
             }
         }
     }
@@ -456,7 +457,7 @@ public class TowerTest {
         for (Elements e : tower.getObjects()) {
             if (!e.getIsBox()) {
                 assertFalse("Element " + e.getNumber() + " should not be quitable",
-                    e.isQuitable());
+                    e.thisIsQuitable());
             }
         }
     }

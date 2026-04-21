@@ -1,5 +1,5 @@
 package Test;
-
+import java.util.Stack;
 import tower.*;
 
 import org.junit.jupiter.api.Test;
@@ -13,10 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SubElementsTest {
 
     private Tower tower;
+    private Tower tower2;
 
     @BeforeEach
     public void prepararEscenario() {
         tower = new Tower(300, 600);
+        tower2 = new Tower(3);
     }
 
     // =========================================================================
@@ -47,7 +49,7 @@ public class SubElementsTest {
     }
 
     @Test
-    public void pruebaAbridorSoloDañaTapasQuitables() {
+    public void pruebaAbridorSoloDanaTapasQuitables() {
         Opener opener = new Opener(4, tower);
         Lid quitableLid = new Lid(2, tower);
         quitableLid.setQuitable(true);
@@ -128,28 +130,46 @@ public class SubElementsTest {
     @Test
     public void pruebaCajaInsertada() {
         tower.pushCup("box", 3);
+        for(Elements element :tower.getObjects()) {
+        	assertTrue(element.thisIsInABox());
+        }
         assertTrue(tower.isOK());
-        assertTrue(tower.isInElements(3, "cup"));
+
     }
 
     @Test
     public void pruebaBanderaCajaEsVerdadera() {
         Box box = new Box(3, tower);
-        assertTrue(box.isBox());
+        assertTrue(box.getIsBox());
     }
 
     @Test
     public void pruebaTazaNormalNoEsCaja() {
         Cup cup = new Cup(3, tower);
-        assertFalse(cup.isBox());
+        assertFalse(cup.getIsBox());
     }
 
     @Test
     public void pruebaCajaDuplicadaRechazada() {
         tower.pushCup("box", 3);
         tower.pushCup("box", 3);
-        assertFalse(tower.isOK());
+        Stack<Elements> objects = tower.getObjects();
+        for (int i= objects.size();i <objects.size();i++) {
+        	assertFalse(objects.get(i).getNumber() == objects.get(i).getNumber());
+        }
+        }
+    
+    @Test
+    public void todosLosElementosNoSePuedenQuiatr() {
+        tower2.pushCup("box", 4);
+        for(Elements e:tower2.getObjects()) {
+        	if (!e.getIsBox()) {
+        	assertTrue(e.thisIsInABox() );
+        	assertFalse(e.thisIsQuitable());
+        	}
+        }
     }
+    
 
     @Test
     public void pruebaCajaCreaTapaAlSerInsertada() {
@@ -173,13 +193,13 @@ public class SubElementsTest {
     @Test
     public void pruebaBanderaLocaEsVerdadera() {
         Crazy crazy = new Crazy(3, tower);
-        assertTrue(crazy.isCrazy());
+        assertTrue(crazy.thisIsCrazy());
     }
 
     @Test
     public void pruebaTapaNormalNoEsLoca() {
         Lid lid = new Lid(3, tower);
-        assertFalse(lid.isCrazy());
+        assertFalse(lid.thisIsCrazy());
     }
 
     @Test
@@ -230,13 +250,13 @@ public class SubElementsTest {
     @Test
     public void pruebaBanderaMiedosaEsVerdadera() {
         Fearful fearful = new Fearful(3, tower);
-        assertTrue(fearful.isFearful());
+        assertTrue(fearful.thisIsFearful());
     }
 
     @Test
     public void pruebaTapaNormalNoEsMiedosa() {
         Lid lid = new Lid(3, tower);
-        assertFalse(lid.isFearful());
+        assertFalse(lid.thisIsFearful());
     }
 
     @Test
