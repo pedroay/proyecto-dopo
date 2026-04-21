@@ -1,0 +1,1151 @@
+Shapes/Shapes/Canvas.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Shapes/Shapes/Canvas.java:7:	CommentSize:	CommentSize: Comment is too large: Too many lines
+Shapes/Shapes/Canvas.java:17:	ClassWithOnlyPrivateConstructorsShouldBeFinal:	ClassWithOnlyPrivateConstructorsShouldBeFinal: This class has only private constructors and may be final
+Shapes/Shapes/Canvas.java:23:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:29:	NonThreadSafeSingleton:	NonThreadSafeSingleton: Singleton is not thread safe
+Shapes/Shapes/Canvas.java:39:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:39:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+Shapes/Shapes/Canvas.java:39:	ImmutableField:	ImmutableField: Field 'frame' may be declared final
+Shapes/Shapes/Canvas.java:40:	AvoidFieldNameMatchingTypeName:	AvoidFieldNameMatchingTypeName: It is somewhat confusing to have a field name matching the declaring class name
+Shapes/Shapes/Canvas.java:40:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:40:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+Shapes/Shapes/Canvas.java:40:	ImmutableField:	ImmutableField: Field 'canvas' may be declared final
+Shapes/Shapes/Canvas.java:41:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:41:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+Shapes/Shapes/Canvas.java:42:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:42:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+Shapes/Shapes/Canvas.java:42:	ImmutableField:	ImmutableField: Field 'backgroundColour' may be declared final
+Shapes/Shapes/Canvas.java:43:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:43:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+Shapes/Shapes/Canvas.java:44:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:44:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+Shapes/Shapes/Canvas.java:44:	ImmutableField:	ImmutableField: Field 'objects' may be declared final
+Shapes/Shapes/Canvas.java:45:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:45:	FieldDeclarationsShouldBeAtStartOfClass:	FieldDeclarationsShouldBeAtStartOfClass: Fields should be declared at the top of the class, before any method declarations, constructors, initializers or inner classes.
+Shapes/Shapes/Canvas.java:45:	ImmutableField:	ImmutableField: Field 'shapes' may be declared final
+Shapes/Shapes/Canvas.java:45:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'HashMap'; use the interface instead
+Shapes/Shapes/Canvas.java:54:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'bgColour' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:54:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'height' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:54:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'title' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:54:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'width' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:62:	UseDiamondOperator:	UseDiamondOperator: Explicit type arguments can be replaced by a diamond: `new ArrayList<>()`
+Shapes/Shapes/Canvas.java:63:	UseDiamondOperator:	UseDiamondOperator: Explicit type arguments can be replaced by a diamond: `new HashMap<>()`
+Shapes/Shapes/Canvas.java:73:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'visible' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:77:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'size' could be declared final
+Shapes/Shapes/Canvas.java:79:	LawOfDemeter:	LawOfDemeter: Call to `getGraphics` on foreign value `canvasImage` (degree 1)
+Shapes/Shapes/Canvas.java:96:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'color' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:96:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'referenceObject' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:96:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'shape' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:107:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'referenceObject' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:117:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'colorString' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:118:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+Shapes/Shapes/Canvas.java:119:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Shapes/Shapes/Canvas.java:120:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+Shapes/Shapes/Canvas.java:121:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Shapes/Shapes/Canvas.java:122:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+Shapes/Shapes/Canvas.java:123:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Shapes/Shapes/Canvas.java:124:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+Shapes/Shapes/Canvas.java:125:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Shapes/Shapes/Canvas.java:126:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+Shapes/Shapes/Canvas.java:127:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Shapes/Shapes/Canvas.java:128:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+Shapes/Shapes/Canvas.java:129:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Shapes/Shapes/Canvas.java:130:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+Shapes/Shapes/Canvas.java:131:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Shapes/Shapes/Canvas.java:133:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Shapes/Shapes/Canvas.java:142:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'milliseconds' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:144:	DoNotUseThreads:	DoNotUseThreads: To be compliant to J2EE, a webapp should not use any thread.
+Shapes/Shapes/Canvas.java:145:	AvoidCatchingGenericException:	AvoidCatchingGenericException: Avoid catching Exception in try-catch block
+Shapes/Shapes/Canvas.java:145:	EmptyCatchBlock:	EmptyCatchBlock: Avoid empty catch blocks
+Shapes/Shapes/Canvas.java:155:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+Shapes/Shapes/Canvas.java:155:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'i' could be declared final
+Shapes/Shapes/Canvas.java:165:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'original' could be declared final
+Shapes/Shapes/Canvas.java:167:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'size' could be declared final
+Shapes/Shapes/Canvas.java:178:	AtLeastOneConstructor:	AtLeastOneConstructor: Each class should declare at least one constructor
+Shapes/Shapes/Canvas.java:178:	ClassWithOnlyPrivateConstructorsShouldBeFinal:	ClassWithOnlyPrivateConstructorsShouldBeFinal: This class has only private constructors and may be final
+Shapes/Shapes/Canvas.java:178:	MissingSerialVersionUID:	MissingSerialVersionUID: Classes implementing Serializable should set a serialVersionUID
+Shapes/Shapes/Canvas.java:179:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'g' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:179:	MissingOverride:	MissingOverride: The method 'paint(Graphics)' is missing an @Override annotation.
+Shapes/Shapes/Canvas.java:179:	ShortVariable:	ShortVariable: Avoid variables with short names like g
+Shapes/Shapes/Canvas.java:190:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:190:	ImmutableField:	ImmutableField: Field 'shape' may be declared final
+Shapes/Shapes/Canvas.java:191:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Canvas.java:191:	ImmutableField:	ImmutableField: Field 'colorString' may be declared final
+Shapes/Shapes/Canvas.java:193:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Shapes/Shapes/Canvas.java:193:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'color' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:193:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'shape' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:193:	PublicMemberInNonPublicType:	PublicMemberInNonPublicType: Public member 'ShapeDescription' declared in a non-public type
+Shapes/Shapes/Canvas.java:198:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Shapes/Shapes/Canvas.java:198:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'graphic' is not assigned and could be declared final
+Shapes/Shapes/Canvas.java:198:	PublicMemberInNonPublicType:	PublicMemberInNonPublicType: Public member 'draw' declared in a non-public type
+Shapes/Shapes/Circle.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Shapes/Shapes/Circle.java:4:	CommentSize:	CommentSize: Comment is too large: Too many lines
+Shapes/Shapes/Circle.java:17:	ShortVariable:	ShortVariable: Avoid variables with short names like PI
+Shapes/Shapes/Circle.java:19:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Circle.java:24:	CallSuperInConstructor:	CallSuperInConstructor: It is a good practice to call super() in a constructor
+Shapes/Shapes/Circle.java:41:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'newDiameter' is not assigned and could be declared final
+Shapes/Shapes/Circle.java:62:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'canvas' could be declared final
+Shapes/Shapes/Circle.java:75:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'canvas' could be declared final
+Shapes/Shapes/Rectangle.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Shapes/Shapes/Rectangle.java:2:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.awt.*'
+Shapes/Shapes/Rectangle.java:4:	CommentSize:	CommentSize: Comment is too large: Too many lines
+Shapes/Shapes/Rectangle.java:19:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Rectangle.java:20:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Rectangle.java:21:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Rectangle.java:30:	CallSuperInConstructor:	CallSuperInConstructor: It is a good practice to call super() in a constructor
+Shapes/Shapes/Rectangle.java:42:	CallSuperInConstructor:	CallSuperInConstructor: It is a good practice to call super() in a constructor
+Shapes/Shapes/Rectangle.java:42:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'per' is not assigned and could be declared final
+Shapes/Shapes/Rectangle.java:56:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'mirror' could be declared final
+Shapes/Shapes/Rectangle.java:71:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'newHeight' is not assigned and could be declared final
+Shapes/Shapes/Rectangle.java:71:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'newWidth' is not assigned and could be declared final
+Shapes/Shapes/Rectangle.java:83:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'z' is not assigned and could be declared final
+Shapes/Shapes/Rectangle.java:83:	ShortVariable:	ShortVariable: Avoid variables with short names like z
+Shapes/Shapes/Rectangle.java:84:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as '-' in if statements
+Shapes/Shapes/Rectangle.java:86:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as '+' in if statements
+Shapes/Shapes/Rectangle.java:96:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'position' is not assigned and could be declared final
+Shapes/Shapes/Rectangle.java:96:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'times' is not assigned and could be declared final
+Shapes/Shapes/Rectangle.java:98:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'minimoves' could be declared final
+Shapes/Shapes/Rectangle.java:140:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'canvas' could be declared final
+Shapes/Shapes/Rectangle.java:152:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'canvas' could be declared final
+Shapes/Shapes/ShapeFigure.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Shapes/Shapes/ShapeFigure.java:3:	CommentSize:	CommentSize: Comment is too large: Too many lines
+Shapes/Shapes/ShapeFigure.java:14:	TooManyMethods:	TooManyMethods: This class has too many methods, consider refactoring it.
+Shapes/Shapes/ShapeFigure.java:18:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/ShapeFigure.java:19:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/ShapeFigure.java:20:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/ShapeFigure.java:21:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/ShapeFigure.java:50:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nPosx' is not assigned and could be declared final
+Shapes/Shapes/ShapeFigure.java:55:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nPosy' is not assigned and could be declared final
+Shapes/Shapes/ShapeFigure.java:64:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nPosx' is not assigned and could be declared final
+Shapes/Shapes/ShapeFigure.java:64:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'nPosy' is not assigned and could be declared final
+Shapes/Shapes/ShapeFigure.java:121:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'distance' is not assigned and could be declared final
+Shapes/Shapes/ShapeFigure.java:131:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'distance' is not assigned and could be declared final
+Shapes/Shapes/ShapeFigure.java:146:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'delta' could be declared final
+Shapes/Shapes/ShapeFigure.java:149:	AvoidReassigningParameters:	AvoidReassigningParameters: Avoid reassigning parameters such as 'distance'
+Shapes/Shapes/ShapeFigure.java:164:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'delta' could be declared final
+Shapes/Shapes/ShapeFigure.java:167:	AvoidReassigningParameters:	AvoidReassigningParameters: Avoid reassigning parameters such as 'distance'
+Shapes/Shapes/ShapeFigure.java:182:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'newColor' is not assigned and could be declared final
+Shapes/Shapes/Triangle.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Shapes/Shapes/Triangle.java:4:	CommentSize:	CommentSize: Comment is too large: Too many lines
+Shapes/Shapes/Triangle.java:19:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Triangle.java:20:	CommentRequired:	CommentRequired: Field comments are required
+Shapes/Shapes/Triangle.java:25:	CallSuperInConstructor:	CallSuperInConstructor: It is a good practice to call super() in a constructor
+Shapes/Shapes/Triangle.java:40:	CallSuperInConstructor:	CallSuperInConstructor: It is a good practice to call super() in a constructor
+Shapes/Shapes/Triangle.java:40:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'height' is not assigned and could be declared final
+Shapes/Shapes/Triangle.java:40:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'width' is not assigned and could be declared final
+Shapes/Shapes/Triangle.java:57:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'newHeight' is not assigned and could be declared final
+Shapes/Shapes/Triangle.java:57:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'newWidth' is not assigned and could be declared final
+Shapes/Shapes/Triangle.java:84:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'canvas' could be declared final
+Shapes/Shapes/Triangle.java:85:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'xpoints' could be declared final
+Shapes/Shapes/Triangle.java:86:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'ypoints' could be declared final
+Shapes/Shapes/Triangle.java:98:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'canvas' could be declared final
+Test/Test/LidTest.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Test/Test/LidTest.java:8:	AtLeastOneConstructor:	AtLeastOneConstructor: Each class should declare at least one constructor
+Test/Test/LidTest.java:8:	CommentRequired:	CommentRequired: Class comments are required
+Test/Test/LidTest.java:8:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/LidTest.java:10:	CommentRequired:	CommentRequired: Field comments are required
+Test/Test/LidTest.java:13:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/LidTest.java:18:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/LidTest.java:19:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+Test/Test/LidTest.java:23:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/LidTest.java:23:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/LidTest.java:27:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/LidTest.java:31:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/LidTest.java:31:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/LidTest.java:32:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'copa' could be declared final
+Test/Test/LidTest.java:33:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tapa' could be declared final
+Test/Test/LidTest.java:34:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/LidTest.java:38:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/LidTest.java:38:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/LidTest.java:39:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'copa' could be declared final
+Test/Test/LidTest.java:40:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tapa' could be declared final
+Test/Test/LidTest.java:42:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/LidTest.java:46:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/LidTest.java:46:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/LidTest.java:47:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'copa' could be declared final
+Test/Test/LidTest.java:48:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tapa' could be declared final
+Test/Test/LidTest.java:50:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/LidTest.java:54:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/LidTest.java:54:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/LidTest.java:55:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'copa' could be declared final
+Test/Test/LidTest.java:56:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tapa' could be declared final
+Test/Test/LidTest.java:58:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/LidTest.java:62:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/LidTest.java:62:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/LidTest.java:63:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'copa' could be declared final
+Test/Test/LidTest.java:64:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tapa' could be declared final
+Test/Test/LidTest.java:67:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Test/Test/SubElementsTest.java:13:	AtLeastOneConstructor:	AtLeastOneConstructor: Each class should declare at least one constructor
+Test/Test/SubElementsTest.java:13:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:13:	TooManyMethods:	TooManyMethods: This class has too many methods, consider refactoring it.
+Test/Test/SubElementsTest.java:15:	CommentRequired:	CommentRequired: Field comments are required
+Test/Test/SubElementsTest.java:19:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:29:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:29:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:29:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:30:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "opener" appears 7 times in this file; the first occurrence is on line 28
+Test/Test/SubElementsTest.java:31:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:32:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "cup" appears 7 times in this file; the first occurrence is on line 30
+Test/Test/SubElementsTest.java:32:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:36:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:36:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:36:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:40:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:41:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "lid" appears 9 times in this file; the first occurrence is on line 39
+Test/Test/SubElementsTest.java:41:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:45:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:45:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:48:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:52:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:52:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:52:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:53:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'opener' could be declared final
+Test/Test/SubElementsTest.java:54:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'quitableLid' could be declared final
+Test/Test/SubElementsTest.java:56:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'nonQuitableLid' could be declared final
+Test/Test/SubElementsTest.java:59:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:60:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:64:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:64:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:65:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'opener' could be declared final
+Test/Test/SubElementsTest.java:66:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cup' could be declared final
+Test/Test/SubElementsTest.java:67:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:75:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:75:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:75:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:76:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "hierarchical" appears 4 times in this file; the first occurrence is on line 74
+Test/Test/SubElementsTest.java:77:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:78:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:82:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:82:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:82:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:86:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:87:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:91:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:91:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:91:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:94:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:95:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:99:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:99:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:99:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:100:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'h' could be declared final
+Test/Test/SubElementsTest.java:100:	ShortVariable:	ShortVariable: Avoid variables with short names like h
+Test/Test/SubElementsTest.java:101:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'smallQuitable' could be declared final
+Test/Test/SubElementsTest.java:103:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'smallNonQuitable' could be declared final
+Test/Test/SubElementsTest.java:105:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'largerCup' could be declared final
+Test/Test/SubElementsTest.java:108:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:109:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:110:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:114:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:114:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:114:	MethodNamingConventions:	MethodNamingConventions: The JUnit 5 test method name 'pruebaJerarquicoNoPuedeDañar' doesn't match '[a-z][a-zA-Z0-9]*'
+Test/Test/SubElementsTest.java:115:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'h' could be declared final
+Test/Test/SubElementsTest.java:115:	ShortVariable:	ShortVariable: Avoid variables with short names like h
+Test/Test/SubElementsTest.java:116:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'lid' could be declared final
+Test/Test/SubElementsTest.java:117:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:121:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:121:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:122:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'h' could be declared final
+Test/Test/SubElementsTest.java:122:	ShortVariable:	ShortVariable: Avoid variables with short names like h
+Test/Test/SubElementsTest.java:123:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:131:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:131:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:131:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:138:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:139:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:143:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:143:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:144:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'box' could be declared final
+Test/Test/SubElementsTest.java:145:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:149:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:149:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:150:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cup' could be declared final
+Test/Test/SubElementsTest.java:151:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:155:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:155:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:158:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'objects' could be declared final
+Test/Test/SubElementsTest.java:158:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+Test/Test/SubElementsTest.java:160:	SimplifiableTestAssertion:	SimplifiableTestAssertion: Assertion may be simplified using assertNotEquals
+Test/Test/SubElementsTest.java:160:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:178:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:178:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:181:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:189:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:189:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:189:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:191:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "crazy" appears 5 times in this file; the first occurrence is on line 173
+Test/Test/SubElementsTest.java:192:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:193:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:197:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:197:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:198:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'crazy' could be declared final
+Test/Test/SubElementsTest.java:203:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:203:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:204:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'lid' could be declared final
+Test/Test/SubElementsTest.java:209:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:209:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:209:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:213:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:214:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/SubElementsTest.java:215:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:216:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:220:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:220:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:224:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:228:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:228:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:228:	MethodNamingConventions:	MethodNamingConventions: The JUnit 5 test method name 'pruebaLocaNoDañaNiDesplaza' doesn't match '[a-z][a-zA-Z0-9]*'
+Test/Test/SubElementsTest.java:228:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:229:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'crazy' could be declared final
+Test/Test/SubElementsTest.java:230:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cup' could be declared final
+Test/Test/SubElementsTest.java:231:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:232:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:240:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:240:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:240:	MethodNamingConventions:	MethodNamingConventions: The JUnit 5 test method name 'pruebaMiedosaInsertadaConTazaCompañera' doesn't match '[a-z][a-zA-Z0-9]*'
+Test/Test/SubElementsTest.java:240:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:242:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "fearful" appears 6 times in this file; the first occurrence is on line 224
+Test/Test/SubElementsTest.java:243:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:244:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:248:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:248:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:248:	MethodNamingConventions:	MethodNamingConventions: The JUnit 5 test method name 'pruebaMiedosaRechazadaSinTazaCompañera' doesn't match '[a-z][a-zA-Z0-9]*'
+Test/Test/SubElementsTest.java:250:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:254:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:254:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:255:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'fearful' could be declared final
+Test/Test/SubElementsTest.java:256:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:260:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:260:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:261:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'lid' could be declared final
+Test/Test/SubElementsTest.java:262:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:266:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:266:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:270:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:274:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:274:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:274:	MethodNamingConventions:	MethodNamingConventions: The JUnit 5 test method name 'pruebaMiedosaNoDañaNiDesplaza' doesn't match '[a-z][a-zA-Z0-9]*'
+Test/Test/SubElementsTest.java:274:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:275:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'fearful' could be declared final
+Test/Test/SubElementsTest.java:276:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cup' could be declared final
+Test/Test/SubElementsTest.java:277:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:278:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:286:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:286:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:286:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:291:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:292:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:296:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:296:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:298:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'f' could be declared final
+Test/Test/SubElementsTest.java:298:	ShortVariable:	ShortVariable: Avoid variables with short names like f
+Test/Test/SubElementsTest.java:302:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:306:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:306:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:306:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:307:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'lid' could be declared final
+Test/Test/SubElementsTest.java:308:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'h' could be declared final
+Test/Test/SubElementsTest.java:308:	ShortVariable:	ShortVariable: Avoid variables with short names like h
+Test/Test/SubElementsTest.java:309:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:310:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:314:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:314:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:314:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:319:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:320:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:324:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/SubElementsTest.java:324:	JUnit5TestShouldBePackagePrivate:	JUnit5TestShouldBePackagePrivate: JUnit 5 tests should be package-private.
+Test/Test/SubElementsTest.java:324:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/SubElementsTest.java:329:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/SubElementsTest.java:330:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/SubElementsTest.java:331:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerAcceptanceTest.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Test/Test/TowerAcceptanceTest.java:7:	AtLeastOneConstructor:	AtLeastOneConstructor: Each class should declare at least one constructor
+Test/Test/TowerAcceptanceTest.java:7:	CommentRequired:	CommentRequired: Class comments are required
+Test/Test/TowerAcceptanceTest.java:9:	CommentRequired:	CommentRequired: Field comments are required
+Test/Test/TowerAcceptanceTest.java:12:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerAcceptanceTest.java:32:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerAcceptanceTest.java:33:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+Test/Test/TowerAcceptanceTest.java:34:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+Test/Test/TowerAcceptanceTest.java:37:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tapadas' could be declared final
+Test/Test/TowerAcceptanceTest.java:40:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'n' could be declared final
+Test/Test/TowerAcceptanceTest.java:41:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as 3 in if statements
+Test/Test/TowerAcceptanceTest.java:45:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerAcceptanceTest.java:50:	CommentSize:	CommentSize: Comment is too large: Line too long
+Test/Test/TowerAcceptanceTest.java:53:	MethodNamingConventions:	MethodNamingConventions: The JUnit 4 test method name 'debeOrdenarTorreDeМayorAMenorConTapaSobreSuCopa' doesn't match '[a-z][a-zA-Z0-9]*'
+Test/Test/TowerAcceptanceTest.java:53:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerAcceptanceTest.java:61:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerAcceptanceTest.java:62:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+Test/Test/TowerAcceptanceTest.java:63:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+Test/Test/TowerAcceptanceTest.java:65:	UnusedLocalVariable:	UnusedLocalVariable: Avoid unused local variables such as 'cup1'.
+Test/Test/TowerAcceptanceTest.java:73:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerAcceptanceTest.java:74:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 't' could be declared final
+Test/Test/TowerAcceptanceTest.java:74:	ShortVariable:	ShortVariable: Avoid variables with short names like t
+Test/Test/TowerAcceptanceTest.java:75:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerAcceptanceTest.java:76:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+Test/Test/TowerAcceptanceTest.java:77:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+Test/Test/TowerAcceptanceTest.java:79:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+Test/Test/TowerAcceptanceTest.java:89:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerAcceptanceTest.java:94:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerAcceptanceTest.java:95:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+Test/Test/TowerAcceptanceTest.java:96:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+Test/Test/TowerAcceptanceTest.java:98:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'par' could be declared final
+Test/Test/TowerAcceptanceTest.java:99:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+Test/Test/TowerAcceptanceTest.java:100:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+Test/Test/TowerAcceptanceTest.java:110:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerAcceptanceTest.java:117:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerAcceptanceTest.java:119:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+Test/Test/TowerAcceptanceTest.java:120:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+Test/Test/TowerAcceptanceTest.java:122:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tapadas' could be declared final
+Test/Test/TowerAcceptanceTest.java:123:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+Test/Test/TowerAcceptanceTest.java:124:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+Test/Test/TowerAcceptanceTest.java:126:	UnusedLocalVariable:	UnusedLocalVariable: Avoid unused local variables such as 'count'.
+Test/Test/TowerAcceptanceTest.java:127:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Test/Test/TowerAcceptanceTest.java:127:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+Test/Test/TowerAcceptanceTest.java:127:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'n' could be declared final
+Test/Test/TowerAcceptanceTest.java:135:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerAcceptanceTest.java:140:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'maxIteraciones' could be declared final
+Test/Test/TowerAcceptanceTest.java:148:	UnusedLocalVariable:	UnusedLocalVariable: Avoid unused local variables such as 'staking'.
+Test/Test/TowerContestAcceptanceTest.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Test/Test/TowerContestAcceptanceTest.java:3:	UnnecessaryImport:	UnnecessaryImport: Unused static import 'org.junit.Assert.*'
+Test/Test/TowerContestAcceptanceTest.java:4:	UnnecessaryImport:	UnnecessaryImport: Unused import 'org.junit.Before'
+Test/Test/TowerContestAcceptanceTest.java:6:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.util.Stack'
+Test/Test/TowerContestAcceptanceTest.java:7:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.util.ArrayList'
+Test/Test/TowerContestAcceptanceTest.java:8:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javax.swing.JOptionPane'
+Test/Test/TowerContestAcceptanceTest.java:17:	AtLeastOneConstructor:	AtLeastOneConstructor: Each class should declare at least one constructor
+Test/Test/TowerContestAcceptanceTest.java:19:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestAcceptanceTest.java:19:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerContestAcceptanceTest.java:20:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+Test/Test/TowerContestAcceptanceTest.java:25:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestAcceptanceTest.java:25:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerContestAcceptanceTest.java:26:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre2' could be declared final
+Test/Test/TowerContestAcceptanceTest.java:34:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestAcceptanceTest.java:34:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerContestAcceptanceTest.java:35:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+Test/Test/TowerContestAcceptanceTest.java:40:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestAcceptanceTest.java:40:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerContestAcceptanceTest.java:41:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+Test/Test/TowerContestAcceptanceTest.java:46:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestAcceptanceTest.java:46:	UnitTestShouldIncludeAssert:	UnitTestShouldIncludeAssert: This unit test should include assert() or fail()
+Test/Test/TowerContestAcceptanceTest.java:47:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre2' could be declared final
+Test/Test/TowerContestTest.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Test/Test/TowerContestTest.java:4:	UnnecessaryImport:	UnnecessaryImport: Unused import 'org.junit.Before'
+Test/Test/TowerContestTest.java:6:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.util.Stack'
+Test/Test/TowerContestTest.java:7:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.util.ArrayList'
+Test/Test/TowerContestTest.java:8:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javax.swing.JOptionPane'
+Test/Test/TowerContestTest.java:16:	AtLeastOneConstructor:	AtLeastOneConstructor: Each class should declare at least one constructor
+Test/Test/TowerContestTest.java:21:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestTest.java:22:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+Test/Test/TowerContestTest.java:23:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 's' could be declared final
+Test/Test/TowerContestTest.java:23:	ShortVariable:	ShortVariable: Avoid variables with short names like s
+Test/Test/TowerContestTest.java:24:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerContestTest.java:28:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestTest.java:29:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+Test/Test/TowerContestTest.java:30:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 's' could be declared final
+Test/Test/TowerContestTest.java:30:	ShortVariable:	ShortVariable: Avoid variables with short names like s
+Test/Test/TowerContestTest.java:31:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+Test/Test/TowerContestTest.java:31:	SimplifiableTestAssertion:	SimplifiableTestAssertion: Assertion may be simplified using assertNotEquals
+Test/Test/TowerContestTest.java:31:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerContestTest.java:35:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestTest.java:36:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+Test/Test/TowerContestTest.java:37:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 's' could be declared final
+Test/Test/TowerContestTest.java:37:	ShortVariable:	ShortVariable: Avoid variables with short names like s
+Test/Test/TowerContestTest.java:38:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerContestTest.java:42:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestTest.java:43:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+Test/Test/TowerContestTest.java:44:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 's' could be declared final
+Test/Test/TowerContestTest.java:44:	ShortVariable:	ShortVariable: Avoid variables with short names like s
+Test/Test/TowerContestTest.java:45:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerContestTest.java:49:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestTest.java:50:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+Test/Test/TowerContestTest.java:51:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 't' could be declared final
+Test/Test/TowerContestTest.java:51:	ShortVariable:	ShortVariable: Avoid variables with short names like t
+Test/Test/TowerContestTest.java:52:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerContestTest.java:56:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerContestTest.java:57:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+Test/Test/TowerContestTest.java:58:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 's' could be declared final
+Test/Test/TowerContestTest.java:58:	ShortVariable:	ShortVariable: Avoid variables with short names like s
+Test/Test/TowerContestTest.java:59:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:1:	PackageCase:	PackageCase: Package name contains upper case characters
+Test/Test/TowerTest.java:7:	UnnecessaryImport:	UnnecessaryImport: Unused import 'java.util.ArrayList'
+Test/Test/TowerTest.java:8:	UnnecessaryImport:	UnnecessaryImport: Unused import 'javax.swing.JOptionPane'
+Test/Test/TowerTest.java:10:	AtLeastOneConstructor:	AtLeastOneConstructor: Each class should declare at least one constructor
+Test/Test/TowerTest.java:10:	CommentRequired:	CommentRequired: Class comments are required
+Test/Test/TowerTest.java:10:	TooManyMethods:	TooManyMethods: This class has too many methods, consider refactoring it.
+Test/Test/TowerTest.java:12:	CommentRequired:	CommentRequired: Field comments are required
+Test/Test/TowerTest.java:15:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:20:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:20:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:26:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:26:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'a' could be declared final
+Test/Test/TowerTest.java:26:	ShortVariable:	ShortVariable: Avoid variables with short names like a
+Test/Test/TowerTest.java:27:	LawOfDemeter:	LawOfDemeter: Call to `getInside` on foreign value `a` (degree 2)
+Test/Test/TowerTest.java:27:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'b' could be declared final
+Test/Test/TowerTest.java:27:	ShortVariable:	ShortVariable: Avoid variables with short names like b
+Test/Test/TowerTest.java:28:	LawOfDemeter:	LawOfDemeter: Call to `getInside` on foreign value `b` (degree 2)
+Test/Test/TowerTest.java:28:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+Test/Test/TowerTest.java:28:	ShortVariable:	ShortVariable: Avoid variables with short names like c
+Test/Test/TowerTest.java:29:	LawOfDemeter:	LawOfDemeter: Call to `getInside` on foreign value `c` (degree 2)
+Test/Test/TowerTest.java:29:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'd' could be declared final
+Test/Test/TowerTest.java:29:	ShortVariable:	ShortVariable: Avoid variables with short names like d
+Test/Test/TowerTest.java:30:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:30:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:31:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:32:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:33:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:38:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:38:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:44:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:44:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'a' could be declared final
+Test/Test/TowerTest.java:44:	ShortVariable:	ShortVariable: Avoid variables with short names like a
+Test/Test/TowerTest.java:46:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:47:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:51:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:51:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:56:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:56:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:57:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:57:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:61:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:61:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:65:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:65:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'top' could be declared final
+Test/Test/TowerTest.java:66:	LawOfDemeter:	LawOfDemeter: Call to `getInside` on foreign value `top` (degree 2)
+Test/Test/TowerTest.java:66:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'inside' could be declared final
+Test/Test/TowerTest.java:68:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:69:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:70:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "lid" appears 14 times in this file; the first occurrence is on line 70
+Test/Test/TowerTest.java:70:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:74:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:74:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:78:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:78:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'top' could be declared final
+Test/Test/TowerTest.java:79:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'l_number' could be declared final
+Test/Test/TowerTest.java:79:	LocalVariableNamingConventions:	LocalVariableNamingConventions: The local variable name 'l_number' doesn't match '[a-z][a-zA-Z0-9]*'
+Test/Test/TowerTest.java:80:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cup' could be declared final
+Test/Test/TowerTest.java:82:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:83:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:84:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "Covered" appears 5 times in this file; the first occurrence is on line 84
+Test/Test/TowerTest.java:84:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:89:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:89:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:94:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:94:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'top' could be declared final
+Test/Test/TowerTest.java:96:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:97:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "cup" appears 20 times in this file; the first occurrence is on line 97
+Test/Test/TowerTest.java:97:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:101:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:106:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:110:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:110:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:115:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:115:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'top' could be declared final
+Test/Test/TowerTest.java:117:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:118:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:119:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:120:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:124:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:127:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:127:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'top' could be declared final
+Test/Test/TowerTest.java:128:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:132:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:138:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:138:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'top' could be declared final
+Test/Test/TowerTest.java:139:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:143:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:143:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:148:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:148:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'top' could be declared final
+Test/Test/TowerTest.java:149:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'a' could be declared final
+Test/Test/TowerTest.java:149:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+Test/Test/TowerTest.java:149:	ShortVariable:	ShortVariable: Avoid variables with short names like a
+Test/Test/TowerTest.java:150:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:151:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:156:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:156:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:161:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:161:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'top' could be declared final
+Test/Test/TowerTest.java:162:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'a' could be declared final
+Test/Test/TowerTest.java:162:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+Test/Test/TowerTest.java:162:	ShortVariable:	ShortVariable: Avoid variables with short names like a
+Test/Test/TowerTest.java:163:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:164:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:169:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:169:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:174:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:174:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'top' could be declared final
+Test/Test/TowerTest.java:175:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'a' could be declared final
+Test/Test/TowerTest.java:175:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+Test/Test/TowerTest.java:175:	ShortVariable:	ShortVariable: Avoid variables with short names like a
+Test/Test/TowerTest.java:176:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:177:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:181:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:181:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:185:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:186:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:186:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:187:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:187:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:191:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:191:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:194:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:195:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:199:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:199:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:204:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:205:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:205:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:206:	LawOfDemeter:	LawOfDemeter: Call to `getInside` on foreign value `tower.getTop()` (degree 2)
+Test/Test/TowerTest.java:206:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:206:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:210:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:210:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:213:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:214:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:214:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:218:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:218:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:223:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:224:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:224:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:225:	LawOfDemeter:	LawOfDemeter: Call to `getInside` on foreign value `tower.getTop()` (degree 2)
+Test/Test/TowerTest.java:225:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:225:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:229:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:229:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:233:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:234:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:238:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:238:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:242:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:244:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:246:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:250:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:250:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:255:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:256:	LawOfDemeter:	LawOfDemeter: Call to `getTop` on foreign value `tower` (degree 1)
+Test/Test/TowerTest.java:256:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'inside' could be declared final
+Test/Test/TowerTest.java:257:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:258:	LawOfDemeter:	LawOfDemeter: Call to `getNumber` on foreign value `inside` (degree 2)
+Test/Test/TowerTest.java:258:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:263:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:263:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:270:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerTest.java:271:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:271:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:272:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:272:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:273:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:273:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:274:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:279:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:279:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:286:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerTest.java:287:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:287:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:288:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:288:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:289:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:289:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:290:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:294:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:294:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:299:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerTest.java:300:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:300:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:301:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:301:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:302:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:302:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:303:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:307:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:307:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:312:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerTest.java:313:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:314:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:315:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:316:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:320:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:320:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:324:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:325:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerTest.java:326:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:327:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:332:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:333:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'result' could be declared final
+Test/Test/TowerTest.java:334:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:338:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:340:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'result' could be declared final
+Test/Test/TowerTest.java:341:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:345:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:349:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'result' could be declared final
+Test/Test/TowerTest.java:350:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:355:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:355:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:357:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:358:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:362:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:362:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:367:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerTest.java:368:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:369:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:370:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:371:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:375:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:375:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:379:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerTest.java:380:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:381:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:381:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:382:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:382:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:383:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cup5' could be declared final
+Test/Test/TowerTest.java:384:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:388:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:388:	UnitTestContainsTooManyAsserts:	UnitTestContainsTooManyAsserts: Unit tests should not contain more than 1 assert(s).
+Test/Test/TowerTest.java:393:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+Test/Test/TowerTest.java:394:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:395:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:395:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:396:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:396:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:397:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:397:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:398:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cup3' could be declared final
+Test/Test/TowerTest.java:399:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cup5' could be declared final
+Test/Test/TowerTest.java:400:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:405:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:409:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tamanoAntes' could be declared final
+Test/Test/TowerTest.java:411:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:419:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:423:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "box" appears 8 times in this file; the first occurrence is on line 423
+Test/Test/TowerTest.java:426:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:430:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:435:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:439:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:444:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+Test/Test/TowerTest.java:453:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:458:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+Test/Test/TowerTest.java:467:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:474:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'box' could be declared final
+Test/Test/TowerTest.java:475:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:479:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:485:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+Test/Test/TowerTest.java:489:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:496:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'box' could be declared final
+Test/Test/TowerTest.java:497:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'boxWidth' could be declared final
+Test/Test/TowerTest.java:498:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+Test/Test/TowerTest.java:507:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+Test/Test/TowerTest.java:514:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'box' could be declared final
+Test/Test/TowerTest.java:515:	UnitTestAssertionsShouldIncludeMessage:	UnitTestAssertionsShouldIncludeMessage: Unit test assertions should include a message
+tower/tower/Box.java:8:	ShortClassName:	ShortClassName: Avoid short class names like Box
+tower/tower/Cup.java:10:	ShortClassName:	ShortClassName: Avoid short class names like Cup
+tower/tower/Cup.java:41:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Cup.java:122:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+tower/tower/Elements.java:16:	ExcessivePublicCount:	ExcessivePublicCount: This class has 47 public methods and attributes; current threshold is 45.
+tower/tower/Elements.java:16:	TooManyFields:	TooManyFields: Too many fields
+tower/tower/Elements.java:16:	TooManyMethods:	TooManyMethods: This class has too many methods, consider refactoring it.
+tower/tower/Elements.java:74:	LongVariable:	LongVariable: Avoid excessively long variable names like notQuitablePosition
+tower/tower/Elements.java:74:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'ArrayList'; use the interface instead
+tower/tower/Elements.java:253:	BooleanGetMethodName:	BooleanGetMethodName: A getX() method which returns a boolean or Boolean should be named isX()
+tower/tower/Elements.java:261:	BooleanGetMethodName:	BooleanGetMethodName: A getX() method which returns a boolean or Boolean should be named isX()
+tower/tower/Elements.java:380:	BooleanGetMethodName:	BooleanGetMethodName: A getX() method which returns a boolean or Boolean should be named isX()
+tower/tower/Lid.java:6:	ShortClassName:	ShortClassName: Avoid short class names like Lid
+tower/tower/Lid.java:18:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Lid.java:95:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+tower/tower/Lid.java:155:	MissingOverride:	MissingOverride: The method 'setCover(Lid)' is missing an @Override annotation.
+tower/tower/Lid.java:155:	UncommentedEmptyMethodBody:	UncommentedEmptyMethodBody: Document empty method body
+tower/tower/Lid.java:157:	MissingOverride:	MissingOverride: The method 'setInside(Elements)' is missing an @Override annotation.
+tower/tower/Lid.java:157:	UncommentedEmptyMethodBody:	UncommentedEmptyMethodBody: Document empty method body
+tower/tower/Lid.java:159:	MissingOverride:	MissingOverride: The method 'cover()' is missing an @Override annotation.
+tower/tower/Lid.java:159:	UncommentedEmptyMethodBody:	UncommentedEmptyMethodBody: Document empty method body
+tower/tower/Tower.java:7:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:16:	CyclomaticComplexity:	CyclomaticComplexity: The class 'Tower' has a total cyclomatic complexity of 225 (highest 13).
+tower/tower/Tower.java:16:	TooManyMethods:	TooManyMethods: This class has too many methods, consider refactoring it.
+tower/tower/Tower.java:18:	UnusedPrivateField:	UnusedPrivateField: Avoid unused private fields such as 'width'.
+tower/tower/Tower.java:21:	AvoidFieldNameMatchingMethodName:	AvoidFieldNameMatchingMethodName: Field height has the same name as a method
+tower/tower/Tower.java:21:	UnusedPrivateField:	UnusedPrivateField: Avoid unused private fields such as 'height'.
+tower/tower/Tower.java:24:	UnusedPrivateField:	UnusedPrivateField: Avoid unused private fields such as 'maxHeight'.
+tower/tower/Tower.java:30:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:33:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:36:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:40:	AvoidFieldNameMatchingMethodName:	AvoidFieldNameMatchingMethodName: Field isOK has the same name as a method
+tower/tower/Tower.java:80:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:127:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:148:	CognitiveComplexity:	CognitiveComplexity: The method 'popCup()' has a cognitive complexity of 17, current threshold is 15
+tower/tower/Tower.java:149:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "cup" appears 14 times in this file; the first occurrence is on line 149
+tower/tower/Tower.java:149:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as "cup" in if statements
+tower/tower/Tower.java:150:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'popeado' could be declared final
+tower/tower/Tower.java:153:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+tower/tower/Tower.java:155:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'o' could be declared final
+tower/tower/Tower.java:156:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:157:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:159:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:162:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:169:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:182:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'number' is not assigned and could be declared final
+tower/tower/Tower.java:184:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:188:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'a' could be declared final
+tower/tower/Tower.java:188:	ShortVariable:	ShortVariable: Avoid variables with short names like a
+tower/tower/Tower.java:192:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+tower/tower/Tower.java:193:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'temp' could be declared final
+tower/tower/Tower.java:193:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:210:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:241:	CognitiveComplexity:	CognitiveComplexity: The method 'pushLid(int)' has a cognitive complexity of 15, current threshold is 15
+tower/tower/Tower.java:241:	CyclomaticComplexity:	CyclomaticComplexity: The method 'pushLid(int)' has a cyclomatic complexity of 13.
+tower/tower/Tower.java:242:	AvoidDuplicateLiterals:	AvoidDuplicateLiterals: The String literal "lid" appears 9 times in this file; the first occurrence is on line 242
+tower/tower/Tower.java:247:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:263:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sizeTop' could be declared final
+tower/tower/Tower.java:264:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sizeNewLid' could be declared final
+tower/tower/Tower.java:273:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:273:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:284:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:306:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+tower/tower/Tower.java:306:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:307:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:311:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'popeado' could be declared final
+tower/tower/Tower.java:314:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+tower/tower/Tower.java:316:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'o' could be declared final
+tower/tower/Tower.java:317:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:318:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:325:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:338:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'i' is not assigned and could be declared final
+tower/tower/Tower.java:338:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:340:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:344:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'a' could be declared final
+tower/tower/Tower.java:344:	ShortVariable:	ShortVariable: Avoid variables with short names like a
+tower/tower/Tower.java:348:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+tower/tower/Tower.java:349:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'temp' could be declared final
+tower/tower/Tower.java:349:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:349:	UseDiamondOperator:	UseDiamondOperator: Raw type use may be avoided by using a diamond: `new Stack<>()`
+tower/tower/Tower.java:354:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'o' could be declared final
+tower/tower/Tower.java:364:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:365:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:392:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'temp' could be declared final
+tower/tower/Tower.java:392:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'ArrayList'; use the interface instead
+tower/tower/Tower.java:392:	UseDiamondOperator:	UseDiamondOperator: Explicit type arguments can be replaced by a diamond: `new ArrayList<>(cups)`
+tower/tower/Tower.java:393:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+tower/tower/Tower.java:396:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'aux' could be declared final
+tower/tower/Tower.java:402:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tempo' could be declared final
+tower/tower/Tower.java:402:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'ArrayList'; use the interface instead
+tower/tower/Tower.java:402:	UseDiamondOperator:	UseDiamondOperator: Explicit type arguments can be replaced by a diamond: `new ArrayList<>(lids)`
+tower/tower/Tower.java:403:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+tower/tower/Tower.java:406:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'aux' could be declared final
+tower/tower/Tower.java:415:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+tower/tower/Tower.java:416:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+tower/tower/Tower.java:419:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cI' could be declared final
+tower/tower/Tower.java:419:	ShortVariable:	ShortVariable: Avoid variables with short names like cI
+tower/tower/Tower.java:423:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+tower/tower/Tower.java:423:	ShortVariable:	ShortVariable: Avoid variables with short names like c
+tower/tower/Tower.java:426:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cI' could be declared final
+tower/tower/Tower.java:426:	ShortVariable:	ShortVariable: Avoid variables with short names like cI
+tower/tower/Tower.java:433:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:455:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'temp' could be declared final
+tower/tower/Tower.java:455:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:455:	UseDiamondOperator:	UseDiamondOperator: Raw type use may be avoided by using a diamond: `new Stack<>()`
+tower/tower/Tower.java:460:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+tower/tower/Tower.java:462:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'a' could be declared final
+tower/tower/Tower.java:462:	ShortVariable:	ShortVariable: Avoid variables with short names like a
+tower/tower/Tower.java:472:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:476:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'totalHeight' could be declared final
+tower/tower/Tower.java:480:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:484:	AssignmentInOperand:	AssignmentInOperand: Avoid assignment to totalHeight in operand
+tower/tower/Tower.java:484:	UnusedAssignment:	UnusedAssignment: The value assigned to variable 'totalHeight' is never used
+tower/tower/Tower.java:487:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:501:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'copas' could be declared final
+tower/tower/Tower.java:504:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+tower/tower/Tower.java:505:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as "Covered" in if statements
+tower/tower/Tower.java:513:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:530:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'staking' could be declared final
+tower/tower/Tower.java:532:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'o' could be declared final
+tower/tower/Tower.java:540:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:559:	CyclomaticComplexity:	CyclomaticComplexity: The method 'swap(String[], String[])' has a cyclomatic complexity of 11.
+tower/tower/Tower.java:559:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'objeto1' is not assigned and could be declared final
+tower/tower/Tower.java:559:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'objeto2' is not assigned and could be declared final
+tower/tower/Tower.java:559:	UseVarargs:	UseVarargs: Consider using varargs for methods or constructors which take an array the last parameter.
+tower/tower/Tower.java:560:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'o1' could be declared final
+tower/tower/Tower.java:560:	ShortVariable:	ShortVariable: Avoid variables with short names like o1
+tower/tower/Tower.java:561:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'o2' could be declared final
+tower/tower/Tower.java:561:	ShortVariable:	ShortVariable: Avoid variables with short names like o2
+tower/tower/Tower.java:562:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+tower/tower/Tower.java:566:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'temp' could be declared final
+tower/tower/Tower.java:566:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:571:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+tower/tower/Tower.java:572:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 't' could be declared final
+tower/tower/Tower.java:575:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tNumber' could be declared final
+tower/tower/Tower.java:576:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+tower/tower/Tower.java:576:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:577:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+tower/tower/Tower.java:580:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+tower/tower/Tower.java:587:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:591:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:602:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+tower/tower/Tower.java:603:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tem' could be declared final
+tower/tower/Tower.java:603:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:604:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'temp' could be declared final
+tower/tower/Tower.java:604:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:605:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tempo' could be declared final
+tower/tower/Tower.java:605:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:606:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+tower/tower/Tower.java:615:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+tower/tower/Tower.java:616:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'i' could be declared final
+tower/tower/Tower.java:616:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:618:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'f' could be declared final
+tower/tower/Tower.java:618:	ShortVariable:	ShortVariable: Avoid variables with short names like f
+tower/tower/Tower.java:624:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'l' could be declared final
+tower/tower/Tower.java:625:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'j' could be declared final
+tower/tower/Tower.java:625:	ShortVariable:	ShortVariable: Avoid variables with short names like j
+tower/tower/Tower.java:630:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+tower/tower/Tower.java:632:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+tower/tower/Tower.java:632:	ShortVariable:	ShortVariable: Avoid variables with short names like e
+tower/tower/Tower.java:634:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'k' could be declared final
+tower/tower/Tower.java:634:	ShortVariable:	ShortVariable: Avoid variables with short names like k
+tower/tower/Tower.java:636:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:647:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:665:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'apilar' is not assigned and could be declared final
+tower/tower/Tower.java:665:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'base' is not assigned and could be declared final
+tower/tower/Tower.java:666:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'insideBase' could be declared final
+tower/tower/Tower.java:667:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'posxApilar' could be declared final
+tower/tower/Tower.java:668:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'posyBase' could be declared final
+tower/tower/Tower.java:669:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'baseHeight' could be declared final
+tower/tower/Tower.java:670:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'apilarHeight' could be declared final
+tower/tower/Tower.java:676:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'insideBaseWidth' could be declared final
+tower/tower/Tower.java:677:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'apilarWidth' could be declared final
+tower/tower/Tower.java:678:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:689:	CyclomaticComplexity:	CyclomaticComplexity: The method 'setAbove(Elements, Elements)' has a cyclomatic complexity of 10.
+tower/tower/Tower.java:689:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'apilar' is not assigned and could be declared final
+tower/tower/Tower.java:689:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'base' is not assigned and could be declared final
+tower/tower/Tower.java:690:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'baseAbove' could be declared final
+tower/tower/Tower.java:691:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'posxApilar' could be declared final
+tower/tower/Tower.java:692:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'posyBase' could be declared final
+tower/tower/Tower.java:693:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'apilarHeight' could be declared final
+tower/tower/Tower.java:697:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:697:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:698:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:702:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:702:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:704:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'baseAboveHeight' could be declared final
+tower/tower/Tower.java:714:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:723:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'newTop' is not assigned and could be declared final
+tower/tower/Tower.java:728:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'posyTop' could be declared final
+tower/tower/Tower.java:729:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'posyNewTop' could be declared final
+tower/tower/Tower.java:735:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:742:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:743:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:746:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'i' is not assigned and could be declared final
+tower/tower/Tower.java:746:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'tipo' is not assigned and could be declared final
+tower/tower/Tower.java:746:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:747:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+tower/tower/Tower.java:749:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:755:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:764:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'i' is not assigned and could be declared final
+tower/tower/Tower.java:764:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:765:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+tower/tower/Tower.java:767:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:773:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:782:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'i' is not assigned and could be declared final
+tower/tower/Tower.java:782:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:783:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'l' could be declared final
+tower/tower/Tower.java:785:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:791:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:801:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'i' is not assigned and could be declared final
+tower/tower/Tower.java:801:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:802:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'l' could be declared final
+tower/tower/Tower.java:804:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:810:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:820:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'i' is not assigned and could be declared final
+tower/tower/Tower.java:820:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:821:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+tower/tower/Tower.java:823:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:829:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:838:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'i' is not assigned and could be declared final
+tower/tower/Tower.java:838:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:839:	ShortVariable:	ShortVariable: Avoid variables with short names like ca
+tower/tower/Tower.java:840:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+tower/tower/Tower.java:849:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:858:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'i' is not assigned and could be declared final
+tower/tower/Tower.java:858:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:859:	ShortVariable:	ShortVariable: Avoid variables with short names like la
+tower/tower/Tower.java:860:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'l' could be declared final
+tower/tower/Tower.java:879:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+tower/tower/Tower.java:880:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'l' could be declared final
+tower/tower/Tower.java:881:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'lPosy' could be declared final
+tower/tower/Tower.java:893:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+tower/tower/Tower.java:897:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'Stack'; use the interface instead
+tower/tower/Tower.java:901:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+tower/tower/Tower.java:903:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'c' could be declared final
+tower/tower/Tower.java:909:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:910:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:920:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:922:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'objeto' is not assigned and could be declared final
+tower/tower/Tower.java:922:	UseVarargs:	UseVarargs: Consider using varargs for methods or constructors which take an array the last parameter.
+tower/tower/Tower.java:927:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'tipo' could be declared final
+tower/tower/Tower.java:928:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'numero' could be declared final
+tower/tower/Tower.java:930:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:931:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:932:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:933:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:939:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+tower/tower/Tower.java:939:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'number' is not assigned and could be declared final
+tower/tower/Tower.java:941:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'numberS' could be declared final
+tower/tower/Tower.java:942:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 's' could be declared final
+tower/tower/Tower.java:942:	ShortVariable:	ShortVariable: Avoid variables with short names like s
+tower/tower/Tower.java:944:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:954:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'i' is not assigned and could be declared final
+tower/tower/Tower.java:954:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:954:	UnnecessaryModifier:	UnnecessaryModifier: Unnecessary modifier 'final' on method 'cupInTower': private methods cannot be overridden
+tower/tower/Tower.java:955:	ShortVariable:	ShortVariable: Avoid variables with short names like is
+tower/tower/Tower.java:966:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'cup' is not assigned and could be declared final
+tower/tower/Tower.java:966:	UnusedPrivateMethod:	UnusedPrivateMethod: Avoid unused private methods such as 'removeLidsBelowCup(Cup)'.
+tower/tower/Tower.java:967:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:967:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:968:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cupIndex' could be declared final
+tower/tower/Tower.java:969:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:969:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:970:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'below' could be declared final
+tower/tower/Tower.java:971:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:971:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:985:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'elementE' is not assigned and could be declared final
+tower/tower/Tower.java:986:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:987:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+tower/tower/Tower.java:987:	UnnecessaryFullyQualifiedName:	UnnecessaryFullyQualifiedName: Unnecessary qualifier 'java.util': 'ArrayList' is already in scope because it is imported in this file
+tower/tower/Tower.java:988:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:989:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cDesplace' could be declared final
+tower/tower/Tower.java:990:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+tower/tower/Tower.java:995:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+tower/tower/Tower.java:996:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+tower/tower/Tower.java:998:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+tower/tower/Tower.java:1003:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'element' is not assigned and could be declared final
+tower/tower/Tower.java:1004:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'i' could be declared final
+tower/tower/Tower.java:1004:	ShortVariable:	ShortVariable: Avoid variables with short names like i
+tower/tower/Tower.java:1008:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:1012:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'number' is not assigned and could be declared final
+tower/tower/Tower.java:1012:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'type' is not assigned and could be declared final
+tower/tower/Tower.java:1013:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'height' could be declared final
+tower/tower/Tower.java:1014:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'nheight' could be declared final
+tower/tower/Tower.java:1015:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'heightBox' could be declared final
+tower/tower/Tower.java:1017:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:1018:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:1019:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:1020:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:1025:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'cup' is not assigned and could be declared final
+tower/tower/Tower.java:1026:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'existing' could be declared final
+tower/tower/Tower.java:1040:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'number' is not assigned and could be declared final
+tower/tower/Tower.java:1040:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'type' is not assigned and could be declared final
+tower/tower/Tower.java:1041:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:1042:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'newCup' could be declared final
+tower/tower/Tower.java:1055:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'newCup' is not assigned and could be declared final
+tower/tower/Tower.java:1062:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sizeTop' could be declared final
+tower/tower/Tower.java:1063:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sizeNewCup' could be declared final
+tower/tower/Tower.java:1085:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'element' is not assigned and could be declared final
+tower/tower/Tower.java:1101:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'box' is not assigned and could be declared final
+tower/tower/Tower.java:1102:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:1104:	AvoidLiteralsInIfCondition:	AvoidLiteralsInIfCondition: Avoid using literals such as "cup" in if statements
+tower/tower/Tower.java:1113:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+tower/tower/Tower.java:1114:	CompareObjectsWithEquals:	CompareObjectsWithEquals: Use equals() to compare object references.
+tower/tower/Tower.java:1127:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'element' is not assigned and could be declared final
+tower/tower/Tower.java:1128:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:1131:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:1137:	NullAssignment:	NullAssignment: Assigning an Object to null is a code smell.  Consider refactoring.
+tower/tower/Tower.java:1138:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+tower/tower/Tower.java:1147:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'newlyAdded' could be declared final
+tower/tower/Tower.java:1148:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:1158:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:1167:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'elementE' is not assigned and could be declared final
+tower/tower/Tower.java:1168:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'copy' could be declared final
+tower/tower/Tower.java:1168:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'ArrayList'; use the interface instead
+tower/tower/Tower.java:1168:	UnnecessaryFullyQualifiedName:	UnnecessaryFullyQualifiedName: Unnecessary qualifier 'java.util': 'ArrayList' is already in scope because it is imported in this file
+tower/tower/Tower.java:1170:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'e' could be declared final
+tower/tower/Tower.java:1170:	ShortVariable:	ShortVariable: Avoid variables with short names like e
+tower/tower/Tower.java:1171:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+tower/tower/Tower.java:1172:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:1173:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cDamage' could be declared final
+tower/tower/Tower.java:1174:	ConfusingTernary:	ConfusingTernary: Avoid if (x != y) ..; else ..;
+tower/tower/Tower.java:1177:	SystemPrintln:	SystemPrintln: Usage of System.out/err
+tower/tower/Tower.java:1179:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+tower/tower/Tower.java:1180:	AvoidInstantiatingObjectsInLoops:	AvoidInstantiatingObjectsInLoops: Avoid instantiating new objects inside loops
+tower/tower/Tower.java:1182:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/Tower.java:1189:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:1202:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'number' is not assigned and could be declared final
+tower/tower/Tower.java:1202:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'type' is not assigned and could be declared final
+tower/tower/Tower.java:1204:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:1205:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:1212:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:1216:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'lid' is not assigned and could be declared final
+tower/tower/Tower.java:1217:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'existing' could be declared final
+tower/tower/Tower.java:1223:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:1224:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:1230:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:1232:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'lid' is not assigned and could be declared final
+tower/tower/Tower.java:1233:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:1233:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:1239:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'companion' could be declared final
+tower/tower/Tower.java:1247:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/Tower.java:1250:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:1251:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:1255:	CommentSize:	CommentSize: Comment is too large: Line too long
+tower/tower/Tower.java:1258:	CyclomaticComplexity:	CyclomaticComplexity: The method 'pushLid(String, int)' has a cyclomatic complexity of 12.
+tower/tower/Tower.java:1258:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'number' is not assigned and could be declared final
+tower/tower/Tower.java:1258:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'type' is not assigned and could be declared final
+tower/tower/Tower.java:1261:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:1262:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/Tower.java:1264:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'newLid' could be declared final
+tower/tower/Tower.java:1274:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sizeTop' could be declared final
+tower/tower/Tower.java:1275:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'sizeNewLid' could be declared final
+tower/tower/Tower.java:1284:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
+tower/tower/Tower.java:1284:	LiteralsFirstInComparisons:	LiteralsFirstInComparisons: Position literals first in String comparisons
+tower/tower/TowerContest.java:10:	AtLeastOneConstructor:	AtLeastOneConstructor: Each class should declare at least one constructor
+tower/tower/TowerContest.java:12:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/TowerContest.java:32:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'h' is not assigned and could be declared final
+tower/tower/TowerContest.java:32:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'n' is not assigned and could be declared final
+tower/tower/TowerContest.java:32:	ShortVariable:	ShortVariable: Avoid variables with short names like h
+tower/tower/TowerContest.java:32:	ShortVariable:	ShortVariable: Avoid variables with short names like n
+tower/tower/TowerContest.java:33:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'respuesta' could be declared final
+tower/tower/TowerContest.java:33:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'ArrayList'; use the interface instead
+tower/tower/TowerContest.java:34:	PrematureDeclaration:	PrematureDeclaration: Declaration of 'result' can be moved closer to its usages
+tower/tower/TowerContest.java:35:	UseCollectionIsEmpty:	UseCollectionIsEmpty: Substitute calls to size() == 0 (or size() != 0, size() > 0, size() < 1) with calls to isEmpty()
+tower/tower/TowerContest.java:36:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/TowerContest.java:38:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'r' could be declared final
+tower/tower/TowerContest.java:39:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'altura' could be declared final
+tower/tower/TowerContest.java:40:	UseStringBufferForStringAppends:	UseStringBufferForStringAppends: Prefer StringBuilder (non-synchronized) or StringBuffer (synchronized) over += for concatenating strings
+tower/tower/TowerContest.java:47:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/TowerContest.java:64:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'h' is not assigned and could be declared final
+tower/tower/TowerContest.java:64:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'n' is not assigned and could be declared final
+tower/tower/TowerContest.java:64:	ShortVariable:	ShortVariable: Avoid variables with short names like h
+tower/tower/TowerContest.java:64:	ShortVariable:	ShortVariable: Avoid variables with short names like n
+tower/tower/TowerContest.java:65:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'respuesta' could be declared final
+tower/tower/TowerContest.java:65:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'ArrayList'; use the interface instead
+tower/tower/TowerContest.java:66:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+tower/tower/TowerContest.java:67:	UseCollectionIsEmpty:	UseCollectionIsEmpty: Substitute calls to size() == 0 (or size() != 0, size() > 0, size() < 1) with calls to isEmpty()
+tower/tower/TowerContest.java:70:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'r' could be declared final
+tower/tower/TowerContest.java:76:	CommentSize:	CommentSize: Comment is too large: Too many lines
+tower/tower/TowerContest.java:100:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'ArrayList'; use the interface instead
+tower/tower/TowerContest.java:100:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'h' is not assigned and could be declared final
+tower/tower/TowerContest.java:100:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'n' is not assigned and could be declared final
+tower/tower/TowerContest.java:100:	ShortVariable:	ShortVariable: Avoid variables with short names like h
+tower/tower/TowerContest.java:100:	ShortVariable:	ShortVariable: Avoid variables with short names like n
+tower/tower/TowerContest.java:101:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'respuesta' could be declared final
+tower/tower/TowerContest.java:101:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'ArrayList'; use the interface instead
+tower/tower/TowerContest.java:101:	UseDiamondOperator:	UseDiamondOperator: Explicit type arguments can be replaced by a diamond: `new ArrayList<>()`
+tower/tower/TowerContest.java:102:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'nh' could be declared final
+tower/tower/TowerContest.java:102:	ShortVariable:	ShortVariable: Avoid variables with short names like nh
+tower/tower/TowerContest.java:103:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'maxAltura' could be declared final
+tower/tower/TowerContest.java:105:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/TowerContest.java:107:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+tower/tower/TowerContest.java:109:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'par' could be declared final
+tower/tower/TowerContest.java:111:	OnlyOneReturn:	OnlyOneReturn: A method should have only one exit point, and that should be the last statement in the method
+tower/tower/TowerContest.java:115:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'items' could be declared final
+tower/tower/TowerContest.java:117:	ForLoopCanBeForeach:	ForLoopCanBeForeach: This for loop can be replaced by a foreach loop
+tower/tower/TowerContest.java:118:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'num' could be declared final
+tower/tower/TowerContest.java:121:	UnusedAssignment:	UnusedAssignment: The value assigned to variable 'result' is never used
+tower/tower/TowerContest.java:126:	CommentRequired:	CommentRequired: Public method and constructor comments are required
+tower/tower/TowerContest.java:126:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'h' is not assigned and could be declared final
+tower/tower/TowerContest.java:126:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'n' is not assigned and could be declared final
+tower/tower/TowerContest.java:126:	ShortVariable:	ShortVariable: Avoid variables with short names like h
+tower/tower/TowerContest.java:126:	ShortVariable:	ShortVariable: Avoid variables with short names like n
+tower/tower/TowerContest.java:127:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'respuesta' could be declared final
+tower/tower/TowerContest.java:127:	LooseCoupling:	LooseCoupling: Avoid using implementation types like 'ArrayList'; use the interface instead
+tower/tower/TowerContest.java:128:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'torre' could be declared final
+tower/tower/TowerContest.java:129:	UseCollectionIsEmpty:	UseCollectionIsEmpty: Substitute calls to size() == 0 (or size() != 0, size() > 0, size() < 1) with calls to isEmpty()
+tower/tower/TowerContest.java:132:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'r' could be declared final

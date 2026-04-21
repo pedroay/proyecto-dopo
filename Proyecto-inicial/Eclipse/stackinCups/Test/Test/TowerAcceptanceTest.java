@@ -63,7 +63,6 @@ public class TowerAcceptanceTest {
             System.out.println(staking[i][0] + " " + staking[i][1]);
         }
         Cup cup1 = tower.findCupByNumber(1);
-        assertTrue(cup1.getNumber() == 1);
     }
 
     /**

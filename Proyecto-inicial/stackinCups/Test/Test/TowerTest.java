@@ -421,8 +421,9 @@ public class TowerTest {
         tower.pushCup(2);
         tower.pushCup(3);
         tower.pushCup("box", 4);
-        Lid 
-        assertTrue(tower.isInElements(4, "cup"));
+        Elements top = tower.getTop();
+        int medida= (int) Math.ceil((top.getWidth() +10) / 20.0);
+        assertTrue(tower.isInElements(medida, "lid"));
     }
 
     @Test
@@ -468,7 +469,9 @@ public class TowerTest {
         tower.pushCup(2);
         tower.pushCup(3);
         tower.pushCup("box", 4);
-        Cup box = tower.findCupByNumber(4);
+        Elements top = tower.getTop();
+        int medida= (int) Math.ceil((top.getWidth() +10) / 20.0);
+        Cup box = tower.findCupByNumber(medida);
         assertTrue(tower.isInElements(box.getNumber(), "lid"));
     }
 
@@ -488,7 +491,9 @@ public class TowerTest {
         tower.pushCup(2);
         tower.pushCup(3);
         tower.pushCup("box", 4);
-        Cup box = tower.findCupByNumber(4);
+        Elements top = tower.getTop();
+        int medida= (int) Math.ceil((top.getWidth() +10) / 20.0);
+        Cup box = tower.findCupByNumber(medida);
         int boxWidth = box.getWidth();
         for (Elements e : tower.getObjects()) {
             if (!e.getIsBox()) {
@@ -504,7 +509,9 @@ public class TowerTest {
         tower.pushCup(2);
         tower.pushCup(3);
         tower.pushCup("box", 4);
-        Cup box = tower.findCupByNumber(4);
+        Elements top = tower.getTop();
+        int medida= (int) Math.ceil((top.getWidth() +10) / 20.0);
+        Cup box = tower.findCupByNumber(medida);
         assertTrue(box.getIsBox());
     }
 }

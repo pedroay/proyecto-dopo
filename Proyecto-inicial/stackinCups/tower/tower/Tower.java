@@ -146,8 +146,17 @@ public class Tower {
      * accordingly. Otherwise, the state flag {@code isOK} is set to {@code false}.
      */
     public void popCup(){
-        if("cup".equals(objects.get(objects.size()-1).getType())){
-        	Elements  popeado = objects.get(objects.size()-1);
+        if(objects.isEmpty() || !"cup".equals(objects.get(objects.size()-1).getType())){
+            if(isVisible)showError();
+            isOK = false;
+        }
+        else{
+            Elements popeado = objects.get(objects.size()-1);
+            if (!popeado.thisIsQuitable()) {
+                if(isVisible)showError();
+                isOK = false;
+                return;
+            }
             objects.remove(popeado);
             cups.remove(popeado);
             top = null;
@@ -156,11 +165,9 @@ public class Tower {
                 if(o.getInside() != null && o.getInside().getNumber() == popeado.getNumber())o.setInside(null);
                 if(o.getAbove() != null && o.getAbove().getNumber() == popeado.getNumber())o.setAbove(null);
                 setNewTop(o);
-            if(isVisible)showError();
-            isOK = false;}}
-        else{
-        	 if(isVisible)showError();
-             isOK = false;}}
+            }
+        }
+    }
     
 
        
@@ -180,7 +187,7 @@ public class Tower {
      * @param i the identifier (number) of the cup to be removed from the tower
      */
     public void removeCup(int number){
-    if(objects.isEmpty() || !isInElements(number,"cup") ){
+    if(objects.isEmpty() || !isInElements(number,"cup" )|| !findCupByNumber(number).thisIsQuitable()){
         if(isVisible)showError();
         isOK = false;
     }
@@ -206,6 +213,7 @@ public class Tower {
     private void push(final Elements element){
         element.push(element.getNumber());
     }
+
     
     /**
      * Adds a lid to the top of the tower following the stacking rules.
@@ -303,12 +311,17 @@ public class Tower {
      * is updated accordingly.
      */
     public void popLid(){
-        if(!objects.get(objects.size()-1).getType().equals("lid") ){
+        if(objects.isEmpty() || !"lid".equals(objects.get(objects.size()-1).getType()) ){
             if(isVisible)showError();
             isOK = false;
         }
         else{
-            Elements  popeado = objects.get(objects.size()-1);
+            Elements popeado = objects.get(objects.size()-1);
+            if (!popeado.thisIsQuitable()) {
+                if(isVisible)showError();
+                isOK = false;
+                return;
+            }
             objects.remove(popeado);
             lids.remove(popeado);
             top = null;
@@ -336,7 +349,7 @@ public class Tower {
      * @param i the identifier (number) of the lid to be removed from the tower
      */
      public void removeLid(int i){
-    if(objects.isEmpty() ){
+    if(objects.isEmpty() || !isInElements(i, "lid") || !findLidByNumber(i).thisIsQuitable() ){
         if(isVisible)showError();
         isOK = false;
     }
@@ -346,7 +359,7 @@ public class Tower {
         objects.remove(a);
         lids.remove(a);
         top = null;
-        Stack<Elements> temp = new Stack();
+        Stack<Elements> temp = new Stack<>();
         temp.addAll(objects);
         objects.clear();
         cups.clear();
@@ -1100,23 +1113,40 @@ public class Tower {
 
     private void validateBox(Box box){
         if (box == null || !box.getIsBox()) return;
+        
         objects.remove(box);
         if ("cup".equals(box.getType())) {
             cups.remove(box);
+        }
+        objects.insertElementAt(box, 0);
+        if ("cup".equals(box.getType())) {
+            cups.insertElementAt((Cup) box, 0);
+        }
         
-
+        if (objects.size() > 1) {
+            Elements previousBase = objects.get(1);
+            if (box.getWidth() >= previousBase.getWidth()) {
+                previousBase.setInside(box);
+                previousBase.setAbove(null);
+            } else {
+                previousBase.setAbove(box);
+                previousBase.setInside(null);
+            }
+            box.setInside(null);
+            box.setAbove(null);
+        }
+        
         box.createHisLid();
-        reverseTower();
-        push(box);
-        reverseTower();
-
+        
         for(Elements e : objects){
             if(e != box){
                 e.setIsInABox(true);
                 e.setQuitable(false);
             }
         }
-       }
+        
+        box.setIsBox(true); 
+        setNewTop(objects.lastElement());
     }
 
     /**

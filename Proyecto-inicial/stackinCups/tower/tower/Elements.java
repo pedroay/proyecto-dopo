@@ -318,7 +318,7 @@ public abstract class Elements {
      * set if a element is quitable
      * @param value
      */
-    public void setQuitable(final boolean value) {
+    public final void setQuitable(final boolean value) {
         isQuitable = value;
     }
     /**

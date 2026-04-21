@@ -111,7 +111,7 @@ public class SubElementsTest {
     }
 
     @Test
-    public void pruebaJerarquicoNoPuedeDañar() {
+    public void pruebaJerarquicoNoPuedeDanar() {
         Hierarchical h = new Hierarchical(3, tower);
         Lid lid = new Lid(1, tower);
         assertFalse(h.canDamage(lid));
@@ -131,7 +131,9 @@ public class SubElementsTest {
     public void pruebaCajaInsertada() {
         tower.pushCup("box", 3);
         for(Elements element :tower.getObjects()) {
+        	if(!element.getIsBox()) {
         	assertTrue(element.thisIsInABox());
+        	}
         }
         assertTrue(tower.isOK());
 
@@ -164,6 +166,7 @@ public class SubElementsTest {
         tower2.pushCup("box", 4);
         for(Elements e:tower2.getObjects()) {
         	if (!e.getIsBox()) {
+        	tower2.makeVisible();
         	assertTrue(e.thisIsInABox() );
         	assertFalse(e.thisIsQuitable());
         	}
@@ -222,7 +225,7 @@ public class SubElementsTest {
     }
 
     @Test
-    public void pruebaLocaNoDañaNiDesplaza() {
+    public void pruebaLocaNoDanaNiDesplaza() {
         Crazy crazy = new Crazy(3, tower);
         Cup cup = new Cup(2, tower);
         assertFalse(crazy.canDamage(cup));
@@ -234,7 +237,7 @@ public class SubElementsTest {
     // =========================================================================
 
     @Test
-    public void pruebaMiedosaInsertadaConTazaCompañera() {
+    public void pruebaMiedosaInsertadaConTazaCompanera() {
         tower.pushCup(3);
         tower.pushLid("fearful", 3);
         assertTrue(tower.isOK());
@@ -242,7 +245,7 @@ public class SubElementsTest {
     }
 
     @Test
-    public void pruebaMiedosaRechazadaSinTazaCompañera() {
+    public void pruebaMiedosaRechazadaSinTazaCompanera() {
         tower.pushLid("fearful", 3);
         assertFalse(tower.isInElements(3, "lid"));
     }
@@ -268,7 +271,7 @@ public class SubElementsTest {
     }
 
     @Test
-    public void pruebaMiedosaNoDañaNiDesplaza() {
+    public void pruebaMiedosaNoDanaNiDesplaza() {
         Fearful fearful = new Fearful(3, tower);
         Cup cup = new Cup(2, tower);
         assertFalse(fearful.canDamage(cup));
