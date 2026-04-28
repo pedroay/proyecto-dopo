@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.swing.JOptionPane;
+
 /**
  * Pruebas de aceptación gráficas y de ensamblado para los subelementos
  * (Box, Hierarchical, Opener, Crazy, Fearful).
@@ -15,7 +17,7 @@ public class SubElementsAcceptanceTest {
 
     @BeforeEach
     public void setUp() {
-        tower = new Tower(false);
+        tower = new Tower(0);
     }
     
     // --- 1. Box ---
@@ -24,6 +26,7 @@ public class SubElementsAcceptanceTest {
         tower.pushCup(1);
         tower.pushCup("box", 4);
         tower.makeVisible();
+        JOptionPane.showMessageDialog(null, "No se pudo hacer la acción");
         assertTrue(tower.isOK());
     }
     
@@ -33,6 +36,8 @@ public class SubElementsAcceptanceTest {
         tower.pushCup(3);
         tower.pushCup("box", 5);
         tower.makeVisible();
+        JOptionPane.showMessageDialog(null, "No se pudo hacer la acción");
+        assertTrue(tower.isOK());
         assertTrue(tower.isOK());
     }
 
@@ -104,7 +109,7 @@ public class SubElementsAcceptanceTest {
     @Test
     public void acceptanceTestFearfulRechazo() {
         tower.pushCup(5);
-        // La miedosa solo se coloca sobre su propia copa (ej: copa 6 no existe)
+
         tower.pushLid("fearful", 6);
         tower.makeVisible();
         assertFalse(tower.isOK()); 

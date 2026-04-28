@@ -1,0 +1,190 @@
+-----------------FINAL-------------------
+Retrospectiva Ciclo4 – Pedro Ayala - Javier Caicedo 
+Repositorio GIT: https://github.com/pedroay/proyecto-dopo.git
+
+1.	¿Cuáles fueron los mini-ciclos definidos? Justifíquenlos.
+Se consideraron los siguientes mini-ciclos:
+1. Pasar los archivos a eclipse y corregir compatibilidad para correr el programa para verificar su funcionamiento.
+2. Verificar funcionamiento de las pruebas en Eclipse y corregir compatibilidad. 
+3. Correr las pruebas como JUnit para verificar el cubrimiento del codigo
+4. Instalar y correr el PMD en eclipse
+5. Generar los documentos necesarios
+
+
+2.	¿Cuál es el estado actual del proyecto en términos de mini-ciclos? ¿por qué?
+Se encuentra casi finalizado, haciendo falta únicamente generar una redacción sobre los documentos.
+
+3.	¿Cuál fue el tiempo total invertido por cada uno de ustedes? (Horas/Hombre)
+Se invirtieron 8 horas Pedro y 8 horas Javier
+
+4.	¿Cuál consideran fue el mayor logro? ¿Por qué?
+Corregir la mayor cantidad de indicaciones del PMD, ya que marcaba en muchos casos cambios mínimos que no percibíamos del todo.
+
+5.	¿Cuál consideran que fue el mayor problema técnico? ¿Qué hicieron para resolverlo?
+El mayor problema técnico fue poder generar un push que pudiera implementar los nuevos elementos, cumpliendo con los requerimientos básicos.
+
+6.	¿Qué hicieron bien como equipo? ¿Qué se comprometen a hacer para mejorar los resultados?
+Mantuvimos buena comunicación, siempre adecuando el proyecto juntos para tener un pleno conocimiento del proyecto y sus adecuaciones
+
+7.	Considerando las prácticas XP incluidas en los laboratorios. ¿Cuál fue la más útil? ¿por qué?
+ Se hizo uso del pair programming, TestBeforeCoding.
+
+8.	¿Qué referencias usaron? ¿Cuál fue la más útil? Incluyan citas con estándares adecuados.
+Se hizo uso de la IA para hacer uso de las nuevas herramientas(Junit y PMD), además de los archivos compartidos en el documento de la entrega, fuera de eso, los archivos de clase.
+
+
+
+
+-----------------CICLO 4-----------------
+
+Retrospectiva Ciclo4 – Pedro Ayala - Javier Caicedo 
+Repositorio GIT: https://github.com/pedroay/proyecto-dopo.git
+
+1.	¿Cuáles fueron los mini-ciclos definidos? Justifíquenlos.
+Se consideraron los siguientes mini-ciclos:
+
+1 Separar en paquetes shapes y tower
+2 Refactorizar el paquete shapes, haciendo uso de herencia
+3 Refactorizar tower
+4 Extender Cups: normal, opener, hierarchical
+5 Extender Lids: normal, fearful, crazy
+6 Extender/Agregar el nuevo elemento
+
+
+2.	¿Cuál es el estado actual del proyecto en términos de mini-ciclos? ¿por qué?
+El proyecto se encuentra en el mini ciclo 6, terminando de agregar el nuevo.
+
+3.	¿Cuál fue el tiempo total invertido por cada uno de ustedes? (Horas/Hombre)
+Se invirtieron: Pedro 10 horas, Javier 10 horas
+
+4.	¿Cuál consideran fue el mayor logro? ¿Por qué?
+La implementación de la lógica de las nuevas tapas y las nuevas copas, 
+
+5.	¿Cuál consideran que fue el mayor problema técnico? ¿Qué hicieron para resolverlo?
+El mayor problema técnico se encontró al implementar las interacciones entre los diferentes elementos, se resolvió agregando atributos para la interacción entre elementos
+
+6.	¿Qué hicieron bien como equipo? ¿Qué se comprometen a hacer para mejorar los resultados?
+Se hablaron todos los cambios e implementaciones antes y después de aplicarlos, de modo que se llegó a una solución objetiva que cumpliera con los requisitos de manera correcta.
+
+7.	Considerando las prácticas XP incluidas en los laboratorios. ¿Cuál fue la más útil? ¿por qué?
+ Se hizo uso del pair programming y se generaron pruebas antes de programar las soluciones.
+
+8.	¿Qué referencias usaron? ¿Cuál fue la más útil? Incluyan citas con estándares adecuados.
+Se hizo uso del API de java y de la experiencia de Javier, adicionalmente se hizo uso de la IA gen para la búsqueda de una solución aplicada de manera adecuada.
+
+
+
+-----------------CICLO 3-----------------
+
+Retrospectiva Ciclo3 – Pedro Ayala - Javier Caicedo 
+Repositorio GIT: https://github.com/pedroay/proyecto-dopo.git
+
+1.	¿Cuáles fueron los mini-ciclos definidos? Justifíquenlos.
+Se consideraron los siguientes mini-ciclos:
+1	Diseño e Implementación de TowerContest
+2	Generar pruebas unitarias y de aceptación
+3	Implementación método solve
+4	Implementación método simulate
+5	Refactor en caso de ser necesario
+
+
+2.	¿Cuál es el estado actual del proyecto en términos de mini-ciclos? ¿por qué?
+Se completo la implementación de los métodos, se esta evaluando la manera en que se recorre la torre por temas de eficiencia
+
+3.	¿Cuál fue el tiempo total invertido por cada uno de ustedes? (Horas/Hombre)
+Se invirtieron: Pedro 12 horas, Javier 10 horas
+
+4.	¿Cuál consideran fue el mayor logro? ¿Por qué?
+El mayor logro fue la implementación del algoritmo de la solución del problema
+
+5.	¿Cuál consideran que fue el mayor problema técnico? ¿Qué hicieron para resolverlo?
+ Separar el Tower de la solución ya que este es el que tiene toda la información de la situación que se esta simulando.
+ Se solucionó pidiéndole la información a la torre con el fin de que no maneje la solución.
+
+6.	¿Qué hicieron bien como equipo? ¿Qué se comprometen a hacer para mejorar los resultados?
+ Planteamos cada situación, y de esa manera evaluamos posibles implementaciones y soluciones.
+
+7.	Considerando las prácticas XP incluidas en los laboratorios. ¿cuál fue la más útil? ¿por qué?
+ Se hizo uso del pair programming y las crc cards para la interacción de tower y towercontest.
+
+8.	¿Qué referencias usaron? ¿Cuál fue la más útil? Incluyan citas con estándares adecuados.
+Se hizo uso del API de java y de la experiencia de Javier, adicionalmente se hizo uso de la IA gen para la búsqueda de una solución aplicada de manera adecuada.
+
+
+-----------------CICLO 2-----------------
+
+Retrospectiva Ciclo2 – Pedro Ayala - Javier Caicedo 
+Repositorio GIT: https://github.com/pedroay/proyecto-dopo.git
+1.	¿Cuáles fueron los mini-ciclos definidos? Justifíquenlos.
+Se consideraron los siguientes mini-ciclos:
+1 Diseño he implementación de las pruebas sobre el método Tower(i);
+2 Diseño he implementación del método Tower(i);
+3 Diseño he implementación de las pruebas sobre el método swap(o1,o2);
+4 Diseño he implementacion de metodo swap(o1,o2);
+5 Creacion Pruebas metodo cover();
+6 Implementacion metodo cover();
+7 Diseño de metodos de swapToReduce();
+8 Implementación método swapToReduce();
+
+2.	¿Cuál es el estado actual del proyecto en términos de mini-ciclos? ¿por qué?
+Actualmente en términos de mini-ciclos, actualmente se encuentra en el mini ciclo 6
+
+3.	¿Cuál fue el tiempo total invertido por cada uno de ustedes? (Horas/Hombre)
+Le hemos invertido un total de: Pedro 13 horas, Javier 10 horas. Más que nada corrigiendo métodos y buscar que se obtengan los resultados del proyecto.
+
+4.	¿Cuál consideran fue el mayor logro? ¿Por qué?
+El calculo del intercambio de lids y cups, para permitir un swap que cumpla con los requisitos. Y la implementación de la mayor cantidad de pruebas de unidad.
+
+5.	¿Cuál consideran que fue el mayor problema técnico? ¿Qué hicieron para resolverlo?
+Buscar el cambio entre una tapa y una taza. Aún estamos buscando la mejor solución.
+
+6.	¿Qué hicieron bien como equipo? ¿Qué se comprometen a hacer para mejorar los resultados?
+Mantener una buena comunicación, organizando nuestros tiempos y realizar pair-programming para mantener una logística y una orientación sobre a donde dirigir el proyecto.
+
+7.	Considerando las prácticas XP incluidas en los laboratorios. ¿cuál fue la más útil? ¿por qué?
+Pair programming, Testing before Coding, con el fin de verificar y generar un código más limpio en el código que implementemos.
+
+8.	¿Qué referencias usaron? ¿Cuál fue la más útil? Incluyan citas con estándares adecuados.
+En su mayoría se usaron las lecturas asignadas para cada clase, y la experiencia de Javier sobre la materia. Sumándole el arreglo de errores haciendo uso de AIGen.
+
+
+
+-----------------CICLO 1-----------------
+
+Retrospectiva Ciclo1 – Pedro Ayala - Javier Caicedo 
+Repositorio GIT: https://github.com/pedroay/proyecto-dopo.git
+1.	¿Cuáles fueron los mini-ciclos definidos? Justifíquenlos.
+Se consideraron los siguientes mini-ciclos:
+1.	Planteamiento y diseño de tower, cup y lid
+2.	Diseño base de tower
+3.	Diseño base de cup y lid
+4.	Implementación de push, pop y remove básico de cup
+5.	Implementación de push, pop y remove básico de Lid
+6.	Diseño de OrderTower, reverseTower
+7.	Implementación de OrderTower, reverseTower
+8.	Diseñar la visibilidad base de cup y lid
+9.	Diseño visual básico de tower
+10.	Implementación de Visibilidad
+11.	Diseño de consulta de información
+12.	Implementación de consulta de información
+
+2.	¿Cuál es el estado actual del proyecto en términos de mini-ciclos? ¿por qué?
+Actualmente en términos de mini-ciclos, nos encontramos en el miniciclo 11/12, llegando al punto de buscar informar sobre la información de la torre.
+
+3.	¿Cuál fue el tiempo total invertido por cada uno de ustedes? (Horas/Hombre)
+Le hemos invertido un total de: Pedro 10 horas, Javier 10 horas. Teniendo en cuenta que se han compartido muchas de esas horas, para buscar un buen diseño e implementación sobre el código y el astah
+
+4.	¿Cuál consideran fue el mayor logro? ¿Por qué?
+El calculo de la altura independiente de el orden en que se encuentren las copas organizadas. Ya que el orden afecta bastante al calculo de la altura con respecto a el alcance de cada copa.
+
+5.	¿Cuál consideran que fue el mayor problema técnico? ¿Qué hicieron para resolverlo?
+El calculo de la altura, debido a que hay que la interacción entre las copas es compleja gracias a que no interactúan directamente entre ellas.
+
+6.	¿Qué hicieron bien como equipo? ¿Qué se comprometen a hacer para mejorar los resultados?
+Mantener una buena comunicación, organizando nuestros tiempos y realizar pair-programming para mantener una logística y una orientación sobre a donde dirigir el proyecto.
+
+7.	Considerando las prácticas XP incluidas en los laboratorios. ¿cuál fue la más útil? ¿por qué?
+Pair programming, y el de CRC carding, mediante el cual mantuvimos una idea clara del funcionamiento e interacciones dentro de tower y dentro de los propios objetos.
+
+8.	¿Qué referencias usaron? ¿Cuál fue la más útil? Incluyan citas con estándares adecuados.
+En su mayoría se usaron las lecturas asignadas para cada clase, y la experiencia de Javier sobre la materia. Se usó genAI en la forma básica para la codificación rápida de los get y set y consultas sobre la lógica del getHeight, y las colisiones entre copas.

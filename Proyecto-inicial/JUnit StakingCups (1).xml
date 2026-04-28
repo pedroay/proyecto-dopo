@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Test" project="stackinCups" tests="90" started="90" failures="3" errors="0" ignored="0">
+  <testsuite name="Test.TowerContestTest" time="0.403" displayname="TowerContestTest" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestTest]">
+    <testcase name="deberiaDar4920" classname="Test.TowerContestTest" time="0.232" displayname="deberiaDar4920" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestTest]/[test:deberiaDar4920(Test.TowerContestTest)]"/>
+    <testcase name="deberiaDar7315" classname="Test.TowerContestTest" time="0.015" displayname="deberiaDar7315" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestTest]/[test:deberiaDar7315(Test.TowerContestTest)]"/>
+    <testcase name="deberiaDar513" classname="Test.TowerContestTest" time="0.001" displayname="deberiaDar513" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestTest]/[test:deberiaDar513(Test.TowerContestTest)]"/>
+    <testcase name="deberiaDarAltura90" classname="Test.TowerContestTest" time="0.001" displayname="deberiaDarAltura90" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestTest]/[test:deberiaDarAltura90(Test.TowerContestTest)]"/>
+    <testcase name="deberiaDarImposible" classname="Test.TowerContestTest" time="0.152" displayname="deberiaDarImposible" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestTest]/[test:deberiaDarImposible(Test.TowerContestTest)]"/>
+    <testcase name="noDeberiaDar531" classname="Test.TowerContestTest" time="0.001" displayname="noDeberiaDar531" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestTest]/[test:noDeberiaDar531(Test.TowerContestTest)]"/>
+  </testsuite>
+  <testsuite name="Test.TowerTest" time="1.066" displayname="TowerTest" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]">
+    <testcase name="debeDarmeElTopCorrectoConTapasYCopas" classname="Test.TowerTest" time="0.0" displayname="debeDarmeElTopCorrectoConTapasYCopas" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeDarmeElTopCorrectoConTapasYCopas(Test.TowerTest)]"/>
+    <testcase name="debeCrearmeUnaTorreSoloDeTapas" classname="Test.TowerTest" time="0.001" displayname="debeCrearmeUnaTorreSoloDeTapas" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeCrearmeUnaTorreSoloDeTapas(Test.TowerTest)]"/>
+    <testcase name="coverMantieneTamanoDeLaTorre" classname="Test.TowerTest" time="0.001" displayname="coverMantieneTamanoDeLaTorre" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:coverMantieneTamanoDeLaTorre(Test.TowerTest)]"/>
+    <testcase name="deveEliminarmeElTopeDeUnaTorreQueEsUnaLId" classname="Test.TowerTest" time="0.0" displayname="deveEliminarmeElTopeDeUnaTorreQueEsUnaLId" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:deveEliminarmeElTopeDeUnaTorreQueEsUnaLId(Test.TowerTest)]"/>
+    <testcase name="debeIntercambiarDosTapas" classname="Test.TowerTest" time="0.002" displayname="debeIntercambiarDosTapas" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeIntercambiarDosTapas(Test.TowerTest)]"/>
+    <testcase name="debeRemoverLaUnicaCopa" classname="Test.TowerTest" time="0.001" displayname="debeRemoverLaUnicaCopa" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRemoverLaUnicaCopa(Test.TowerTest)]"/>
+    <testcase name="coverCubreSoloCopasConSuTapaEnLaTorre" classname="Test.TowerTest" time="0.001" displayname="coverCubreSoloCopasConSuTapaEnLaTorre" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:coverCubreSoloCopasConSuTapaEnLaTorre(Test.TowerTest)]"/>
+    <testcase name="debeIntercambiarPrimeraCopaPorUltima" classname="Test.TowerTest" time="0.888" displayname="debeIntercambiarPrimeraCopaPorUltima" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeIntercambiarPrimeraCopaPorUltima(Test.TowerTest)]"/>
+    <testcase name="debeCrearmeUnaTorreDeTapasConCopas" classname="Test.TowerTest" time="0.001" displayname="debeCrearmeUnaTorreDeTapasConCopas" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeCrearmeUnaTorreDeTapasConCopas(Test.TowerTest)]"/>
+    <testcase name="debeDarmeElTopCorrectoConUnaMiniTorre" classname="Test.TowerTest" time="0.001" displayname="debeDarmeElTopCorrectoConUnaMiniTorre" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeDarmeElTopCorrectoConUnaMiniTorre(Test.TowerTest)]"/>
+    <testcase name="debeEliminarmeElTopeDeUnaTorreSoloDeCopas" classname="Test.TowerTest" time="0.068" displayname="debeEliminarmeElTopeDeUnaTorreSoloDeCopas" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeEliminarmeElTopeDeUnaTorreSoloDeCopas(Test.TowerTest)]"/>
+    <testcase name="debeAgregarUnaTapaDentroDeUnaCopa" classname="Test.TowerTest" time="0.001" displayname="debeAgregarUnaTapaDentroDeUnaCopa" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeAgregarUnaTapaDentroDeUnaCopa(Test.TowerTest)]"/>
+    <testcase name="noDebeAgregarUnaTapaDuplicada" classname="Test.TowerTest" time="0.0" displayname="noDebeAgregarUnaTapaDuplicada" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:noDebeAgregarUnaTapaDuplicada(Test.TowerTest)]"/>
+    <testcase name="coverConTorreVaciaNoFalla" classname="Test.TowerTest" time="0.001" displayname="coverConTorreVaciaNoFalla" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:coverConTorreVaciaNoFalla(Test.TowerTest)]"/>
+    <testcase name="coverSinTapasNoAlteraElOrden" classname="Test.TowerTest" time="0.001" displayname="coverSinTapasNoAlteraElOrden" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:coverSinTapasNoAlteraElOrden(Test.TowerTest)]"/>
+    <testcase name="debeRetornarVacioConUnSoloElemento" classname="Test.TowerTest" time="0.001" displayname="debeRetornarVacioConUnSoloElemento" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRetornarVacioConUnSoloElemento(Test.TowerTest)]"/>
+    <testcase name="debeIntercambiarCopayTapa" classname="Test.TowerTest" time="0.001" displayname="debeIntercambiarCopayTapa" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeIntercambiarCopayTapa(Test.TowerTest)]"/>
+    <testcase name="debeAgregarUnaTapaQueCubraUnaCopa" classname="Test.TowerTest" time="0.068" displayname="debeAgregarUnaTapaQueCubraUnaCopa" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeAgregarUnaTapaQueCubraUnaCopa(Test.TowerTest)]"/>
+    <testcase name="debeRemoverTapaQueCubreYDescubrirCopa" classname="Test.TowerTest" time="0.001" displayname="debeRemoverTapaQueCubreYDescubrirCopa" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRemoverTapaQueCubreYDescubrirCopa(Test.TowerTest)]"/>
+    <testcase name="debeRemoverUnaCopaSinElementos" classname="Test.TowerTest" time="0.001" displayname="debeRemoverUnaCopaSinElementos" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRemoverUnaCopaSinElementos(Test.TowerTest)]"/>
+    <testcase name="debeEliminarUnaTapa" classname="Test.TowerTest" time="0.002" displayname="debeEliminarUnaTapa" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeEliminarUnaTapa(Test.TowerTest)]"/>
+    <testcase name="debeHacermeUnaTorreInvertida" classname="Test.TowerTest" time="0.001" displayname="debeHacermeUnaTorreInvertida" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeHacermeUnaTorreInvertida(Test.TowerTest)]"/>
+    <testcase name="swapMismoElementoNoAlteraElOrden" classname="Test.TowerTest" time="0.001" displayname="swapMismoElementoNoAlteraElOrden" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:swapMismoElementoNoAlteraElOrden(Test.TowerTest)]"/>
+    <testcase name="debeRemoverUnaTapaSinElementos" classname="Test.TowerTest" time="0.001" displayname="debeRemoverUnaTapaSinElementos" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRemoverUnaTapaSinElementos(Test.TowerTest)]"/>
+    <testcase name="debeAgregarVariasTapasCorrectamente" classname="Test.TowerTest" time="0.001" displayname="debeAgregarVariasTapasCorrectamente" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeAgregarVariasTapasCorrectamente(Test.TowerTest)]"/>
+    <testcase name="coverCubreUnaCopaCuandoHaySuTapa" classname="Test.TowerTest" time="0.001" displayname="coverCubreUnaCopaCuandoHaySuTapa" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:coverCubreUnaCopaCuandoHaySuTapa(Test.TowerTest)]"/>
+    <testcase name="debeRemoverTapaEntreDosElementos" classname="Test.TowerTest" time="0.001" displayname="debeRemoverTapaEntreDosElementos" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRemoverTapaEntreDosElementos(Test.TowerTest)]"/>
+    <testcase name="noDebeIntercambiarSiPrimerElementoNoExiste" classname="Test.TowerTest" time="0.0" displayname="noDebeIntercambiarSiPrimerElementoNoExiste" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:noDebeIntercambiarSiPrimerElementoNoExiste(Test.TowerTest)]"/>
+    <testcase name="debeRemoverCopayReubicarCopasInternas" classname="Test.TowerTest" time="0.0" displayname="debeRemoverCopayReubicarCopasInternas" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRemoverCopayReubicarCopasInternas(Test.TowerTest)]"/>
+    <testcase name="debeRemoverCopaDelMedio" classname="Test.TowerTest" time="0.0" displayname="debeRemoverCopaDelMedio" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRemoverCopaDelMedio(Test.TowerTest)]"/>
+    <testcase name="debeRetornarVacioSiObjectsOrdenadoDescendente" classname="Test.TowerTest" time="0.001" displayname="debeRetornarVacioSiObjectsOrdenadoDescendente" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRetornarVacioSiObjectsOrdenadoDescendente(Test.TowerTest)]"/>
+    <testcase name="debeRetornarVacioConTorreVacia" classname="Test.TowerTest" time="0.0" displayname="debeRetornarVacioConTorreVacia" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeRetornarVacioConTorreVacia(Test.TowerTest)]"/>
+    <testcase name="debeAgregarmeUnaCopaDentroDeOtra" classname="Test.TowerTest" time="0.001" displayname="debeAgregarmeUnaCopaDentroDeOtra" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:debeAgregarmeUnaCopaDentroDeOtra(Test.TowerTest)]"/>
+    <testcase name="noDebeRemoverCopaQueNoExiste" classname="Test.TowerTest" time="0.0" displayname="noDebeRemoverCopaQueNoExiste" uniqueid="[engine:junit-vintage]/[runner:Test.TowerTest]/[test:noDebeRemoverCopaQueNoExiste(Test.TowerTest)]"/>
+  </testsuite>
+  <testsuite name="Test.TowerAcceptanceTest" time="0.781" displayname="TowerAcceptanceTest" uniqueid="[engine:junit-vintage]/[runner:Test.TowerAcceptanceTest]">
+    <testcase name="debeCubrirCopasYVerificarLidedCupsOrdenado" classname="Test.TowerAcceptanceTest" time="0.138" displayname="debeCubrirCopasYVerificarLidedCupsOrdenado" uniqueid="[engine:junit-vintage]/[runner:Test.TowerAcceptanceTest]/[test:debeCubrirCopasYVerificarLidedCupsOrdenado(Test.TowerAcceptanceTest)]"/>
+    <testcase name="debeCrearTorreConConstructorDeCopasYVerificarAltura" classname="Test.TowerAcceptanceTest" time="0.001" displayname="debeCrearTorreConConstructorDeCopasYVerificarAltura" uniqueid="[engine:junit-vintage]/[runner:Test.TowerAcceptanceTest]/[test:debeCrearTorreConConstructorDeCopasYVerificarAltura(Test.TowerAcceptanceTest)]"/>
+    <testcase name="debeOrdenarTorreDeМayorAMenorConTapaSobreSuCopa" classname="Test.TowerAcceptanceTest" time="0.3" displayname="debeOrdenarTorreDeМayorAMenorConTapaSobreSuCopa" uniqueid="[engine:junit-vintage]/[runner:Test.TowerAcceptanceTest]/[test:debeOrdenarTorreDeМayorAMenorConTapaSobreSuCopa(Test.TowerAcceptanceTest)]"/>
+    <testcase name="debeIntercambiarElementosYDetectarDesorden" classname="Test.TowerAcceptanceTest" time="0.094" displayname="debeIntercambiarElementosYDetectarDesorden" uniqueid="[engine:junit-vintage]/[runner:Test.TowerAcceptanceTest]/[test:debeIntercambiarElementosYDetectarDesorden(Test.TowerAcceptanceTest)]"/>
+    <testcase name="debeConstruirTorreConCopasYTapasCorrectamente" classname="Test.TowerAcceptanceTest" time="0.125" displayname="debeConstruirTorreConCopasYTapasCorrectamente" uniqueid="[engine:junit-vintage]/[runner:Test.TowerAcceptanceTest]/[test:debeConstruirTorreConCopasYTapasCorrectamente(Test.TowerAcceptanceTest)]"/>
+    <testcase name="debeOrdenarTorreCompletaConCicloSwapToReduce" classname="Test.TowerAcceptanceTest" time="0.12" displayname="debeOrdenarTorreCompletaConCicloSwapToReduce" uniqueid="[engine:junit-vintage]/[runner:Test.TowerAcceptanceTest]/[test:debeOrdenarTorreCompletaConCicloSwapToReduce(Test.TowerAcceptanceTest)]"/>
+  </testsuite>
+  <testsuite name="Test.TowerContestAcceptanceTest" time="24.247" displayname="TowerContestAcceptanceTest" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestAcceptanceTest]">
+    <testcase name="deberiamostrarImposible" classname="Test.TowerContestAcceptanceTest" time="23.799" displayname="deberiamostrarImposible" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestAcceptanceTest]/[test:deberiamostrarImposible(Test.TowerContestAcceptanceTest)]"/>
+    <testcase name="crearCorrectamenteImagen21" classname="Test.TowerContestAcceptanceTest" time="0.109" displayname="crearCorrectamenteImagen21" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestAcceptanceTest]/[test:crearCorrectamenteImagen21(Test.TowerContestAcceptanceTest)]"/>
+    <testcase name="crearCorrectamenteImagen22" classname="Test.TowerContestAcceptanceTest" time="0.117" displayname="crearCorrectamenteImagen22" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestAcceptanceTest]/[test:crearCorrectamenteImagen22(Test.TowerContestAcceptanceTest)]"/>
+    <testcase name="deberiaCrearCorrectamenteLaImagen2" classname="Test.TowerContestAcceptanceTest" time="0.122" displayname="deberiaCrearCorrectamenteLaImagen2" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestAcceptanceTest]/[test:deberiaCrearCorrectamenteLaImagen2(Test.TowerContestAcceptanceTest)]"/>
+    <testcase name="deberiaCrearCorrectamenteLaImagen" classname="Test.TowerContestAcceptanceTest" time="0.094" displayname="deberiaCrearCorrectamenteLaImagen" uniqueid="[engine:junit-vintage]/[runner:Test.TowerContestAcceptanceTest]/[test:deberiaCrearCorrectamenteLaImagen(Test.TowerContestAcceptanceTest)]"/>
+  </testsuite>
+  <testsuite name="Test.SubElementsTest" time="0.198" displayname="SubElementsTest" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]">
+    <testcase name="pruebaAbridorNoPuedeDesplazar" classname="Test.SubElementsTest" time="0.051" displayname="pruebaAbridorNoPuedeDesplazar()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaAbridorNoPuedeDesplazar()]"/>
+    <testcase name="pruebaMiedosaNoDañaNiDesplaza" classname="Test.SubElementsTest" time="0.002" displayname="pruebaMiedosaNoDañaNiDesplaza()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaMiedosaNoDañaNiDesplaza()]"/>
+    <testcase name="pruebaJerarquicoNoPuedeDañar" classname="Test.SubElementsTest" time="0.002" displayname="pruebaJerarquicoNoPuedeDañar()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaJerarquicoNoPuedeDañar()]"/>
+    <testcase name="pruebaJerarquicoDesplazaMenores" classname="Test.SubElementsTest" time="0.011" displayname="pruebaJerarquicoDesplazaMenores()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaJerarquicoDesplazaMenores()]"/>
+    <testcase name="pruebaLocaSiempreEnLaBaseEnTorreMixta" classname="Test.SubElementsTest" time="0.028" displayname="pruebaLocaSiempreEnLaBaseEnTorreMixta()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaLocaSiempreEnLaBaseEnTorreMixta()]">
+      <failure>
+        <expected>lid</expected>
+        <actual>cup</actual>
+        org.opentest4j.AssertionFailedError: expected: &lt;lid&gt; but was: &lt;cup&gt;&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)&#13;
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)&#13;
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)&#13;
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)&#13;
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)&#13;
+	at Test.SubElementsTest.pruebaLocaSiempreEnLaBaseEnTorreMixta(SubElementsTest.java:307)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)&#13;
+&#13;
+
+      </failure>
+    </testcase>
+    <testcase name="pruebaAbridorSoloDañaTapasQuitables" classname="Test.SubElementsTest" time="0.002" displayname="pruebaAbridorSoloDañaTapasQuitables()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaAbridorSoloDañaTapasQuitables()]"/>
+    <testcase name="pruebaAbridorInsertadoEnTorreVacia" classname="Test.SubElementsTest" time="0.002" displayname="pruebaAbridorInsertadoEnTorreVacia()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaAbridorInsertadoEnTorreVacia()]"/>
+    <testcase name="pruebaCajaCreaTapaAlSerInsertada" classname="Test.SubElementsTest" time="0.001" displayname="pruebaCajaCreaTapaAlSerInsertada()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaCajaCreaTapaAlSerInsertada()]"/>
+    <testcase name="pruebaLocaVaALaBase" classname="Test.SubElementsTest" time="0.005" displayname="pruebaLocaVaALaBase()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaLocaVaALaBase()]">
+      <failure>
+        <expected>lid</expected>
+        <actual>cup</actual>
+        org.opentest4j.AssertionFailedError: expected: &lt;lid&gt; but was: &lt;cup&gt;&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)&#13;
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)&#13;
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)&#13;
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)&#13;
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)&#13;
+	at Test.SubElementsTest.pruebaLocaVaALaBase(SubElementsTest.java:192)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)&#13;
+&#13;
+
+      </failure>
+    </testcase>
+    <testcase name="pruebaJerarquicoInsertado" classname="Test.SubElementsTest" time="0.003" displayname="pruebaJerarquicoInsertado()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaJerarquicoInsertado()]"/>
+    <testcase name="pruebaJerarquicoNoQuitableEnPosicion0" classname="Test.SubElementsTest" time="0.002" displayname="pruebaJerarquicoNoQuitableEnPosicion0()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaJerarquicoNoQuitableEnPosicion0()]"/>
+    <testcase name="pruebaAbridorEliminaMiedosaSiEsQuitable" classname="Test.SubElementsTest" time="0.002" displayname="pruebaAbridorEliminaMiedosaSiEsQuitable()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaAbridorEliminaMiedosaSiEsQuitable()]"/>
+    <testcase name="pruebaMiedosaInsertadaConTazaCompañera" classname="Test.SubElementsTest" time="0.0" displayname="pruebaMiedosaInsertadaConTazaCompañera()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaMiedosaInsertadaConTazaCompañera()]"/>
+    <testcase name="pruebaJerarquicoNoDesplazaMayores" classname="Test.SubElementsTest" time="0.002" displayname="pruebaJerarquicoNoDesplazaMayores()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaJerarquicoNoDesplazaMayores()]"/>
+    <testcase name="pruebaLogicaDeDesplazamientoJerarquico" classname="Test.SubElementsTest" time="0.002" displayname="pruebaLogicaDeDesplazamientoJerarquico()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaLogicaDeDesplazamientoJerarquico()]"/>
+    <testcase name="pruebaTorreMixtaPermaneceCorrecta" classname="Test.SubElementsTest" time="0.002" displayname="pruebaTorreMixtaPermaneceCorrecta()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaTorreMixtaPermaneceCorrecta()]"/>
+    <testcase name="pruebaCajaDuplicadaRechazada" classname="Test.SubElementsTest" time="0.002" displayname="pruebaCajaDuplicadaRechazada()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaCajaDuplicadaRechazada()]"/>
+    <testcase name="pruebaLocaNoDañaNiDesplaza" classname="Test.SubElementsTest" time="0.001" displayname="pruebaLocaNoDañaNiDesplaza()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaLocaNoDañaNiDesplaza()]"/>
+    <testcase name="pruebaAbridorNoEliminaMiedosaNoQuitable" classname="Test.SubElementsTest" time="0.005" displayname="pruebaAbridorNoEliminaMiedosaNoQuitable()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaAbridorNoEliminaMiedosaNoQuitable()]"/>
+    <testcase name="pruebaTazaNormalNoEsCaja" classname="Test.SubElementsTest" time="0.0" displayname="pruebaTazaNormalNoEsCaja()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaTazaNormalNoEsCaja()]"/>
+    <testcase name="pruebaLocaDuplicadaRechazada" classname="Test.SubElementsTest" time="0.0" displayname="pruebaLocaDuplicadaRechazada()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaLocaDuplicadaRechazada()]"/>
+    <testcase name="pruebaTapaNormalNoEsMiedosa" classname="Test.SubElementsTest" time="0.0" displayname="pruebaTapaNormalNoEsMiedosa()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaTapaNormalNoEsMiedosa()]"/>
+    <testcase name="pruebaTapaLocaInsertada" classname="Test.SubElementsTest" time="0.0" displayname="pruebaTapaLocaInsertada()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaTapaLocaInsertada()]"/>
+    <testcase name="pruebaBanderaMiedosaEsVerdadera" classname="Test.SubElementsTest" time="0.0" displayname="pruebaBanderaMiedosaEsVerdadera()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaBanderaMiedosaEsVerdadera()]"/>
+    <testcase name="pruebaCajaInsertada" classname="Test.SubElementsTest" time="0.0" displayname="pruebaCajaInsertada()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaCajaInsertada()]"/>
+    <testcase name="pruebaMiedosaRechazadaSinTazaCompañera" classname="Test.SubElementsTest" time="0.0" displayname="pruebaMiedosaRechazadaSinTazaCompañera()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaMiedosaRechazadaSinTazaCompañera()]"/>
+    <testcase name="pruebaAbridorEliminaTapasConNumeroMenor" classname="Test.SubElementsTest" time="0.0" displayname="pruebaAbridorEliminaTapasConNumeroMenor()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaAbridorEliminaTapasConNumeroMenor()]"/>
+    <testcase name="pruebaJerarquicoConstruidoConTapaTienePosicion0NoQuitable" classname="Test.SubElementsTest" time="0.002" displayname="pruebaJerarquicoConstruidoConTapaTienePosicion0NoQuitable()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaJerarquicoConstruidoConTapaTienePosicion0NoQuitable()]"/>
+    <testcase name="pruebaAbridorDuplicadoRechazado" classname="Test.SubElementsTest" time="0.003" displayname="pruebaAbridorDuplicadoRechazado()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaAbridorDuplicadoRechazado()]"/>
+    <testcase name="pruebaMiedosaNoQuitableSiTazaYaEstaCubierta" classname="Test.SubElementsTest" time="0.001" displayname="pruebaMiedosaNoQuitableSiTazaYaEstaCubierta()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaMiedosaNoQuitableSiTazaYaEstaCubierta()]"/>
+    <testcase name="pruebaTapaNormalNoEsLoca" classname="Test.SubElementsTest" time="0.003" displayname="pruebaTapaNormalNoEsLoca()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaTapaNormalNoEsLoca()]"/>
+    <testcase name="pruebaBanderaLocaEsVerdadera" classname="Test.SubElementsTest" time="0.004" displayname="pruebaBanderaLocaEsVerdadera()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaBanderaLocaEsVerdadera()]">
+      <failure>
+        <expected>true</expected>
+        <actual>false</actual>
+        org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)&#13;
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)&#13;
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)&#13;
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)&#13;
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)&#13;
+	at Test.SubElementsTest.pruebaBanderaLocaEsVerdadera(SubElementsTest.java:176)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)&#13;
+&#13;
+
+      </failure>
+    </testcase>
+    <testcase name="pruebaBanderaCajaEsVerdadera" classname="Test.SubElementsTest" time="0.009" displayname="pruebaBanderaCajaEsVerdadera()" uniqueid="[engine:junit-jupiter]/[class:Test.SubElementsTest]/[method:pruebaBanderaCajaEsVerdadera()]"/>
+  </testsuite>
+  <testsuite name="Test.LidTest" time="0.014" displayname="LidTest" uniqueid="[engine:junit-jupiter]/[class:Test.LidTest]">
+    <testcase name="deberiaTenerElMismoNumeroQueSuCopa" classname="Test.LidTest" time="0.004" displayname="deberiaTenerElMismoNumeroQueSuCopa()" uniqueid="[engine:junit-jupiter]/[class:Test.LidTest]/[method:deberiaTenerElMismoNumeroQueSuCopa()]"/>
+    <testcase name="deberiaCrearTapaConCupAsociada" classname="Test.LidTest" time="0.001" displayname="deberiaCrearTapaConCupAsociada()" uniqueid="[engine:junit-jupiter]/[class:Test.LidTest]/[method:deberiaCrearTapaConCupAsociada()]"/>
+    <testcase name="deberiaCrearUnaTapaConNumero3" classname="Test.LidTest" time="0.002" displayname="deberiaCrearUnaTapaConNumero3()" uniqueid="[engine:junit-jupiter]/[class:Test.LidTest]/[method:deberiaCrearUnaTapaConNumero3()]"/>
+    <testcase name="deberiaCambiarEstado" classname="Test.LidTest" time="0.001" displayname="deberiaCambiarEstado()" uniqueid="[engine:junit-jupiter]/[class:Test.LidTest]/[method:deberiaCambiarEstado()]"/>
+    <testcase name="deberiaTenerElMismoColorQueSuCopa" classname="Test.LidTest" time="0.001" displayname="deberiaTenerElMismoColorQueSuCopa()" uniqueid="[engine:junit-jupiter]/[class:Test.LidTest]/[method:deberiaTenerElMismoColorQueSuCopa()]"/>
+    <testcase name="deberiaFallarSiEstadoInicialNoEsNormal" classname="Test.LidTest" time="0.002" displayname="deberiaFallarSiEstadoInicialNoEsNormal()" uniqueid="[engine:junit-jupiter]/[class:Test.LidTest]/[method:deberiaFallarSiEstadoInicialNoEsNormal()]"/>
+  </testsuite>
+</testrun>
