@@ -22,6 +22,7 @@ public class WorldHardestGameGUI extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private JPanel startPanel;
+    private JPanel menuPanel;
 
     public WorldHardestGameGUI() {
         prepareElements();
@@ -90,16 +91,18 @@ public class WorldHardestGameGUI extends JFrame {
         startPanel.setLayout(new BorderLayout());
         startPanel.setOpaque(false); // Para que se vea el fondo
         
-        // Título
-        JLabel titleLabel = new JLabel("World's Hardest Game", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 48));
-        titleLabel.setForeground(Color.WHITE); // Texto blanco para que resalte
-        startPanel.add(titleLabel, BorderLayout.CENTER);
         
         // Botón Start
         JButton startButton = new JButton("Start");
         startButton.setFont(new Font("Arial", Font.BOLD, 24));
         startButton.setPreferredSize(new Dimension(150, 50));
+        
+        //color boton
+        startButton.setBackground(new Color(167, 235, 122)); // Un azul brillante, por ejemplo
+        startButton.setForeground(Color.WHITE);            // Color de la letra
+        startButton.setFocusPainted(false);               // Quita el cuadrito punteado al hacer clic
+        startButton.setBorderPainted(false);              // Quita el borde por defecto
+        startButton.setContentAreaFilled(true);
         
         // Panel para el botón (en la parte inferior)
         JPanel buttonPanel = new JPanel();
@@ -122,7 +125,7 @@ public class WorldHardestGameGUI extends JFrame {
     private void exit() {
         int confirm = JOptionPane.showConfirmDialog(
             this,
-            "¿Desea cerrar la aplicación EasySokoban?",
+            "¿Desea cerrar la aplicación World Hardest Game?",
             "Confirmar salida",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE
