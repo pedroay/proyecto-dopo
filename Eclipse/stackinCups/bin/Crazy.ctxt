@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Crazy
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Crazy\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=number\ torre
+comment1.target=Crazy(int,\ Tower)
+comment2.params=number\ cup
+comment2.target=Crazy(int,\ Cup)
+comment3.params=
+comment3.target=void\ draw()
+numComments=4

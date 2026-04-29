@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=TowerAcceptanceTest
+comment1.params=
+comment1.target=void\ setUp()
+comment2.params=
+comment2.target=void\ debeConstruirTorreConCopasYTapasCorrectamente()
+comment2.text=\r\n\ Prueba\ de\ aceptaci\u00F3n\ C1-1\:\ Torre\ b\u00E1sica\ con\ pushCup\ y\ pushLid,\r\n\ verificando\ unicidad,\ orden\ de\ stacking\ y\ copas\ tapadas.\r\n
+comment3.params=
+comment3.target=void\ debeOrdenarTorreDe\u041CayorAMenorConTapaSobreSuCopa()
+comment3.text=\r\n\ Prueba\ de\ aceptaci\u00F3n\ C1-2\:\ orderTower\ ordena\ de\ mayor\ a\ menor,\r\n\ el\ menor\ queda\ en\ la\ cima,\ y\ si\ hay\ tapa\ del\ mismo\ n\u00FAmero\ se\ coloca\ sobre\ su\ copa.\r\n
+comment4.params=
+comment4.target=void\ debeCrearTorreConConstructorDeCopasYVerificarAltura()
+comment4.text=\r\n\ Prueba\ de\ aceptaci\u00F3n\ C1-3\:\ Constructor\ Tower(int\ cups)\ crea\ copas\r\n\ de\ tama\u00F1o\ 1,3,5,...\ y\ height()\ retorna\ la\ altura\ correcta.\r\n
+comment5.params=
+comment5.target=void\ debeIntercambiarElementosYDetectarDesorden()
+comment5.text=\r\n\ Prueba\ de\ aceptaci\u00F3n\ C2-1\:\ swap\ intercambia\ dos\ elementos\ y\r\n\ swapToReduce\ detecta\ el\ primer\ par\ desordenado\ por\ altura.\r\n
+comment6.params=
+comment6.target=void\ debeCubrirCopasYVerificarLidedCupsOrdenado()
+comment6.text=\r\n\ Prueba\ de\ aceptaci\u00F3n\ C2-2\:\ cover\ empareja\ copas\ con\ sus\ tapas,\r\n\ verificando\ staking,\ estados\ y\ lidedCups\ ordenado\ de\ menor\ a\ mayor.\r\n
+comment7.params=
+comment7.target=void\ debeOrdenarTorreCompletaConCicloSwapToReduce()
+comment7.text=\r\n\ Prueba\ de\ aceptaci\u00F3n\ C2-3\:\ ciclo\ completo\ swapToReduce\ +\ swap\r\n\ hasta\ ordenar\ la\ torre\ completamente\ de\ mayor\ a\ menor.\r\n
+numComments=8

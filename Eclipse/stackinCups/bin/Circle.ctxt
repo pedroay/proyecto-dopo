@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Circle
+comment0.text=\r\n\ Un\ c\u00EDrculo\ que\ puede\ ser\ manipulado\ y\ que\ se\ dibuja\ en\ el\ canvas.\r\n\ Hereda\ de\ Shape\ los\ atributos\ de\ posici\u00F3n,\ color\ y\ visibilidad,\r\n\ as\u00ED\ como\ todos\ los\ m\u00E9todos\ de\ movimiento\ comunes.\r\n\r\n\ Refactorizaci\u00F3n\ 1DOPO-I04\ \u2013\ Entrega\ 4\:\ aprovechamiento\ de\ herencia.\r\n\r\n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\ (Modified)\r\n\ @version\ 2.0\r\n
+comment1.params=
+comment1.target=Circle()
+comment1.text=\r\n\ Crea\ un\ nuevo\ c\u00EDrculo\ en\ la\ posici\u00F3n\ por\ defecto\ con\ color\ azul.\r\n
+comment2.params=newDiameter
+comment2.target=void\ changeSize(int)
+comment2.text=\r\n\ Cambia\ el\ di\u00E1metro\ del\ c\u00EDrculo.\r\n\ @param\ newDiameter\ nuevo\ di\u00E1metro\ en\ p\u00EDxeles\ (debe\ ser\ >\=\ 0)\r\n
+comment3.params=
+comment3.target=int\ getDiameter()
+comment3.text=Devuelve\ el\ di\u00E1metro\ actual\ del\ c\u00EDrculo.
+comment4.params=
+comment4.target=void\ draw()
+comment4.text=\r\n\ Dibuja\ el\ c\u00EDrculo\ en\ el\ Canvas\ con\ las\ especificaciones\ actuales.\r\n
+comment5.params=
+comment5.target=void\ erase()
+comment5.text=\r\n\ Borra\ el\ c\u00EDrculo\ del\ Canvas.\r\n
+numComments=6

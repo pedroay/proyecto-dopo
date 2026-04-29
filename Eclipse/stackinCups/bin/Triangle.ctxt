@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Triangle
+comment0.text=\r\n\ Un\ tri\u00E1ngulo\ que\ puede\ ser\ manipulado\ y\ que\ se\ dibuja\ en\ el\ canvas.\r\n\ Hereda\ de\ Shape\ los\ atributos\ de\ posici\u00F3n,\ color\ y\ visibilidad,\r\n\ as\u00ED\ como\ todos\ los\ m\u00E9todos\ de\ movimiento\ comunes.\r\n\r\n\ Refactorizaci\u00F3n\ 1DOPO-I04\ \u2013\ Entrega\ 4\:\ aprovechamiento\ de\ herencia.\r\n\r\n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\ (Modified)\r\n\ @version\ 2.0\r\n
+comment1.params=
+comment1.target=Triangle()
+comment1.text=\r\n\ Crea\ un\ nuevo\ tri\u00E1ngulo\ en\ la\ posici\u00F3n\ por\ defecto\ con\ color\ verde.\r\n
+comment2.params=height\ width
+comment2.target=Triangle(int,\ int)
+comment2.text=\r\n\ Crea\ un\ nuevo\ tri\u00E1ngulo\ con\ altura\ y\ ancho\ especificados.\r\n\ La\ posici\u00F3n\ y\ el\ color\ se\ mantienen\ con\ los\ valores\ por\ defecto.\r\n\ @param\ height\ altura\ del\ tri\u00E1ngulo\ en\ p\u00EDxeles\ (debe\ ser\ >\=\ 0)\r\n\ @param\ width\ \ base\ del\ tri\u00E1ngulo\ en\ p\u00EDxeles\ \ (debe\ ser\ >\=\ 0)\r\n
+comment3.params=newHeight\ newWidth
+comment3.target=void\ changeSize(int,\ int)
+comment3.text=\r\n\ Cambia\ el\ tama\u00F1o\ del\ tri\u00E1ngulo.\r\n\ @param\ newHeight\ nueva\ altura\ en\ p\u00EDxeles\ (debe\ ser\ >\=\ 0)\r\n\ @param\ newWidth\ \ nuevo\ ancho\ en\ p\u00EDxeles\ \ (debe\ ser\ >\=\ 0)\r\n
+comment4.params=
+comment4.target=int\ getHeight()
+comment4.text=Devuelve\ la\ altura\ actual\ del\ tri\u00E1ngulo.
+comment5.params=
+comment5.target=int\ getWidth()
+comment5.text=Devuelve\ la\ anchura\ actual\ del\ tri\u00E1ngulo.
+comment6.params=
+comment6.target=void\ draw()
+comment6.text=\r\n\ Dibuja\ el\ tri\u00E1ngulo\ en\ el\ Canvas\ con\ las\ especificaciones\ actuales.\r\n
+comment7.params=
+comment7.target=void\ erase()
+comment7.text=\r\n\ Borra\ el\ tri\u00E1ngulo\ del\ Canvas.\r\n
+numComments=8

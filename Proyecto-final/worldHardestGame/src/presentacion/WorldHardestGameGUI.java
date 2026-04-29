@@ -52,16 +52,25 @@ public class WorldHardestGameGUI extends JFrame {
         startPanel = new JPanel() {
             private Image backgroundImage;
             
-            { // Bloque de inicialización
-                java.io.File file = new java.io.File("src/presentacion/images/background.png");
-                if (!file.exists()) {
-                    // Si falla, intentamos una ruta relativa diferente o absoluta (para pruebas)
-                    file = new java.io.File("c:/Users/Pedro Ayala/Documents/proyecto-dopo/Proyecto-final/worldHardestGame/src/presentacion/images/background.png");
-                }
-                if (file.exists()) {
-                    backgroundImage = new ImageIcon(file.getAbsolutePath()).getImage();
-                } else {
-                    System.out.println("No se encontró la imagen en: " + file.getAbsolutePath());
+            { 
+                // Intentamos cargar la imagen como recurso del proyecto
+                try {
+                    // La ruta empieza con "/" desde la raíz de src
+                    java.net.URL imgURL = getClass().getResource("/presentacion/images/fondo.png");
+                    if (imgURL != null) {
+                        backgroundImage = new ImageIcon(imgURL).getImage();
+                    } else {
+                        // Si getResource falla, intentamos la ruta física relativa
+                        System.out.println("No se encontró como recurso, intentando ruta física...");
+                        java.io.File file = new java.io.File("src/presentacion/images/fondo.png");
+                        if (file.exists()) {
+                            backgroundImage = new ImageIcon(file.getAbsolutePath()).getImage();
+                        } else {
+                            System.err.println("¡Error! No se encuentra 'fondo.png' en ninguna ruta.");
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -69,8 +78,10 @@ public class WorldHardestGameGUI extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 if (backgroundImage != null) {
+                    // Dibujamos la imagen escalada al tamaño del panel
                     g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
                 } else {
+                    // Fondo de emergencia si la imagen no carga
                     g.setColor(Color.DARK_GRAY);
                     g.fillRect(0, 0, getWidth(), getHeight());
                 }
