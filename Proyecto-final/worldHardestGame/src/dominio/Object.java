@@ -22,7 +22,7 @@ public abstract class Object {
     }
 
     public void setPosy(int newPosy){
-        posx = newPosy;
+        posy = newPosy;
     }
     
     public int getPosx() {
