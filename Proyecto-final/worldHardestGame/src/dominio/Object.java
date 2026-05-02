@@ -14,19 +14,26 @@ public abstract class Object {
     }
 
     public boolean canColideW(Object obj) {
-        // TODO: Implementar lógica
-        return false;
+        return colideWith.contains(obj);
     }
 
     public void setPosx(int newPosx){
-        posx = newPosx
+        posx = newPosx;
     }
 
     public void setPosy(int newPosy){
-        posx = newPosy
+        posx = newPosy;
     }
-
+    
+    public int getPosx() {
+    	return posx;
+    }
+    
+    public int getPosy() {
+    	return posy;
+    }
+    
     public void addColideWith(Object newObject){
-        
+    	
     }
 }
