@@ -6,13 +6,16 @@ public class WorldHG {
     private Level level;
     private Board[][] board;
     private Player player1;
-    private Player player2;
     private String modalidad;
     private int deaths;
+    private int timeRemaining; // en segundos (3 minutos = 180 seg)
+    private ArrayList<Enemy> enemies; // referencia rápida a todos los enemigos activos
 
     public WorldHG(String modalidad) {
         this.modalidad = modalidad;
         this.deaths = 0;
+        this.timeRemaining = 180;
+        this.enemies = new ArrayList<>();
     }
 
     /**
@@ -21,6 +24,9 @@ public class WorldHG {
      */
     public void loadLevel(Level level) {
         this.level = level;
+        this.enemies = new ArrayList<>();
+        this.timeRemaining = 180;
+        this.deaths = 0;
         this.board = buildBoard(level);
 
         if ("player".equals(modalidad)) {
@@ -31,8 +37,16 @@ public class WorldHG {
     }
 
     /**
-     * Construye la grilla dinámica Board[][] a partir de la representación estática del Level.
-     * Cada token del .txt se traduce en una celda Board con su contenido inicial.
+     * Construye la grilla dinámica Board[][] a partir del Level estático.
+     * Tokens soportados:
+     *   W   = pared (Borde)
+     *   S   = zona de inicio (Start)
+     *   G   = meta final (Goal)
+     *   Z   = zona segura intermedia (SafeZone)
+     *   P   = moneda (Punto)
+     *   B{estado} = Ball con el estado dado (BH, BV, BP, etc.)
+     *   M   = Mina (enemigo estático)
+     *   .   = celda vacía
      */
     private Board[][] buildBoard(Level level) {
         String[] rows = level.getRows();
@@ -43,7 +57,19 @@ public class WorldHG {
         for (int y = 0; y < height; y++) {
             String[] tokens = rows[y].split(" ");
             for (int x = 0; x < tokens.length; x++) {
-                switch (tokens[x]) {
+                String token = tokens[x];
+
+                // Ball: cualquier token que empiece con "B" y tenga estado (BH, BV, BP...)
+                if (token.startsWith("B") && token.length() > 1) {
+                    String estado = token.substring(1); // "H", "V", "P", etc.
+                    Ball ball = new Ball(x, y, estado);
+                    newBoard[y][x] = new Board(x, y, true);
+                    newBoard[y][x].addObject(ball);
+                    enemies.add(ball);
+                    continue;
+                }
+
+                switch (token) {
                     case "W":
                         newBoard[y][x] = new Board(x, y, false);
                         newBoard[y][x].addObject(new Borde(x, y));
@@ -64,17 +90,64 @@ public class WorldHG {
                         newBoard[y][x] = new Board(x, y, true);
                         newBoard[y][x].addObject(new Punto(x, y));
                         break;
-                    case "B":
+                    case "M": {
+                        Mina mina = new Mina(x, y);
                         newBoard[y][x] = new Board(x, y, true);
-                        newBoard[y][x].addObject(new Ball(x, y));
+                        newBoard[y][x].addObject(mina);
+                        enemies.add(mina);
                         break;
-                    default: // "." celda vacía
+                    }
+                    default: // "."
                         newBoard[y][x] = new Board(x, y, true);
                         break;
                 }
             }
         }
         return newBoard;
+    }
+
+    /**
+     * Avanza el juego un paso:
+     * 1. Descuenta un segundo del tiempo
+     * 2. Mueve todos los enemigos móviles
+     * 3. Verifica si algún enemigo colisionó con el jugador
+     * Debe llamarse una vez por segundo desde la capa de presentación.
+     */
+    public void tick() {
+        if (timeRemaining > 0) {
+            timeRemaining--;
+        }
+        moveEnemies();
+        checkEnemyPlayerCollisions();
+    }
+
+    /**
+     * Mueve todos los enemigos que tienen lógica de movimiento.
+     * La Mina no se mueve — solo las Ball.
+     */
+    private void moveEnemies() {
+        for (Enemy enemy : enemies) {
+            if (enemy instanceof Ball) {
+                ((Ball) enemy).move(board);
+            }
+            // Mina: estática, no se mueve
+        }
+    }
+
+    /**
+     * Verifica si algún enemigo está en la misma celda que el jugador
+     * después de que los enemigos se movieron.
+     */
+    private void checkEnemyPlayerCollisions() {
+        if (player1 == null) return;
+        int px = player1.getPosx();
+        int py = player1.getPosy();
+        for (Object obj : new ArrayList<>(board[py][px].getContents())) {
+            if (obj instanceof Enemy) {
+                playerDies(player1);
+                return;
+            }
+        }
     }
 
     /**
@@ -132,8 +205,7 @@ public class WorldHG {
      * Revisa los objetos presentes en la celda y resuelve interacciones con el jugador.
      */
     private void checkInteractions(Player player, Board cell) {
-        ArrayList<Object> snapshot = new ArrayList<>(cell.getContents());
-        for (Object obj : snapshot) {
+        for (Object obj : new ArrayList<>(cell.getContents())) {
             if (obj instanceof Enemy) {
                 playerDies(player);
                 return;
@@ -180,12 +252,27 @@ public class WorldHG {
         board[player.getRespawnY()][player.getRespawnX()].addObject(player);
     }
 
-    public int getDeaths() {
-        return deaths;
-    }
+    // --- Getters de estado del juego ---
+
+    public int getDeaths() { return deaths; }
+
+    public int getTimeRemaining() { return timeRemaining; }
+
+    public boolean isTimeUp() { return timeRemaining <= 0; }
+
+    public boolean isLevelComplete() { return allCoinsCollected(); }
+
+    public Player getPlayer1() { return player1; }
+
+    public Board[][] getBoard() { return board; }
+
+    public Level getLevel() { return level; }
 
     public String getInfo() {
-        return "Muertes: " + deaths + " | Monedas recolectadas: " + (allCoinsCollected() ? "Todas" : "Faltan");
+        int mins = timeRemaining / 60;
+        int secs = timeRemaining % 60;
+        return String.format("Tiempo: %d:%02d | Muertes: %d | Monedas: %s",
+                mins, secs, deaths, allCoinsCollected() ? "Todas" : "Faltan");
     }
 
     public String saveGame() {
