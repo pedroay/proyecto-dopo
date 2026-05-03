@@ -5,19 +5,19 @@ package dominio;
  * Esto permite agregar nuevos patrones de movimiento fácilmente.
  *
  * Estados disponibles:
- *   "H" = horizontal: se mueve de izquierda a derecha, rebota en paredes.
- *   "V" = vertical:   se mueve de arriba a abajo, rebota en paredes.
- *   "P" = perímetro:  recorre el contorno de las paredes en sentido horario.
+ * "H" = horizontal: se mueve de izquierda a derecha, rebota en paredes.
+ * "V" = vertical: se mueve de arriba a abajo, rebota en paredes.
+ * "P" = perímetro: recorre el contorno de las paredes en sentido horario.
  *
  * En el archivo .txt se representa como:
- *   BH = Ball estado horizontal
- *   BV = Ball estado vertical
- *   BP = Ball estado perímetro
+ * BH = Ball estado horizontal
+ * BV = Ball estado vertical
+ * BP = Ball estado perímetro
  */
 public class Ball extends Enemy implements canMove {
-    private String estado;  // describe el patrón de movimiento
-    private int dirX;       // dirección actual en X (-1, 0, 1)
-    private int dirY;       // dirección actual en Y (-1, 0, 1)
+    private String estado; // describe el patrón de movimiento
+    private int dirX; // dirección actual en X (-1, 0, 1)
+    private int dirY; // dirección actual en Y (-1, 0, 1)
 
     /**
      * @param posx   posición inicial columna
@@ -36,13 +36,21 @@ public class Ball extends Enemy implements canMove {
     private void initDirection() {
         switch (estado) {
             case "H":
-                dirX = 1;  dirY = 0;  break; // inicia yendo a la derecha
+                dirX = 1;
+                dirY = 0;
+                break; // inicia yendo a la derecha
             case "V":
-                dirX = 0;  dirY = 1;  break; // inicia yendo hacia abajo
+                dirX = 0;
+                dirY = 1;
+                break; // inicia yendo hacia abajo
             case "P":
-                dirX = 1;  dirY = 0;  break; // inicia en sentido horario (→)
+                dirX = 1;
+                dirY = 0;
+                break; // inicia en sentido horario (→)
             default:
-                dirX = 1;  dirY = 0;  break;
+                dirX = 1;
+                dirY = 0;
+                break;
         }
     }
 
@@ -96,10 +104,10 @@ public class Ball extends Enemy implements canMove {
 
         // Prioridad: girar derecha → recto → girar izquierda → reversa
         int[][] attempts = {
-            turnRight(dirX, dirY),
-            {dirX, dirY},
-            turnLeft(dirX, dirY),
-            {-dirX, -dirY}
+                turnRight(dirX, dirY),
+                { dirX, dirY },
+                turnLeft(dirX, dirY),
+                { -dirX, -dirY }
         };
 
         for (int[] dir : attempts) {
@@ -117,28 +125,29 @@ public class Ball extends Enemy implements canMove {
 
     /**
      * Giro a la derecha (sentido horario):
-     *   → (1,0)  vira a  ↓ (0,1)
-     *   ↓ (0,1)  vira a  ← (-1,0)
-     *   ← (-1,0) vira a  ↑ (0,-1)
-     *   ↑ (0,-1) vira a  → (1,0)
+     * → (1,0) vira a ↓ (0,1)
+     * ↓ (0,1) vira a ← (-1,0)
+     * ← (-1,0) vira a ↑ (0,-1)
+     * ↑ (0,-1) vira a → (1,0)
      */
     private int[] turnRight(int dx, int dy) {
-        return new int[]{-dy, dx};
+        return new int[] { -dy, dx };
     }
 
     /**
      * Giro a la izquierda (sentido anti-horario):
-     *   → (1,0)  vira a  ↑ (0,-1)
-     *   ↑ (0,-1) vira a  ← (-1,0)
-     *   ← (-1,0) vira a  ↓ (0,1)
-     *   ↓ (0,1)  vira a  → (1,0)
+     * → (1,0) vira a ↑ (0,-1)
+     * ↑ (0,-1) vira a ← (-1,0)
+     * ← (-1,0) vira a ↓ (0,1)
+     * ↓ (0,1) vira a → (1,0)
      */
     private int[] turnLeft(int dx, int dy) {
-        return new int[]{dy, -dx};
+        return new int[] { dy, -dx };
     }
 
     /**
-     * Actualiza la posición en el tablero: remueve de la celda actual y agrega en la nueva.
+     * Actualiza la posición en el tablero: remueve de la celda actual y agrega en
+     * la nueva.
      */
     private void updatePosition(int fromX, int fromY, int toX, int toY, Board[][] board) {
         board[fromY][fromX].removeObject(this);
@@ -157,24 +166,15 @@ public class Ball extends Enemy implements canMove {
         return !board[y][x].isCanHaveObjectOnTop();
     }
 
-    /**
-     * Implementación de canMove: delegan a Personaje (mueven posx/posy en 1).
-     * La validación de colisiones con paredes es responsabilidad de WorldHG,
-     * que verifica la celda destino antes de autorizar el movimiento.
-     */
-    @Override
-    public void moveUp()    { super.moveUp();    }
+    public String getEstado() {
+        return estado;
+    }
 
-    @Override
-    public void moveDown()  { super.moveDown();  }
+    public int getDirX() {
+        return dirX;
+    }
 
-    @Override
-    public void moveLeft()  { super.moveLeft();  }
-
-    @Override
-    public void moveRight() { super.moveRight(); }
-
-    public String getEstado() { return estado; }
-    public int getDirX() { return dirX; }
-    public int getDirY() { return dirY; }
+    public int getDirY() {
+        return dirY;
+    }
 }

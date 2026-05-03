@@ -29,31 +29,32 @@ public class WorldHardestGameGUI extends JFrame {
     private JPanel mainPanel;
     private JPanel startPanel;
     private MenuWindow menuPanel;
+    private GamePanel gamePanel;
+    private dominio.WorldHG worldHG;
     private JFileChooser fileChooser = new JFileChooser(".");
 
     public WorldHardestGameGUI() {
         prepareElements();
         prepareActions();
-        
+
     }
 
     private final void prepareElements() {
         // cosas para iniciar la aplicacion
         setTitle("The World’s Hardest Game");
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) (screen.getWidth()/2);
-        int height = (int) (screen.getHeight()/2);
-        setSize(width,height);
+        int width = (int) (screen.getWidth() / 2);
+        int height = (int) (screen.getHeight() / 2);
+        setSize(width, height);
         setLocationRelativeTo(null);
 
-        //Pantallas
+        // Pantallas
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         menuPanel = new MenuWindow(this);
 
-        
         prepareElementsStartPanel();
-        
+
         mainPanel.add(startPanel, "Start");
         mainPanel.add(menuPanel, "MENU");
         add(mainPanel);
@@ -62,8 +63,8 @@ public class WorldHardestGameGUI extends JFrame {
     private final void prepareElementsStartPanel() {
         startPanel = new JPanel() {
             private Image backgroundImage;
-            
-            { 
+
+            {
                 // Intentamos cargar la imagen como recurso del proyecto
                 try {
                     // La ruta empieza con "/" desde la raíz de src
@@ -104,20 +105,19 @@ public class WorldHardestGameGUI extends JFrame {
         };
         startPanel.setLayout(new BorderLayout());
         startPanel.setOpaque(false); // Para que se vea el fondo
-        
-        
+
         // Botón Start
         JButton startButton = new JButton("Start");
         startButton.setFont(new Font("Arial Black", Font.BOLD, 24));
         startButton.setPreferredSize(new Dimension(150, 50));
-        
-        //color boton
+
+        // color boton
         startButton.setBackground(new Color(26, 67, 117)); // Un azul brillante, por ejemplo
-        startButton.setForeground(Color.WHITE);            // Color de la letra
-        startButton.setFocusPainted(false);               // Quita el cuadrito punteado al hacer clic
-        startButton.setBorderPainted(false);              // Quita el borde por defecto
+        startButton.setForeground(Color.WHITE); // Color de la letra
+        startButton.setFocusPainted(false); // Quita el cuadrito punteado al hacer clic
+        startButton.setBorderPainted(false); // Quita el borde por defecto
         startButton.setContentAreaFilled(true);
-        
+
         // Efecto hover para hacer más grande el botón
         startButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -134,13 +134,13 @@ public class WorldHardestGameGUI extends JFrame {
                 startButton.getParent().revalidate();
             }
         });
-        
+
         // Panel para el botón (en la parte inferior)
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         startButton.addActionListener(e -> irAlMenu());
         buttonPanel.add(startButton);
-        
+
         startPanel.add(buttonPanel, BorderLayout.SOUTH);
     }
 
@@ -156,12 +156,11 @@ public class WorldHardestGameGUI extends JFrame {
 
     public void exit() {
         int confirm = JOptionPane.showConfirmDialog(
-            this,
-            "¿Desea cerrar la aplicación World Hardest Game?",
-            "Confirmar salida",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE
-        );
+                this,
+                "¿Desea cerrar la aplicación World Hardest Game?",
+                "Confirmar salida",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
 
         if (confirm == 0) {
             setVisible(false);
@@ -181,17 +180,63 @@ public class WorldHardestGameGUI extends JFrame {
     }
 
     public void irAlTablero() {
-        JOptionPane.showMessageDialog(this, "Función ir al tablero en construcción.");
+        // Buscar el archivo del nivel 1
+        String[] paths = {
+                "src/dominio/levels/level1.txt",
+                "worldHardestGame/src/dominio/levels/level1.txt"
+        };
+        java.io.File levelFile = null;
+        for (String path : paths) {
+            java.io.File f = new java.io.File(path);
+            if (f.exists()) {
+                levelFile = f;
+                break;
+            }
+        }
+        if (levelFile == null) {
+            JOptionPane.showMessageDialog(this,
+                    "No se encontró el archivo de nivel.\nBuscado en: src/dominio/levels/level1.txt",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Cargar nivel y crear el juego
+            dominio.Level level = dominio.Level.loadFromFile(levelFile.getPath());
+            worldHG = new dominio.WorldHG("player");
+            worldHG.loadLevel(level);
+
+            // Detener el panel anterior si existe
+            if (gamePanel != null) {
+                gamePanel.stopTimer();
+                mainPanel.remove(gamePanel);
+            }
+
+            // Crear nuevo GamePanel y agregarlo al CardLayout
+            gamePanel = new GamePanel(worldHG, this);
+            mainPanel.add(gamePanel, "GAME");
+            cardLayout.show(mainPanel, "GAME");
+
+            // Asegurarse de que el panel reciba el foco para el teclado
+            gamePanel.requestFocusInWindow();
+            pack(); // Ajustar tamaño de la ventana al tablero
+            setLocationRelativeTo(null);
+
+        } catch (java.io.IOException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error al cargar el nivel: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void salvar() {
         int seleccion = fileChooser.showSaveDialog(this);
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             java.io.File archivo = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(this, 
-                "Función de GUARDADO en construcción.\nArchivo: " + archivo.getName(), 
-                "En desarrollo", 
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Función de GUARDADO en construcción.\nArchivo: " + archivo.getName(),
+                    "En desarrollo",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -199,24 +244,24 @@ public class WorldHardestGameGUI extends JFrame {
         int seleccion = fileChooser.showOpenDialog(this);
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             java.io.File archivo = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(this, 
-                "Función de APERTURA en construcción.\nArchivo: " + archivo.getName(), 
-                "En desarrollo", 
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Función de APERTURA en construcción.\nArchivo: " + archivo.getName(),
+                    "En desarrollo",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    class MenuWindow extends JPanel{
+    class MenuWindow extends JPanel {
         protected WorldHardestGameGUI gui;
         protected JButton newButton;
         protected JButton saveButton;
         protected JButton cancelButton;
         protected JButton loadButton;
         private Image backgroundImage;
-        
-        public MenuWindow(WorldHardestGameGUI app){
+
+        public MenuWindow(WorldHardestGameGUI app) {
             this.gui = app;
-            
+
             // Intentamos cargar la imagen como recurso del proyecto
             try {
                 java.net.URL imgURL = getClass().getResource("/presentacion/images/fondo.png");
@@ -237,12 +282,12 @@ public class WorldHardestGameGUI extends JFrame {
                 System.err.println("Error al cargar la imagen: " + e.getMessage());
                 e.printStackTrace();
             }
-            
+
             setLayout(new java.awt.GridBagLayout()); // Para centrar los botones
             prepareElementsMenuWindow();
             prepareActionsMenuWindow();
         }
-        
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -253,21 +298,21 @@ public class WorldHardestGameGUI extends JFrame {
                 g.fillRect(0, 0, getWidth(), getHeight());
             }
         }
-        
-        public final void prepareElementsMenuWindow(){
+
+        public final void prepareElementsMenuWindow() {
             newButton = new JButton("New");
             saveButton = new JButton("Save");
             loadButton = new JButton("Load");
             cancelButton = new JButton("Cancel");
-            
+
             JPanel buttonPanel = new JPanel();
             buttonPanel.setLayout(new java.awt.GridBagLayout());
             buttonPanel.setOpaque(false);
             java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
             gbc.gridx = 0;
             gbc.insets = new java.awt.Insets(10, 0, 10, 0); // Espacio vertical entre botones
-            
-            JButton[] buttons = {newButton, saveButton, loadButton, cancelButton};
+
+            JButton[] buttons = { newButton, saveButton, loadButton, cancelButton };
             for (JButton btn : buttons) {
                 btn.setFont(new Font("Arial Black", Font.BOLD, 20));
                 btn.setPreferredSize(new Dimension(150, 40));
@@ -276,7 +321,7 @@ public class WorldHardestGameGUI extends JFrame {
                 btn.setFocusPainted(false);
                 btn.setBorderPainted(false);
                 btn.setContentAreaFilled(true);
-                
+
                 // Efecto hover
                 btn.addMouseListener(new MouseAdapter() {
                     @Override
@@ -293,13 +338,13 @@ public class WorldHardestGameGUI extends JFrame {
                         btn.getParent().revalidate();
                     }
                 });
-                
+
                 buttonPanel.add(btn, gbc);
             }
-            
+
             add(buttonPanel);
         }
-        
+
         protected final void prepareActionsMenuWindow() {
             newButton.addActionListener(e -> gui.irAlTablero());
             saveButton.addActionListener(e -> gui.salvar());

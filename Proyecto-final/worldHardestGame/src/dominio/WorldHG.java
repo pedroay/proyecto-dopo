@@ -9,6 +9,7 @@ public class WorldHG {
     private String modalidad;
     private int deaths;
     private int timeRemaining; // en segundos (3 minutos = 180 seg)
+    private boolean levelComplete;
     private ArrayList<Enemy> enemies; // referencia rápida a todos los enemigos activos
 
     public WorldHG(String modalidad) {
@@ -27,6 +28,7 @@ public class WorldHG {
         this.enemies = new ArrayList<>();
         this.timeRemaining = 180;
         this.deaths = 0;
+        this.levelComplete = false;
         this.board = buildBoard(level);
 
         if ("player".equals(modalidad)) {
@@ -219,7 +221,7 @@ public class WorldHG {
                 player.setRespawnPoint(player.getPosx(), player.getPosy());
             } else if (obj instanceof Goal) {
                 if (allCoinsCollected()) {
-                    // TODO: notificar victoria / cargar siguiente nivel
+                    levelComplete = true;
                 }
             }
         }
@@ -260,7 +262,7 @@ public class WorldHG {
 
     public boolean isTimeUp() { return timeRemaining <= 0; }
 
-    public boolean isLevelComplete() { return allCoinsCollected(); }
+    public boolean isLevelComplete() { return levelComplete; }
 
     public Player getPlayer1() { return player1; }
 

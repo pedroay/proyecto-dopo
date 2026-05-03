@@ -1,0 +1,8 @@
+1
+W W W W W W W W W W W W W W W W W W W
+W S S S W W . . . . . . . . W G G G W
+W S S S W BV . P . P . P . BV W G G G W
+W S S S . . . . . . . . . . . G G G W
+W S S S . BV . P . P . P . BV W W W W W
+W S S S W W . . . . . . . . W W W W W
+W W W W W W W W W W W W W W W W W W W
