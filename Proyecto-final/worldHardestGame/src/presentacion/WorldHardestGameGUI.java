@@ -617,7 +617,7 @@ public class WorldHardestGameGUI extends JFrame {
 
             int prevX = player.getPosx();
             int prevY = player.getPosy();
-            worldHG.movePlayer(player, direction);
+            worldHG.movePlayerContinuous(player, direction);
             int newX = player.getPosx();
             int newY = player.getPosy();
 

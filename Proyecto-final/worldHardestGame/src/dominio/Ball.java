@@ -2,26 +2,34 @@ package dominio;
 
 /**
  * Enemigo móvil cuyo comportamiento está definido por un String de estado.
- * Esto permite agregar nuevos patrones de movimiento fácilmente.
+ *
+ * Con el nuevo sistema de movimiento continuo, Ball ya NO salta de celda en
+ * celda: avanza BALL_SPEED píxeles por frame y rebota cuando su caja de
+ * colisión (AABB) choca con una pared del mapa estático.
  *
  * Estados disponibles:
- * "H" = horizontal: se mueve de izquierda a derecha, rebota en paredes.
- * "V" = vertical: se mueve de arriba a abajo, rebota en paredes.
- * "P" = perímetro: recorre el contorno de las paredes en sentido horario.
+ *   "H" = horizontal — rebota entre paredes izquierda y derecha.
+ *   "V" = vertical   — rebota entre paredes superior e inferior.
+ *   "P" = perímetro  — sigue el contorno de las paredes en sentido horario.
  *
- * En el archivo .txt se representa como:
- * BH = Ball estado horizontal
- * BV = Ball estado vertical
- * BP = Ball estado perímetro
+ * Representación en level*.txt:
+ *   BH, BV, BP
  */
-public class Ball extends Enemy implements canMove {
-    private String estado; // describe el patrón de movimiento
-    private int dirX; // dirección actual en X (-1, 0, 1)
-    private int dirY; // dirección actual en Y (-1, 0, 1)
+public class Ball extends Enemy {
+
+    /** Velocidad de desplazamiento en píxeles por frame (~60 FPS). */
+    private static final double BALL_SPEED = 2.5;
+
+    /** Tamaño de la celda en píxeles (debe coincidir con GamePanel.CELL_SIZE). */
+    public static final int CELL_SIZE = 40;
+
+    private String estado;  // patrón de movimiento
+    private double dirX;    // dirección en X: -1.0, 0 o 1.0
+    private double dirY;    // dirección en Y: -1.0, 0 o 1.0
 
     /**
-     * @param posx   posición inicial columna
-     * @param posy   posición inicial fila
+     * @param posx   columna inicial en la grilla
+     * @param posy   fila inicial en la grilla
      * @param estado patrón de movimiento: "H", "V" o "P"
      */
     public Ball(int posx, int posy, String estado) {
@@ -30,9 +38,7 @@ public class Ball extends Enemy implements canMove {
         initDirection();
     }
 
-    /**
-     * Inicializa la dirección de acuerdo al estado.
-     */
+    /** Inicializa la dirección según el estado. */
     private void initDirection() {
         switch (estado) {
             case "H":
@@ -55,9 +61,10 @@ public class Ball extends Enemy implements canMove {
     }
 
     /**
-     * Delega el movimiento al método correspondiente según el estado.
+     * Avanza la Ball un frame usando coordenadas continuas.
+     * Delega al método correspondiente según el estado.
      *
-     * @param board la grilla dinámica del juego
+     * @param board tablero estático (solo paredes, metas, etc.)
      */
     public void move(Board[][] board) {
         switch (estado) {
@@ -68,113 +75,116 @@ public class Ball extends Enemy implements canMove {
             case "P":
                 movePerimeter(board);
                 break;
-            // Aquí se pueden agregar nuevos estados en el futuro
         }
+        // Actualizar la celda de grilla (posx/posy) para que WorldHG pueda
+        // usar AABB entre jugador y Ball sin depender del Board[][].
+        setPosx((int) (getX() / CELL_SIZE));
+        setPosy((int) (getY() / CELL_SIZE));
     }
+
+    // ─── Movimiento recto con rebote ──────────────────────────────────────────
 
     /**
-     * Movimiento en línea recta con rebote.
-     * Si la próxima celda está bloqueada, invierte la dirección.
+     * Mueve la Ball en línea recta (H o V).
+     * Si la próxima posición invade una pared, invierte la dirección y rebota.
      */
     private void moveStraight(Board[][] board) {
-        int currentX = getPosx();
-        int currentY = getPosy();
-        int newX = currentX + dirX;
-        int newY = currentY + dirY;
+        double nextX = getX() + dirX * BALL_SPEED;
+        double nextY = getY() + dirY * BALL_SPEED;
 
-        if (isBlocked(newX, newY, board)) {
+        if (isPixelBlocked(nextX, nextY, board)) {
             dirX = -dirX;
             dirY = -dirY;
-            newX = currentX + dirX;
-            newY = currentY + dirY;
+            nextX = getX() + dirX * BALL_SPEED;
+            nextY = getY() + dirY * BALL_SPEED;
         }
 
-        updatePosition(currentX, currentY, newX, newY, board);
+        setX(nextX);
+        setY(nextY);
     }
+
+    // ─── Movimiento en perímetro ──────────────────────────────────────────────
 
     /**
      * Movimiento en perímetro: sigue las paredes en sentido horario.
-     * Lógica: intenta girar a la derecha primero, luego ir recto,
-     * luego girar a la izquierda, y finalmente retroceder.
-     * Esto produce un recorrido que abraza el contorno de los obstáculos.
+     * Prioridad: girar derecha → seguir recto → girar izquierda → reversa.
      */
     private void movePerimeter(Board[][] board) {
-        int currentX = getPosx();
-        int currentY = getPosy();
-
-        // Prioridad: girar derecha → recto → girar izquierda → reversa
-        int[][] attempts = {
-                turnRight(dirX, dirY),
-                { dirX, dirY },
-                turnLeft(dirX, dirY),
-                { -dirX, -dirY }
+        double[][] attempts = {
+            turnRight(dirX, dirY),
+            { dirX, dirY },
+            turnLeft(dirX, dirY),
+            { -dirX, -dirY }
         };
 
-        for (int[] dir : attempts) {
-            int newX = currentX + dir[0];
-            int newY = currentY + dir[1];
-            if (!isBlocked(newX, newY, board)) {
+        for (double[] dir : attempts) {
+            double nextX = getX() + dir[0] * BALL_SPEED;
+            double nextY = getY() + dir[1] * BALL_SPEED;
+            if (!isPixelBlocked(nextX, nextY, board)) {
                 dirX = dir[0];
                 dirY = dir[1];
-                updatePosition(currentX, currentY, newX, newY, board);
+                setX(nextX);
+                setY(nextY);
                 return;
             }
         }
-        // Si todos están bloqueados, se queda quieto este tick
+        // Todos los caminos bloqueados → se queda quieta este frame
     }
 
-    /**
-     * Giro a la derecha (sentido horario):
-     * → (1,0) vira a ↓ (0,1)
-     * ↓ (0,1) vira a ← (-1,0)
-     * ← (-1,0) vira a ↑ (0,-1)
-     * ↑ (0,-1) vira a → (1,0)
-     */
-    private int[] turnRight(int dx, int dy) {
-        return new int[] { -dy, dx };
+    // ─── Utilidades de dirección ──────────────────────────────────────────────
+
+    /** Giro a la derecha (sentido horario): (1,0)→(0,1)→(-1,0)→(0,-1)→(1,0). */
+    private double[] turnRight(double dx, double dy) {
+        return new double[]{ -dy, dx };
     }
 
-    /**
-     * Giro a la izquierda (sentido anti-horario):
-     * → (1,0) vira a ↑ (0,-1)
-     * ↑ (0,-1) vira a ← (-1,0)
-     * ← (-1,0) vira a ↓ (0,1)
-     * ↓ (0,1) vira a → (1,0)
-     */
-    private int[] turnLeft(int dx, int dy) {
-        return new int[] { dy, -dx };
+    /** Giro a la izquierda (sentido anti-horario). */
+    private double[] turnLeft(double dx, double dy) {
+        return new double[]{ dy, -dx };
     }
 
-    /**
-     * Actualiza la posición en el tablero: remueve de la celda actual y agrega en
-     * la nueva.
-     */
-    private void updatePosition(int fromX, int fromY, int toX, int toY, Board[][] board) {
-        board[fromY][fromX].removeObject(this);
-        setPosx(toX);
-        setPosy(toY);
-        board[toY][toX].addObject(this);
-    }
+    // ─── Detección de colisión con paredes (AABB) ─────────────────────────────
 
     /**
-     * Verifica si una celda está bloqueada (fuera de límites o no transitable).
+     * Verifica si la esquina delantera de la Ball (en píxeles) cae dentro de
+     * una celda no transitable.
+     *
+     * Se comprueban las cuatro esquinas del bounding box de la Ball (tamaño
+     * CELL_SIZE × CELL_SIZE) para detectar correctamente la colisión al
+     * moverse en diagonal durante el modo perímetro.
+     *
+     * @param px posición X candidata (en píxeles)
+     * @param py posición Y candidata (en píxeles)
      */
-    private boolean isBlocked(int x, int y, Board[][] board) {
-        if (x < 0 || x >= board[0].length || y < 0 || y >= board.length) {
-            return true;
+    private boolean isPixelBlocked(double px, double py, Board[][] board) {
+        int size = CELL_SIZE;
+        // Probamos las cuatro esquinas de la caja de colisión
+        int[][] corners = {
+            { (int) px,           (int) py },
+            { (int)(px + size-1), (int) py },
+            { (int) px,           (int)(py + size-1) },
+            { (int)(px + size-1), (int)(py + size-1) }
+        };
+        for (int[] c : corners) {
+            int col = c[0] / size;
+            int row = c[1] / size;
+            if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) return true;
+            if (!board[row][col].isCanHaveObjectOnTop()) return true;
         }
-        return !board[y][x].isCanHaveObjectOnTop();
+        return false;
     }
+
+    // ─── Getters ─────────────────────────────────────────────────────────────
 
     public String getEstado() {
         return estado;
     }
 
-    public int getDirX() {
+    public double getDirX() {
         return dirX;
     }
 
-    public int getDirY() {
+    public double getDirY() {
         return dirY;
     }
 }
