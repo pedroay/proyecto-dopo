@@ -24,6 +24,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import dominio.Ball;
+import dominio.Board;
+import dominio.Borde;
+import dominio.Goal;
+import dominio.Mina;
+import dominio.Player;
+import dominio.Punto;
+import dominio.SafeZone;
+import dominio.Start;
+import dominio.WorldHG;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.BasicStroke;
+import java.awt.RenderingHints;
+import java.awt.Graphics2D;
+import javax.swing.Timer;
+
 public class WorldHardestGameGUI extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
@@ -352,4 +369,275 @@ public class WorldHardestGameGUI extends JFrame {
             cancelButton.addActionListener(e -> gui.exit());
         }
     }
+
+    class GamePanel extends JPanel implements KeyListener {
+
+        private static final int CELL_SIZE  = 40;
+        private static final int HUD_HEIGHT = 45;
+        private static final double MOVE_SPEED = 5.0; // píxeles por frame (16ms)
+
+        private static final Color COLOR_WALL     = new Color(45, 45, 55);
+        private static final Color COLOR_EMPTY1   = new Color(200, 210, 230);
+        private static final Color COLOR_EMPTY2   = new Color(180, 193, 218);
+        private static final Color COLOR_START    = new Color(144, 238, 144);
+        private static final Color COLOR_GOAL     = new Color(60, 210, 80);
+        private static final Color COLOR_SAFEZONE = new Color(100, 200, 120);
+        private static final Color COLOR_PLAYER   = new Color(215, 40, 40);
+        private static final Color COLOR_ENEMY    = new Color(30, 100, 200);
+        private static final Color COLOR_COIN     = new Color(255, 210, 0);
+        private static final Color COLOR_HUD_BG   = new Color(20, 22, 38);
+
+        private final WorldHG worldHG;
+        private final WorldHardestGameGUI gui;
+
+        // Posición visual del jugador en píxeles (interpolada para movimiento suave)
+        private double playerVisualX, playerVisualY;
+        private double playerTargetX, playerTargetY;
+
+        private final Timer gameTimer;   // mueve enemigos cada 500ms
+        private final Timer renderTimer; // repinta ~60fps para animación suave
+
+        public GamePanel(WorldHG worldHG, WorldHardestGameGUI gui) {
+            this.worldHG = worldHG;
+            this.gui = gui;
+            setFocusable(true);
+            addKeyListener(this);
+
+            // Inicializar posición visual en la celda de inicio
+            Player player = worldHG.getPlayer1();
+            if (player != null) {
+                playerVisualX = player.getPosx() * CELL_SIZE;
+                playerVisualY = player.getPosy() * CELL_SIZE;
+                playerTargetX = playerVisualX;
+                playerTargetY = playerVisualY;
+            }
+
+            // Timer de lógica: ticks de enemigos y tiempo
+            gameTimer = new Timer(500, e -> onTick());
+            gameTimer.start();
+
+            // Timer de render: interpola posición del jugador y repinta
+            renderTimer = new Timer(16, e -> {
+                updatePlayerAnimation();
+                repaint();
+            });
+            renderTimer.start();
+        }
+
+        // ─── Lógica ────────────────────────────────────────────────────────────────
+
+        private void onTick() {
+            if (worldHG.isTimeUp()) {
+                stopTimers();
+                repaint();
+                JOptionPane.showMessageDialog(this,
+                    "¡Se acabó el tiempo!\nMuertes: " + worldHG.getDeaths(),
+                    "Game Over", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            worldHG.tick();
+
+            // Sincronizar posición visual por si el jugador murió durante el tick
+            syncPlayerVisualAfterTick();
+
+            if (worldHG.isLevelComplete()) {
+                stopTimers();
+                repaint();
+                JOptionPane.showMessageDialog(this,
+                    "¡Nivel Completo!\nMuertes: " + worldHG.getDeaths(),
+                    "Victoria", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+        /**
+         * Después de un tick de enemigos, si el jugador murió y reapareció lejos,
+         * hace snap de la posición visual al nuevo punto de reaparición.
+         */
+        private void syncPlayerVisualAfterTick() {
+            Player player = worldHG.getPlayer1();
+            if (player == null) return;
+            double newTargetX = player.getPosx() * CELL_SIZE;
+            double newTargetY = player.getPosy() * CELL_SIZE;
+            double dist = Math.abs(newTargetX - playerVisualX) + Math.abs(newTargetY - playerVisualY);
+            if (dist > CELL_SIZE * 2) {
+                // Reapareció lejos → snap inmediato
+                playerVisualX = newTargetX;
+                playerVisualY = newTargetY;
+            }
+            playerTargetX = newTargetX;
+            playerTargetY = newTargetY;
+        }
+
+        /**
+         * Mueve la posición visual del jugador hacia el target a velocidad constante.
+         * Produce el efecto de deslizamiento entre celdas.
+         */
+        private void updatePlayerAnimation() {
+            double dx = playerTargetX - playerVisualX;
+            double dy = playerTargetY - playerVisualY;
+            if (Math.abs(dx) < MOVE_SPEED) playerVisualX = playerTargetX;
+            else playerVisualX += Math.signum(dx) * MOVE_SPEED;
+            if (Math.abs(dy) < MOVE_SPEED) playerVisualY = playerTargetY;
+            else playerVisualY += Math.signum(dy) * MOVE_SPEED;
+        }
+
+        public void stopTimer() { stopTimers(); }
+
+        private void stopTimers() {
+            gameTimer.stop();
+            renderTimer.stop();
+        }
+
+        // ─── Dibujo ────────────────────────────────────────────────────────────────
+
+        @Override
+        public Dimension getPreferredSize() {
+            Board[][] board = worldHG.getBoard();
+            if (board == null || board.length == 0) return new Dimension(760, 360);
+            return new Dimension(board[0].length * CELL_SIZE, board.length * CELL_SIZE + HUD_HEIGHT);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            drawHUD(g2);
+            drawBoard(g2);
+        }
+
+        private void drawHUD(Graphics2D g2) {
+            g2.setColor(COLOR_HUD_BG);
+            g2.fillRect(0, 0, getWidth(), HUD_HEIGHT);
+            g2.setColor(Color.WHITE);
+            g2.setFont(new Font("Arial", Font.BOLD, 15));
+            g2.drawString(worldHG.getInfo(), 12, 28);
+        }
+
+        private void drawBoard(Graphics2D g2) {
+            Board[][] board = worldHG.getBoard();
+            if (board == null) return;
+            for (int row = 0; row < board.length; row++) {
+                for (int col = 0; col < board[row].length; col++) {
+                    drawCell(g2, board[row][col], col * CELL_SIZE, HUD_HEIGHT + row * CELL_SIZE, row, col);
+                }
+            }
+            drawPlayerSmooth(g2); // jugador encima de todo con posición interpolada
+        }
+
+        private void drawCell(Graphics2D g2, Board cell, int x, int y, int row, int col) {
+            g2.setColor(getCellBgColor(cell, row, col));
+            g2.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+            g2.setColor(new Color(0, 0, 0, 25));
+            g2.drawRect(x, y, CELL_SIZE, CELL_SIZE);
+            for (Object obj : cell.getContents()) {
+                drawObject(g2, obj, x, y);
+            }
+        }
+
+        private Color getCellBgColor(Board cell, int row, int col) {
+            for (Object obj : cell.getContents()) {
+                if (obj instanceof Borde)    return COLOR_WALL;
+                if (obj instanceof Goal)     return COLOR_GOAL;
+                if (obj instanceof Start)    return COLOR_START;
+                if (obj instanceof SafeZone) return COLOR_SAFEZONE;
+            }
+            if (!cell.isCanHaveObjectOnTop()) return COLOR_WALL;
+            return ((row + col) % 2 == 0) ? COLOR_EMPTY1 : COLOR_EMPTY2;
+        }
+
+        private void drawObject(Graphics2D g2, Object obj, int x, int y) {
+            // El jugador se dibuja aparte con posición suavizada
+            if (obj instanceof Player) return;
+
+            int m = 5, s = CELL_SIZE - m * 2;
+
+            if (obj instanceof Mina) {
+                g2.setColor(new Color(20, 20, 120));
+                g2.fillOval(x + m, y + m, s, s);
+                g2.setColor(Color.BLACK);
+                g2.setStroke(new BasicStroke(1.5f));
+                g2.drawOval(x + m, y + m, s, s);
+
+            } else if (obj instanceof Ball) {
+                g2.setColor(COLOR_ENEMY);
+                g2.fillOval(x + m, y + m, s, s);
+                g2.setColor(new Color(10, 60, 160));
+                g2.setStroke(new BasicStroke(2));
+                g2.drawOval(x + m, y + m, s, s);
+
+            } else if (obj instanceof Punto) {
+                int cs = s / 2;
+                int cx = x + (CELL_SIZE - cs) / 2;
+                int cy = y + (CELL_SIZE - cs) / 2;
+                g2.setColor(COLOR_COIN);
+                g2.fillOval(cx, cy, cs, cs);
+                g2.setColor(new Color(200, 160, 0));
+                g2.setStroke(new BasicStroke(1.5f));
+                g2.drawOval(cx, cy, cs, cs);
+            }
+        }
+
+        /**
+         * Dibuja al jugador usando playerVisualX/Y (posición interpolada),
+         * NO la posición lógica del grid. Esto produce el movimiento suave.
+         */
+        private void drawPlayerSmooth(Graphics2D g2) {
+            if (worldHG.getPlayer1() == null) return;
+            int m = 5, s = CELL_SIZE - m * 2;
+            int px = (int) playerVisualX + m;
+            int py = (int) playerVisualY + HUD_HEIGHT + m;
+            g2.setColor(COLOR_PLAYER);
+            g2.fillRect(px, py, s, s);
+            g2.setColor(new Color(150, 20, 20));
+            g2.setStroke(new BasicStroke(2));
+            g2.drawRect(px, py, s, s);
+        }
+
+        // ─── Teclado ───────────────────────────────────────────────────────────────
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            Player player = worldHG.getPlayer1();
+            if (player == null || worldHG.isTimeUp() || worldHG.isLevelComplete()) return;
+
+            String direction = null;
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                case KeyEvent.VK_W:     direction = "UP";    break;
+                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_S:     direction = "DOWN";  break;
+                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_A:     direction = "LEFT";  break;
+                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_D:     direction = "RIGHT"; break;
+            }
+
+            if (direction == null) return;
+
+            int prevX = player.getPosx();
+            int prevY = player.getPosy();
+            worldHG.movePlayer(player, direction);
+            int newX = player.getPosx();
+            int newY = player.getPosy();
+
+            if (newX == prevX && newY == prevY) return; // movimiento bloqueado por pared
+
+            double newTargetX = newX * CELL_SIZE;
+            double newTargetY = newY * CELL_SIZE;
+
+            // Si el jugador murió y reapareció lejos, hacer snap en vez de animar
+            double dist = Math.abs(newTargetX - playerVisualX) + Math.abs(newTargetY - playerVisualY);
+            if (dist > CELL_SIZE * 2) {
+                playerVisualX = newTargetX;
+                playerVisualY = newTargetY;
+            }
+            playerTargetX = newTargetX;
+            playerTargetY = newTargetY;
+        }
+
+        @Override public void keyTyped(KeyEvent e) {}
+        @Override public void keyReleased(KeyEvent e) {}
+    }
+
 }
