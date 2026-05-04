@@ -374,7 +374,7 @@ public class WorldHardestGameGUI extends JFrame {
 
         private static final int CELL_SIZE  = 40;
         private static final int HUD_HEIGHT = 45;
-        private static final double MOVE_SPEED = 5.0; // píxeles por frame (16ms)
+        private static final double MOVE_SPEED = 6.0; // píxeles por frame (16ms)
 
         private static final Color COLOR_WALL     = new Color(45, 45, 55);
         private static final Color COLOR_EMPTY1   = new Color(200, 210, 230);
@@ -418,6 +418,7 @@ public class WorldHardestGameGUI extends JFrame {
 
             // Timer de render: interpola posición del jugador y repinta
             renderTimer = new Timer(16, e -> {
+                onTick();
                 updatePlayerAnimation();
                 repaint();
             });
@@ -522,7 +523,13 @@ public class WorldHardestGameGUI extends JFrame {
                     drawCell(g2, board[row][col], col * CELL_SIZE, HUD_HEIGHT + row * CELL_SIZE, row, col);
                 }
             }
-            drawPlayerSmooth(g2); // jugador encima de todo con posición interpolada
+            
+            // Dibujar enemigos que viven fuera del Board[][]
+            for (dominio.Enemy enemy : worldHG.getEnemies()) {
+                drawObject(g2, enemy, (int) enemy.getX(), HUD_HEIGHT + (int) enemy.getY());
+            }
+
+            drawPlayer(g2); // jugador encima de todo con su posición real
         }
 
         private void drawCell(Graphics2D g2, Board cell, int x, int y, int row, int col) {
@@ -579,14 +586,15 @@ public class WorldHardestGameGUI extends JFrame {
         }
 
         /**
-         * Dibuja al jugador usando playerVisualX/Y (posición interpolada),
-         * NO la posición lógica del grid. Esto produce el movimiento suave.
+         * Dibuja al jugador usando su posición lógica real (x, y).
+         * Esto garantiza sincronización perfecta con la colisión.
          */
-        private void drawPlayerSmooth(Graphics2D g2) {
-            if (worldHG.getPlayer1() == null) return;
+        private void drawPlayer(Graphics2D g2) {
+            dominio.Player player = worldHG.getPlayer1();
+            if (player == null) return;
             int m = 5, s = CELL_SIZE - m * 2;
-            int px = (int) playerVisualX + m;
-            int py = (int) playerVisualY + HUD_HEIGHT + m;
+            int px = (int) player.getX() + m;
+            int py = (int) player.getY() + HUD_HEIGHT + m;
             g2.setColor(COLOR_PLAYER);
             g2.fillRect(px, py, s, s);
             g2.setColor(new Color(150, 20, 20));
@@ -615,11 +623,11 @@ public class WorldHardestGameGUI extends JFrame {
 
             if (direction == null) return;
 
-            int prevX = player.getPosx();
-            int prevY = player.getPosy();
-            worldHG.movePlayerContinuous(player, direction);
-            int newX = player.getPosx();
-            int newY = player.getPosy();
+            double prevX = player.getPosx();
+            double prevY = player.getPosy();
+            worldHG.movePlayerContinuous(player,direction);
+            double newX = player.getPosx();
+            double newY = player.getPosy();
 
             if (newX == prevX && newY == prevY) return; // movimiento bloqueado por pared
 

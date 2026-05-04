@@ -31,4 +31,17 @@ public class Board extends Object {
     public boolean isEmpty() {
         return contents.isEmpty();
     }
+
+    /**
+     * Indica si esta celda es una zona segura (Inicio, Meta o Zona Segura)
+     * donde los enemigos no deberían entrar.
+     */
+    public boolean isSafeZone() {
+        for (Object obj : contents) {
+            if (obj instanceof Start || obj instanceof Goal || obj instanceof SafeZone) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

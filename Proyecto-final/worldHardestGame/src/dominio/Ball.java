@@ -169,7 +169,7 @@ public class Ball extends Enemy {
             int col = c[0] / size;
             int row = c[1] / size;
             if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) return true;
-            if (!board[row][col].isCanHaveObjectOnTop()) return true;
+            if (!board[row][col].isCanHaveObjectOnTop() || board[row][col].isSafeZone()) return true;
         }
         return false;
     }

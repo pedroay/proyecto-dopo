@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public abstract class Object {
 
     // ── Posición en grilla (índices de columna/fila) ─────────────────────────
-    private int posx;
-    private int posy;
+    private double posx;
+    private double posy;
 
     // ── Posición continua en píxeles ─────────────────────────────────────────
     private double x;
@@ -43,11 +43,16 @@ public abstract class Object {
 
     // ── Getters / Setters de posición entera (grilla) ─────────────────────────
 
-    public int getPosx() { return posx; }
-    public int getPosy() { return posy; }
+    public double getPosx() { return posx; }
+    public double getPosy() { return posy; }
 
-    public void setPosx(int newPosx) { this.posx = newPosx; }
-    public void setPosy(int newPosy) { this.posy = newPosy; }
+    public void setPosx(double newPosx) { 
+    	this.posx = newPosx; 
+    	}
+    
+    public void setPosy(double newPosy) { 
+    	this.posy = newPosy; 
+    	}
 
     // ── Getters / Setters de posición continua (píxeles) ──────────────────────
 

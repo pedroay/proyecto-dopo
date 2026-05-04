@@ -24,7 +24,7 @@ public class WorldHG {
     public static final int CELL_SIZE = 40;
 
     /** Velocidad de movimiento del jugador en píxeles/frame. */
-    public static final double PLAYER_SPEED = 3.0;
+    public static final double PLAYER_SPEED = 6.0;
 
     /** Duración inicial del nivel en segundos. */
     private static final int INITIAL_TIME = 180;
@@ -203,22 +203,24 @@ public class WorldHG {
             default: return; // dirección desconocida, no mover
         }
 
-        double newX = player.getX() + vx;
-        double newY = player.getY() + vy;
+        // Movimiento paso a paso para tocar paredes (elimina "paredes fantasma")
+        int steps = (int) Math.ceil(Math.abs(vx) > Math.abs(vy) ? Math.abs(vx) : Math.abs(vy));
+        double stepX = vx / (steps > 0 ? steps : 1);
+        double stepY = vy / (steps > 0 ? steps : 1);
 
-        // Intentar mover en X (deslizamiento suave contra paredes)
-        if (!isPlayerBlocked(newX, player.getY())) {
-            player.setX(newX);
+        for (int i = 0; i < steps; i++) {
+            // Intentar mover en X
+            if (!isPlayerBlocked(player.getX() + stepX, player.getY())) {
+                player.setX(player.getX() + stepX);
+            }
+            // Intentar mover en Y
+            if (!isPlayerBlocked(player.getX(), player.getY() + stepY)) {
+                player.setY(player.getY() + stepY);
+            }
         }
 
-        // Intentar mover en Y
-        if (!isPlayerBlocked(player.getX(), newY)) {
-            player.setY(newY);
-        }
-
-        // Actualizar celda de grilla (posx/posy) desde coordenadas de píxeles
-        player.setPosx((int)(player.getX() / CELL_SIZE));
-        player.setPosy((int)(player.getY() / CELL_SIZE));
+        player.setPosx(player.getX() / CELL_SIZE);
+        player.setPosy(player.getY() / CELL_SIZE);
     }
 
     /**
@@ -227,8 +229,8 @@ public class WorldHG {
      */
     private boolean isPlayerBlocked(double px, double py) {
         int size = CELL_SIZE;
-        // Márgenes internos para no quedar atascado en esquinas (1 px de margen)
-        int margin = 1;
+        // Márgenes internos para no quedar atascado en esquinas (4 px de margen)
+        int margin = 4;
         int[][] corners = {
             { (int)(px + margin),        (int)(py + margin) },
             { (int)(px + size - margin), (int)(py + margin) },
@@ -304,8 +306,12 @@ public class WorldHG {
      * jugador y aplica los efectos correspondientes.
      */
     private void checkPlayerBoardInteractions(Player player) {
-        int col = player.getPosx();
-        int row = player.getPosy();
+        // Usar el centro del jugador para detectar la celda actual (más preciso)
+        double centerX = player.getX() + CELL_SIZE / 2.0;
+        double centerY = player.getY() + CELL_SIZE / 2.0;
+        int col = (int) (centerX / CELL_SIZE);
+        int row = (int) (centerY / CELL_SIZE);
+
         if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) return;
 
         Board cell = board[row][col];
