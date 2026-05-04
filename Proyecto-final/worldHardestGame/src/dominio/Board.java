@@ -33,8 +33,8 @@ public class Board extends Object {
     }
 
     /**
-     * Indica si esta celda es una zona segura (Inicio, Meta o Zona Segura)
-     * donde los enemigos no deberían entrar.
+     * Indicates whether this cell is a safe zone (Start, Goal, or Safe Zone)
+     * where enemies should not enter.
      */
     public boolean isSafeZone() {
         for (Object obj : contents) {
@@ -44,4 +44,5 @@ public class Board extends Object {
         }
         return false;
     }
-}
+   }
+
