@@ -3,63 +3,51 @@ package dominio;
 import java.util.ArrayList;
 
 /**
- * Núcleo del juego. Gestiona el estado lógico completo:
- * tablero estático, jugador y enemigos.
+ * Game core. Manages the complete logical state:
+ * static board, player, and enemies.
  *
- * ─── Arquitectura de movimiento continuo ────────────────────────────────────
- * El tablero Board[][] ahora contiene SOLO elementos estáticos:
- *   Borde (W), Start (S), Goal (G), SafeZone (Z), Punto (P).
- * El jugador y las bolas enemigas viven FUERA del tablero y usan
- * coordenadas en píxeles (double x, y).
- *
- * Las colisiones se detectan mediante AABB (Axis-Aligned Bounding Box):
- * dos rectángulos se solapan si sus intervalos en X e Y se intersectan.
- *
- * tick() debe llamarse ~60 veces por segundo desde GamePanel.
- * ────────────────────────────────────────────────────────────────────────────
  */
 public class WorldHG {
 
-    /** Tamaño de celda en píxeles — debe coincidir con GamePanel.CELL_SIZE. */
+    /** Cell size in pixels*/
     public static final int CELL_SIZE = 40;
 
-    /** Velocidad de movimiento del jugador en píxeles/frame. */
+    /** Player movement speed in pixels/frame. */
     public static final double PLAYER_SPEED = 6.0;
 
-    /** Duración inicial del nivel en segundos. */
+    /** Initial level duration in seconds. */
     private static final int INITIAL_TIME = 180;
 
-    /** Cuántos frames acumular antes de descontar un segundo (a 60fps → 60). */
+    /** How many frames to accumulate before deducting a second (at 60fps → 60). */
     private static final int FRAMES_PER_SECOND = 60;
 
     private Level level;
 
-    /** Tablero estático: solo paredes, metas, monedas, zonas seguras. */
+    /** Static board: only walls, goals, coins, and safe zones. */
     private Board[][] board;
 
     private Player player1;
-    private String modalidad;
+    private String modality;
     private int deaths;
-    private int timeRemaining;   // en segundos
-    private int frameCounter;    // frames acumulados para contar segundos
+    private int timeRemaining;   // in seconds
+    private int frameCounter;    // accumulated frames to count seconds
     private boolean levelComplete;
 
-    /** Lista de todos los enemigos activos (Ball, Mina…). */
+    /** List of all active enemies (Ball, Mine...). */
     private ArrayList<Enemy> enemies;
 
-    public WorldHG(String modalidad) {
-        this.modalidad  = modalidad;
+    public WorldHG(String modality) {
+        this.modality  = modality;
         this.deaths     = 0;
         this.timeRemaining = INITIAL_TIME;
         this.enemies    = new ArrayList<>();
     }
 
-    // ─── Carga de nivel ───────────────────────────────────────────────────────
-
+    
     /**
-     * Carga un nivel: construye el tablero estático y ubica al jugador en S.
-     * Los enemigos (Ball, Mina) se registran en la lista interna pero NO en
-     * el Board[][].
+     * Loads a level: builds the static board and places the player at S.
+     * Enemies (Ball, Mine) are registered in the internal list but NOT in
+     * the Board[][].
      */
     public void loadLevel(Level level) {
         this.level         = level;
@@ -70,23 +58,23 @@ public class WorldHG {
         this.levelComplete = false;
         this.board = buildBoard(level);
 
-        if ("player".equals(modalidad)) {
+        if ("player".equals(modality)) {
             int[] start = findStart();
             this.player1 = new Player("Player1", start[0], start[1]);
         }
     }
-
+    
     /**
-     * Construye la grilla estática a partir del archivo de nivel.
+     * Builds the static grid from the level file.
      * Tokens:
-     *   W  = pared (Borde)
-     *   S  = inicio (Start)
-     *   G  = meta (Goal)
-     *   Z  = zona segura (SafeZone)
-     *   P  = moneda (Punto)
-     *   B* = Ball (enemigo móvil)  → NO se coloca en Board[][], solo en enemies[]
-     *   M  = Mina (enemigo estático) → idem
-     *   .  = celda vacía
+     *   W  = wall (Border)
+     *   S  = start (Start)
+     *   G  = goal (Goal)
+     *   Z  = safe zone (SafeZone)
+     *   P  = coin (Point/Coin)
+     *   B* = Ball (moving enemy) → NOT placed in Board[][], only in enemies[]
+     *   M  = Mine (static enemy) → ditto
+     *   .  = empty cell
      */
     private Board[][] buildBoard(Level level) {
         String[] rows = level.getRows();
@@ -99,12 +87,12 @@ public class WorldHG {
             for (int x = 0; x < tokens.length; x++) {
                 String token = tokens[x];
 
-                // Ball: cualquier token "B" + estado
+                // Ball: any token "B" + state
                 if (token.startsWith("B") && token.length() > 1) {
-                    String estado = token.substring(1);
-                    Ball ball = new Ball(x, y, estado);
+                    String state = token.substring(1);
+                    Ball ball = new Ball(x, y, state);
                     enemies.add(ball);
-                    newBoard[y][x] = new Board(x, y, true); // celda vacía debajo
+                    newBoard[y][x] = new Board(x, y, true); // empty cell underneath
                     continue;
                 }
 
@@ -130,8 +118,8 @@ public class WorldHG {
                         newBoard[y][x].addObject(new Punto(x, y));
                         break;
                     case "M": {
-                        Mina mina = new Mina(x, y);
-                        enemies.add(mina);
+                        Mina mine = new Mina(x, y);
+                        enemies.add(mine);
                         newBoard[y][x] = new Board(x, y, true);
                         break;
                     }
@@ -144,53 +132,48 @@ public class WorldHG {
         return newBoard;
     }
 
-    // ─── Bucle principal ──────────────────────────────────────────────────────
+ // Main Loop 
 
     /**
-     * Avanza el juego un frame (~16ms a 60fps).
+     * Advances the game by one frame (~16ms at 60fps).
      *
-     * Orden de operaciones:
-     *   1. Contar tiempo (cada 60 frames = 1 segundo).
-     *   2. Mover las bolas enemigas.
-     *   3. Mover al jugador según su velocidad actual.
-     *   4. Detectar colisiones jugador↔enemigo y jugador↔objetos especiales.
+     * Order of operations:
+     *   1. Update timer (every 60 frames = 1 second).
+     *   2. Move enemy balls.
+     *   3. Move the player based on current velocity.
+     *   4. Detect player↔enemy and player↔special object collisions.
      */
     public void tick() {
-        // 1. Tiempo
+        // 1. Timer
         frameCounter++;
         if (frameCounter >= FRAMES_PER_SECOND) {
             frameCounter = 0;
             if (timeRemaining > 0) timeRemaining--;
         }
 
-        // 2. Mover enemigos
+        // 2. Move enemies
         for (Enemy enemy : enemies) {
             if (enemy instanceof Ball) {
                 ((Ball) enemy).move(board);
             }
         }
 
-        // 3. Mover jugador
-        // El movimiento continuo ahora lo dispara el GUI al presionar teclas,
-        // llamando a movePlayerContinuous(player, direction).
+        //nota para el pedro del futuro: aca debe estar el error de porque se queda queito al tocar la tecla al inicio
+        // despues revisa este como move continues
 
-        // 4. Interacciones
+        // 4. Interactions
         checkEnemyPlayerCollisions();
         if (player1 != null) {
             checkPlayerBoardInteractions(player1);
         }
     }
 
-    // ─── Movimiento del jugador ───────────────────────────────────────────────
+ //Player Movement 
 
     /**
-     * Mueve al jugador en la dirección indicada ("UP", "DOWN", "LEFT", "RIGHT")
-     * usando el sistema de coordenadas continuas con detección AABB de paredes.
-     *
-     * Es el punto de entrada que usa el GUI: traduce la dirección a velocidad,
-     * aplica el movimiento con colisión y actualiza la celda de grilla.
-     *
-     * @param player    el jugador a mover
+     * Moves the player in the specified direction ("UP", "DOWN", "LEFT", "RIGHT")
+     * using the continuous coordinate system with AABB wall detection.
+     * @param player    the player to move
      * @param direction "UP" | "DOWN" | "LEFT" | "RIGHT"
      */
     public void movePlayerContinuous(Player player, String direction) {
@@ -200,20 +183,19 @@ public class WorldHG {
             case "DOWN":  vy =  PLAYER_SPEED; break;
             case "LEFT":  vx = -PLAYER_SPEED; break;
             case "RIGHT": vx =  PLAYER_SPEED; break;
-            default: return; // dirección desconocida, no mover
+            default: return; // Unknown direction, do not move
         }
 
-        // Movimiento paso a paso para tocar paredes (elimina "paredes fantasma")
         int steps = (int) Math.ceil(Math.abs(vx) > Math.abs(vy) ? Math.abs(vx) : Math.abs(vy));
         double stepX = vx / (steps > 0 ? steps : 1);
         double stepY = vy / (steps > 0 ? steps : 1);
 
         for (int i = 0; i < steps; i++) {
-            // Intentar mover en X
+            // Attempt to move in X
             if (!isPlayerBlocked(player.getX() + stepX, player.getY())) {
                 player.setX(player.getX() + stepX);
             }
-            // Intentar mover en Y
+            // Attempt to move in Y
             if (!isPlayerBlocked(player.getX(), player.getY() + stepY)) {
                 player.setY(player.getY() + stepY);
             }
@@ -224,17 +206,17 @@ public class WorldHG {
     }
 
     /**
-     * Verifica si la caja de colisión del jugador (CELL_SIZE × CELL_SIZE)
-     * en la posición (px, py) intersecta con alguna pared del tablero.
+     * Checks if the player's collision box (CELL_SIZE × CELL_SIZE)
+     * at position (px, py) intersects with any wall on the board.
      */
     private boolean isPlayerBlocked(double px, double py) {
         int size = CELL_SIZE;
-        // Márgenes internos para no quedar atascado en esquinas (4 px de margen)
+        // Internal margins to prevent getting stuck in corners (4 px margin)
         int margin = 4;
         int[][] corners = {
-            { (int)(px + margin),        (int)(py + margin) },
+            { (int)(px + margin), (int)(py + margin) },
             { (int)(px + size - margin), (int)(py + margin) },
-            { (int)(px + margin),        (int)(py + size - margin) },
+            { (int)(px + margin), (int)(py + size - margin) },
             { (int)(px + size - margin), (int)(py + size - margin) }
         };
         for (int[] c : corners) {
@@ -245,13 +227,15 @@ public class WorldHG {
         }
         return false;
     }
-
+    
     /**
-     * Método público para que GamePanel actualice la velocidad del jugador.
-     * La dirección viene del estado de las teclas.
+     * Public method for GamePanel to update the player's velocity.
+     * The direction is derived from the state of the keys.
      *
-     * @param direction "UP" | "DOWN" | "LEFT" | "RIGHT" | "" (parar eje)
-     * @param axis      "H" (horizontal) o "V" (vertical)
+     * @param up    true if the "Up" key is pressed
+     * @param down  true if the "Down" key is pressed
+     * @param left  true if the "Left" key is pressed
+     * @param right true if the "Right" key is pressed
      */
     public void setPlayerVelocity(boolean up, boolean down, boolean left, boolean right) {
         if (player1 == null) return;
@@ -261,7 +245,7 @@ public class WorldHG {
         if (up)    vy -= PLAYER_SPEED;
         if (down)  vy += PLAYER_SPEED;
 
-        // Normalizar diagonal para evitar que sea más rápida
+        // Normalize diagonal movement to prevent it from being faster
         if (vx != 0 && vy != 0) {
             double factor = 1.0 / Math.sqrt(2);
             vx *= factor;
@@ -271,11 +255,11 @@ public class WorldHG {
         player1.setVelY(vy);
     }
 
-    // ─── Colisiones ───────────────────────────────────────────────────────────
+ // ─── Collisions ───────────────────────────────────────────────────────────
 
     /**
-     * Comprueba si algún enemigo (Ball o Mina) se solapa con el jugador
-     * usando detección AABB.
+     * Checks if any enemy (Ball or Mine) overlaps with the player
+     * using AABB detection.
      */
     private void checkEnemyPlayerCollisions() {
         if (player1 == null) return;
@@ -289,12 +273,12 @@ public class WorldHG {
     }
 
     /**
-     * Retorna true si dos cajas de CELL_SIZE×CELL_SIZE se solapan.
-     * Usa un margen interior para tolerar pequeños roces sin matar al jugador.
+     * Returns true if two CELL_SIZE×CELL_SIZE boxes overlap.
+     * Uses an internal margin to allow for minor grazing without killing the player.
      */
     private boolean aabbOverlap(double ax, double ay, double bx, double by) {
         int s = CELL_SIZE;
-        int margin = 6; // margen de tolerancia en píxeles
+        int margin = 6; // tolerance margin in pixels
         return ax + margin < bx + s - margin &&
                ax + s - margin > bx + margin &&
                ay + margin < by + s - margin &&
@@ -302,11 +286,11 @@ public class WorldHG {
     }
 
     /**
-     * Revisa qué objetos estáticos hay en la celda donde se encuentra el
-     * jugador y aplica los efectos correspondientes.
+     * Checks which static objects are present in the cell currently occupied 
+     * by the player and applies the corresponding effects.
      */
     private void checkPlayerBoardInteractions(Player player) {
-        // Usar el centro del jugador para detectar la celda actual (más preciso)
+        // Use the player's center point to detect the current cell (more precise)
         double centerX = player.getX() + CELL_SIZE / 2.0;
         double centerY = player.getY() + CELL_SIZE / 2.0;
         int col = (int) (centerX / CELL_SIZE);
@@ -315,6 +299,7 @@ public class WorldHG {
         if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) return;
 
         Board cell = board[row][col];
+        // Create a copy of the list to avoid ConcurrentModificationException during removal
         for (Object obj : new ArrayList<>(cell.getContents())) {
             if (obj instanceof Punto) {
                 Punto coin = (Punto) obj;
@@ -323,6 +308,7 @@ public class WorldHG {
                     cell.removeObject(coin);
                 }
             } else if (obj instanceof SafeZone) {
+                // Update the checkpoint/respawn point
                 player.setRespawnPoint(player.getX(), player.getY());
             } else if (obj instanceof Goal) {
                 if (allCoinsCollected()) {
@@ -359,8 +345,8 @@ public class WorldHG {
     }
 
     /**
-     * El jugador muere: suma una muerte y lo teleporta al respawn en píxeles.
-     * La velocidad se anula para que no siga moviéndose al renacer.
+     * The player dies: increments the death counter and teleports them to the respawn point in pixels.
+     * Velocity is reset to zero to prevent the player from moving immediately upon respawning.
      */
     private void playerDies(Player player) {
         deaths++;
@@ -374,21 +360,37 @@ public class WorldHG {
 
     // --- Getters de estado del juego ---
 
-    public int getDeaths() { return deaths; }
+    public int getDeaths() { 
+    	return deaths; 
+    	}
 
-    public int getTimeRemaining() { return timeRemaining; }
+    public int getTimeRemaining() { 
+    	return timeRemaining; 
+    }
 
-    public boolean isTimeUp() { return timeRemaining <= 0; }
+    public boolean isTimeUp() {
+return timeRemaining <= 0; 
+}
 
-    public boolean isLevelComplete() { return levelComplete; }
+    public boolean isLevelComplete() { 
+    	return levelComplete;
+    	}
 
-    public Player getPlayer1() { return player1; }
+    public Player getPlayer1() { 
+    	return player1;
+    	}
 
-    public Board[][] getBoard() { return board; }
+    public Board[][] getBoard() { 
+    	return board; 
+    	}
 
-    public Level getLevel() { return level; }
+    public Level getLevel() {
+    	return level; 
+    	}
 
-    public ArrayList<Enemy> getEnemies() { return enemies; }
+    public ArrayList<Enemy> getEnemies() { 
+    	return enemies;
+}
 
     public String getInfo() {
         int mins = timeRemaining / 60;
@@ -398,11 +400,9 @@ public class WorldHG {
     }
 
     public String saveGame() {
-        // TODO: Implementar serialización
         return null;
     }
 
     public void importGame(String file) {
-        // TODO: Implementar carga de partida
     }
 }

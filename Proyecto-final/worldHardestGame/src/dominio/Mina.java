@@ -1,14 +1,14 @@
 package dominio;
 
 /**
- * Enemigo estático. No se mueve, pero daña al jugador si lo toca.
- * En el archivo .txt se representa como: M
+ * Static enemy. Does not move, but damages the player upon contact.
+ * In the .txt file, it is represented as: M
  */
 public class Mina extends Enemy {
     public Mina(int posx, int posy) {
         super(posx, posy);
     }
 
-    // No tiene lógica de movimiento — es un obstáculo fijo en el tablero.
-    // La colisión con el jugador la maneja WorldHG en checkInteractions().
+    // Has no movement logic — it is a fixed obstacle on the board.
+    // Collision with the player is handled by WorldHG in checkInteractions().
 }

@@ -1,11 +1,11 @@
 package dominio;
 
 /**
- * Clase abstracta para todas las entidades móviles (jugador y enemigos).
+ * Abstract class for all moving entities (player and enemies).
  *
- * Implementa canMove usando las velocidades (velX, velY) almacenadas en Object.
- * La lógica de movimiento real (con colisión de paredes) la ejecuta WorldHG;
- * estos métodos son de conveniencia para desplazamientos directos.
+ * Implements canMove using the velocities (velX, velY) stored in Object.
+ * The actual movement logic (including wall collisions) is executed by WorldHG;
+ * these methods are convenience methods for direct displacements.
  */
 public abstract class Personaje extends Object implements canMove {
 
@@ -13,18 +13,26 @@ public abstract class Personaje extends Object implements canMove {
         super(posx, posy);
     }
 
-    // ── Implementación de canMove (sin parámetro) ─────────────────────────────
-    // Usan la velocidad actual almacenada en Object (velX, velY).
+    // ── Implementation of canMove (no parameters) ─────────────────────────────
+    // These use the current velocity stored in Object (velX, velY).
 
     @Override
-    public void moveUp()    { setY(getY() - Math.abs(getVelY() > 0 ? getVelY() : 1)); }
+    public void moveUp()    { 
+        setY(getY() - Math.abs(getVelY() > 0 ? getVelY() : 1)); 
+    }
 
     @Override
-    public void moveDown()  { setY(getY() + Math.abs(getVelY() > 0 ? getVelY() : 1)); }
+    public void moveDown()  { 
+        setY(getY() + Math.abs(getVelY() > 0 ? getVelY() : 1)); 
+    }
 
     @Override
-    public void moveRight() { setX(getX() + Math.abs(getVelX() > 0 ? getVelX() : 1)); }
+    public void moveRight() { 
+        setX(getX() + Math.abs(getVelX() > 0 ? getVelX() : 1));
+    }
 
     @Override
-    public void moveLeft()  { setX(getX() - Math.abs(getVelX() > 0 ? getVelX() : 1)); }
+    public void moveLeft()  { 
+        setX(getX() - Math.abs(getVelX() > 0 ? getVelX() : 1)); 
+    }
 }

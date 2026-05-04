@@ -1,42 +1,42 @@
 package dominio;
 
 /**
- * Representa al jugador controlado por el usuario.
+ * Represents the user-controlled player.
  *
- * Novedades respecto a la versión anterior:
- * - Los puntos de reaparición (respawn) se almacenan en píxeles (double) para
- *   mantener consistencia con el sistema de movimiento continuo.
- * - Las variables velX / velY viven en la clase base Object y se activan desde
- *   el GamePanel al detectar teclas presionadas.
+ * New features compared to the previous version:
+ * - Respawn points are stored in pixels (double) to maintain consistency 
+ *   with the continuous movement system.
+ * - velX / velY variables reside in the Object base class and are activated 
+ *   from GamePanel upon detecting key presses.
  */
 public class Player extends Hero {
 
-    private String nombre;
+    private String name;
 
-    /** Punto de reaparición en píxeles (columna × CELL_SIZE). */
+    /** Respawn point in pixels (column × CELL_SIZE). */
     private double respawnX;
 
-    /** Punto de reaparición en píxeles (fila × CELL_SIZE). */
+    /** Respawn point in pixels (row × CELL_SIZE). */
     private double respawnY;
 
     /**
-     * @param nombre nombre del jugador (ej. "Player1")
-     * @param posx   columna inicial en la grilla
-     * @param posy   fila inicial en la grilla
+     * @param name    player's name (e.g., "Player1")
+     * @param posx    initial column in the grid
+     * @param posy    initial row in the grid
      */
-    public Player(String nombre, int posx, int posy) {
+    public Player(String name, int posx, int posy) {
         super(posx, posy);
-        this.nombre = nombre;
-        // El respawn inicial coincide con la posición de inicio en píxeles
+        this.name = name;
+        // The initial respawn matches the starting position in pixels
         this.respawnX = posx * 40.0;
         this.respawnY = posy * 40.0;
     }
 
     /**
-     * Actualiza el punto de reaparición usando coordenadas de píxeles.
+     * Updates the respawn point using pixel coordinates.
      *
-     * @param px posición en píxeles sobre el eje X
-     * @param py posición en píxeles sobre el eje Y
+     * @param px position in pixels on the X axis
+     * @param py position in pixels on the Y axis
      */
     public void setRespawnPoint(double px, double py) {
         this.respawnX = px;
@@ -51,7 +51,7 @@ public class Player extends Hero {
         return respawnY;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 }

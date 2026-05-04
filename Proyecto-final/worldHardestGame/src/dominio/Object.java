@@ -3,27 +3,27 @@ package dominio;
 import java.util.ArrayList;
 
 /**
- * Clase base para todos los objetos del juego.
+ * Base class for all game objects.
  *
- * Mantiene TANTO coordenadas enteras (posx, posy) para compatibilidad con el
- * tablero estático (Board[][]) como coordenadas de punto flotante (x, y) para
- * representar la posición exacta en píxeles durante el movimiento continuo.
+ * Maintains BOTH integer coordinates (posx, posy) for compatibility with the
+ * static board (Board[][]) and floating-point coordinates (x, y) to represent
+ * the exact pixel position during continuous movement.
  *
- * Las coordenadas double (x, y) son la "fuente de verdad" durante el juego;
- * las enteras (posx, posy) indican en qué celda de la grilla se encuentra el
- * objeto y se usan para verificar colisiones con paredes.
+ * The double coordinates (x, y) are the "source of truth" during gameplay;
+ * the integers (posx, posy) indicate which grid cell the object is in
+ * and are used for wall collision detection.
  */
 public abstract class Object {
 
-    // ── Posición en grilla (índices de columna/fila) ─────────────────────────
+    // Grid position (column/row indices) 
     private double posx;
     private double posy;
 
-    // ── Posición continua en píxeles ─────────────────────────────────────────
+    // Continuous position in pixels
     private double x;
     private double y;
 
-    // ── Velocidad en píxeles/frame ────────────────────────────────────────────
+    //Velocity in pixels/frame 
     private double velX;
     private double velY;
 
@@ -32,8 +32,8 @@ public abstract class Object {
     public Object(int posx, int posy) {
         this.posx = posx;
         this.posy = posy;
-        // Inicializamos las coordenadas continuas en el centro de la celda de la grilla.
-        // CELL_SIZE = 40 px (definido en WorldHG como constante de referencia).
+        // Initialize continuous coordinates at the top-left of the grid cell.
+        // CELL_SIZE = 40 px (defined in WorldHG as a reference constant).
         this.x = posx * 40.0;
         this.y = posy * 40.0;
         this.velX = 0;
@@ -41,36 +41,57 @@ public abstract class Object {
         this.colideWith = new ArrayList<>();
     }
 
-    // ── Getters / Setters de posición entera (grilla) ─────────────────────────
+ // Getters / Setters for integer position (grid)
 
-    public double getPosx() { return posx; }
-    public double getPosy() { return posy; }
+    public double getPosx() { 
+    	return posx;
+    	}
+    public double getPosy() { 
+    	return posy;
+    	}
 
     public void setPosx(double newPosx) { 
-    	this.posx = newPosx; 
-    	}
+        this.posx = newPosx; 
+    }
     
     public void setPosy(double newPosy) { 
-    	this.posy = newPosy; 
+        this.posy = newPosy; 
+    }
+
+    // Getters / Setters for continuous position (pixels) 
+
+    public double getX() { 
+    	return x; 
+    	}
+    public double getY() { 
+    	return y; 
     	}
 
-    // ── Getters / Setters de posición continua (píxeles) ──────────────────────
+    public void setX(double x) { 
+    	this.x = x; 
+    	}
+    public void setY(double y) { 
+    	this.y = y; }
 
-    public double getX() { return x; }
-    public double getY() { return y; }
+    
+    //  Getters / Setters for velocity 
 
-    public void setX(double x) { this.x = x; }
-    public void setY(double y) { this.y = y; }
+    public double getVelX() { 
+    	return velX; 
+    	}
+    
+    public double getVelY() {
+    	return velY;
+    	}
 
-    // ── Getters / Setters de velocidad ────────────────────────────────────────
+    public void setVelX(double velX) { 
+    	this.velX = velX;
+    	}
+    public void setVelY(double velY) {
+    	this.velY = velY; 
+    	}
 
-    public double getVelX() { return velX; }
-    public double getVelY() { return velY; }
-
-    public void setVelX(double velX) { this.velX = velX; }
-    public void setVelY(double velY) { this.velY = velY; }
-
-    // ── Colisiones (herencia original) ────────────────────────────────────────
+    //  Collisions (original inheritance)
 
     public boolean canColideW(Object obj) {
         return colideWith.contains(obj);

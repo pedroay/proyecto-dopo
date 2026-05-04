@@ -1,16 +1,16 @@
 package dominio;
 
 /**
- * Interfaz para todos los objetos capaces de desplazarse en el mapa.
+ * Interface for all objects capable of moving across the map.
  *
- * Los métodos no reciben delta porque cada clase que implementa la interfaz
- * conoce su propia velocidad internamente (velX, velY en Object).
- * El movimiento real en píxeles lo gestiona WorldHG a través de los campos
- * velX/velY del objeto.
+ * Methods do not receive a delta because each class implementing the interface
+ * manages its own internal speed (velX, velY in Object).
+ * The actual movement in pixels is handled by WorldHG via the object's
+ * velX/velY fields.
  */
 public interface canMove {
     public void moveUp();
     public void moveDown();
     public void moveRight();
     public void moveLeft();
-}
+    }

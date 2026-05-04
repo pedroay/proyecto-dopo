@@ -15,13 +15,13 @@ public class Level {
     }
 
     /**
-     * Carga un nivel desde un archivo .txt.
-     * Formato esperado:
-     *   Primera línea: número de nivel (ej: "1")
-     *   Líneas siguientes: mapa con tokens separados por espacio
-     *   Tokens: W=pared, S=inicio, G=meta, Z=zona segura, P=moneda, B=enemigo básico, .=vacío
+     * Loads a level from a .txt file.
+     * Expected format:
+     *   First line: level number (e.g., "1")
+     *   Following lines: map with space-separated tokens
+     *   Tokens: W=wall, S=start, G=goal, Z=safe zone, P=coin, B=basic enemy, .=empty
      *
-     * Ejemplo:
+     * Example:
      *   1
      *   W W W W W W W
      *   W S . P . G W

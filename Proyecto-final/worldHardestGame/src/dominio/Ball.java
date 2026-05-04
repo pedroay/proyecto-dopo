@@ -1,58 +1,58 @@
 package dominio;
 
 /**
- * Enemigo móvil cuyo comportamiento está definido por un String de estado.
+ * Moving enemy whose behavior is defined by a state String.
  *
- * Con el nuevo sistema de movimiento continuo, Ball ya NO salta de celda en
- * celda: avanza BALL_SPEED píxeles por frame y rebota cuando su caja de
- * colisión (AABB) choca con una pared del mapa estático.
+ * With the new continuous movement system, Ball NO LONGER jumps from cell
+ * to cell: it advances BALL_SPEED pixels per frame and bounces when its
+ * collision box (AABB) hits a wall in the static map.
  *
- * Estados disponibles:
- *   "H" = horizontal — rebota entre paredes izquierda y derecha.
- *   "V" = vertical   — rebota entre paredes superior e inferior.
- *   "P" = perímetro  — sigue el contorno de las paredes en sentido horario.
+ * Available states:
+ *   "H" = horizontal — bounces between left and right walls.
+ *   "V" = vertical   — bounces between top and bottom walls.
+ *   "P" = perimeter  — follows the contour of the walls clockwise.
  *
- * Representación en level*.txt:
+ * Representation in level*.txt:
  *   BH, BV, BP
  */
 public class Ball extends Enemy {
 
-    /** Velocidad de desplazamiento en píxeles por frame (~60 FPS). */
+	/** Movement speed in pixels per frame (~60 FPS). */
     private static final double BALL_SPEED = 2.5;
 
-    /** Tamaño de la celda en píxeles (debe coincidir con GamePanel.CELL_SIZE). */
+    /** Cell size in pixels (must match GamePanel.CELL_SIZE). */
     public static final int CELL_SIZE = 40;
 
-    private String estado;  // patrón de movimiento
-    private double dirX;    // dirección en X: -1.0, 0 o 1.0
-    private double dirY;    // dirección en Y: -1.0, 0 o 1.0
+    private String state;   // movement pattern
+    private double dirX;    // X direction: -1.0, 0, or 1.0
+    private double dirY;    // Y direction: -1.0, 0, or 1.0
 
     /**
-     * @param posx   columna inicial en la grilla
-     * @param posy   fila inicial en la grilla
-     * @param estado patrón de movimiento: "H", "V" o "P"
+     * @param posx   initial column in the grid
+     * @param posy   initial row in the grid
+     * @param state  movement pattern: "H", "V", or "P"
      */
-    public Ball(int posx, int posy, String estado) {
+    public Ball(int posx, int posy, String state) {
         super(posx, posy);
-        this.estado = estado;
+        this.state = state;
         initDirection();
     }
-
-    /** Inicializa la dirección según el estado. */
+    
+    /** Initializes the direction based on the state. */
     private void initDirection() {
-        switch (estado) {
+        switch (state) {
             case "H":
                 dirX = 1;
                 dirY = 0;
-                break; // inicia yendo a la derecha
+                break; // starts by moving right
             case "V":
                 dirX = 0;
                 dirY = 1;
-                break; // inicia yendo hacia abajo
+                break; // starts by moving down
             case "P":
                 dirX = 1;
                 dirY = 0;
-                break; // inicia en sentido horario (→)
+                break; // starts clockwise (→)
             default:
                 dirX = 1;
                 dirY = 0;
@@ -61,14 +61,14 @@ public class Ball extends Enemy {
     }
 
     /**
-     * Avanza la Ball un frame usando coordenadas continuas.
-     * Delega al método correspondiente según el estado.
+     * Advances the Ball by one frame using continuous coordinates.
+     * Delegates to the corresponding method based on the state.
      *
-     * @param board tablero estático (solo paredes, metas, etc.)
+     * @param board static board (walls, goals, etc.)
      */
     public void move(Board[][] board) {
-        switch (estado) {
-            case "H":
+        switch (state) {
+            case "H":	
             case "V":
                 moveStraight(board);
                 break;
@@ -76,13 +76,14 @@ public class Ball extends Enemy {
                 movePerimeter(board);
                 break;
         }
-        // Actualizar la celda de grilla (posx/posy) para que WorldHG pueda
-        // usar AABB entre jugador y Ball sin depender del Board[][].
+        // Update the grid cell (posx/posy) so WorldHG can use AABB 
+        // between player and Ball without relying on Board[][].
         setPosx((int) (getX() / CELL_SIZE));
         setPosy((int) (getY() / CELL_SIZE));
     }
 
-    // ─── Movimiento recto con rebote ──────────────────────────────────────────
+   //MOVING METHOD
+    
 
     /**
      * Mueve la Ball en línea recta (H o V).
@@ -103,11 +104,12 @@ public class Ball extends Enemy {
         setY(nextY);
     }
 
-    // ─── Movimiento en perímetro ──────────────────────────────────────────────
+
+ // ─── Perimeter Movement ───────────────────────────────────────────────────
 
     /**
-     * Movimiento en perímetro: sigue las paredes en sentido horario.
-     * Prioridad: girar derecha → seguir recto → girar izquierda → reversa.
+     * Perimeter movement: follows the walls in a clockwise direction.
+     * Priority: turn right → continue straight → turn left → reverse.
      */
     private void movePerimeter(Board[][] board) {
         double[][] attempts = {
@@ -128,41 +130,41 @@ public class Ball extends Enemy {
                 return;
             }
         }
-        // Todos los caminos bloqueados → se queda quieta este frame
+        // All paths blocked → remains still this frame
     }
 
-    // ─── Utilidades de dirección ──────────────────────────────────────────────
+ // ─── Direction Utilities ───────────────────────────────────────────────────
 
-    /** Giro a la derecha (sentido horario): (1,0)→(0,1)→(-1,0)→(0,-1)→(1,0). */
+    /** Right turn (clockwise): (1,0)→(0,1)→(-1,0)→(0,-1)→(1,0). */
     private double[] turnRight(double dx, double dy) {
         return new double[]{ -dy, dx };
     }
 
-    /** Giro a la izquierda (sentido anti-horario). */
+    /** Left turn (counter-clockwise). */
     private double[] turnLeft(double dx, double dy) {
         return new double[]{ dy, -dx };
     }
 
-    // ─── Detección de colisión con paredes (AABB) ─────────────────────────────
+ //Wall Collision Detection (AABB) 
 
     /**
-     * Verifica si la esquina delantera de la Ball (en píxeles) cae dentro de
-     * una celda no transitable.
+     * Checks if the leading edges of the Ball (in pixels) fall within a
+     * non-traversable cell.
      *
-     * Se comprueban las cuatro esquinas del bounding box de la Ball (tamaño
-     * CELL_SIZE × CELL_SIZE) para detectar correctamente la colisión al
-     * moverse en diagonal durante el modo perímetro.
+     * The four corners of the Ball's bounding box (size CELL_SIZE × CELL_SIZE)
+     * are checked to correctly detect collisions when moving diagonally 
+     * during perimeter mode.
      *
-     * @param px posición X candidata (en píxeles)
-     * @param py posición Y candidata (en píxeles)
+     * @param px candidate X position (in pixels)
+     * @param py candidate Y position (in pixels)
      */
     private boolean isPixelBlocked(double px, double py, Board[][] board) {
         int size = CELL_SIZE;
-        // Probamos las cuatro esquinas de la caja de colisión
+        // Test the four corners of the collision box
         int[][] corners = {
-            { (int) px,           (int) py },
+            { (int) px, (int) py },
             { (int)(px + size-1), (int) py },
-            { (int) px,           (int)(py + size-1) },
+            { (int) px, (int)(py + size-1) },
             { (int)(px + size-1), (int)(py + size-1) }
         };
         for (int[] c : corners) {
@@ -176,8 +178,8 @@ public class Ball extends Enemy {
 
     // ─── Getters ─────────────────────────────────────────────────────────────
 
-    public String getEstado() {
-        return estado;
+    public String getState() {
+        return state;
     }
 
     public double getDirX() {
