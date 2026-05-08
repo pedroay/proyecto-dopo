@@ -24,9 +24,9 @@ public class BoardTest {
     public void testBoardSafeZone() {
         Board safeBoard = new Board(0, 0, true);
         safeBoard.addObject(new Start(0, 0));
-        assertTrue("Debería ser zona segura si tiene un Start", safeBoard.isSafeZone());
+        assertTrue("Debería ser zona segura si tiene un Start", safeBoard.isASafeZone());
         
         Board normalBoard = new Board(1, 1, true);
-        assertFalse("No debería ser zona segura si está vacía", normalBoard.isSafeZone());
+        assertFalse("No debería ser zona segura si está vacía", normalBoard.isASafeZone());
     }
 }

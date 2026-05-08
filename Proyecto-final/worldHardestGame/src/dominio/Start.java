@@ -1,7 +1,23 @@
 package dominio;
 
-public class Start extends Board implements interactWPlayer {
-    public Start(int posx, int posy) {
-        super(posx, posy, true);
+public class Start implements CellState {
+    @Override
+    public boolean canHaveObjectOnTop() {
+        return true;
+    }
+
+    @Override
+    public boolean isASafeZone() {
+        return true; // Start is also a safe zone
+    }
+
+    @Override
+    public boolean isAGoal() {
+        return false;
+    }
+
+    @Override
+    public boolean isAStart() {
+        return true;
     }
 }

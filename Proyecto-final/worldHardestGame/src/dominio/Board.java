@@ -3,17 +3,21 @@ package dominio;
 import java.util.ArrayList;
 
 public class Board extends Object {
-    private boolean canHaveObjectOnTop;
+    private CellState state;
     private ArrayList<Object> contents;
 
-    public Board(int posx, int posy, boolean canHaveObjectOnTop) {
+    public Board(int posx, int posy) {
         super(posx, posy);
-        this.canHaveObjectOnTop = canHaveObjectOnTop;
         this.contents = new ArrayList<>();
+        this.state = new Empty(); // Default state
     }
 
-    public boolean isCanHaveObjectOnTop() {
-        return canHaveObjectOnTop;
+    public CellState getState() {
+        return state;
+    }
+
+    public void setState(CellState state) {
+        this.state = state;
     }
 
     public ArrayList<Object> getContents() {
@@ -32,20 +36,20 @@ public class Board extends Object {
         return contents.isEmpty();
     }
 
-    /**
-     * Indicates whether this cell is a safe zone (Start, Goal, or Safe Zone)
-     * where enemies should not enter.
-     */
-    public boolean isSafeZone() {
-        if (this instanceof Start || this instanceof Goal || this instanceof SafeZone) {
-            return true;
-        }
-        for (Object obj : contents) {
-            if (obj instanceof Start || obj instanceof Goal || obj instanceof SafeZone) {
-                return true;
-            }
-        }
-        return false;
+    // Delegación al estado:
+    public boolean isCanHaveObjectOnTop() {
+        return state.canHaveObjectOnTop();
     }
-   }
 
+    public boolean isASafeZone() {
+        return state.isASafeZone();
+    }
+
+    public boolean isAGoal() {
+        return state.isAGoal();
+    }
+
+    public boolean isAStart() {
+        return state.isAStart();
+    }
+}

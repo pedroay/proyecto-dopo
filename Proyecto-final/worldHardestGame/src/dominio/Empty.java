@@ -1,6 +1,6 @@
 package dominio;
 
-public class SafeZone implements CellState {
+public class Empty implements CellState {
     @Override
     public boolean canHaveObjectOnTop() {
         return true;
@@ -8,7 +8,7 @@ public class SafeZone implements CellState {
 
     @Override
     public boolean isASafeZone() {
-        return true;
+        return false;
     }
 
     @Override

@@ -26,13 +26,9 @@ import javax.swing.SwingConstants;
 
 import dominio.Ball;
 import dominio.Board;
-import dominio.Borde;
-import dominio.Goal;
 import dominio.Mina;
 import dominio.Player;
 import dominio.Punto;
-import dominio.SafeZone;
-import dominio.Start;
 import dominio.WorldHG;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -543,18 +539,11 @@ public class WorldHardestGameGUI extends JFrame {
         }
 
         private Color getCellBgColor(Board cell, int row, int col) {
-            if (cell instanceof Borde)    return COLOR_WALL;
-            if (cell instanceof Goal)     return COLOR_GOAL;
-            if (cell instanceof Start)    return COLOR_START;
-            if (cell instanceof SafeZone) return COLOR_SAFEZONE;
-            
-            for (Object obj : cell.getContents()) {
-                if (obj instanceof Borde)    return COLOR_WALL;
-                if (obj instanceof Goal)     return COLOR_GOAL;
-                if (obj instanceof Start)    return COLOR_START;
-                if (obj instanceof SafeZone) return COLOR_SAFEZONE;
-            }
             if (!cell.isCanHaveObjectOnTop()) return COLOR_WALL;
+            if (cell.isAStart())              return COLOR_START;
+            if (cell.isAGoal())               return COLOR_GOAL;
+            if (cell.isASafeZone())           return COLOR_SAFEZONE;
+            
             return ((row + col) % 2 == 0) ? COLOR_EMPTY1 : COLOR_EMPTY2;
         }
 
