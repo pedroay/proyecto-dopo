@@ -7,8 +7,9 @@ package dominio;
  * The actual movement logic (including wall collisions) is executed by WorldHG;
  * these methods are convenience methods for direct displacements.
  */
-public abstract class Personaje extends Object implements canMove {
-
+public abstract class Personaje extends Object implements CanMove {
+	
+	private boolean move;
     public Personaje(int posx, int posy) {
         super(posx, posy);
     }
@@ -35,4 +36,12 @@ public abstract class Personaje extends Object implements canMove {
     public void moveLeft()  { 
         setX(getX() - Math.abs(getVelX() > 0 ? getVelX() : 1)); 
     }
+    
+   public boolean canMoveInMap() {
+	   return move;
+   }
+   
+   public void setMove(boolean value) {
+	   move = value;
+   }
 }

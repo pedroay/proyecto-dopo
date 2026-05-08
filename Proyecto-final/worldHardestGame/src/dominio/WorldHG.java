@@ -86,50 +86,97 @@ public class WorldHG {
             String[] tokens = rows[y].split(" ");
             for (int x = 0; x < tokens.length; x++) {
                 String token = tokens[x];
-
-                // Ball: any token "B" + state
-                if (token.startsWith("B") && token.length() > 1) {
-                    String state = token.substring(1);
-                    Ball ball = new Ball(x, y, state);
-                    enemies.add(ball);
-                    newBoard[y][x] = new Board(x, y, true); // empty cell underneath
-                    continue;
-                }
-
-                switch (token) {
-                    case "W":
-                        newBoard[y][x] = new Board(x, y, false);
-                        newBoard[y][x].addObject(new Borde(x, y));
-                        break;
-                    case "S":
-                        newBoard[y][x] = new Board(x, y, true);
-                        newBoard[y][x].addObject(new Start(x, y));
-                        break;
-                    case "G":
-                        newBoard[y][x] = new Board(x, y, true);
-                        newBoard[y][x].addObject(new Goal(x, y));
-                        break;
-                    case "Z":
-                        newBoard[y][x] = new Board(x, y, true);
-                        newBoard[y][x].addObject(new SafeZone(x, y));
-                        break;
-                    case "P":
-                        newBoard[y][x] = new Board(x, y, true);
-                        newBoard[y][x].addObject(new Punto(x, y));
-                        break;
-                    case "M": {
-                        Mina mine = new Mina(x, y);
-                        enemies.add(mine);
-                        newBoard[y][x] = new Board(x, y, true);
-                        break;
-                    }
-                    default: // "."
-                        newBoard[y][x] = new Board(x, y, true);
-                        break;
-                }
+                logicBoard(newBoard, y, x, token);
             }
         }
         return newBoard;
+    }
+
+    /**
+     * Processes a single token from the level definition and updates the board and enemy list.
+     * It places static objects (walls, goals, etc.) on the grid and instantiates dynamic 
+     * entities like balls and mines.
+     *
+     * @param map   the 2D array representing the static board state
+     * @param row   the vertical index (row) in the board array
+     * @param col   the horizontal index (column) in the board array
+     * @param token the string token representing the element to be processed
+     */
+    public void logicBoard(Board[][] map, int row, int col, String token) {
+        if (token.startsWith("B") && token.length() > 1) {
+            String state = token.substring(1);
+            Ball ball = new Ball(col, row, state);
+            enemies.add(ball);
+            map[row][col] = new Board(col, row, true); // empty cell underneath
+
+        } else {
+            createFirstPartOfTheBoard(map,token,row,col);
+        }
+    }
+
+    private void createFirstPartOfTheBoard(Board[][] map,String token, int row, int col){
+        if("W".equals(token)){
+            map[row][col] = new Borde(col, row);
+        }
+        else{
+            createSecondPartOfTheBoard(map,token,row,col);
+        }
+    }
+
+    private void createSecondPartOfTheBoard(Board[][] map, String token, int row, int col) {
+        if ("S".equals(token)) {
+            Start start = new Start(col, row);
+            map[row][col] = start;
+        } else {
+            createThirdPartOfTheBoard(map, token, row, col);
+        }
+    }
+
+    private void createThirdPartOfTheBoard(Board[][] map, String token, int row, int col) {
+        if ("G".equals(token)) {
+            map[row][col] = new Goal(col, row);
+        } else {
+            createFourthPartOfTheBoard(map, token, row, col);
+        }
+    }
+
+    private void createFourthPartOfTheBoard(Board[][] map, String token, int row, int col) {
+        if ("Z".equals(token)) {
+            map[row][col] = new SafeZone(col, row);
+        } else {
+            createFifthPartOfTheBoard(map, token, row, col);
+        }
+    }
+
+    private void createFifthPartOfTheBoard(Board[][] map, String token, int row, int col) {
+        if ("P".equals(token)) {
+            map[row][col] = new Board(col, row, true);
+            map[row][col].addObject(new Punto(col, row));
+        } else {
+            createSixthPartOfTheBoard(map, token, row, col);
+        }
+    }
+
+    private void createSixthPartOfTheBoard(Board[][] map, String token, int row, int col) {
+        if ("M".equals(token)) {
+            map[row][col] = new Board(col, row, true);
+            Mina mine = new Mina(col, row);
+            enemies.add(mine);
+            map[row][col].addObject(mine);
+        } else {
+            createSeventhPartOfTheBoard(map, token, row, col);
+        }
+    }
+
+    private void createSeventhPartOfTheBoard(Board[][] map, String token, int row, int col) {
+        if (".".equals(token)) {
+            map[row][col] = new Board(col, row, true);
+        } else {
+            createEighthPartOfTheBoard(map, token, row, col);
+        }
+    }
+
+    private void createEighthPartOfTheBoard(Board[][] map, String token, int row, int col) {
     }
 
  // Main Loop 
@@ -153,8 +200,8 @@ public class WorldHG {
 
         // 2. Move enemies
         for (Enemy enemy : enemies) {
-            if (enemy instanceof Ball) {
-                ((Ball) enemy).move(board);
+            if (enemy.canMoveInMap()) {
+                 enemy.move(board);
             }
         }
 
@@ -299,6 +346,16 @@ public class WorldHG {
         if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) return;
 
         Board cell = board[row][col];
+        
+        // Verificar si la celda misma es el objeto con el que interactuamos (polimorfismo)
+        if (cell instanceof SafeZone || cell instanceof Start) {
+            player.setRespawnPoint(player.getX(), player.getY());
+        } else if (cell instanceof Goal) {
+            if (allCoinsCollected()) {
+                levelComplete = true;
+            }
+        }
+
         // Create a copy of the list to avoid ConcurrentModificationException during removal
         for (Object obj : new ArrayList<>(cell.getContents())) {
             if (obj instanceof Punto) {
@@ -307,7 +364,7 @@ public class WorldHG {
                     coin.collect();
                     cell.removeObject(coin);
                 }
-            } else if (obj instanceof SafeZone) {
+            } else if (obj instanceof SafeZone || obj instanceof Start) {
                 // Update the checkpoint/respawn point
                 player.setRespawnPoint(player.getX(), player.getY());
             } else if (obj instanceof Goal) {
@@ -323,6 +380,7 @@ public class WorldHG {
     private int[] findStart() {
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
+                if (board[y][x] instanceof Start) return new int[]{ x, y };
                 for (Object obj : board[y][x].getContents()) {
                     if (obj instanceof Start) return new int[]{ x, y };
                 }

@@ -37,6 +37,9 @@ public class Board extends Object {
      * where enemies should not enter.
      */
     public boolean isSafeZone() {
+        if (this instanceof Start || this instanceof Goal || this instanceof SafeZone) {
+            return true;
+        }
         for (Object obj : contents) {
             if (obj instanceof Start || obj instanceof Goal || obj instanceof SafeZone) {
                 return true;

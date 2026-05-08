@@ -8,9 +8,18 @@ package dominio;
  * The actual movement in pixels is handled by WorldHG via the object's
  * velX/velY fields.
  */
-public interface canMove {
+public interface CanMove {
+	
+	 
     public void moveUp();
     public void moveDown();
     public void moveRight();
     public void moveLeft();
+    
+    public boolean canMoveInMap();
+    public void setMove(boolean value);
+    
     }
+	
+
+

@@ -543,6 +543,11 @@ public class WorldHardestGameGUI extends JFrame {
         }
 
         private Color getCellBgColor(Board cell, int row, int col) {
+            if (cell instanceof Borde)    return COLOR_WALL;
+            if (cell instanceof Goal)     return COLOR_GOAL;
+            if (cell instanceof Start)    return COLOR_START;
+            if (cell instanceof SafeZone) return COLOR_SAFEZONE;
+            
             for (Object obj : cell.getContents()) {
                 if (obj instanceof Borde)    return COLOR_WALL;
                 if (obj instanceof Goal)     return COLOR_GOAL;

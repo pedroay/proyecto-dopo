@@ -7,8 +7,8 @@ package dominio;
 public class Mina extends Enemy {
     public Mina(int posx, int posy) {
         super(posx, posy);
+        super.setMove(false);
     }
 
-    // Has no movement logic — it is a fixed obstacle on the board.
-    // Collision with the player is handled by WorldHG in checkInteractions().
+    public void move(Board[][] board) {}
 }

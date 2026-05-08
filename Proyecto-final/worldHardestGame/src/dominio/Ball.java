@@ -36,6 +36,7 @@ public class Ball extends Enemy {
         super(posx, posy);
         this.state = state;
         initDirection();
+        super.setMove(true);
     }
     
     /** Initializes the direction based on the state. */
@@ -59,6 +60,7 @@ public class Ball extends Enemy {
                 break;
         }
     }
+    
 
     /**
      * Advances the Ball by one frame using continuous coordinates.
