@@ -337,11 +337,11 @@ public class WorldHG {
 
         Board cell = board[row][col];
         
-        if (cell.isASafeZone() || cell.isAStart()) {
+        if (cell.isARespawn()) {
             player.setRespawnPoint(player.getX(), player.getY());
         } 
         
-        if (cell.isAGoal()) {
+        if (cell.isAFinish()) {
             if (allCoinsCollected()) {
                 levelComplete = true;
             }
@@ -363,7 +363,7 @@ public class WorldHG {
     private int[] findStart() {
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
-                if (board[y][x].isAStart()) return new int[]{ x, y };
+                if (board[y][x].isARespawn()) return new int[]{ x, y };
             }
         }
         return new int[]{ 0, 0 }; // fallback

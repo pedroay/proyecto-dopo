@@ -26,6 +26,8 @@ public abstract class Object {
     //Velocity in pixels/frame 
     private double velX;
     private double velY;
+    
+    
 
     private ArrayList<String> colideWith;
 

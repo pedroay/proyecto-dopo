@@ -41,15 +41,18 @@ public class Board extends Object {
         return state.canHaveObjectOnTop();
     }
 
-    public boolean isASafeZone() {
-        return state.isASafeZone();
+    public boolean isSafe() {
+        return state.isSafe();
     }
 
-    public boolean isAGoal() {
-        return state.isAGoal();
+    public boolean isARespawn() {
+        return state.isARespawn();
     }
+    
 
-    public boolean isAStart() {
-        return state.isAStart();
-    }
+    public boolean isAFinish() {
+     	return state.isAFinish();
+     }
+
+   
 }

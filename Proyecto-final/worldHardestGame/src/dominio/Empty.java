@@ -7,17 +7,18 @@ public class Empty implements CellState {
     }
 
     @Override
-    public boolean isASafeZone() {
+    public boolean isSafe() {
         return false;
     }
 
-    @Override
-    public boolean isAGoal() {
-        return false;
-    }
 
     @Override
-    public boolean isAStart() {
+    public boolean isARespawn() {
         return false;
     }
+    
+    @Override
+    public boolean isAFinish() {
+     	return false;
+     }
 }

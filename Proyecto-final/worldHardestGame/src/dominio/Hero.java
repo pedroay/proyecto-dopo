@@ -1,7 +1,14 @@
 package dominio;
 
 public abstract class Hero extends Personaje {
-    public Hero(int posx, int posy) {
+	
+	private State skin;
+	private double size;
+	
+    public Hero(int posx, int posy, double heroVelocity) {
         super(posx, posy);
+        this.heroVelocity = heroVelocity;
     }
+    
+    
 }

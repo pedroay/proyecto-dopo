@@ -7,17 +7,17 @@ public class Goal implements CellState {
     }
 
     @Override
-    public boolean isASafeZone() {
+    public boolean isSafe() {
         return true; // Goal is also a safe zone
     }
 
     @Override
-    public boolean isAGoal() {
-        return true;
-    }
-
-    @Override
-    public boolean isAStart() {
+    public boolean isARespawn() {
         return false;
     }
+    
+    @Override
+    public boolean isAFinish() {
+     	return true;
+     }
 }

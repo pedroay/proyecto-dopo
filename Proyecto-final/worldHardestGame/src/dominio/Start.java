@@ -7,17 +7,15 @@ public class Start implements CellState {
     }
 
     @Override
-    public boolean isASafeZone() {
+    public boolean isSafe() {
         return true; // Start is also a safe zone
     }
-
+    
     @Override
-    public boolean isAGoal() {
-        return false;
+	public boolean isARespawn() {
+    	return true;
     }
-
-    @Override
-    public boolean isAStart() {
-        return true;
+    public boolean isAFinish() {
+    	return false;
     }
 }
