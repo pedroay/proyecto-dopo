@@ -12,7 +12,7 @@ package dominio;
 public class Player extends Hero {
 
     private String name;
-    
+    private PlayerState state;
 
     /** Respawn point in pixels (column × CELL_SIZE). */
     private double respawnX;
@@ -25,9 +25,10 @@ public class Player extends Hero {
      * @param posx    initial column in the grid
      * @param posy    initial row in the grid
      */
-    public Player(String name, int posx, int posy, ) {
+    public Player(String name, int posx, int posy) {
         super(posx, posy);
         this.name = name;
+        this.state = new RedState(); // Default state
         // The initial respawn matches the starting position in pixels
         this.respawnX = posx * 40.0;
         this.respawnY = posy * 40.0;
@@ -54,5 +55,13 @@ public class Player extends Hero {
 
     public String getName() {
         return name;
+    }
+
+    public PlayerState getState() {
+        return state;
+    }
+
+    public void setState(PlayerState state) {
+        this.state = state;
     }
 }

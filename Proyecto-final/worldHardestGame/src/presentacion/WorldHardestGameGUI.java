@@ -540,9 +540,9 @@ public class WorldHardestGameGUI extends JFrame {
 
         private Color getCellBgColor(Board cell, int row, int col) {
             if (!cell.isCanHaveObjectOnTop()) return COLOR_WALL;
-            if (cell.isAStart())              return COLOR_START;
-            if (cell.isAGoal())               return COLOR_GOAL;
-            if (cell.isASafeZone())           return COLOR_SAFEZONE;
+            if (cell.isARespawn())            return COLOR_START;
+            if (cell.isAFinish())             return COLOR_GOAL;
+            if (cell.isSafe())                return COLOR_SAFEZONE;
             
             return ((row + col) % 2 == 0) ? COLOR_EMPTY1 : COLOR_EMPTY2;
         }
@@ -571,9 +571,26 @@ public class WorldHardestGameGUI extends JFrame {
                 int cs = s / 2;
                 int cx = x + (CELL_SIZE - cs) / 2;
                 int cy = y + (CELL_SIZE - cs) / 2;
-                g2.setColor(COLOR_COIN);
+                
+                Color ptColor = COLOR_COIN;
+                Color ptBorder = new Color(200, 160, 0);
+                if (obj instanceof dominio.SkinPunto) {
+                    dominio.SkinPunto sp = (dominio.SkinPunto) obj;
+                    if (sp.getColor().equals("blue")) {
+                        ptColor = new Color(100, 150, 255);
+                        ptBorder = new Color(20, 80, 200);
+                    } else if (sp.getColor().equals("green")) {
+                        ptColor = new Color(100, 255, 100);
+                        ptBorder = new Color(20, 200, 20);
+                    } else if (sp.getColor().equals("red")) {
+                        ptColor = new Color(255, 100, 100);
+                        ptBorder = new Color(200, 20, 20);
+                    }
+                }
+                
+                g2.setColor(ptColor);
                 g2.fillOval(cx, cy, cs, cs);
-                g2.setColor(new Color(200, 160, 0));
+                g2.setColor(ptBorder);
                 g2.setStroke(new BasicStroke(1.5f));
                 g2.drawOval(cx, cy, cs, cs);
             }
@@ -586,12 +603,19 @@ public class WorldHardestGameGUI extends JFrame {
         private void drawPlayer(Graphics2D g2) {
             dominio.Player player = worldHG.getPlayer1();
             if (player == null) return;
-            int m = 5, s = CELL_SIZE - m * 2;
+            
+            // Tamaño dinámico del jugador según su estado
+            double stateSize = player.getState().getSize();
+            // Calcula el margen para centrar el cuadro dentro de su celda
+            int m = (int) ((CELL_SIZE - stateSize) / 2);
             int px = (int) player.getX() + m;
             int py = (int) player.getY() + HUD_HEIGHT + m;
-            g2.setColor(COLOR_PLAYER);
+            int s = (int) stateSize;
+            
+            // Color dinámico del jugador
+            g2.setColor(player.getState().getColor());
             g2.fillRect(px, py, s, s);
-            g2.setColor(new Color(150, 20, 20));
+            g2.setColor(player.getState().getColor().darker());
             g2.setStroke(new BasicStroke(2));
             g2.drawRect(px, py, s, s);
         }

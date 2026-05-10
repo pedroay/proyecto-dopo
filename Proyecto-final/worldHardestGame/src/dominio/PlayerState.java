@@ -1,0 +1,45 @@
+package dominio;
+
+import java.awt.Color;
+
+/**
+ * Base abstract class for player states (skins).
+ * Defines color, speed, size, and interaction with enemies.
+ */
+public abstract class PlayerState {
+    protected Color color;
+    protected double speed;
+    protected double size;
+
+    public PlayerState(Color color, double speed, double size) {
+        this.color = color;
+        this.speed = speed;
+        this.size = size;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getSize() {
+        return size;
+    }
+
+    /**
+     * @return true if the player should die upon contacting an enemy.
+     */
+    public abstract boolean diesOnContact();
+
+    /**
+     * Called when the player touches an enemy.
+     * Can be used to change state properties (like reducing speed for Green).
+     * @param player the player object
+     */
+    public void handleEnemyContact(Player player) {
+        // Default behavior is do nothing. Override in subclasses if needed.
+    }
+}

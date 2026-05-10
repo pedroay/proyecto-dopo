@@ -78,6 +78,21 @@ public class WorldHG {
             cell.addObject(new Punto(col, row));
             map[row][col] = cell;
         });
+        tokenHandlers.put("PB", (map, row, col, token, ctx) -> {
+            Board cell = new Board(col, row);
+            cell.addObject(new SkinPunto(col, row, "blue"));
+            map[row][col] = cell;
+        });
+        tokenHandlers.put("PG", (map, row, col, token, ctx) -> {
+            Board cell = new Board(col, row);
+            cell.addObject(new SkinPunto(col, row, "green"));
+            map[row][col] = cell;
+        });
+        tokenHandlers.put("PR", (map, row, col, token, ctx) -> {
+            Board cell = new Board(col, row);
+            cell.addObject(new SkinPunto(col, row, "red"));
+            map[row][col] = cell;
+        });
         tokenHandlers.put("M", (map, row, col, token, ctx) -> {
             Board cell = new Board(col, row);
             Mina mine = new Mina(col, row);
@@ -135,8 +150,9 @@ public class WorldHG {
 
         for (int y = 0; y < height; y++) {
             String[] tokens = rows[y].split(" ");
-            for (int x = 0; x < tokens.length; x++) {
-                String token = tokens[x];
+            for (int x = 0; x < width; x++) {
+                // Si el nivel tiene espacios faltantes en el txt, rellena con un punto vacío "."
+                String token = (x < tokens.length) ? tokens[x] : ".";
                 logicBoard(newBoard, y, x, token);
             }
         }
@@ -215,11 +231,12 @@ public class WorldHG {
      */
     public void movePlayerContinuous(Player player, String direction) {
         double vx = 0, vy = 0;
+        double speed = player.getState().getSpeed();
         switch (direction) {
-            case "UP":    vy = -PLAYER_SPEED; break;
-            case "DOWN":  vy =  PLAYER_SPEED; break;
-            case "LEFT":  vx = -PLAYER_SPEED; break;
-            case "RIGHT": vx =  PLAYER_SPEED; break;
+            case "UP":    vy = -speed; break;
+            case "DOWN":  vy =  speed; break;
+            case "LEFT":  vx = -speed; break;
+            case "RIGHT": vx =  speed; break;
             default: return; // Unknown direction, do not move
         }
 
@@ -276,11 +293,12 @@ public class WorldHG {
      */
     public void setPlayerVelocity(boolean up, boolean down, boolean left, boolean right) {
         if (player1 == null) return;
+        double speed = player1.getState().getSpeed();
         double vx = 0, vy = 0;
-        if (left)  vx -= PLAYER_SPEED;
-        if (right) vx += PLAYER_SPEED;
-        if (up)    vy -= PLAYER_SPEED;
-        if (down)  vy += PLAYER_SPEED;
+        if (left)  vx -= speed;
+        if (right) vx += speed;
+        if (up)    vy -= speed;
+        if (down)  vy += speed;
 
         // Normalize diagonal movement to prevent it from being faster
         if (vx != 0 && vy != 0) {
@@ -301,25 +319,28 @@ public class WorldHG {
     private void checkEnemyPlayerCollisions() {
         if (player1 == null) return;
         for (Enemy enemy : enemies) {
-            if (aabbOverlap(player1.getX(), player1.getY(),
-                            enemy.getX(),   enemy.getY())) {
-                playerDies(player1);
-                return;
+            if (aabbOverlap(player1.getX(), player1.getY(), player1.getState().getSize(),
+                            enemy.getX(),   enemy.getY(), CELL_SIZE)) {
+                if (player1.getState().diesOnContact()) {
+                    playerDies(player1);
+                    return;
+                } else {
+                    player1.getState().handleEnemyContact(player1);
+                }
             }
         }
     }
 
     /**
-     * Returns true if two CELL_SIZE×CELL_SIZE boxes overlap.
+     * Returns true if two boxes of given sizes overlap.
      * Uses an internal margin to allow for minor grazing without killing the player.
      */
-    private boolean aabbOverlap(double ax, double ay, double bx, double by) {
-        int s = CELL_SIZE;
+    private boolean aabbOverlap(double ax, double ay, double aSize, double bx, double by, double bSize) {
         int margin = 6; // tolerance margin in pixels
-        return ax + margin < bx + s - margin &&
-               ax + s - margin > bx + margin &&
-               ay + margin < by + s - margin &&
-               ay + s - margin > by + margin;
+        return ax + margin < bx + bSize - margin &&
+               ax + aSize - margin > bx + margin &&
+               ay + margin < by + bSize - margin &&
+               ay + aSize - margin > by + margin;
     }
 
     /**
@@ -353,6 +374,9 @@ public class WorldHG {
                 if (!coin.isCollected()) {
                     coin.collect();
                     cell.removeObject(coin);
+                    if (coin instanceof SkinPunto) {
+                        ((SkinPunto) coin).applyState(player);
+                    }
                 }
             }
         }
@@ -394,6 +418,11 @@ public class WorldHG {
         player.setPosy((int)(player.getRespawnY() / CELL_SIZE));
         player.setVelX(0);
         player.setVelY(0);
+        
+        // Reset player state if it is a GreenState, so it gets the hit again
+        if (player.getState() instanceof GreenState) {
+            ((GreenState) player.getState()).resetContact();
+        }
     }
 
     // --- Getters de estado del juego ---
