@@ -231,7 +231,7 @@ public class WorldHG {
      */
     public void movePlayerContinuous(Player player, String direction) {
         double vx = 0, vy = 0;
-        double speed = player.getState().getSpeed();
+        double speed = player.getSpeed();
         switch (direction) {
             case "UP":    vy = -speed; break;
             case "DOWN":  vy =  speed; break;

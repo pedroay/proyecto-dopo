@@ -87,4 +87,8 @@ public class Player extends Hero {
     public java.awt.Color getBorderColor() {
         return java.awt.Color.RED.darker();
     }
+    
+    public double getSpeed() {
+    	return state.getSpeed();
+    }
 }
