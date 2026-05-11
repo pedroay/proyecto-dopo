@@ -40,6 +40,16 @@ public abstract class PlayerState {
      * @param player the player object
      */
     public void handleEnemyContact(Player player) {
-        // Default behavior is do nothing. Override in subclasses if needed.
+        // Default behavior: do nothing. Override in subclasses if needed.
+    }
+
+    /**
+     * Called by WorldHG when the player dies (any cause).
+     * Override in subclasses that need to reset internal state on death.
+     * Replaces the former (instanceof GreenState) check in playerDies().
+     * @param player the player that just died
+     */
+    public void onPlayerDeath(Player player) {
+        // Default: no action
     }
 }

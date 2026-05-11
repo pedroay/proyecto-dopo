@@ -90,7 +90,7 @@ public class WorldHGTest {
         Board coinCell = game.getBoard()[1][2];
         boolean coinStillThere = false;
         for(Object obj : coinCell.getContents()) {
-            if (obj instanceof Punto) coinStillThere = true;
+            if (obj.isCollectible()) coinStillThere = true;
         }
         
         assertFalse("La moneda debería haber sido recolectada", coinStillThere);

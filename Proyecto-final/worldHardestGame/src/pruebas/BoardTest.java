@@ -14,7 +14,7 @@ public class BoardTest {
         
         board.addObject(coin);
         assertEquals("La lista contents debería tener 1 objeto", 1, board.getContents().size());
-        assertTrue("El objeto debería ser una instancia de Punto", board.getContents().get(0) instanceof Punto);
+        assertTrue("El objeto debería ser coleccionable (isCollectible)", board.getContents().get(0).isCollectible());
         
         board.removeObject(coin);
         assertTrue("La lista contents debería estar vacía tras remover", board.isEmpty());

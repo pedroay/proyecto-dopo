@@ -1,5 +1,7 @@
 package dominio;
 
+import java.awt.Color;
+
 /**
  * Moving enemy whose behavior is defined by a state String.
  *
@@ -22,6 +24,9 @@ public class Ball extends Enemy {
 
     /** Cell size in pixels (must match GamePanel.CELL_SIZE). */
     public static final int CELL_SIZE = 40;
+
+    private static final Color BALL_PRIMARY = new Color(30, 100, 200);
+    private static final Color BALL_BORDER  = new Color(10,  60, 160);
 
     private String state;   // movement pattern
     private double dirX;    // X direction: -1.0, 0, or 1.0
@@ -190,5 +195,27 @@ public class Ball extends Enemy {
 
     public double getDirY() {
         return dirY;
+    }
+
+    // ─── Renderable — Ball knows its own appearance ───────────────────────────
+
+    @Override
+    public boolean isVisible() {
+        return true;
+    }
+
+    @Override
+    public float getStrokeWidth() {
+        return 2.0f;
+    }
+
+    @Override
+    public Color getPrimaryColor() {
+        return BALL_PRIMARY;
+    }
+
+    @Override
+    public Color getBorderColor() {
+        return BALL_BORDER;
     }
 }

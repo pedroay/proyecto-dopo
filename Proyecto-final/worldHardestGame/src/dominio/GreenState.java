@@ -34,4 +34,13 @@ public class GreenState extends PlayerState {
         this.hasContacted = false;
         this.speed = 6.0;
     }
+
+    /**
+     * Called by WorldHG.playerDies() — no instanceof needed.
+     * Resets the contact flag so the next life starts fresh.
+     */
+    @Override
+    public void onPlayerDeath(Player player) {
+        resetContact();
+    }
 }

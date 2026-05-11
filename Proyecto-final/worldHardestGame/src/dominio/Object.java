@@ -1,5 +1,6 @@
 package dominio;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -12,8 +13,11 @@ import java.util.ArrayList;
  * The double coordinates (x, y) are the "source of truth" during gameplay;
  * the integers (posx, posy) indicate which grid cell the object is in
  * and are used for wall collision detection.
+ *
+ * Implements {@link Renderable} so the GUI can query any object for its own
+ * rendering data without instanceof checks or wrapper objects.
  */
-public abstract class Object {
+public abstract class Object implements Renderable {
 
     // Grid position (column/row indices) 
     private double posx;
@@ -26,8 +30,6 @@ public abstract class Object {
     //Velocity in pixels/frame 
     private double velX;
     private double velY;
-    
-    
 
     private ArrayList<String> colideWith;
 
@@ -92,6 +94,60 @@ public abstract class Object {
     public void setVelY(double velY) {
     	this.velY = velY; 
     	}
+
+    // ─── Behaviour hooks ──────────────────────────────────────────────────────
+
+    /**
+     * @return true if this object can be collected by the player (coins, skins…).
+     *         Override in collectible subclasses.
+     */
+    public boolean isCollectible() {
+        return false;
+    }
+
+    /**
+     * @return true only for the Player object.
+     *         Lightweight sentinel used by the GUI to skip the player
+     *         inside drawObject() (player is drawn separately).
+     */
+    public boolean isPlayer() {
+        return false;
+    }
+
+    // ─── Renderable defaults ──────────────────────────────────────────────────
+
+    /** Default: not drawn by drawObject(). Visible subclasses override this to true. */
+    @Override
+    public boolean isVisible() {
+        return false;
+    }
+
+    /**
+     * Default: full-cell size. Collectibles override this to 0.5 to draw
+     * a smaller, centred oval.
+     */
+    @Override
+    public float getDrawSizeRatio() {
+        return 1.0f;
+    }
+
+    /** Default stroke width. Override to customise the outline thickness. */
+    @Override
+    public float getStrokeWidth() {
+        return 1.5f;
+    }
+
+    /** Default neutral fill colour. Subclasses override with their own colour. */
+    @Override
+    public Color getPrimaryColor() {
+        return Color.GRAY;
+    }
+
+    /** Default neutral border colour. Subclasses override with their own colour. */
+    @Override
+    public Color getBorderColor() {
+        return Color.DARK_GRAY;
+    }
 
     //  Collisions (original inheritance)
 

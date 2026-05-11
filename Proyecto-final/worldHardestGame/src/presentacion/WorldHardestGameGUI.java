@@ -24,11 +24,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import dominio.Ball;
 import dominio.Board;
-import dominio.Mina;
 import dominio.Player;
-import dominio.Punto;
 import dominio.WorldHG;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -378,9 +375,6 @@ public class WorldHardestGameGUI extends JFrame {
         private static final Color COLOR_START    = new Color(144, 238, 144);
         private static final Color COLOR_GOAL     = new Color(60, 210, 80);
         private static final Color COLOR_SAFEZONE = new Color(100, 200, 120);
-        private static final Color COLOR_PLAYER   = new Color(215, 40, 40);
-        private static final Color COLOR_ENEMY    = new Color(30, 100, 200);
-        private static final Color COLOR_COIN     = new Color(255, 210, 0);
         private static final Color COLOR_HUD_BG   = new Color(20, 22, 38);
 
         private final WorldHG worldHG;
@@ -533,7 +527,7 @@ public class WorldHardestGameGUI extends JFrame {
             g2.fillRect(x, y, CELL_SIZE, CELL_SIZE);
             g2.setColor(new Color(0, 0, 0, 25));
             g2.drawRect(x, y, CELL_SIZE, CELL_SIZE);
-            for (Object obj : cell.getContents()) {
+            for (dominio.Object obj : cell.getContents()) {
                 drawObject(g2, obj, x, y);
             }
         }
@@ -547,53 +541,26 @@ public class WorldHardestGameGUI extends JFrame {
             return ((row + col) % 2 == 0) ? COLOR_EMPTY1 : COLOR_EMPTY2;
         }
 
-        private void drawObject(Graphics2D g2, Object obj, int x, int y) {
-            // El jugador se dibuja aparte con posición suavizada
-            if (obj instanceof Player) return;
-
-            int m = 5, s = CELL_SIZE - m * 2;
-
-            if (obj instanceof Mina) {
-                g2.setColor(new Color(20, 20, 120));
-                g2.fillOval(x + m, y + m, s, s);
-                g2.setColor(Color.BLACK);
-                g2.setStroke(new BasicStroke(1.5f));
-                g2.drawOval(x + m, y + m, s, s);
-
-            } else if (obj instanceof Ball) {
-                g2.setColor(COLOR_ENEMY);
-                g2.fillOval(x + m, y + m, s, s);
-                g2.setColor(new Color(10, 60, 160));
-                g2.setStroke(new BasicStroke(2));
-                g2.drawOval(x + m, y + m, s, s);
-
-            } else if (obj instanceof Punto) {
-                int cs = s / 2;
-                int cx = x + (CELL_SIZE - cs) / 2;
-                int cy = y + (CELL_SIZE - cs) / 2;
-                
-                Color ptColor = COLOR_COIN;
-                Color ptBorder = new Color(200, 160, 0);
-                if (obj instanceof dominio.SkinPunto) {
-                    dominio.SkinPunto sp = (dominio.SkinPunto) obj;
-                    if (sp.getColor().equals("blue")) {
-                        ptColor = new Color(100, 150, 255);
-                        ptBorder = new Color(20, 80, 200);
-                    } else if (sp.getColor().equals("green")) {
-                        ptColor = new Color(100, 255, 100);
-                        ptBorder = new Color(20, 200, 20);
-                    } else if (sp.getColor().equals("red")) {
-                        ptColor = new Color(255, 100, 100);
-                        ptBorder = new Color(200, 20, 20);
-                    }
-                }
-                
-                g2.setColor(ptColor);
-                g2.fillOval(cx, cy, cs, cs);
-                g2.setColor(ptBorder);
-                g2.setStroke(new BasicStroke(1.5f));
-                g2.drawOval(cx, cy, cs, cs);
+        private void drawObject(Graphics2D g2, dominio.Object obj, int x, int y) {
+            if (!obj.isVisible() || obj.isPlayer()) {
+                return;
             }
+
+            float ratio = obj.getDrawSizeRatio();
+            // A ratio of 1.0 corresponds to a full cell with a 5px margin.
+            int baseSize = CELL_SIZE - 10; 
+            int s = (int) (baseSize * ratio);
+            
+            // Compute centered offsets within the cell
+            int cx = x + (CELL_SIZE - s) / 2;
+            int cy = y + (CELL_SIZE - s) / 2;
+            
+            g2.setColor(obj.getPrimaryColor());
+            g2.fillOval(cx, cy, s, s);
+            
+            g2.setColor(obj.getBorderColor());
+            g2.setStroke(new BasicStroke(obj.getStrokeWidth()));
+            g2.drawOval(cx, cy, s, s);
         }
 
         /**

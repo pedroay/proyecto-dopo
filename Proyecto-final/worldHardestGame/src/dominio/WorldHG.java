@@ -369,14 +369,12 @@ public class WorldHG {
         }
 
         for (Object obj : new ArrayList<>(cell.getContents())) {
-            if (obj instanceof Punto) {
+            if (obj.isCollectible()) {
                 Punto coin = (Punto) obj;
                 if (!coin.isCollected()) {
                     coin.collect();
                     cell.removeObject(coin);
-                    if (coin instanceof SkinPunto) {
-                        ((SkinPunto) coin).applyState(player);
-                    }
+                    coin.onCollect(player); // SkinPunto overrides this to apply a state
                 }
             }
         }
@@ -397,7 +395,7 @@ public class WorldHG {
         for (Board[] row : board) {
             for (Board cell : row) {
                 for (Object obj : cell.getContents()) {
-                    if (obj instanceof Punto && !((Punto) obj).isCollected()) {
+                    if (obj.isCollectible() && !((Punto) obj).isCollected()) {
                         return false;
                     }
                 }
@@ -419,10 +417,8 @@ public class WorldHG {
         player.setVelX(0);
         player.setVelY(0);
         
-        // Reset player state if it is a GreenState, so it gets the hit again
-        if (player.getState() instanceof GreenState) {
-            ((GreenState) player.getState()).resetContact();
-        }
+        // Notify the current state so it can reset itself (e.g. GreenState resets its hit flag)
+        player.getState().onPlayerDeath(player);
     }
 
     // --- Getters de estado del juego ---

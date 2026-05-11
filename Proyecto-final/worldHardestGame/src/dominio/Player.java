@@ -64,4 +64,27 @@ public class Player extends Hero {
     public void setState(PlayerState state) {
         this.state = state;
     }
+
+    // ─── Behaviour hooks ──────────────────────────────────────────────────────
+
+    /** The GUI uses this to skip drawing the player inside drawObject(). */
+    @Override
+    public boolean isPlayer() {
+        return true;
+    }
+
+    // ─── Renderable — Player knows its own rendering category ─────────────────
+    // (Player is drawn by drawPlayer(), not drawObject().
+    //  Because Object defaults isVisible() to false, drawObject() skips it.)
+
+    @Override
+    public java.awt.Color getPrimaryColor() {
+        // Actual color comes from getState().getColor() in drawPlayer()
+        return java.awt.Color.RED;
+    }
+
+    @Override
+    public java.awt.Color getBorderColor() {
+        return java.awt.Color.RED.darker();
+    }
 }
