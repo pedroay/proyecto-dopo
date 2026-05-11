@@ -260,22 +260,31 @@ public class WorldHG {
     }
 
     /**
-     * Checks if the player's collision box (CELL_SIZE × CELL_SIZE)
-     * at position (px, py) intersects with any wall on the board.
+     * Checks if the player's visual bounding box at the candidate position (px, py)
+     * intersects with any wall on the board.
      */
     private boolean isPlayerBlocked(double px, double py) {
-        int size = CELL_SIZE;
-        // Internal margins to prevent getting stuck in corners (4 px margin)
-        int margin = 4;
-        int[][] corners = {
-            { (int)(px + margin), (int)(py + margin) },
-            { (int)(px + size - margin), (int)(py + margin) },
-            { (int)(px + margin), (int)(py + size - margin) },
-            { (int)(px + size - margin), (int)(py + size - margin) }
+        if (player1 == null) return false;
+        double stateSize = player1.getState().getSize();
+        double offset = (CELL_SIZE - stateSize) / 2.0;
+
+        // Visual corners of the player (we shrink the box by 1 pixel to allow smooth sliding)
+        double margin = 1.0;
+        double left = px + offset + margin;
+        double right = px + offset + stateSize - margin;
+        double top = py + offset + margin;
+        double bottom = py + offset + stateSize - margin;
+
+        double[][] corners = {
+            { left, top },
+            { right, top },
+            { left, bottom },
+            { right, bottom }
         };
-        for (int[] c : corners) {
-            int col = c[0] / size;
-            int row = c[1] / size;
+
+        for (double[] c : corners) {
+            int col = (int) (c[0] / CELL_SIZE);
+            int row = (int) (c[1] / CELL_SIZE);
             if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) return true;
             if (!board[row][col].isCanHaveObjectOnTop()) return true;
         }
@@ -314,13 +323,25 @@ public class WorldHG {
 
     /**
      * Checks if any enemy (Ball or Mine) overlaps with the player
-     * using AABB detection.
+     * using AABB detection matching their visual representations.
      */
     private void checkEnemyPlayerCollisions() {
         if (player1 == null) return;
+        
+        // Player's visual bounding box
+        double pSize = player1.getState().getSize();
+        double pOffset = (CELL_SIZE - pSize) / 2.0;
+        double pLeft = player1.getX() + pOffset;
+        double pTop = player1.getY() + pOffset;
+
         for (Enemy enemy : enemies) {
-            if (aabbOverlap(player1.getX(), player1.getY(), player1.getState().getSize(),
-                            enemy.getX(),   enemy.getY(), CELL_SIZE)) {
+            // Enemy's visual bounding box (Enemies currently have 1.0 ratio but use baseSize = CELL_SIZE - 10)
+            double eSize = CELL_SIZE - 10;
+            double eOffset = (CELL_SIZE - eSize) / 2.0;
+            double eLeft = enemy.getX() + eOffset;
+            double eTop = enemy.getY() + eOffset;
+
+            if (aabbOverlap(pLeft, pTop, pSize, eLeft, eTop, eSize)) {
                 if (player1.getState().diesOnContact()) {
                     playerDies(player1);
                     return;
@@ -332,15 +353,15 @@ public class WorldHG {
     }
 
     /**
-     * Returns true if two boxes of given sizes overlap.
-     * Uses an internal margin to allow for minor grazing without killing the player.
+     * Returns true if two visual boxes overlap.
+     * Uses a slight inner margin to avoid pixel-perfect unfair deaths.
      */
-    private boolean aabbOverlap(double ax, double ay, double aSize, double bx, double by, double bSize) {
-        int margin = 6; // tolerance margin in pixels
-        return ax + margin < bx + bSize - margin &&
-               ax + aSize - margin > bx + margin &&
-               ay + margin < by + bSize - margin &&
-               ay + aSize - margin > by + margin;
+    private boolean aabbOverlap(double aLeft, double aTop, double aSize, double bLeft, double bTop, double bSize) {
+        double margin = 2.0; // 2 pixels of forgiveness
+        return aLeft + margin < bLeft + bSize - margin &&
+               aLeft + aSize - margin > bLeft + margin &&
+               aTop + margin < bTop + bSize - margin &&
+               aTop + aSize - margin > bTop + margin;
     }
 
     /**
