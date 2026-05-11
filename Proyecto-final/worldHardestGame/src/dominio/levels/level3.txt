@@ -1,0 +1,12 @@
+3
+W W W W W W W W W W W W W W W W W W W W
+W S S S W W W W W W W W W W W W G G G W
+W S S S . . . . . . . . . . . . G G G W
+W S S S . BP . . . . . . . BP . G G G W
+W S S S . . . . . . . . . . . . G G G W
+W S S S . . . . . Z Z . . . . . G G G W
+W S S S . . . . . Z Z . . . . . G G G W
+W S S S . . . . . . . . . . . . G G G W
+W S S S . BP . . . . . . . BP . G G G W
+W S S S . . . . . . . . . . . . G G G W
+W W W W W W W W W W W W W W W W W W W W

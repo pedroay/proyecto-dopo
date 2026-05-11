@@ -343,8 +343,8 @@ public class WorldHG {
 
             if (aabbOverlap(pLeft, pTop, pSize, eLeft, eTop, eSize)) {
                 if (player1.getState().diesOnContact()) {
-                    playerDies(player1);
-                    return;
+                playerDies(player1);
+                return;
                 } else {
                     player1.getState().handleEnemyContact(player1);
                 }
@@ -357,7 +357,7 @@ public class WorldHG {
      * Uses a slight inner margin to avoid pixel-perfect unfair deaths.
      */
     private boolean aabbOverlap(double aLeft, double aTop, double aSize, double bLeft, double bTop, double bSize) {
-        double margin = 2.0; // 2 pixels of forgiveness
+        double margin = 1.0; 
         return aLeft + margin < bLeft + bSize - margin &&
                aLeft + aSize - margin > bLeft + margin &&
                aTop + margin < bTop + bSize - margin &&
@@ -380,7 +380,7 @@ public class WorldHG {
         Board cell = board[row][col];
         
         if (cell.isARespawn()) {
-            player.setRespawnPoint(player.getX(), player.getY());
+            player.setRespawnPoint(col *CELL_SIZE, row *CELL_SIZE);
         } 
         
         if (cell.isAFinish()) {

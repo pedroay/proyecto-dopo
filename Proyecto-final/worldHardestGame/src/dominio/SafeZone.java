@@ -13,7 +13,7 @@ public class SafeZone implements CellState {
 
     @Override
     public boolean isARespawn() {
-        return false;
+        return true;
     }
 
     @Override

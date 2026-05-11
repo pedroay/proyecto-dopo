@@ -42,6 +42,7 @@ public class WorldHardestGameGUI extends JFrame {
     private GamePanel gamePanel;
     private dominio.WorldHG worldHG;
     private JFileChooser fileChooser = new JFileChooser(".");
+    private int currentLevel = 1;
 
     public WorldHardestGameGUI() {
         prepareElements();
@@ -190,11 +191,19 @@ public class WorldHardestGameGUI extends JFrame {
     }
 
     public void irAlTablero() {
-        // Buscar el archivo del nivel 1
+        irAlTablero(1);
+    }
+
+    public void irAlTablero(int numNivel) {
+        this.currentLevel = numNivel;
+        String fileName = "level" + numNivel + ".txt";
+        
+        // Buscar el archivo del nivel dinámicamente
         String[] paths = {
-                "src/dominio/levels/level1.txt",
-                "worldHardestGame/src/dominio/levels/level1.txt"
+                "src/dominio/levels/" + fileName,
+                "worldHardestGame/src/dominio/levels/" + fileName
         };
+        
         java.io.File levelFile = null;
         for (String path : paths) {
             java.io.File f = new java.io.File(path);
@@ -203,10 +212,18 @@ public class WorldHardestGameGUI extends JFrame {
                 break;
             }
         }
+
         if (levelFile == null) {
-            JOptionPane.showMessageDialog(this,
-                    "No se encontró el archivo de nivel.\nBuscado en: src/dominio/levels/level1.txt",
+            if (numNivel > 1) {
+                JOptionPane.showMessageDialog(this, 
+                    "¡Felicidades! Has completado todos los niveles disponibles.", 
+                    "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
+                irAlMenu();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                    "No se encontró el archivo de nivel: " + fileName,
                     "Error", JOptionPane.ERROR_MESSAGE);
+            }
             return;
         }
 
@@ -435,8 +452,11 @@ public class WorldHardestGameGUI extends JFrame {
                 stopTimers();
                 repaint();
                 JOptionPane.showMessageDialog(this,
-                    "¡Nivel Completo!\nMuertes: " + worldHG.getDeaths(),
+                    "¡Nivel " + gui.currentLevel + " Completo!\nMuertes: " + worldHG.getDeaths(),
                     "Victoria", JOptionPane.INFORMATION_MESSAGE);
+                
+                // Cargar el siguiente nivel automáticamente
+                gui.irAlTablero(gui.currentLevel + 1);
             }
         }
 
