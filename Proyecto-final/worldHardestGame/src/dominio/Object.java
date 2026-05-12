@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Implements {@link Renderable} so the GUI can query any object for its own
  * rendering data without instanceof checks or wrapper objects.
  */
-public abstract class Object implements Renderable {
+public abstract class Object implements Renderable, java.io.Serializable {
 
     // Grid position (column/row indices) 
     private double posx;

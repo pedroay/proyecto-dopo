@@ -39,10 +39,12 @@ public class WorldHardestGameGUI extends JFrame {
     private JPanel mainPanel;
     private JPanel startPanel;
     private MenuWindow menuPanel;
+    private SkinSelectionPanel skinPanel;
     private GamePanel gamePanel;
     private dominio.WorldHG worldHG;
     private JFileChooser fileChooser = new JFileChooser(".");
     private int currentLevel = 1;
+    private String selectedSkin = "red"; // Default skin
 
     public WorldHardestGameGUI() {
         prepareElements();
@@ -63,11 +65,13 @@ public class WorldHardestGameGUI extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         menuPanel = new MenuWindow(this);
+        skinPanel = new SkinSelectionPanel(this);
 
         prepareElementsStartPanel();
 
         mainPanel.add(startPanel, "Start");
         mainPanel.add(menuPanel, "MENU");
+        mainPanel.add(skinPanel, "SKIN");
         add(mainPanel);
     }
 
@@ -190,6 +194,14 @@ public class WorldHardestGameGUI extends JFrame {
         cardLayout.show(mainPanel, "MENU");
     }
 
+    public void irASeleccionSkin() {
+        cardLayout.show(mainPanel, "SKIN");
+    }
+
+    public void setSelectedSkin(String skin) {
+        this.selectedSkin = skin;
+    }
+
     public void irAlTablero() {
         irAlTablero(1);
     }
@@ -197,13 +209,13 @@ public class WorldHardestGameGUI extends JFrame {
     public void irAlTablero(int numNivel) {
         this.currentLevel = numNivel;
         String fileName = "level" + numNivel + ".txt";
-        
+
         // Buscar el archivo del nivel dinámicamente
         String[] paths = {
                 "src/dominio/levels/" + fileName,
                 "worldHardestGame/src/dominio/levels/" + fileName
         };
-        
+
         java.io.File levelFile = null;
         for (String path : paths) {
             java.io.File f = new java.io.File(path);
@@ -215,14 +227,14 @@ public class WorldHardestGameGUI extends JFrame {
 
         if (levelFile == null) {
             if (numNivel > 1) {
-                JOptionPane.showMessageDialog(this, 
-                    "¡Felicidades! Has completado todos los niveles disponibles.", 
-                    "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "¡Felicidades! Has completado todos los niveles disponibles.",
+                        "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
                 irAlMenu();
             } else {
                 JOptionPane.showMessageDialog(this,
-                    "No se encontró el archivo de nivel: " + fileName,
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                        "No se encontró el archivo de nivel: " + fileName,
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
             return;
         }
@@ -232,6 +244,23 @@ public class WorldHardestGameGUI extends JFrame {
             dominio.Level level = dominio.Level.loadFromFile(levelFile.getPath());
             worldHG = new dominio.WorldHG("player");
             worldHG.loadLevel(level);
+
+            // Apply the selected skin to the player
+            if (worldHG.getPlayer1() != null) {
+                dominio.PlayerState skinState;
+                switch (selectedSkin) {
+                    case "blue":
+                        skinState = new dominio.BlueState();
+                        break;
+                    case "green":
+                        skinState = new dominio.GreenState();
+                        break;
+                    default:
+                        skinState = new dominio.RedState();
+                        break;
+                }
+                worldHG.getPlayer1().setState(skinState);
+            }
 
             // Detener el panel anterior si existe
             if (gamePanel != null) {
@@ -373,26 +402,185 @@ public class WorldHardestGameGUI extends JFrame {
         }
 
         protected final void prepareActionsMenuWindow() {
-            newButton.addActionListener(e -> gui.irAlTablero());
+            newButton.addActionListener(e -> gui.irASeleccionSkin());
             saveButton.addActionListener(e -> gui.salvar());
             loadButton.addActionListener(e -> gui.abrir());
             cancelButton.addActionListener(e -> gui.exit());
         }
     }
 
+    // ─── Skin Selection Panel ──────────────────────────────────────────────────
+
+    class SkinSelectionPanel extends JPanel {
+        private final WorldHardestGameGUI gui;
+        private Image backgroundImage;
+        private String hoveredSkin = null;
+
+        public SkinSelectionPanel(WorldHardestGameGUI gui) {
+            this.gui = gui;
+            setLayout(new BorderLayout());
+
+            // Load background image
+            try {
+                java.net.URL imgURL = getClass().getResource("/presentacion/images/fondo.png");
+                if (imgURL != null) {
+                    backgroundImage = javax.imageio.ImageIO.read(imgURL);
+                } else {
+                    java.io.File file = new java.io.File("src/presentacion/images/fondo.png");
+                    java.io.File file2 = new java.io.File("worldHardestGame/src/presentacion/images/fondo.png");
+                    if (file.exists())
+                        backgroundImage = javax.imageio.ImageIO.read(file);
+                    else if (file2.exists())
+                        backgroundImage = javax.imageio.ImageIO.read(file2);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Title
+            JLabel title = new JLabel("Selecciona tu Skin", SwingConstants.CENTER);
+            title.setFont(new Font("Arial Black", Font.BOLD, 28));
+            title.setForeground(Color.WHITE);
+            title.setOpaque(false);
+            title.setBorder(javax.swing.BorderFactory.createEmptyBorder(30, 0, 10, 0));
+            add(title, BorderLayout.NORTH);
+
+            // Skin cards panel
+            JPanel cardsPanel = new JPanel(new GridLayout(1, 3, 20, 0));
+            cardsPanel.setOpaque(false);
+            cardsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 40, 20, 40));
+
+            cardsPanel.add(createSkinCard("red", "Clásico", Color.RED,
+                    "Velocidad: Normal", "Tamaño: Normal", "Muere al contacto"));
+            cardsPanel.add(createSkinCard("blue", "Veloz", Color.BLUE,
+                    "Velocidad: Alta", "Tamaño: Pequeño", "Muere al contacto"));
+            cardsPanel.add(createSkinCard("green", "Resistente", new Color(0, 180, 0),
+                    "Velocidad: Normal", "Tamaño: Grande", "Resiste 1 golpe"));
+
+            add(cardsPanel, BorderLayout.CENTER);
+
+            // Back button
+            JPanel bottomPanel = new JPanel();
+            bottomPanel.setOpaque(false);
+            JButton backButton = new JButton("Volver");
+            backButton.setFont(new Font("Arial Black", Font.BOLD, 16));
+            backButton.setPreferredSize(new Dimension(120, 40));
+            backButton.setBackground(new Color(120, 40, 40));
+            backButton.setForeground(Color.WHITE);
+            backButton.setFocusPainted(false);
+            backButton.setBorderPainted(false);
+            backButton.addActionListener(e -> gui.irAlMenu());
+            bottomPanel.add(backButton);
+            bottomPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 20, 0));
+            add(bottomPanel, BorderLayout.SOUTH);
+        }
+
+        private JPanel createSkinCard(String skinId, String skinName, Color skinColor,
+                String stat1, String stat2, String stat3) {
+            JPanel card = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    Graphics2D g2 = (Graphics2D) g;
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                    // Card background with transparency
+                    boolean isHovered = skinId.equals(hoveredSkin);
+                    int alpha = isHovered ? 200 : 150;
+                    g2.setColor(new Color(30, 30, 50, alpha));
+                    g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+
+                    // Border
+                    if (isHovered) {
+                        g2.setColor(skinColor);
+                        g2.setStroke(new BasicStroke(3));
+                    } else {
+                        g2.setColor(new Color(100, 100, 130));
+                        g2.setStroke(new BasicStroke(1));
+                    }
+                    g2.drawRoundRect(1, 1, getWidth() - 3, getHeight() - 3, 20, 20);
+
+                    // Player preview square
+                    int previewSize = 50;
+                    int px = (getWidth() - previewSize) / 2;
+                    int py = 30;
+                    g2.setColor(skinColor);
+                    g2.fillRect(px, py, previewSize, previewSize);
+                    g2.setColor(skinColor.darker());
+                    g2.setStroke(new BasicStroke(2));
+                    g2.drawRect(px, py, previewSize, previewSize);
+
+                    // Skin name
+                    g2.setColor(Color.WHITE);
+                    g2.setFont(new Font("Arial Black", Font.BOLD, 18));
+                    java.awt.FontMetrics fm = g2.getFontMetrics();
+                    int textX = (getWidth() - fm.stringWidth(skinName)) / 2;
+                    g2.drawString(skinName, textX, py + previewSize + 30);
+
+                    // Stats
+                    g2.setFont(new Font("Arial", Font.PLAIN, 13));
+                    g2.setColor(new Color(200, 200, 220));
+                    fm = g2.getFontMetrics();
+                    String[] stats = { stat1, stat2, stat3 };
+                    int startY = py + previewSize + 55;
+                    for (int i = 0; i < stats.length; i++) {
+                        int sx = (getWidth() - fm.stringWidth(stats[i])) / 2;
+                        g2.drawString(stats[i], sx, startY + i * 20);
+                    }
+                }
+            };
+            card.setOpaque(false);
+            card.setPreferredSize(new Dimension(180, 250));
+            card.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+            card.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    hoveredSkin = skinId;
+                    card.getParent().repaint();
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    hoveredSkin = null;
+                    card.getParent().repaint();
+                }
+
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    gui.setSelectedSkin(skinId);
+                    gui.irAlTablero();
+                }
+            });
+
+            return card;
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (backgroundImage != null) {
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            } else {
+                g.setColor(new Color(20, 22, 38));
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        }
+    }
+
     class GamePanel extends JPanel implements KeyListener {
 
-        private static final int CELL_SIZE  = 40;
+        private static final int CELL_SIZE = 40;
         private static final int HUD_HEIGHT = 45;
         private static final double MOVE_SPEED = 6.0; // píxeles por frame (16ms)
 
-        private static final Color COLOR_WALL     = new Color(45, 45, 55);
-        private static final Color COLOR_EMPTY1   = new Color(200, 210, 230);
-        private static final Color COLOR_EMPTY2   = new Color(180, 193, 218);
-        private static final Color COLOR_START    = new Color(144, 238, 144);
-        private static final Color COLOR_GOAL     = new Color(60, 210, 80);
+        private static final Color COLOR_WALL = new Color(45, 45, 55);
+        private static final Color COLOR_EMPTY1 = new Color(200, 210, 230);
+        private static final Color COLOR_EMPTY2 = new Color(180, 193, 218);
+        private static final Color COLOR_START = new Color(144, 238, 144);
+        private static final Color COLOR_GOAL = new Color(60, 210, 80);
         private static final Color COLOR_SAFEZONE = new Color(100, 200, 120);
-        private static final Color COLOR_HUD_BG   = new Color(20, 22, 38);
+        private static final Color COLOR_HUD_BG = new Color(20, 22, 38);
 
         private final WorldHG worldHG;
         private final WorldHardestGameGUI gui;
@@ -401,14 +589,29 @@ public class WorldHardestGameGUI extends JFrame {
         private double playerVisualX, playerVisualY;
         private double playerTargetX, playerTargetY;
 
-        private final Timer gameTimer;   // mueve enemigos cada 500ms
+        private final Timer gameTimer; // mueve enemigos cada 500ms
         private final Timer renderTimer; // repinta ~60fps para animación suave
 
         public GamePanel(WorldHG worldHG, WorldHardestGameGUI gui) {
             this.worldHG = worldHG;
             this.gui = gui;
             setFocusable(true);
+            setLayout(null);
             addKeyListener(this);
+
+            // Botón de menú
+            JButton menuBtn = new JButton("Menu");
+            menuBtn.setFont(new Font("Arial", Font.BOLD, 12));
+            menuBtn.setBackground(new Color(150, 40, 40));
+            menuBtn.setForeground(Color.WHITE);
+            menuBtn.setFocusPainted(false);
+            menuBtn.addActionListener(e -> {
+                stopTimers();
+                gui.irAlMenu();
+            });
+            int width = (worldHG.getBoard() != null && worldHG.getBoard().length > 0) ? worldHG.getBoard()[0].length * CELL_SIZE : 760;
+            menuBtn.setBounds(width - 90, 8, 80, 28);
+            add(menuBtn);
 
             // Inicializar posición visual en la celda de inicio
             Player player = worldHG.getPlayer1();
@@ -439,8 +642,8 @@ public class WorldHardestGameGUI extends JFrame {
                 stopTimers();
                 repaint();
                 JOptionPane.showMessageDialog(this,
-                    "¡Se acabó el tiempo!\nMuertes: " + worldHG.getDeaths(),
-                    "Game Over", JOptionPane.ERROR_MESSAGE);
+                        "¡Se acabó el tiempo!\nMuertes: " + worldHG.getDeaths(),
+                        "Game Over", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             worldHG.tick();
@@ -452,9 +655,9 @@ public class WorldHardestGameGUI extends JFrame {
                 stopTimers();
                 repaint();
                 JOptionPane.showMessageDialog(this,
-                    "¡Nivel " + gui.currentLevel + " Completo!\nMuertes: " + worldHG.getDeaths(),
-                    "Victoria", JOptionPane.INFORMATION_MESSAGE);
-                
+                        "¡Nivel " + gui.currentLevel + " Completo!\nMuertes: " + worldHG.getDeaths(),
+                        "Victoria", JOptionPane.INFORMATION_MESSAGE);
+
                 // Cargar el siguiente nivel automáticamente
                 gui.irAlTablero(gui.currentLevel + 1);
             }
@@ -466,7 +669,8 @@ public class WorldHardestGameGUI extends JFrame {
          */
         private void syncPlayerVisualAfterTick() {
             Player player = worldHG.getPlayer1();
-            if (player == null) return;
+            if (player == null)
+                return;
             double newTargetX = player.getPosx() * CELL_SIZE;
             double newTargetY = player.getPosy() * CELL_SIZE;
             double dist = Math.abs(newTargetX - playerVisualX) + Math.abs(newTargetY - playerVisualY);
@@ -486,13 +690,19 @@ public class WorldHardestGameGUI extends JFrame {
         private void updatePlayerAnimation() {
             double dx = playerTargetX - playerVisualX;
             double dy = playerTargetY - playerVisualY;
-            if (Math.abs(dx) < MOVE_SPEED) playerVisualX = playerTargetX;
-            else playerVisualX += Math.signum(dx) * MOVE_SPEED;
-            if (Math.abs(dy) < MOVE_SPEED) playerVisualY = playerTargetY;
-            else playerVisualY += Math.signum(dy) * MOVE_SPEED;
+            if (Math.abs(dx) < MOVE_SPEED)
+                playerVisualX = playerTargetX;
+            else
+                playerVisualX += Math.signum(dx) * MOVE_SPEED;
+            if (Math.abs(dy) < MOVE_SPEED)
+                playerVisualY = playerTargetY;
+            else
+                playerVisualY += Math.signum(dy) * MOVE_SPEED;
         }
 
-        public void stopTimer() { stopTimers(); }
+        public void stopTimer() {
+            stopTimers();
+        }
 
         private void stopTimers() {
             gameTimer.stop();
@@ -504,7 +714,8 @@ public class WorldHardestGameGUI extends JFrame {
         @Override
         public Dimension getPreferredSize() {
             Board[][] board = worldHG.getBoard();
-            if (board == null || board.length == 0) return new Dimension(760, 360);
+            if (board == null || board.length == 0)
+                return new Dimension(760, 360);
             return new Dimension(board[0].length * CELL_SIZE, board.length * CELL_SIZE + HUD_HEIGHT);
         }
 
@@ -527,13 +738,14 @@ public class WorldHardestGameGUI extends JFrame {
 
         private void drawBoard(Graphics2D g2) {
             Board[][] board = worldHG.getBoard();
-            if (board == null) return;
+            if (board == null)
+                return;
             for (int row = 0; row < board.length; row++) {
                 for (int col = 0; col < board[row].length; col++) {
                     drawCell(g2, board[row][col], col * CELL_SIZE, HUD_HEIGHT + row * CELL_SIZE, row, col);
                 }
             }
-            
+
             // Dibujar enemigos que viven fuera del Board[][]
             for (dominio.Enemy enemy : worldHG.getEnemies()) {
                 drawObject(g2, enemy, (int) enemy.getX(), HUD_HEIGHT + (int) enemy.getY());
@@ -553,11 +765,15 @@ public class WorldHardestGameGUI extends JFrame {
         }
 
         private Color getCellBgColor(Board cell, int row, int col) {
-            if (!cell.isCanHaveObjectOnTop()) return COLOR_WALL;
-            if (cell.isARespawn())            return COLOR_START;
-            if (cell.isAFinish())             return COLOR_GOAL;
-            if (cell.isSafe())                return COLOR_SAFEZONE;
-            
+            if (!cell.isCanHaveObjectOnTop())
+                return COLOR_WALL;
+            if (cell.isARespawn())
+                return COLOR_START;
+            if (cell.isAFinish())
+                return COLOR_GOAL;
+            if (cell.isSafe())
+                return COLOR_SAFEZONE;
+
             return ((row + col) % 2 == 0) ? COLOR_EMPTY1 : COLOR_EMPTY2;
         }
 
@@ -568,16 +784,16 @@ public class WorldHardestGameGUI extends JFrame {
 
             float ratio = obj.getDrawSizeRatio();
             // A ratio of 1.0 corresponds to a full cell with a 5px margin.
-            int baseSize = CELL_SIZE - 10; 
+            int baseSize = CELL_SIZE - 10;
             int s = (int) (baseSize * ratio);
-            
+
             // Compute centered offsets within the cell
             int cx = x + (CELL_SIZE - s) / 2;
             int cy = y + (CELL_SIZE - s) / 2;
-            
+
             g2.setColor(obj.getPrimaryColor());
             g2.fillOval(cx, cy, s, s);
-            
+
             g2.setColor(obj.getBorderColor());
             g2.setStroke(new BasicStroke(obj.getStrokeWidth()));
             g2.drawOval(cx, cy, s, s);
@@ -589,8 +805,9 @@ public class WorldHardestGameGUI extends JFrame {
          */
         private void drawPlayer(Graphics2D g2) {
             dominio.Player player = worldHG.getPlayer1();
-            if (player == null) return;
-            
+            if (player == null)
+                return;
+
             // Tamaño dinámico del jugador según su estado
             double stateSize = player.getState().getSize();
             // Calcula el margen para centrar el cuadro dentro de su celda
@@ -598,7 +815,7 @@ public class WorldHardestGameGUI extends JFrame {
             int px = (int) player.getX() + m;
             int py = (int) player.getY() + HUD_HEIGHT + m;
             int s = (int) stateSize;
-            
+
             // Color dinámico del jugador
             g2.setColor(player.getState().getColor());
             g2.fillRect(px, py, s, s);
@@ -612,29 +829,40 @@ public class WorldHardestGameGUI extends JFrame {
         @Override
         public void keyPressed(KeyEvent e) {
             Player player = worldHG.getPlayer1();
-            if (player == null || worldHG.isTimeUp() || worldHG.isLevelComplete()) return;
+            if (player == null || worldHG.isTimeUp() || worldHG.isLevelComplete())
+                return;
 
             String direction = null;
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
-                case KeyEvent.VK_W:     direction = "UP";    break;
+                case KeyEvent.VK_W:
+                    direction = "UP";
+                    break;
                 case KeyEvent.VK_DOWN:
-                case KeyEvent.VK_S:     direction = "DOWN";  break;
+                case KeyEvent.VK_S:
+                    direction = "DOWN";
+                    break;
                 case KeyEvent.VK_LEFT:
-                case KeyEvent.VK_A:     direction = "LEFT";  break;
+                case KeyEvent.VK_A:
+                    direction = "LEFT";
+                    break;
                 case KeyEvent.VK_RIGHT:
-                case KeyEvent.VK_D:     direction = "RIGHT"; break;
+                case KeyEvent.VK_D:
+                    direction = "RIGHT";
+                    break;
             }
 
-            if (direction == null) return;
+            if (direction == null)
+                return;
 
             double prevX = player.getPosx();
             double prevY = player.getPosy();
-            worldHG.movePlayerContinuous(player,direction);
+            worldHG.movePlayerContinuous(player, direction);
             double newX = player.getPosx();
             double newY = player.getPosy();
 
-            if (newX == prevX && newY == prevY) return; // movimiento bloqueado por pared
+            if (newX == prevX && newY == prevY)
+                return; // movimiento bloqueado por pared
 
             double newTargetX = newX * CELL_SIZE;
             double newTargetY = newY * CELL_SIZE;
@@ -649,8 +877,13 @@ public class WorldHardestGameGUI extends JFrame {
             playerTargetY = newTargetY;
         }
 
-        @Override public void keyTyped(KeyEvent e) {}
-        @Override public void keyReleased(KeyEvent e) {}
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+        }
     }
 
 }

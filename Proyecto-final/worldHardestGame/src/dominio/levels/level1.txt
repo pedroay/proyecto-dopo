@@ -1,8 +1,99 @@
 1
-W W W W W W W W W W W W W W W W W W W
-W S S S W W PG . PB . PR . . . W G G G W
-W S S S W BH . . . . . . . . BH W G G G W
-W S S S . . . . M . M . . . . G G G W
-W S S S . M . . . . . . . . BH W W W W
-W S S S W W . . . Z Z . . . W W W W W
-W W W W W W W W W W W W W W W W W W W
+20 7
+W 0 0
+W 1 0
+W 2 0
+W 3 0
+W 4 0
+W 5 0
+W 6 0
+W 7 0
+W 8 0
+W 9 0
+W 10 0
+W 11 0
+W 12 0
+W 13 0
+W 14 0
+W 15 0
+W 16 0
+W 17 0
+W 18 0
+W 0 1
+S 1 1
+S 2 1
+S 3 1
+W 4 1
+W 5 1
+PG 6 1
+PB 8 1
+PR 10 1
+W 14 1
+G 15 1
+G 16 1
+G 17 1
+W 18 1
+W 0 2
+S 1 2
+S 2 2
+S 3 2
+W 4 2
+BH 5 2
+BH 14 2
+W 15 2
+G 16 2
+G 17 2
+G 18 2
+W 19 2
+W 0 3
+S 1 3
+S 2 3
+S 3 3
+M 8 3
+M 10 3
+G 15 3
+G 16 3
+G 17 3
+W 18 3
+W 0 4
+S 1 4
+S 2 4
+S 3 4
+M 5 4
+BH 14 4
+W 15 4
+W 16 4
+W 17 4
+W 18 4
+W 0 5
+S 1 5
+S 2 5
+S 3 5
+W 4 5
+W 5 5
+Z 9 5
+Z 10 5
+W 14 5
+W 15 5
+W 16 5
+W 17 5
+W 18 5
+W 0 6
+W 1 6
+W 2 6
+W 3 6
+W 4 6
+W 5 6
+W 6 6
+W 7 6
+W 8 6
+W 9 6
+W 10 6
+W 11 6
+W 12 6
+W 13 6
+W 14 6
+W 15 6
+W 16 6
+W 17 6
+W 18 6
