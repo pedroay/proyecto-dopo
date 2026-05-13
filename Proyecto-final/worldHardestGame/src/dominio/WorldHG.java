@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.File;
 
 /**
  * Game core. Manages the complete logical state:
@@ -224,10 +225,6 @@ public class WorldHG implements Serializable {
                 enemy.move(board);
             }
         }
-
-        // nota para el pedro del futuro: aca debe estar el error de porque se queda
-        // queito al tocar la tecla al inicio
-        // despues revisa este como move continues
 
         // 3. Update player state (immunity timers, etc.)
         if (player1 != null) {
@@ -533,15 +530,33 @@ public class WorldHG implements Serializable {
                 mins, secs, deaths, allCoinsCollected() ? "Todas" : "Faltan");
     }
 
-    public void saveGame(java.io.File file) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+    public void saveAs(File file) throws WorldHGException {
+        if (!file.getName().toLowerCase().endsWith(".dat")) {
+            file = new File(file.getParentFile(), file.getName() + ".dat");
+        }
+        try (java.io.FileOutputStream fos = new java.io.FileOutputStream(file);
+             java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(fos)) {
             oos.writeObject(this);
+        } catch (java.io.IOException e) {
+        	throw new WorldHGException(WorldHGException.IO_ERROR);
+        }
+    }
+    
+    public static WorldHG open(File file) throws WorldHGException {
+        try (java.io.FileInputStream fis = new java.io.FileInputStream(file);
+             java.io.ObjectInputStream ois = new java.io.ObjectInputStream(fis)) {
+            java.lang.Object obj = ois.readObject();
+            if (!(obj instanceof WorldHG)) {
+                throw new WorldHGException(WorldHGException.IO_ERROR);
+            }
+            return (WorldHG) obj;
+        } catch (java.io.IOException | ClassNotFoundException e) {
+            throw new WorldHGException(WorldHGException.IO_ERROR);
         }
     }
 
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         ois.defaultReadObject();
-        // Re-initialize transient token handlers after deserialization
         this.tokenHandlers = new HashMap<>();
         initTokenHandlers();
     }

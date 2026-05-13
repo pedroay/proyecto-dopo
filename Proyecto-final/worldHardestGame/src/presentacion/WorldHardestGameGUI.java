@@ -27,6 +27,8 @@ import javax.swing.SwingConstants;
 import dominio.Board;
 import dominio.Player;
 import dominio.WorldHG;
+import dominio.WorldHGException;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.BasicStroke;
@@ -44,7 +46,8 @@ public class WorldHardestGameGUI extends JFrame {
     private dominio.WorldHG worldHG;
     private JFileChooser fileChooser = new JFileChooser(".");
     private int currentLevel = 1;
-    private String selectedSkin = "red"; // Default skin
+    private String selectedSkin = "red";
+    private java.io.File archivoActual;
 
     public WorldHardestGameGUI() {
         prepareElements();
@@ -289,10 +292,16 @@ public class WorldHardestGameGUI extends JFrame {
         int seleccion = fileChooser.showSaveDialog(this);
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             java.io.File archivo = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(this,
-                    "Función de GUARDADO en construcción.\nArchivo: " + archivo.getName(),
-                    "En desarrollo",
+            try {
+            	worldHG.saveAs(archivo);
+            	archivoActual = archivo;
+                JOptionPane.showMessageDialog(this,
+                    "Juego guardado correctamente en:\n" + archivo.getName(),
+                    "Guardado Exitoso",
                     JOptionPane.INFORMATION_MESSAGE);
+            	
+            }
+            catch(dominio.WorldHGException e){}
         }
     }
 
@@ -300,10 +309,38 @@ public class WorldHardestGameGUI extends JFrame {
         int seleccion = fileChooser.showOpenDialog(this);
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             java.io.File archivo = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(this,
-                    "Función de APERTURA en construcción.\nArchivo: " + archivo.getName(),
-                    "En desarrollo",
+            try {
+                worldHG = WorldHG.open(archivo);
+                archivoActual = archivo;
+                
+                if (worldHG.getLevel() != null) {
+                    this.currentLevel = worldHG.getLevel().getLevelNumber();
+                }
+
+                // Detener el panel anterior si existe
+                if (gamePanel != null) {
+                    gamePanel.stopTimer();
+                    mainPanel.remove(gamePanel);
+                }
+
+                // Crear nuevo GamePanel y agregarlo al CardLayout
+                gamePanel = new GamePanel(worldHG, this);
+                mainPanel.add(gamePanel, "GAME");
+                cardLayout.show(mainPanel, "GAME");
+
+                // Asegurarse de que el panel reciba el foco para el teclado
+                gamePanel.requestFocusInWindow();
+                pack(); // Ajustar tamaño de la ventana al tablero
+                setLocationRelativeTo(null);
+
+                JOptionPane.showMessageDialog(this,
+                    "Juego cargado correctamente desde:\n" + archivo.getName(),
+                    "Apertura Exitosa",
                     JOptionPane.INFORMATION_MESSAGE);
+            } catch (dominio.WorldHGException e) {
+                JOptionPane.showMessageDialog(this,
+                    e.getMessage(), "Error al abrir", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

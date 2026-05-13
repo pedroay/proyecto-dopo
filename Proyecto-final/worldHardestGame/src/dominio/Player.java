@@ -29,7 +29,6 @@ public class Player extends Hero {
         super(posx, posy);
         this.name = name;
         this.state = new RedState(); // Default state
-        // The initial respawn matches the starting position in pixels
         this.respawnX = posx * 40.0;
         this.respawnY = posy * 40.0;
     }

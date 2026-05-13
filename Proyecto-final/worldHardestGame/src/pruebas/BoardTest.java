@@ -9,7 +9,7 @@ public class BoardTest {
 
     @Test
     public void testBoardContents() {
-        Board board = new Board(0, 0, true);
+        Board board = new Board(0, 0);
         Punto coin = new Punto(0, 0);
         
         board.addObject(coin);
@@ -22,11 +22,11 @@ public class BoardTest {
 
     @Test
     public void testBoardSafeZone() {
-        Board safeBoard = new Board(0, 0, true);
-        safeBoard.addObject(new Start(0, 0));
-        assertTrue("Debería ser zona segura si tiene un Start", safeBoard.isASafeZone());
+        Board safeBoard = new Board(0, 0);
+        safeBoard.setState(new Start());
+        assertTrue("Debería ser zona segura si tiene el estado Start", safeBoard.isSafe());
         
-        Board normalBoard = new Board(1, 1, true);
-        assertFalse("No debería ser zona segura si está vacía", normalBoard.isASafeZone());
+        Board normalBoard = new Board(1, 1);
+        assertFalse("No debería ser zona segura si está vacía (estado Empty)", normalBoard.isSafe());
     }
 }

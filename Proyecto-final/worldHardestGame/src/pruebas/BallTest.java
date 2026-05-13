@@ -25,11 +25,12 @@ public class BallTest {
         Board[][] board = new Board[3][3];
         for(int i=0; i<3; i++) {
             for(int j=0; j<3; j++) {
-                board[i][j] = new Board(j, i, false); // Todas paredes inicialmente
+                board[i][j] = new Board(j, i);
+                board[i][j].setState(new Borde()); // Todas paredes inicialmente
             }
         }
         // Celda central transitable
-        board[1][1] = new Board(1, 1, true);
+        board[1][1] = new Board(1, 1);
         
         Ball ball = new Ball(1, 1, "H"); // Está en (40, 40)
         ball.setX(40);
