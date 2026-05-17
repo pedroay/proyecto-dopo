@@ -42,11 +42,13 @@ public class WorldHardestGameGUI extends JFrame {
     private JPanel startPanel;
     private MenuWindow menuPanel;
     private SkinSelectionPanel skinPanel;
+    private GameModeSelectionPanel modePanel;
     private GamePanel gamePanel;
     private dominio.WorldHG worldHG;
     private JFileChooser fileChooser = new JFileChooser(".");
     private int currentLevel = 1;
     private String selectedSkin = "red";
+    private String selectedMode = "solo";
     private java.io.File archivoActual;
 
     public WorldHardestGameGUI() {
@@ -69,12 +71,14 @@ public class WorldHardestGameGUI extends JFrame {
         mainPanel = new JPanel(cardLayout);
         menuPanel = new MenuWindow(this);
         skinPanel = new SkinSelectionPanel(this);
+        modePanel = new GameModeSelectionPanel(this);
 
         prepareElementsStartPanel();
 
         mainPanel.add(startPanel, "Start");
         mainPanel.add(menuPanel, "MENU");
         mainPanel.add(skinPanel, "SKIN");
+        mainPanel.add(modePanel, "MODE");
         add(mainPanel);
     }
 
@@ -201,8 +205,16 @@ public class WorldHardestGameGUI extends JFrame {
         cardLayout.show(mainPanel, "SKIN");
     }
 
+    public void irASeleccionModo() {
+        cardLayout.show(mainPanel, "MODE");
+    }
+
     public void setSelectedSkin(String skin) {
         this.selectedSkin = skin;
+    }
+
+    public void setSelectedMode(String mode) {
+        this.selectedMode = mode;
     }
 
     public void irAlTablero() {
@@ -245,7 +257,7 @@ public class WorldHardestGameGUI extends JFrame {
         try {
             // Cargar nivel y crear el juego
             dominio.Level level = dominio.Level.loadFromFile(levelFile.getPath());
-            worldHG = new dominio.WorldHG("player");
+            worldHG = new dominio.WorldHG(this.selectedMode);
             worldHG.loadLevel(level);
 
             // Apply the selected skin to the player
@@ -586,7 +598,7 @@ public class WorldHardestGameGUI extends JFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     gui.setSelectedSkin(skinId);
-                    gui.irAlTablero();
+                    gui.irASeleccionModo();
                 }
             });
 
@@ -628,6 +640,7 @@ public class WorldHardestGameGUI extends JFrame {
 
         private final Timer gameTimer; // mueve enemigos cada 500ms
         private final Timer renderTimer; // repinta ~60fps para animación suave
+        private final java.util.Set<Integer> keysPressed = new java.util.HashSet<>();
 
         public GamePanel(WorldHG worldHG, WorldHardestGameGUI gui) {
             this.worldHG = worldHG;
@@ -665,6 +678,7 @@ public class WorldHardestGameGUI extends JFrame {
 
             // Timer de render: interpola posición del jugador y repinta
             renderTimer = new Timer(16, e -> {
+                handleInput();
                 onTick();
                 updatePlayerAnimation();
                 repaint();
@@ -691,8 +705,12 @@ public class WorldHardestGameGUI extends JFrame {
             if (worldHG.isLevelComplete()) {
                 stopTimers();
                 repaint();
+                String msg = "¡Nivel " + gui.currentLevel + " Completo!\nMuertes: " + worldHG.getDeaths();
+                if (worldHG.getWinner() != null) {
+                    msg = "¡" + worldHG.getWinner() + " ha ganado!\n" + msg;
+                }
                 JOptionPane.showMessageDialog(this,
-                        "¡Nivel " + gui.currentLevel + " Completo!\nMuertes: " + worldHG.getDeaths(),
+                        msg,
                         "Victoria", JOptionPane.INFORMATION_MESSAGE);
 
                 // Cargar el siguiente nivel automáticamente
@@ -788,7 +806,10 @@ public class WorldHardestGameGUI extends JFrame {
                 drawObject(g2, enemy, (int) enemy.getX(), HUD_HEIGHT + (int) enemy.getY());
             }
 
-            drawPlayer(g2); // jugador encima de todo con su posición real
+            drawPlayer(g2, worldHG.getPlayer1()); // jugador encima de todo con su posición real
+            if (worldHG.getPlayer2() != null) {
+                drawPlayer(g2, worldHG.getPlayer2());
+            }
         }
 
         private void drawCell(Graphics2D g2, Board cell, int x, int y, int row, int col) {
@@ -840,8 +861,7 @@ public class WorldHardestGameGUI extends JFrame {
          * Dibuja al jugador usando su posición lógica real (x, y).
          * Esto garantiza sincronización perfecta con la colisión.
          */
-        private void drawPlayer(Graphics2D g2) {
-            dominio.Player player = worldHG.getPlayer1();
+        private void drawPlayer(Graphics2D g2, dominio.Player player) {
             if (player == null)
                 return;
 
@@ -865,53 +885,7 @@ public class WorldHardestGameGUI extends JFrame {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            Player player = worldHG.getPlayer1();
-            if (player == null || worldHG.isTimeUp() || worldHG.isLevelComplete())
-                return;
-
-            String direction = null;
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
-                case KeyEvent.VK_W:
-                    direction = "UP";
-                    break;
-                case KeyEvent.VK_DOWN:
-                case KeyEvent.VK_S:
-                    direction = "DOWN";
-                    break;
-                case KeyEvent.VK_LEFT:
-                case KeyEvent.VK_A:
-                    direction = "LEFT";
-                    break;
-                case KeyEvent.VK_RIGHT:
-                case KeyEvent.VK_D:
-                    direction = "RIGHT";
-                    break;
-            }
-
-            if (direction == null)
-                return;
-
-            double prevX = player.getPosx();
-            double prevY = player.getPosy();
-            worldHG.movePlayerContinuous(player, direction);
-            double newX = player.getPosx();
-            double newY = player.getPosy();
-
-            if (newX == prevX && newY == prevY)
-                return; // movimiento bloqueado por pared
-
-            double newTargetX = newX * CELL_SIZE;
-            double newTargetY = newY * CELL_SIZE;
-
-            // Si el jugador murió y reapareció lejos, hacer snap en vez de animar
-            double dist = Math.abs(newTargetX - playerVisualX) + Math.abs(newTargetY - playerVisualY);
-            if (dist > CELL_SIZE * 2) {
-                playerVisualX = newTargetX;
-                playerVisualY = newTargetY;
-            }
-            playerTargetX = newTargetX;
-            playerTargetY = newTargetY;
+            keysPressed.add(e.getKeyCode());
         }
 
         @Override
@@ -920,7 +894,144 @@ public class WorldHardestGameGUI extends JFrame {
 
         @Override
         public void keyReleased(KeyEvent e) {
+            keysPressed.remove(e.getKeyCode());
         }
+
+        private void handleInput() {
+            Player p1 = worldHG.getPlayer1();
+            Player p2 = worldHG.getPlayer2();
+            if (worldHG.isTimeUp() || worldHG.isLevelComplete())
+                return;
+
+            if (p1 != null) {
+                if (keysPressed.contains(KeyEvent.VK_W)) worldHG.movePlayerContinuous(p1, "UP");
+                if (keysPressed.contains(KeyEvent.VK_S)) worldHG.movePlayerContinuous(p1, "DOWN");
+                if (keysPressed.contains(KeyEvent.VK_A)) worldHG.movePlayerContinuous(p1, "LEFT");
+                if (keysPressed.contains(KeyEvent.VK_D)) worldHG.movePlayerContinuous(p1, "RIGHT");
+
+                if (p2 == null) {
+                    if (keysPressed.contains(KeyEvent.VK_UP)) worldHG.movePlayerContinuous(p1, "UP");
+                    if (keysPressed.contains(KeyEvent.VK_DOWN)) worldHG.movePlayerContinuous(p1, "DOWN");
+                    if (keysPressed.contains(KeyEvent.VK_LEFT)) worldHG.movePlayerContinuous(p1, "LEFT");
+                    if (keysPressed.contains(KeyEvent.VK_RIGHT)) worldHG.movePlayerContinuous(p1, "RIGHT");
+                }
+            }
+
+            if (p2 != null) {
+                if (keysPressed.contains(KeyEvent.VK_UP)) worldHG.movePlayerContinuous(p2, "UP");
+                if (keysPressed.contains(KeyEvent.VK_DOWN)) worldHG.movePlayerContinuous(p2, "DOWN");
+                if (keysPressed.contains(KeyEvent.VK_LEFT)) worldHG.movePlayerContinuous(p2, "LEFT");
+                if (keysPressed.contains(KeyEvent.VK_RIGHT)) worldHG.movePlayerContinuous(p2, "RIGHT");
+            }
+        }
+
+
     }
 
+    // ─── Game Mode Selection Panel ─────────────────────────────────────────────
+
+    class GameModeSelectionPanel extends JPanel {
+        protected WorldHardestGameGUI gui;
+        protected JButton soloButton;
+        protected JButton pvpButton;
+        protected JButton pveButton;
+        protected JButton backButton;
+        private Image backgroundImage;
+
+        public GameModeSelectionPanel(WorldHardestGameGUI app) {
+            this.gui = app;
+
+            try {
+                java.net.URL imgURL = getClass().getResource("/presentacion/images/fondo.png");
+                if (imgURL != null) {
+                    backgroundImage = javax.imageio.ImageIO.read(imgURL);
+                } else {
+                    java.io.File file = new java.io.File("src/presentacion/images/fondo.png");
+                    java.io.File file2 = new java.io.File("worldHardestGame/src/presentacion/images/fondo.png");
+                    if (file.exists()) {
+                        backgroundImage = javax.imageio.ImageIO.read(file);
+                    } else if (file2.exists()) {
+                        backgroundImage = javax.imageio.ImageIO.read(file2);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            setLayout(new java.awt.BorderLayout());
+            
+            JLabel title = new JLabel("Selecciona el Modo de Juego", SwingConstants.CENTER);
+            title.setFont(new Font("Arial Black", Font.BOLD, 28));
+            title.setForeground(Color.WHITE);
+            title.setBorder(javax.swing.BorderFactory.createEmptyBorder(30, 0, 10, 0));
+            add(title, java.awt.BorderLayout.NORTH);
+
+            prepareElementsModeWindow();
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (backgroundImage != null) {
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            } else {
+                g.setColor(Color.DARK_GRAY);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        }
+
+        public final void prepareElementsModeWindow() {
+            soloButton = new JButton("Solo");
+            pvpButton = new JButton("Jugador vs Jugador");
+            pveButton = new JButton("Jugador vs Máquina");
+            backButton = new JButton("Volver");
+
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new java.awt.GridBagLayout());
+            buttonPanel.setOpaque(false);
+            java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.insets = new java.awt.Insets(10, 0, 10, 0);
+
+            JButton[] buttons = { soloButton, pvpButton, pveButton, backButton };
+            for (JButton btn : buttons) {
+                btn.setFont(new Font("Arial Black", Font.BOLD, 20));
+                btn.setPreferredSize(new Dimension(280, 50));
+                if (btn == backButton) {
+                    btn.setBackground(new Color(120, 40, 40));
+                } else {
+                    btn.setBackground(new Color(26, 67, 117));
+                }
+                btn.setForeground(Color.WHITE);
+                btn.setFocusPainted(false);
+                btn.setBorderPainted(false);
+                btn.setContentAreaFilled(true);
+
+                btn.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        btn.setFont(new Font("Arial", Font.BOLD, 22));
+                        btn.setPreferredSize(new Dimension(300, 60));
+                        btn.getParent().revalidate();
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        btn.setFont(new Font("Arial", Font.BOLD, 20));
+                        btn.setPreferredSize(new Dimension(280, 50));
+                        btn.getParent().revalidate();
+                    }
+                });
+
+                buttonPanel.add(btn, gbc);
+            }
+
+            add(buttonPanel, java.awt.BorderLayout.CENTER);
+
+            soloButton.addActionListener(e -> { gui.setSelectedMode("solo"); gui.irAlTablero(); });
+            pvpButton.addActionListener(e -> { gui.setSelectedMode("pvp"); gui.irAlTablero(); });
+            pveButton.addActionListener(e -> { gui.setSelectedMode("pve"); gui.irAlTablero(); });
+            backButton.addActionListener(e -> gui.irASeleccionSkin());
+        }
+    }
 }

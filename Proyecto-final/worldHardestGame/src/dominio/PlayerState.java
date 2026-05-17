@@ -11,13 +11,24 @@ public abstract class PlayerState implements java.io.Serializable {
     protected double speed;
     protected double size;
 
-    public PlayerState(Color color, double speed, double size) {
+    protected int vidasIniciales;
+    protected int vidas;
+    protected int immunityFrames = 0;
+    protected int blinkCounter = 0;
+    protected static final int IMMUNITY_DURATION = 120; // 2 seconds default
+
+    public PlayerState(Color color, double speed, double size, int vidasIniciales) {
         this.color = color;
         this.speed = speed;
         this.size = size;
+        this.vidasIniciales = vidasIniciales;
+        this.vidas = vidasIniciales;
     }
 
     public Color getColor() {
+        if (isImmune() && (blinkCounter / 8) % 2 == 0) {
+            return new Color(color.getRed(), color.getGreen(), color.getBlue(), 120);
+        }
         return color;
     }
 
@@ -29,46 +40,56 @@ public abstract class PlayerState implements java.io.Serializable {
         return size;
     }
 
-    /**
-     * @return true if the player should die upon contacting an enemy.
-     */
-    public abstract boolean diesOnContact();
+    public int getVidas() {
+        return vidas;
+    }
+
+    public void addVida() {
+        this.vidas++;
+    }
+
+    public void restarVida() {
+        if (this.vidas > 0) this.vidas--;
+    }
+
+    public void resetVidas() {
+        this.vidas = this.vidasIniciales;
+    }
 
     /**
      * Called when the player touches an enemy.
-     * Can be used to change state properties (like reducing speed for Green).
-     * 
-     * @param player the player object
      */
     public void handleEnemyContact(Player player) {
-        // Default behavior: do nothing. Override in subclasses if needed.
+        if (isImmune()) return;
+        
+        restarVida();
+        if (vidas > 0) {
+            immunityFrames = IMMUNITY_DURATION;
+            blinkCounter = 0;
+        }
     }
 
     /**
-     * Called by WorldHG when the player dies (any cause).
-     * Override in subclasses that need to reset internal state on death.
-     * Replaces the former (instanceof GreenState) check in playerDies().
-     * 
-     * @param player the player that just died
+     * Called by WorldHG when the player dies (vidas == 0).
      */
     public void onPlayerDeath(Player player) {
-        // Default: no action
+        resetVidas();
+        this.immunityFrames = 0;
+        this.blinkCounter = 0;
     }
 
     /**
-     * Called every frame (~60fps) to update time-based state (e.g. immunity
-     * counters).
-     * 
-     * @param player the player that owns this state
+     * Called every frame (~60fps)
      */
     public void onTick(Player player) {
-        // Default: no action
+        if (immunityFrames > 0) {
+            immunityFrames--;
+            blinkCounter++;
+        }
     }
 
-    /**
-     * @return true if the player is currently immune to enemy damage.
-     */
     public boolean isImmune() {
-        return false;
+        return immunityFrames > 0;
     }
 }
+
