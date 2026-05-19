@@ -19,8 +19,16 @@ import java.awt.Color;
  */
 public class Ball extends Enemy {
 
-	/** Movement speed in pixels per frame (~60 FPS). */
-    private static final double BALL_SPEED = 2.5;
+	/** Base movement speed in pixels per frame (~60 FPS). Override in subclasses to change speed. */
+    private static final double BASE_SPEED = 2.5;
+
+    /**
+     * Returns the movement speed for this ball in pixels per frame.
+     * Subclasses override this to travel at a different speed.
+     */
+    protected double getSpeed() {
+        return BASE_SPEED;
+    }
 
     /** Cell size in pixels (must match GamePanel.CELL_SIZE). */
     public static final int CELL_SIZE = 40;
@@ -97,14 +105,15 @@ public class Ball extends Enemy {
      * Si la próxima posición invade una pared, invierte la dirección y rebota.
      */
     private void moveStraight(Board[][] board) {
-        double nextX = getX() + dirX * BALL_SPEED;
-        double nextY = getY() + dirY * BALL_SPEED;
+        double speed = getSpeed();
+        double nextX = getX() + dirX * speed;
+        double nextY = getY() + dirY * speed;
 
         if (isPixelBlocked(nextX, nextY, board)) {
             dirX = -dirX;
             dirY = -dirY;
-            nextX = getX() + dirX * BALL_SPEED;
-            nextY = getY() + dirY * BALL_SPEED;
+            nextX = getX() + dirX * speed;
+            nextY = getY() + dirY * speed;
         }
 
         setX(nextX);
@@ -119,6 +128,7 @@ public class Ball extends Enemy {
      * Priority: turn right → continue straight → turn left → reverse.
      */
     private void movePerimeter(Board[][] board) {
+        double speed = getSpeed();
         double[][] attempts = {
             turnRight(dirX, dirY),
             { dirX, dirY },
@@ -127,8 +137,8 @@ public class Ball extends Enemy {
         };
 
         for (double[] dir : attempts) {
-            double nextX = getX() + dir[0] * BALL_SPEED;
-            double nextY = getY() + dir[1] * BALL_SPEED;
+            double nextX = getX() + dir[0] * speed;
+            double nextY = getY() + dir[1] * speed;
             if (!isPixelBlocked(nextX, nextY, board)) {
                 dirX = dir[0];
                 dirY = dir[1];

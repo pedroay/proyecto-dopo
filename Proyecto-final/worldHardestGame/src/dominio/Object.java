@@ -95,6 +95,33 @@ public abstract class Object implements Renderable, java.io.Serializable {
     	this.velY = velY; 
     	}
 
+    /**
+     * Multiplies the current X velocity by the given factor.
+     * Useful for subclasses that want to run at a multiple of the base speed.
+     */
+    public void multiplyVelX(double factor) {
+        this.velX *= factor;
+    }
+
+    /**
+     * Multiplies the current Y velocity by the given factor.
+     * Useful for subclasses that want to run at a multiple of the base speed.
+     */
+    public void multiplyVelY(double factor) {
+        this.velY *= factor;
+    }
+    public void multVelX(double mult) {
+    	double actVelx=getVelX();
+    	double newVelx=actVelx*mult;
+    	setVelX(newVelx);
+    }
+    
+    public void multVelY(double mult) {
+    	double actVely=getVelY();
+    	double newVely=actVely*mult;
+    	setVelY(newVely);
+    }
+
     // ─── Behaviour hooks ──────────────────────────────────────────────────────
 
     /**

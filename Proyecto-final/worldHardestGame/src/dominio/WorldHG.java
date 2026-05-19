@@ -202,6 +202,11 @@ public class WorldHG implements Serializable {
             Ball ball = new Ball(col, row, state);
             enemies.add(ball);
             map[row][col] = new Board(col, row); // empty cell underneath
+        } else if (token.startsWith("F") && token.length() > 1) {
+            String state = token.substring(1);
+            FastBall fastBall = new FastBall(col, row, state);
+            enemies.add(fastBall);
+            map[row][col] = new Board(col, row); // empty cell underneath
         } else if (token.startsWith("M")) {
             Board cell = new Board(col, row);
             int radius = 1;
