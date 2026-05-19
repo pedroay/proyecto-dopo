@@ -227,4 +227,65 @@ public class WorldHGTest {
         assertTrue("La información debería contener las muertes", info.contains("Muertes: 0"));
         assertTrue("La información debería contener el estado de monedas", info.contains("Monedas: Todas"));
     }
+
+    @Test
+    public void shouldInitializeMineWithDefaultRadius() {
+        Mina mine = new Mina(0, 0);
+        assertEquals("El radio por defecto de la mina debe ser 1", 1, mine.getRadio());
+    }
+
+    @Test
+    public void shouldDetonateOnlyOnDirectCollisionAndAffectRadius() {
+        String[] entities = {
+            "W 0 0", "W 1 0", "W 2 0", "W 3 0", "W 4 0",
+            "W 0 1", "S 1 1", "W 4 1",
+            "W 0 2", "W 1 2", "W 2 2", "W 3 2", "W 4 2"
+        };
+        game.loadLevel(new Level(1, 5, 3, entities));
+        
+        Mina mine = new Mina(2, 1, 2); // Radius 2 (3x3 explosion centered at 2,1)
+        Ball inRadiusEnemy = new Ball(3, 1, "H"); // At (3,1), inside 3x3 explosion radius but not same cell
+        Ball outRadiusEnemy = new Ball(0, 1, "H"); // At (0,1), outside explosion radius
+        
+        game.addEnemy(mine);
+        game.addEnemy(inRadiusEnemy);
+        game.addEnemy(outRadiusEnemy);
+        
+        // Tick 1: No direct collision (no enemy on (2,1)). Should NOT detonate.
+        game.tick();
+        
+        assertTrue("La mina no debería detonar sin colisión directa", game.getEnemies().contains(mine));
+        assertTrue("El enemigo en el radio no debería eliminarse sin detonación", game.getEnemies().contains(inRadiusEnemy));
+        assertTrue("El enemigo fuera del radio no debería eliminarse", game.getEnemies().contains(outRadiusEnemy));
+        
+        // Add a trigger enemy directly on the mine's cell (2,1)
+        Ball triggerEnemy = new Ball(2, 1, "H");
+        game.addEnemy(triggerEnemy);
+        
+        // Tick 2: Trigger enemy is on same cell. Mine should detonate!
+        game.tick();
+        
+        assertFalse("La mina debería detonar por colisión directa", game.getEnemies().contains(mine));
+        assertFalse("El enemigo disparador en la misma celda debería eliminarse", game.getEnemies().contains(triggerEnemy));
+        assertFalse("El enemigo dentro del radio de explosión (3x3) debería eliminarse", game.getEnemies().contains(inRadiusEnemy));
+        assertTrue("El enemigo fuera del radio de explosión debería seguir vivo", game.getEnemies().contains(outRadiusEnemy));
+    }
+
+    @Test
+    public void shouldParseMineTokenWithCustomRadius() {
+        String[] entities = {
+            "S 0 0", "M3 1 1"
+        };
+        game.loadLevel(new Level(1, 3, 3, entities));
+        
+        Mina mine = null;
+        for (Enemy e : game.getEnemies()) {
+            if (e instanceof Mina) {
+                mine = (Mina) e;
+            }
+        }
+        
+        assertNotNull("La mina debería haber sido creada", mine);
+        assertEquals("El radio de la mina debería ser 3", 3, mine.getRadio());
+    }
 }

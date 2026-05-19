@@ -202,6 +202,20 @@ public class WorldHG implements Serializable {
             Ball ball = new Ball(col, row, state);
             enemies.add(ball);
             map[row][col] = new Board(col, row); // empty cell underneath
+        } else if (token.startsWith("M")) {
+            Board cell = new Board(col, row);
+            int radius = 1;
+            if (token.length() > 1) {
+                try {
+                    radius = Integer.parseInt(token.substring(1));
+                } catch (NumberFormatException e) {
+                    // Fallback to 1
+                }
+            }
+            Mina mine = new Mina(col, row, radius);
+            this.addEnemy(mine);
+            cell.addObject(mine);
+            map[row][col] = cell;
         } else {
             TokenHandler handler = tokenHandlers.get(token);
             if (handler != null) {
@@ -256,6 +270,7 @@ public class WorldHG implements Serializable {
         if (player2 != null) {
             checkPlayerBoardInteractions(player2, false);
         }
+        checkEnemyEnemyInteractions();
     }
 
     // Player Movement
@@ -603,6 +618,60 @@ public class WorldHG implements Serializable {
             return (WorldHG) obj;
         } catch (java.io.IOException | ClassNotFoundException e) {
             throw new WorldHGException(WorldHGException.IO_ERROR);
+        }
+    }
+
+    public void removeEnemy(Enemy enemy) {
+        if (this.enemies != null) {
+            this.enemies.remove(enemy);
+        }
+        if (board != null) {
+            for (int r = 0; r < board.length; r++) {
+                for (int c = 0; c < board[r].length; c++) {
+                    if (board[r][c].getContents().contains(enemy)) {
+                        board[r][c].removeObject(enemy);
+                    }
+                }
+            }
+        }
+    }
+
+    private void checkEnemyEnemyInteractions() {
+        ArrayList<Enemy> currentEnemies = new ArrayList<>(enemies);
+        ArrayList<Enemy> toRemove = new ArrayList<>();
+        
+        for (Enemy enemy : currentEnemies) {
+            if (enemy instanceof interactWEnemy && !toRemove.contains(enemy)) {
+                interactWEnemy interactor = (interactWEnemy) enemy;
+                
+                // 1. Check if the mine is triggered by a direct collision (shouldInteract)
+                boolean triggered = false;
+                for (Enemy other : currentEnemies) {
+                    if (enemy != other && !toRemove.contains(other)) {
+                        if (interactor.shouldInteract(other)) {
+                            triggered = true;
+                            break;
+                        }
+                    }
+                }
+                
+                // 2. If triggered, explode and affect all enemies in the explosion radius (plus the mine itself)
+                if (triggered) {
+                    for (Enemy other : currentEnemies) {
+                        if (!toRemove.contains(other)) {
+                            if (other == enemy || interactor.isWithinExplosionRadius(other)) {
+                                interactor.interact(other);
+                                toRemove.add(other);
+                            }
+                        }
+                    }
+                    toRemove.add(enemy);
+                }
+            }
+        }
+        
+        for (Enemy e : toRemove) {
+            removeEnemy(e);
         }
     }
 
