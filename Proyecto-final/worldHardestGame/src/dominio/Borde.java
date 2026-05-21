@@ -16,7 +16,7 @@ public class Borde implements CellState {
     public boolean isARespawn() {
         return false;
     }
-   
+    
     @Override
    public boolean isAFinish() {
     	return false;

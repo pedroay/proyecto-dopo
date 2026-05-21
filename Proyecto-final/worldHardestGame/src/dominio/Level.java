@@ -51,7 +51,7 @@ public class Level implements java.io.Serializable {
             String[] dims = br.readLine().trim().split("\\s+");
             int width = Integer.parseInt(dims[0]);
             int height = Integer.parseInt(dims[1]);
-
+  
             // Remaining lines: entity declarations
             ArrayList<String> lines = new ArrayList<>();
             String line;
@@ -91,6 +91,47 @@ public class Level implements java.io.Serializable {
 
     public int getWidth() {
         return width;
+    }
+
+    /**
+     * Exports this level to a .txt file using the entity-list format.
+     * Format:
+     *   Line 1: level number
+     *   Line 2: width height
+     *   Remaining lines: entity declarations (TOKEN col row)
+     *
+     * @param file destination file (if it doesn't end in .txt, the extension is appended)
+     * @throws WorldHGException if an I/O error occurs during writing
+     */
+    public void exportAs(java.io.File file) throws WorldHGException {
+        if (!file.getName().toLowerCase().endsWith(".txt")) {
+            file = new java.io.File(file.getParentFile(), file.getName() + ".txt");
+        }
+        try (java.io.PrintWriter pw = new java.io.PrintWriter(
+                new java.io.FileWriter(file))) {
+            pw.println(levelNumber);
+            pw.println(width + " " + height);
+            for (String entityLine : entityLines) {
+                pw.println(entityLine);
+            }
+        } catch (java.io.IOException e) {
+            throw new WorldHGException(WorldHGException.EXPORT_ERROR, e);
+        }
+    }
+
+    /**
+     * Imports a level from a .txt file using the entity-list format.
+     *
+     * @param file the source .txt file
+     * @return a new Level instance with the data from the file
+     * @throws WorldHGException if an I/O error occurs or the file format is invalid
+     */
+    public static Level importFrom(java.io.File file) throws WorldHGException {
+        try {
+            return loadFromFile(file.getAbsolutePath());
+        } catch (Exception e) {
+            throw new WorldHGException(WorldHGException.IMPORT_ERROR, e);
+        }
     }
 
     @Override

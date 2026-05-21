@@ -1,4 +1,4 @@
-package dominio;
+ package dominio;
 
 import java.awt.Color;
 
@@ -8,7 +8,6 @@ import java.awt.Color;
  */
 public class Police extends Enemy {
 
-    private static final double POLICE_SPEED = 4.0;
     private static final int CELL_SIZE = 40;
 
     private double dirX = 1;
@@ -22,18 +21,19 @@ public class Police extends Enemy {
     public Police(int posx, int posy) {
         super(posx, posy);
         super.setMove(true);
+        super.setSpeed(4.0);
     }
 
     @Override
     public void move(Board[][] board) {
-        double nextX = getX() + dirX * POLICE_SPEED;
-        double nextY = getY() + dirY * POLICE_SPEED;
+        double nextX = getX() + dirX * getSpeed();
+        double nextY = getY() + dirY * getSpeed();
 
         if (isPixelBlocked(nextX, nextY, board)) {
             dirX = -dirX;
             dirY = -dirY;
-            nextX = getX() + dirX * POLICE_SPEED;
-            nextY = getY() + dirY * POLICE_SPEED;
+            nextX = getX() + dirX * getSpeed();
+            nextY = getY() + dirY * getSpeed();
         }
 
         setX(nextX);

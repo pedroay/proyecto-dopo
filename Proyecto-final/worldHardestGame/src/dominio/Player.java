@@ -87,6 +87,7 @@ public class Player extends Hero {
         return java.awt.Color.RED.darker();
     }
     
+    @Override
     public double getSpeed() {
     	return state.getSpeed();
     }

@@ -42,4 +42,6 @@ public class BallTest {
         // La dirección debería haberse invertido
         assertEquals("La dirección X debería haberse invertido tras chocar", -1.0, ball.getDirX(), 0.001);
     }
+
+
 }

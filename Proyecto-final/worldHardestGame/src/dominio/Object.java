@@ -183,5 +183,6 @@ public abstract class Object implements Renderable, java.io.Serializable {
     }
 
     public void addColideWith(Object newObject) {
+        colideWith.add(newObject.getClass().getName());
     }
 }

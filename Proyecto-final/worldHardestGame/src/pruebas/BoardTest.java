@@ -29,4 +29,13 @@ public class BoardTest {
         Board normalBoard = new Board(1, 1);
         assertFalse("No debería ser zona segura si está vacía (estado Empty)", normalBoard.isSafe());
     }
+
+    @Test
+    public void testBorde(){
+        Borde borde = new Borde();
+        assertFalse(borde.isSafe());
+        assertFalse(borde.isARespawn());
+        assertFalse(borde.isAFinish());
+        assertFalse(borde.isSafe());
+    }
 }

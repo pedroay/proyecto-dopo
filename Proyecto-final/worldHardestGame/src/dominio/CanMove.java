@@ -19,6 +19,8 @@ public interface CanMove {
     public boolean canMoveInMap();
     public void setMove(boolean value);
     
+    public double getSpeed();
+    public void setSpeed(double speed);
     }
 	
 

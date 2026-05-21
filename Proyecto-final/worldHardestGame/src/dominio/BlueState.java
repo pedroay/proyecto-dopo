@@ -9,7 +9,6 @@ import java.awt.Color;
 public class BlueState extends PlayerState {
 
     public BlueState() {
-        // Faster speed, smaller size
         super(Color.BLUE, 9.0, 25.0, 1); 
     }
 }

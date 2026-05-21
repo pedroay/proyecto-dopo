@@ -19,16 +19,6 @@ import java.awt.Color;
  */
 public class Ball extends Enemy {
 
-	/** Base movement speed in pixels per frame (~60 FPS). Override in subclasses to change speed. */
-    private static final double BASE_SPEED = 2.5;
-
-    /**
-     * Returns the movement speed for this ball in pixels per frame.
-     * Subclasses override this to travel at a different speed.
-     */
-    protected double getSpeed() {
-        return BASE_SPEED;
-    }
 
     /** Cell size in pixels (must match GamePanel.CELL_SIZE). */
     public static final int CELL_SIZE = 40;
@@ -36,8 +26,8 @@ public class Ball extends Enemy {
     private static final Color BALL_PRIMARY = new Color(30, 100, 200);
     private static final Color BALL_BORDER  = new Color(10,  60, 160);
 
-    private String state;   // movement pattern
-    private double dirX;    // X direction: -1.0, 0, or 1.0
+    private String state;   // estado de movimiento horizontal o vertical
+    private double dirX;    // X direction: -1.0, 0, or 1.0 esto nos dice donde se va a mover tipo en el plano cartesiano
     private double dirY;    // Y direction: -1.0, 0, or 1.0
 
     /**
@@ -50,6 +40,7 @@ public class Ball extends Enemy {
         this.state = state;
         initDirection();
         super.setMove(true);
+        super.setSpeed(2.5);
     }
     
     /** Initializes the direction based on the state. */
@@ -58,15 +49,11 @@ public class Ball extends Enemy {
             case "H":
                 dirX = 1;
                 dirY = 0;
-                break; // starts by moving right
+                break;
             case "V":
                 dirX = 0;
                 dirY = 1;
-                break; // starts by moving down
-            case "P":
-                dirX = 1;
-                dirY = 0;
-                break; // starts clockwise (→)
+                break; 
             default:
                 dirX = 1;
                 dirY = 0;
@@ -87,12 +74,9 @@ public class Ball extends Enemy {
             case "V":
                 moveStraight(board);
                 break;
-            case "P":
-                movePerimeter(board);
-                break;
         }
-        // Update the grid cell (posx/posy) so WorldHG can use AABB 
-        // between player and Ball without relying on Board[][].
+        //esto es para que como tenemos 2 indicadroes posicion uno en la grid y otro en pixeles para manejar interaciones
+        //Pos es para gri x o y para interaciones
         setPosx((int) (getX() / CELL_SIZE));
         setPosy((int) (getY() / CELL_SIZE));
     }
@@ -121,48 +105,9 @@ public class Ball extends Enemy {
     }
 
 
- // ─── Perimeter Movement ───────────────────────────────────────────────────
 
-    /**
-     * Perimeter movement: follows the walls in a clockwise direction.
-     * Priority: turn right → continue straight → turn left → reverse.
-     */
-    private void movePerimeter(Board[][] board) {
-        double speed = getSpeed();
-        double[][] attempts = {
-            turnRight(dirX, dirY),
-            { dirX, dirY },
-            turnLeft(dirX, dirY),
-            { -dirX, -dirY }
-        };
 
-        for (double[] dir : attempts) {
-            double nextX = getX() + dir[0] * speed;
-            double nextY = getY() + dir[1] * speed;
-            if (!isPixelBlocked(nextX, nextY, board)) {
-                dirX = dir[0];
-                dirY = dir[1];
-                setX(nextX);
-                setY(nextY);
-                return;
-            }
-        }
-        // All paths blocked → remains still this frame
-    }
 
- // ─── Direction Utilities ───────────────────────────────────────────────────
-
-    /** Right turn (clockwise): (1,0)→(0,1)→(-1,0)→(0,-1)→(1,0). */
-    private double[] turnRight(double dx, double dy) {
-        return new double[]{ -dy, dx };
-    }
-
-    /** Left turn (counter-clockwise). */
-    private double[] turnLeft(double dx, double dy) {
-        return new double[]{ dy, -dx };
-    }
-
- //Wall Collision Detection (AABB) 
 
     /**
      * Checks if the leading edges of the Ball (in pixels) fall within a
@@ -177,13 +122,20 @@ public class Ball extends Enemy {
      */
     private boolean isPixelBlocked(double px, double py, Board[][] board) {
         int size = CELL_SIZE;
-        // Test the four corners of the collision box
+        // aqui lo que hacemos es crear las cuatro esquina
+        //(px, py) ─────────── (px+39, py)
+        //│                      │
+        //│       BALL           │
+        //│                      │
+        //(px, py+39) ──────── (px+39, py+39)
+        // le restamos uno para no invadir ninguna  celda 
         int[][] corners = {
             { (int) px, (int) py },
             { (int)(px + size-1), (int) py },
             { (int) px, (int)(py + size-1) },
             { (int)(px + size-1), (int)(py + size-1) }
         };
+        // t aca se divide para saver en cual de la board esta
         for (int[] c : corners) {
             int col = c[0] / size;
             int row = c[1] / size;

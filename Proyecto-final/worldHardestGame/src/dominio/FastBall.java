@@ -19,7 +19,7 @@ import java.awt.Color;
  */
 public class FastBall extends Ball {
 
-    private static final double SPEED_MULTIPLIER = 2.0;
+    private static final double speedMultiplier = 2.0;
 
     private static final Color FAST_PRIMARY = new Color(220, 60, 0);   // Fiery orange-red
     private static final Color FAST_BORDER  = new Color(150, 20, 0);   // Dark red border
@@ -31,6 +31,7 @@ public class FastBall extends Ball {
      */
     public FastBall(int posx, int posy, String state) {
         super(posx, posy, state);
+        setSpeed(super.getSpeed() * speedMultiplier);
     }
 
     /**
@@ -38,10 +39,6 @@ public class FastBall extends Ball {
      * The private movement methods in Ball call this.getSpeed() at runtime,
      * so they automatically use this faster value without any code duplication.
      */
-    @Override
-    protected double getSpeed() {
-        return super.getSpeed() * SPEED_MULTIPLIER;
-    }
 
     // ─── Renderable — FastBall uses a distinct red/orange color ──────────────
 

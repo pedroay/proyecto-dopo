@@ -15,6 +15,7 @@ public class Mina extends Enemy implements interactWEnemy {
 
     public Mina(int posx, int posy) {
         this(posx, posy, 1);
+        this.setSpeed(0);
     }
 
     public Mina(int posx, int posy, int radio) {

@@ -640,6 +640,8 @@ public class WorldHG implements Serializable {
             }
         }
     }
+    
+   
 
     private void checkEnemyEnemyInteractions() {
         ArrayList<Enemy> currentEnemies = new ArrayList<>(enemies);

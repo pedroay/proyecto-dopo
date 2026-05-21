@@ -45,4 +45,55 @@ public class PlayerTest {
         player.setState(new BlueState());
         assertTrue("El estado debería ser BlueState", player.getState() instanceof BlueState);
     }
+
+    @Test
+    public void testBlueState(){
+        BlueState blueState = new BlueState();
+        assertEquals(java.awt.Color.BLUE, blueState.getColor());
+        assertEquals(9.0, blueState.getSpeed(), 0.001);
+        assertEquals(25.0, blueState.getSize(), 0.001);
+    }
+
+    @Test
+    public void testGreenStateFirstContactNoDeath() {
+        Player player = new Player("GreenHero", 0, 0);
+        player.setState(new GreenState());
+        
+        // GreenState starts with 2 lives
+        assertEquals(2, player.getState().getVidas());
+        assertEquals(6.0, player.getState().getSpeed(), 0.001);
+        assertFalse(player.getState().isImmune());
+
+        // First contact: should lose 1 life, gain immunity, and slow down to 4.0 (2/3 of 6.0)
+        player.getState().handleEnemyContact(player);
+        
+        assertEquals(1, player.getState().getVidas());
+        assertTrue(player.getState().isImmune());
+        assertEquals(4.0, player.getState().getSpeed(), 0.001);
+    }
+
+    @Test
+    public void testGreenStateSecondContactDeath() {
+        Player player = new Player("GreenHero", 0, 0);
+        player.setState(new GreenState());
+        
+        // First contact
+        player.getState().handleEnemyContact(player);
+        assertEquals(1, player.getState().getVidas());
+        assertTrue(player.getState().isImmune());
+
+        // Second contact while immune should be ignored
+        player.getState().handleEnemyContact(player);
+        assertEquals(1, player.getState().getVidas()); // Still 1 life
+
+        // Simulate 120 frames passing to expire immunity
+        for (int i = 0; i < 120; i++) {
+            player.getState().onTick(player);
+        }
+        assertFalse(player.getState().isImmune());
+
+        // Second contact after immunity expired: should lose the last life and die
+        player.getState().handleEnemyContact(player);
+        assertEquals(0, player.getState().getVidas());
+    }
 }

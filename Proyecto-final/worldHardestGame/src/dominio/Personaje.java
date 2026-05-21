@@ -10,6 +10,7 @@ package dominio;
 public abstract class Personaje extends Object implements CanMove {
 	
 	private boolean move;
+	private double speed;
     public Personaje(int posx, int posy) {
         super(posx, posy);
     }
@@ -43,5 +44,13 @@ public abstract class Personaje extends Object implements CanMove {
    
    public void setMove(boolean value) {
 	   move = value;
+   }
+   
+   public double getSpeed() {
+	   return speed;
+   }
+   
+   public void setSpeed(double speed) {
+	   this.speed = speed;
    }
 }
