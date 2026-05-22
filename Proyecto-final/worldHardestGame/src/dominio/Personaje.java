@@ -19,23 +19,15 @@ public abstract class Personaje extends Object implements CanMove {
     // These use the current velocity stored in Object (velX, velY).
 
     @Override
-    public void moveUp()    { 
-        setY(getY() - Math.abs(getVelY() > 0 ? getVelY() : 1)); 
+    public void moveY (double stepY)    { 
+    	setY(getY() + stepY); 
     }
 
-    @Override
-    public void moveDown()  { 
-        setY(getY() + Math.abs(getVelY() > 0 ? getVelY() : 1)); 
-    }
+  
 
     @Override
-    public void moveRight() { 
-        setX(getX() + Math.abs(getVelX() > 0 ? getVelX() : 1));
-    }
-
-    @Override
-    public void moveLeft()  { 
-        setX(getX() - Math.abs(getVelX() > 0 ? getVelX() : 1)); 
+    public void moveX(double stepX)  { 
+        setX(getX() + stepX); 
     }
     
    public boolean canMoveInMap() {

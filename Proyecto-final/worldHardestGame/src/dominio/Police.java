@@ -1,7 +1,9 @@
  package dominio;
 
 import java.awt.Color;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 /**
  * Police enemy. Extends Enemy and moves horizontally 
  * with a flashing red/blue strobe effect.
@@ -13,15 +15,17 @@ public class Police extends Enemy {
     private double dirX = 1;
     private double dirY = 0;
     private int frameCount = 0;
+    private ArrayList<Map.Entry<String, Integer>> instruciones;
 
     /**
      * @param posx initial column in the grid
      * @param posy initial row in the grid
      */
-    public Police(int posx, int posy) {
+    public Police(int posx, int posy, ArrayList<Map.Entry<String, Integer>> instruciones ) {
         super(posx, posy);
         super.setMove(true);
         super.setSpeed(4.0);
+        this.instruciones = instruciones;
     }
 
     @Override

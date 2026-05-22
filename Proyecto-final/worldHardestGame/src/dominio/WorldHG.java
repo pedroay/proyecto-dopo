@@ -59,7 +59,6 @@ public class WorldHG implements Serializable {
         this.timeRemaining = INITIAL_TIME;
         this.enemies = new ArrayList<>();
 
-        // Initialize token handlers
         this.tokenHandlers = new HashMap<>();
         initTokenHandlers();
     }
@@ -147,7 +146,8 @@ public class WorldHG implements Serializable {
             if ("pvp".equals(modality) || "pve".equals(modality)) {
                 int[] goal = findGoal();
                 this.player2 = new Player("Player2", goal[0], goal[1]);
-                this.player2.setState(new BlueState()); // Por defecto distinto a J1
+                this.player2.setState(new BlueState());
+                this.player2.setOriginalState(player2.getState());
             }
         }
     }
@@ -174,11 +174,10 @@ public class WorldHG implements Serializable {
             String[] parts = entityLine.split("\\s+");
             if (parts.length < 3)
                 continue; // skip malformed lines
-            String token = parts[0];
             int col = Integer.parseInt(parts[1]);
             int row = Integer.parseInt(parts[2]);
             if (row >= 0 && row < height && col >= 0 && col < width) {
-                logicBoard(newBoard, row, col, token);
+                logicBoard(newBoard, row, col, parts);
             }
         }
         return newBoard;
@@ -196,7 +195,8 @@ public class WorldHG implements Serializable {
      * @param col   the horizontal index (column) in the board array
      * @param token the string token representing the element to be processed
      */
-    public void logicBoard(Board[][] map, int row, int col, String token) {
+    public void logicBoard(Board[][] map, int row, int col, String[] parts) {
+    	String token = parts[0];
         if (token.startsWith("B") && token.length() > 1) {
             String state = token.substring(1);
             Ball ball = new Ball(col, row, state);
@@ -207,7 +207,20 @@ public class WorldHG implements Serializable {
             FastBall fastBall = new FastBall(col, row, state);
             enemies.add(fastBall);
             map[row][col] = new Board(col, row); // empty cell underneath
-        } else if (token.startsWith("M")) {
+        } else if(token.startsWith("PO")){
+        	ArrayList<Map.Entry<String, Integer>> instruccionesPolicia = new ArrayList<>();
+        	for (int i = 3; i < parts.length; i += 2) {
+                if (i + 1 < parts.length) { 
+                    String direccion = parts[i];
+                    int pasos = Integer.parseInt(parts[i + 1]);
+                    instruccionesPolicia.add(Map.entry(direccion, pasos));
+                }
+        	}
+        	Police policia = new Police(col, row, instruccionesPolicia);
+            enemies.add(policia);
+            map[row][col] = new Board(col, row);
+        }
+        else if (token.startsWith("M")) {
             Board cell = new Board(col, row);
             int radius = 1;
             if (token.length() > 1) {
@@ -314,11 +327,11 @@ public class WorldHG implements Serializable {
         for (int i = 0; i < steps; i++) {
             // Attempt to move in X
             if (!isPlayerBlocked(player.getX() + stepX, player.getY(), player)) {
-                player.setX(player.getX() + stepX);
+                player.moveX(stepX);
             }
             // Attempt to move in Y
             if (!isPlayerBlocked(player.getX(), player.getY() + stepY, player)) {
-                player.setY(player.getY() + stepY);
+                player.moveY(stepY);
             }
         }
 
@@ -541,9 +554,7 @@ public class WorldHG implements Serializable {
         player.setPosy((int) (player.getRespawnY() / CELL_SIZE));
         player.setVelX(0);
         player.setVelY(0);
-
-        // Notify the current state so it can reset itself (e.g. GreenState resets its
-        // hit flag)
+        player.setState(player.getOriginalState());
         player.getState().onPlayerDeath(player);
     }
 

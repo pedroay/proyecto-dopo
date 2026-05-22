@@ -281,6 +281,7 @@ public class WorldHardestGameGUI extends JFrame {
                         break;
                 }
                 worldHG.getPlayer1().setState(skinState);
+                worldHG.getPlayer1().setOriginalState(skinState);
             }
 
             // Detener el panel anterior si existe

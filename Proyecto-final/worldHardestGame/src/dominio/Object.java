@@ -179,7 +179,7 @@ public abstract class Object implements Renderable, java.io.Serializable {
     //  Collisions (original inheritance)
 
     public boolean canColideW(Object obj) {
-        return colideWith.contains(obj);
+        return colideWith.contains(obj.getClass().getName());
     }
 
     public void addColideWith(Object newObject) {

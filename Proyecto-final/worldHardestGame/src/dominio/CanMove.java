@@ -11,11 +11,9 @@ package dominio;
 public interface CanMove {
 	
 	 
-    public void moveUp();
-    public void moveDown();
-    public void moveRight();
-    public void moveLeft();
-    
+    public void moveY(double StepY);
+    public void moveX(double StepX);
+
     public boolean canMoveInMap();
     public void setMove(boolean value);
     

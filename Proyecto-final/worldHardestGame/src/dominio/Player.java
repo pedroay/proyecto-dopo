@@ -13,6 +13,7 @@ public class Player extends Hero {
 
     private String name;
     private PlayerState state;
+    private PlayerState originalState;
 
     /** Respawn point in pixels (column × CELL_SIZE). */
     private double respawnX;
@@ -28,7 +29,8 @@ public class Player extends Hero {
     public Player(String name, int posx, int posy) {
         super(posx, posy);
         this.name = name;
-        this.state = new RedState(); // Default state
+        this.state = new RedState();
+        this.originalState = this.state;
         this.respawnX = posx * 40.0;
         this.respawnY = posy * 40.0;
     }
@@ -62,6 +64,14 @@ public class Player extends Hero {
 
     public void setState(PlayerState state) {
         this.state = state;
+    }
+    
+    public PlayerState getOriginalState() {
+    	return originalState;
+    }
+    
+    public void setOriginalState(PlayerState state) {
+    	originalState = state;
     }
 
     // ─── Behaviour hooks ──────────────────────────────────────────────────────
