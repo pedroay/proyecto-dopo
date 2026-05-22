@@ -273,10 +273,10 @@ public class WorldHG implements Serializable {
 
         // 3. Update player state (immunity timers, etc.)
         if (player1 != null) {
-            player1.getState().onTick(player1);
+            player1.onTick();
         }
         if (player2 != null) {
-            player2.getState().onTick(player2);
+            player2.onTick();
         }
 
         // 4. Interactions

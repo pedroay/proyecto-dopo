@@ -81,7 +81,7 @@ public abstract class PlayerState implements java.io.Serializable {
     /**
      * Called every frame (~60fps)
      */
-    public void onTick(Player player) {
+    public void onTick() {
         if (immunityFrames > 0) {
             immunityFrames--;
             blinkCounter++;

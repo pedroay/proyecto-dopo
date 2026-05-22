@@ -90,18 +90,18 @@ public class Ball extends Enemy {
      */
     private void moveStraight(Board[][] board) {
         double speed = getSpeed();
-        double nextX = getX() + dirX * speed;
-        double nextY = getY() + dirY * speed;
+        double nextX = dirX * speed;
+        double nextY = dirY * speed;
 
-        if (isPixelBlocked(nextX, nextY, board)) {
+        if (isPixelBlocked(nextX+ getX(), nextY+ getY(), board)) {
             dirX = -dirX;
             dirY = -dirY;
-            nextX = getX() + dirX * speed;
-            nextY = getY() + dirY * speed;
+            nextX = dirX * speed;
+            nextY =  dirY * speed;
         }
 
-        setX(nextX);
-        setY(nextY);
+        moveX(nextX);
+        moveY(nextY);
     }
 
 

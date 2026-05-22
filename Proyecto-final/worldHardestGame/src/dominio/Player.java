@@ -101,4 +101,8 @@ public class Player extends Hero {
     public double getSpeed() {
     	return state.getSpeed();
     }
+
+    public void onTick(){
+        state.onTick();
+    }
 }
