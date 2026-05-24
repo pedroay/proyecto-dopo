@@ -3,13 +3,25 @@ package pruebas;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.AbstractMap.SimpleEntry;
 import dominio.*;
 
 public class PoliceTest {
 
+    // Método auxiliar para no escribir tanto código al crear instrucciones en los tests
+    private ArrayList<Map.Entry<String, Integer>> crearInstrucciones(String direccion, int casillas) {
+        ArrayList<Map.Entry<String, Integer>> instrucciones = new ArrayList<>();
+        instrucciones.add(new SimpleEntry<>(direccion, casillas));
+        return instrucciones;
+    }
+
     @Test
     public void testPoliceInitialization() {
-        Police police = new Police(3, 4);
+        ArrayList<Map.Entry<String, Integer>> instrucciones = crearInstrucciones("up", 2);
+        Police police = new Police(3, 4, instrucciones);
+        
         assertEquals(3.0, police.getPosx(), 0.001);
         assertEquals(4.0, police.getPosy(), 0.001);
         assertEquals(120.0, police.getX(), 0.001);
@@ -24,11 +36,15 @@ public class PoliceTest {
 
     @Test
     public void testPoliceColorStrobeEffect() {
-        Police police = new Police(0, 0);
+        // Le damos muchas casillas para que no termine la instrucción antes de tiempo
+        ArrayList<Map.Entry<String, Integer>> instrucciones = crearInstrucciones("down", 20);
+        Police police = new Police(0, 0, instrucciones);
         
-        Board[][] board = new Board[2][2];
-        for (int r = 0; r < 2; r++) {
-            for (int c = 0; c < 2; c++) {
+        // Creamos un tablero 10x10 para que tenga espacio para moverse durante 30 frames
+        // sin chocar contra las paredes (30 frames * 4px = 120px = 3 casillas de distancia).
+        Board[][] board = new Board[10][10];
+        for (int r = 0; r < 10; r++) {
+            for (int c = 0; c < 10; c++) {
                 board[r][c] = new Board(c, r);
                 board[r][c].setState(new Empty()); // can have objects on top, not safe
             }
@@ -58,7 +74,7 @@ public class PoliceTest {
     }
 
     @Test
-    public void testPoliceMovementAndBounce() {
+    public void testPoliceMovementAndInstructionSwitchOnBlock() {
         // Create a 1x3 board
         // row 0 has: col 0 (Empty), col 1 (Empty), col 2 (Borde - blocks)
         Board[][] board = new Board[1][3];
@@ -71,7 +87,12 @@ public class PoliceTest {
         board[0][2] = new Board(2, 0);
         board[0][2].setState(new Borde()); // Borde will block (isCanHaveObjectOnTop() is false)
 
-        Police police = new Police(0, 0); // Speed 4.0, dirX = 1
+        // Lista con dos instrucciones: intenta ir a la derecha y luego a la izquierda
+        ArrayList<Map.Entry<String, Integer>> instrucciones = new ArrayList<>();
+        instrucciones.add(new SimpleEntry<>("right", 10));
+        instrucciones.add(new SimpleEntry<>("left", 10));
+        
+        Police police = new Police(0, 0, instrucciones); // Speed 4.0
         
         // Initial pos: x = 0.0
         assertEquals(0.0, police.getX(), 0.001);
@@ -90,8 +111,12 @@ public class PoliceTest {
         
         // From x = 40.0, moving right with speed 4.0 puts nextX = 44.0.
         // Corner x + size - 1 is 44 + 39 = 83, which is in column 83/40 = 2 (the blocked Borde).
-        // It should bounce (invert dirX to -1, nextX becomes 40 - 4 = 36).
+        // It should detect the collision, SKIP the move to 44.0, and change its current instruction to "left".
         police.move(board);
-        assertEquals(36.0, police.getX(), 0.001);
+        assertEquals("No debió avanzar porque chocó con el bloque", 40.0, police.getX(), 0.001);
+        
+        // En el siguiente tick del juego, ya tiene cargada la instrucción "left", así que debe retroceder.
+        police.move(board);
+        assertEquals("Debió empezar a moverse a la izquierda", 36.0, police.getX(), 0.001);
     }
 }
