@@ -2,6 +2,8 @@ package dominio;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Base class for all game objects.
@@ -31,7 +33,7 @@ public abstract class Object implements Renderable, java.io.Serializable {
     private double velX;
     private double velY;
 
-    private ArrayList<String> colideWith;
+    private Set<Class<?>> colideWith;
 
     public Object(int posx, int posy) {
         this.posx = posx;
@@ -42,7 +44,7 @@ public abstract class Object implements Renderable, java.io.Serializable {
         this.y = posy * 40.0;
         this.velX = 0;
         this.velY = 0;
-        this.colideWith = new ArrayList<>();
+        this.colideWith =  new HashSet<>();
     }
 
  // Getters / Setters for integer position (grid)
@@ -178,11 +180,14 @@ public abstract class Object implements Renderable, java.io.Serializable {
 
     //  Collisions (original inheritance)
 
-    public boolean canColideW(Object obj) {
-        return colideWith.contains(obj.getClass().getName());
+    public boolean canColideWith(Object obj) {
+        if (obj == null) return false;
+        return colideWith.contains(obj.getClass()); // Búsqueda pura de O(1)
     }
 
-    public void addColideWith(Object newObject) {
-        colideWith.add(newObject.getClass().getName());
+    public void addColideWith(Class<?> clazz) {
+        if (clazz != null) {
+            colideWith.add(clazz); // El Set ignora los duplicados por sí solo
+        }
     }
 }

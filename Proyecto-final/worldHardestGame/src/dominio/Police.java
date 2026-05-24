@@ -15,31 +15,64 @@ public class Police extends Enemy {
     private double dirX = 1;
     private double dirY = 0;
     private int frameCount = 0;
-    private ArrayList<Map.Entry<String, Integer>> instruciones;
+    private ArrayList<Map.Entry<String, Integer>> instrucciones;
+    private int indiceInstruccionActual = 0;
+    private double pixelesRecorridosActual = 0;
 
     /**
      * @param posx initial column in the grid
      * @param posy initial row in the grid
      */
-    public Police(int posx, int posy, ArrayList<Map.Entry<String, Integer>> instruciones ) {
+    public Police(int posx, int posy, ArrayList<Map.Entry<String, Integer>> instrucciones ) {
         super(posx, posy);
         super.setMove(true);
         super.setSpeed(4.0);
-        this.instruciones = instruciones;
+        this.instrucciones = instrucciones;
     }
 
     @Override
     public void move(Board[][] board) {
-        double nextX = getX() + dirX * getSpeed();
-        double nextY = getY() + dirY * getSpeed();
+        if (instrucciones == null || instrucciones.isEmpty()) return;
 
-        if (isPixelBlocked(nextX, nextY, board)) {
-            dirX = -dirX;
-            dirY = -dirY;
-            nextX = getX() + dirX * getSpeed();
-            nextY = getY() + dirY * getSpeed();
+        // 1. Leer la instrucción actual
+        Map.Entry<String, Integer> instruccion = instrucciones.get(indiceInstruccionActual);
+        String direccion = instruccion.getKey().toLowerCase();
+        int casillasObjetivo = instruccion.getValue();
+        
+        // Convertir casillas a píxeles (ej: 10 casillas * 40 px = 400 px)
+        double pixelesObjetivo = casillasObjetivo * CELL_SIZE;
+
+        // 2. Determinar hacia dónde moverse basándonos en el String
+        double dx = 0;
+        double dy = 0;
+        switch (direccion) {
+            case "up":    dy = -1; break;
+            case "down":  dy = 1;  break;
+            case "left":  dx = -1; break;
+            case "right": dx = 1;  break;
+            default: break; // Ignorar instrucciones inválidas
         }
 
+        // 3. Calcular el paso de este frame
+        double paso = getSpeed();
+
+        // Evitar pasarse del destino exacto si el último paso es más grande que lo que falta
+        if (pixelesRecorridosActual + paso > pixelesObjetivo) {
+            paso = pixelesObjetivo - pixelesRecorridosActual;
+        }
+
+        double nextX = getX() + (dx * paso);
+        double nextY = getY() + (dy * paso);
+
+        // 4. Sistema de seguridad por si choca contra una pared (opcional)
+        // Si choca antes de terminar la instrucción, pasamos a la siguiente de inmediato
+        // para que no se quede atascado intentando atravesar un muro.
+        if (isPixelBlocked(nextX, nextY, board)) {
+            siguienteInstruccion();
+            return;
+        }
+
+        // 5. Aplicar el movimiento
         setX(nextX);
         setY(nextY);
         
@@ -47,7 +80,29 @@ public class Police extends Enemy {
         setPosx((int) (getX() / CELL_SIZE));
         setPosy((int) (getY() / CELL_SIZE));
         
+        // Sumar lo que recorrimos
+        pixelesRecorridosActual += paso;
+
+        // 6. Revisar si ya terminamos esta instrucción
+        if (pixelesRecorridosActual >= pixelesObjetivo) {
+            siguienteInstruccion();
+        }
+
         frameCount++;
+    }
+
+    /**
+     * Pasa a la siguiente instrucción y reinicia el contador de píxeles.
+     * Si llega al final de la lista, vuelve a empezar (hace un ciclo de patrulla).
+     */
+    private void siguienteInstruccion() {
+        pixelesRecorridosActual = 0;
+        indiceInstruccionActual++;
+        
+        // Si terminamos todas las instrucciones, volvemos a la primera (loop)
+        if (indiceInstruccionActual >= instrucciones.size()) {
+            indiceInstruccionActual = 0;
+        }
     }
 
     private boolean isPixelBlocked(double px, double py, Board[][] board) {

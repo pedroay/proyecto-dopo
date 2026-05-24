@@ -59,7 +59,7 @@ public abstract class PlayerState implements java.io.Serializable {
     /**
      * Called when the player touches an enemy.
      */
-    public void handleEnemyContact(Player player) {
+    public void handleEnemyContact() {
         if (isImmune()) return;
         
         restarVida();
@@ -72,7 +72,7 @@ public abstract class PlayerState implements java.io.Serializable {
     /**
      * Called by WorldHG when the player dies (vidas == 0).
      */
-    public void onPlayerDeath(Player player) {
+    public void onPlayerDeath() {
         resetVidas();
         this.immunityFrames = 0;
         this.blinkCounter = 0;

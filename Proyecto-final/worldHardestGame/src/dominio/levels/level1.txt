@@ -25,7 +25,7 @@ S 2 1
 S 3 1
 W 4 1
 W 5 1
-PG 6 1
+PO 6 1 right 4 down 1 left 4 up 1
 PB 8 1
 PR 10 1
 W 14 1

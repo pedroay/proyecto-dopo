@@ -24,7 +24,7 @@ public class PoliceTest {
 
     @Test
     public void testPoliceColorStrobeEffect() {
-        Police police = new Police(0, 0,);
+        Police police = new Police(0, 0);
         
         Board[][] board = new Board[2][2];
         for (int r = 0; r < 2; r++) {

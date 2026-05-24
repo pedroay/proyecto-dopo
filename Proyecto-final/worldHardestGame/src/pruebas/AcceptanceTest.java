@@ -24,7 +24,7 @@ public class AcceptanceTest {
             "S 0 0", "G 1 0"
         };
         game.loadLevel(new Level(1, 2, 1, entities));
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         
         // Inicialmente el nivel no está completado
         assertFalse(game.isLevelComplete());
@@ -70,7 +70,7 @@ public class AcceptanceTest {
             "S 0 0", "P 1 0", "G 2 0"
         };
         game.loadLevel(new Level(1, 3, 1, entities));
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         
         // Movemos al jugador directamente a la meta (Columna 2, x = 80 px) sin pasar por la moneda en (1,0)
         p.setX(2 * WorldHG.CELL_SIZE);
@@ -100,7 +100,7 @@ public class AcceptanceTest {
             "S 0 0", "BH 1 0"
         };
         game.loadLevel(new Level(1, 2, 1, entities));
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         
         // Cambiamos el estado a GreenState (que otorga 2 vidas iniciales)
         p.setState(new GreenState());
@@ -142,7 +142,7 @@ public class AcceptanceTest {
             "S 0 0", "PB 1 0", "G 2 0"
         };
         game.loadLevel(new Level(1, 3, 1, entities));
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         
         // Al inicio tiene el RedState (por defecto)
         assertTrue(p.getState() instanceof RedState);
@@ -174,7 +174,7 @@ public class AcceptanceTest {
             "S 0 0", "Z 1 0", "BH 2 0"
         };
         game.loadLevel(new Level(1, 3, 1, entities));
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         
         // Nos posicionamos primero en la zona segura (1,0) para establecer el nuevo punto de control (respawn)
         p.setX(1 * WorldHG.CELL_SIZE);

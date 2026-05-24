@@ -29,7 +29,7 @@ public class WorldHGTest {
         Level level = new Level(1, 5, 3, entities);
         game.loadLevel(level);
 
-        assertNotNull("El jugador no debería ser nulo tras cargar el nivel", game.getPlayer1());
+        assertNotNull("El jugador no debería ser nulo tras cargar el nivel", game.getPlayer(1));
         assertNotNull("El tablero no debería ser nulo tras cargar el nivel", game.getBoard());
         assertEquals("El número de muertes debería empezar en 0", 0, game.getDeaths());
     }
@@ -43,7 +43,7 @@ public class WorldHGTest {
         };
         game.loadLevel(new Level(1, 5, 3, entities));
         
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         double initialX = p.getX();
         
         // Simular tecla derecha (Right) presionada
@@ -62,7 +62,7 @@ public class WorldHGTest {
         };
         game.loadLevel(new Level(1, 3, 3, entities));
         
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         double xBefore = p.getX();
         double yBefore = p.getY();
         
@@ -85,7 +85,7 @@ public class WorldHGTest {
         };
         game.loadLevel(new Level(1, 5, 3, entities));
         
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         // Mover al jugador a la derecha hasta alcanzar la moneda en (2,1)
         for(int i = 0; i < 20; i++) {
             game.movePlayerContinuous(p, "RIGHT");
@@ -112,7 +112,7 @@ public class WorldHGTest {
         game.loadLevel(new Level(1, 5, 3, entities));
         
         int initialDeaths = game.getDeaths();
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         
         // Mover al jugador a la derecha hacia el enemigo en (3,1)
         for(int i = 0; i < 40; i++) {
@@ -145,7 +145,7 @@ public class WorldHGTest {
         };
         game.loadLevel(new Level(1, 4, 3, entities));
         
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         // Mover al jugador a la meta
         for(int i = 0; i < 30; i++) {
             game.movePlayerContinuous(p, "RIGHT");
@@ -166,7 +166,7 @@ public class WorldHGTest {
         };
         game.loadLevel(new Level(1, 3, 5, entities));
         
-        Player p = game.getPlayer1();
+        Player p = game.getPlayer(1);
         // Mover al jugador directamente a la meta "G" (1,3) saltándose la moneda "P" (1,2)
         p.setX(1 * WorldHG.CELL_SIZE);
         p.setY(3 * WorldHG.CELL_SIZE);
@@ -180,9 +180,8 @@ public class WorldHGTest {
     public void shouldNormalizeDiagonalVelocity() {
         String[] entities = { "S 0 0" };
         game.loadLevel(new Level(1, 1, 1, entities));
-        
-        game.setPlayerVelocity(false, true, false, true); // Abajo y Derecha
-        Player p = game.getPlayer1();
+
+        Player p = game.getPlayer(1);
         
         double speed = p.getState().getSpeed();
         double expectedVel = speed * (1.0 / Math.sqrt(2));

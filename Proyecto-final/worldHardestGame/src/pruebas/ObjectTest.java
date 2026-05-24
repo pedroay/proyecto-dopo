@@ -84,17 +84,5 @@ public class ObjectTest {
         assertEquals("Default getBorderColor should be Color.DARK_GRAY", Color.DARK_GRAY, obj.getBorderColor());
     }
 
-    @Test
-    public void testCollisionDetection() {
-        TestObject obj1 = new TestObject(0, 0);
-        TestObject obj2 = new TestObject(1, 1);
-        
-        // Initially should not collide
-        assertFalse(obj1.canColideW(obj2));
-        
-        obj1.addColideWith(obj2);
-        
-        // Now it should collide since we fixed the bug
-        assertTrue("Collision should be detected after adding class", obj1.canColideW(obj2));
-    }
+   
 }

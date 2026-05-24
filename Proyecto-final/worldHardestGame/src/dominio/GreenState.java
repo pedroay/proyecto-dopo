@@ -22,10 +22,10 @@ public class GreenState extends PlayerState {
     // ─── Core overrides ──────────────────────────────────────────────────────
 
     @Override
-    public void handleEnemyContact(Player player) {
+    public void handleEnemyContact() {
         if (isImmune()) return; // ignore hits while already immune
 
-        super.handleEnemyContact(player);
+        super.handleEnemyContact();
 
         // Reduce speed by 1/3 of the current speed if it survives
         if (getVidas() > 0) {
@@ -34,8 +34,8 @@ public class GreenState extends PlayerState {
     }
 
     @Override
-    public void onPlayerDeath(Player player) {
-        super.onPlayerDeath(player);
+    public void onPlayerDeath() {
+        super.onPlayerDeath();
         this.speed = BASE_SPEED;
     }
 }

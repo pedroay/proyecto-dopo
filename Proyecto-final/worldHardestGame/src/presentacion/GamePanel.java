@@ -71,7 +71,7 @@ public class GamePanel extends JPanel implements KeyListener {
         add(menuBtn);
 
         // Inicializar posición visual en la celda de inicio
-        Player player = worldHG.getPlayer1();
+        Player player = worldHG.getPlayer(1);
         if (player != null) {
             playerVisualX = player.getPosx() * CELL_SIZE;
             playerVisualY = player.getPosy() * CELL_SIZE;
@@ -130,7 +130,7 @@ public class GamePanel extends JPanel implements KeyListener {
      * hace snap de la posición visual al nuevo punto de reaparición.
      */
     private void syncPlayerVisualAfterTick() {
-        Player player = worldHG.getPlayer1();
+        Player player = worldHG.getPlayer(1);
         if (player == null)
             return;
         double newTargetX = player.getPosx() * CELL_SIZE;
@@ -213,9 +213,13 @@ public class GamePanel extends JPanel implements KeyListener {
             drawObject(g2, enemy, (int) enemy.getX(), HUD_HEIGHT + (int) enemy.getY());
         }
 
-        drawPlayer(g2, worldHG.getPlayer1()); // jugador encima de todo con su posición real
-        if (worldHG.getPlayer2() != null) {
-            drawPlayer(g2, worldHG.getPlayer2());
+        drawPlayer(g2, worldHG.getPlayer(1)); // jugador encima de todo con su posición real
+        try {
+	        if (worldHG.getPlayer(2) != null) {
+	            drawPlayer(g2, worldHG.getPlayer(2));
+	        }
+        }catch(Exception e){
+        	
         }
     }
 
@@ -305,8 +309,13 @@ public class GamePanel extends JPanel implements KeyListener {
     }
 
     private void handleInput() {
-        Player p1 = worldHG.getPlayer1();
-        Player p2 = worldHG.getPlayer2();
+        Player p1 = worldHG.getPlayer(1);
+        Player p2;
+        try {
+        	 p2 = worldHG.getPlayer(2);
+        }catch(Exception e) {
+        	p2 = null;
+        }
         if (worldHG.isTimeUp() || worldHG.isLevelComplete())
             return;
 

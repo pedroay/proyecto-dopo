@@ -37,13 +37,13 @@ public class Mina extends Enemy implements interactWEnemy {
     // ─── interactWEnemy ──────────────────────────────────────────────────────
 
     @Override
-    public boolean shouldInteract(Enemy other) {
+    public boolean shouldInteract(Object other) {
         // Triggered only if they occupy the exact same cell (direct collision)
         return this.getPosx() == other.getPosx() && this.getPosy() == other.getPosy();
     }
 
     @Override
-    public boolean isWithinExplosionRadius(Enemy other) {
+    public boolean isWithinExplosionRadius(Object other) {
         // Chebyshev distance on grid coordinates: max(|dx|, |dy|) <= radio - 1
         int dx = (int) Math.abs(this.getPosx() - other.getPosx());
         int dy = (int) Math.abs(this.getPosy() - other.getPosy());

@@ -65,10 +65,10 @@ public class PlayerTest {
         assertFalse(player.getState().isImmune());
 
         // First contact: should lose 1 life, gain immunity, and slow down to 4.0 (2/3 of 6.0)
-        player.getState().handleEnemyContact(player);
+        player.handleEnemyContact();
         
-        assertEquals(1, player.getState().getVidas());
-        assertTrue(player.getState().isImmune());
+        assertEquals(1, player.getVidas());
+        assertTrue(player.isImmune());
         assertEquals(4.0, player.getState().getSpeed(), 0.001);
     }
 
@@ -78,22 +78,22 @@ public class PlayerTest {
         player.setState(new GreenState());
         
         // First contact
-        player.getState().handleEnemyContact(player);
+        player.handleEnemyContact();
         assertEquals(1, player.getState().getVidas());
         assertTrue(player.getState().isImmune());
 
         // Second contact while immune should be ignored
-        player.getState().handleEnemyContact(player);
+        player.getState().handleEnemyContact();
         assertEquals(1, player.getState().getVidas()); // Still 1 life
 
         // Simulate 120 frames passing to expire immunity
         for (int i = 0; i < 120; i++) {
-            player.getState().onTick(player);
+            player.onTick();
         }
         assertFalse(player.getState().isImmune());
 
         // Second contact after immunity expired: should lose the last life and die
-        player.getState().handleEnemyContact(player);
+        player.handleEnemyContact();
         assertEquals(0, player.getState().getVidas());
     }
 }

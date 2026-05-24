@@ -267,7 +267,7 @@ public class WorldHardestGameGUI extends JFrame {
             worldHG.loadLevel(level);
 
             // Apply the selected skin to the player
-            if (worldHG.getPlayer1() != null) {
+            if (worldHG.getPlayer(1) != null) {
                 dominio.PlayerState skinState;
                 switch (selectedSkin) {
                     case "blue":
@@ -280,8 +280,8 @@ public class WorldHardestGameGUI extends JFrame {
                         skinState = new dominio.RedState();
                         break;
                 }
-                worldHG.getPlayer1().setState(skinState);
-                worldHG.getPlayer1().setOriginalState(skinState);
+                worldHG.getPlayer(1).setState(skinState);
+                worldHG.getPlayer(1).setOriginalState(skinState);
             }
 
             // Detener el panel anterior si existe

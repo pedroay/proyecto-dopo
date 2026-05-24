@@ -38,11 +38,9 @@ public class WorldHG implements Serializable {
     /** Static board: only walls, goals, coins, and safe zones. */
     private Board[][] board;
 
-    private Player player1;
-    private Player player2;
+    private ArrayList<Player> players;
     private String modality;
     private String winner;
-    private int deaths;
     private int timeRemaining; // in seconds
     private int frameCounter; // accumulated frames to count seconds
     private boolean levelComplete;
@@ -55,10 +53,9 @@ public class WorldHG implements Serializable {
 
     public WorldHG(String modality) {
         this.modality = modality;
-        this.deaths = 0;
         this.timeRemaining = INITIAL_TIME;
         this.enemies = new ArrayList<>();
-
+        this.players = new ArrayList<>();
         this.tokenHandlers = new HashMap<>();
         initTokenHandlers();
     }
@@ -133,21 +130,26 @@ public class WorldHG implements Serializable {
     public void loadLevel(Level level) {
         this.level = level;
         this.enemies = new ArrayList<>();
+        this.players = new ArrayList<>();
         this.timeRemaining = INITIAL_TIME;
         this.frameCounter = 0;
-        this.deaths = 0;
+        for(Player player:players) {
+        	player.setDeaths(0);
+        }
         this.levelComplete = false;
         this.board = buildBoard(level);
 
         if ("player".equals(modality) || "solo".equals(modality) || "pvp".equals(modality) || "pve".equals(modality)) {
             int[] start = findStart();
-            this.player1 = new Player("Player1", start[0], start[1]);
+            Player player1 = new Player("Player1", start[0], start[1]);	
+            players.add(player1);
             
             if ("pvp".equals(modality) || "pve".equals(modality)) {
                 int[] goal = findGoal();
-                this.player2 = new Player("Player2", goal[0], goal[1]);
-                this.player2.setState(new BlueState());
-                this.player2.setOriginalState(player2.getState());
+                Player player2 = new Player("Player2", goal[0], goal[1]);
+                player2.setState(new BlueState());
+                player2.setOriginalState(player2.getState());
+                players.add(player2);
             }
         }
     }
@@ -201,11 +203,17 @@ public class WorldHG implements Serializable {
             String state = token.substring(1);
             Ball ball = new Ball(col, row, state);
             enemies.add(ball);
+            for(Player p:players) {
+            	p.addColideWith(ball.getClass());
+            }
             map[row][col] = new Board(col, row); // empty cell underneath
         } else if (token.startsWith("F") && token.length() > 1) {
             String state = token.substring(1);
             FastBall fastBall = new FastBall(col, row, state);
             enemies.add(fastBall);
+            for(Player p:players) {
+            	p.addColideWith(fastBall.getClass());
+            }
             map[row][col] = new Board(col, row); // empty cell underneath
         } else if(token.startsWith("PO")){
         	ArrayList<Map.Entry<String, Integer>> instruccionesPolicia = new ArrayList<>();
@@ -218,6 +226,9 @@ public class WorldHG implements Serializable {
         	}
         	Police policia = new Police(col, row, instruccionesPolicia);
             enemies.add(policia);
+            for(Player p:players) {
+            	p.addColideWith(policia.getClass());
+            }
             map[row][col] = new Board(col, row);
         }
         else if (token.startsWith("M")) {
@@ -232,6 +243,9 @@ public class WorldHG implements Serializable {
             }
             Mina mine = new Mina(col, row, radius);
             this.addEnemy(mine);
+            for(Player p:players) {
+            	p.addColideWith(mine.getClass());
+            }
             cell.addObject(mine);
             map[row][col] = cell;
         } else {
@@ -272,23 +286,16 @@ public class WorldHG implements Serializable {
         }
 
         // 3. Update player state (immunity timers, etc.)
-        if (player1 != null) {
-            player1.onTick();
-        }
-        if (player2 != null) {
-            player2.onTick();
+        for(Player player:players) {
+        	 if (player != null) {
+                 player.onTick();
+             }
+        	 player.checkEnemyPlayerCollisions(CELL_SIZE,enemies);
+        	 checkPlayerBoardInteractions(player);
         }
 
-        // 4. Interactions
-        checkEnemyPlayerCollisions(player1);
-        checkEnemyPlayerCollisions(player2);
-        if (player1 != null) {
-            checkPlayerBoardInteractions(player1, true);
-        }
-        if (player2 != null) {
-            checkPlayerBoardInteractions(player2, false);
-        }
         checkEnemyEnemyInteractions();
+        addColideEnemis();
     }
 
     // Player Movement
@@ -384,7 +391,7 @@ public class WorldHG implements Serializable {
      * @param left  true if the "Left" key is pressed
      * @param right true if the "Right" key is pressed
      */
-    public void setPlayerVelocity(boolean up, boolean down, boolean left, boolean right) {
+    public void setPlayerVelocity(Player player1,boolean up, boolean down, boolean left, boolean right) {
         if (player1 == null)
             return;
         double speed = player1.getState().getSpeed();
@@ -410,57 +417,12 @@ public class WorldHG implements Serializable {
 
     // ─── Collisions ───────────────────────────────────────────────────────────
 
-    /**
-     * Checks if any enemy (Ball or Mine) overlaps with the player
-     * using AABB detection matching their visual representations.
-     */
-    private void checkEnemyPlayerCollisions(Player p) {
-        if (p == null)
-            return;
-
-        // Player's visual bounding box
-        double pSize = p.getState().getSize();
-        double pOffset = (CELL_SIZE - pSize) / 2.0;
-        double pLeft = p.getX() + pOffset;
-        double pTop = p.getY() + pOffset;
-
-        for (Enemy enemy : enemies) {
-            double eSize = CELL_SIZE - 10;
-            double eOffset = (CELL_SIZE - eSize) / 2.0;
-            double eLeft = enemy.getX() + eOffset;
-            double eTop = enemy.getY() + eOffset;
-
-            if (aabbOverlap(pLeft, pTop, pSize, eLeft, eTop, eSize)) {
-                if (p.getState().isImmune()) {
-                    continue;
-                }
-                
-                p.getState().handleEnemyContact(p);
-                if (p.getState().getVidas() == 0) {
-                    playerDies(p);
-                    return; // Si muere, dejamos de revisar colisiones en este frame
-                }
-            }
-        }
-    }
-
-    /**
-     * Returns true if two visual boxes overlap.
-     * Uses a slight inner margin to avoid pixel-perfect unfair deaths.
-     */
-    private boolean aabbOverlap(double aLeft, double aTop, double aSize, double bLeft, double bTop, double bSize) {
-        double margin = 1.0;
-        return aLeft + margin < bLeft + bSize - margin &&
-                aLeft + aSize - margin > bLeft + margin &&
-                aTop + margin < bTop + bSize - margin &&
-                aTop + aSize - margin > bTop + margin;
-    }
-
+    
     /**
      * Checks which static objects are present in the cell currently occupied
      * by the player and applies the corresponding effects.
      */
-    private void checkPlayerBoardInteractions(Player player, boolean isPlayer1) {
+    private void checkPlayerBoardInteractions(Player player) {
         // Use the player's center point to detect the current cell (more precise)
         double centerX = player.getX() + CELL_SIZE / 2.0;
         double centerY = player.getY() + CELL_SIZE / 2.0;
@@ -472,27 +434,34 @@ public class WorldHG implements Serializable {
 
         Board cell = board[row][col];
 
-        if (isPlayer1 && cell.isARespawn()) {
-            player.setRespawnPoint(col * CELL_SIZE, row * CELL_SIZE);
-        }
-        if (!isPlayer1 && cell.isAFinish()) {
-            player.setRespawnPoint(col * CELL_SIZE, row * CELL_SIZE);
-        }
-
-        if (isPlayer1 && cell.isAFinish()) {
-            if (allCoinsCollected()) {
-                levelComplete = true;
-                winner = "Jugador 1";
-            }
-        }
+        // 1. Ya NO usamos un for(Player p:players) aquí. 
+        // Solo afectamos al 'player' que pasó por parámetro.
         
-        if (!isPlayer1 && cell.isARespawn()) {
+        if (cell.isARespawn() || cell.isAFinish()) {
+            player.setRespawnPoint(col * CELL_SIZE, row * CELL_SIZE);
+        }
+
+     // Obtenemos qué jugador es (0 para el Jugador 1, 1 para el Jugador 2)
+        int playerIndex = players.indexOf(player);
+
+        // Definimos qué es "la meta" para cada quien
+        // Jugador 1 gana si llega al final (G)
+        boolean p1Wins = (playerIndex == 0 && cell.isAFinish());
+        
+        // Jugador 2 gana si llega a su propia meta 
+        // (Cámbialo a cell.isAFinish() si ambos deben llegar a la misma G, 
+        // o déjalo como cell.isARespawn() si el P2 debe llegar a la S)
+        boolean p2Wins = (playerIndex == 1 && cell.isARespawn()); 
+
+        if (p1Wins || p2Wins) {
             if (allCoinsCollected()) {
                 levelComplete = true;
-                winner = "Jugador 2";
+                // Lo guardamos sin espacio para evitar errores de lectura en tu GamePanel
+                winner = "Jugador" + (playerIndex + 1); 
             }
         }
 
+        // 3. Lógica de recolección de monedas intacta
         for (Object obj : new ArrayList<>(cell.getContents())) {
             if (obj.isCollectible()) {
                 Punto coin = (Punto) obj;
@@ -504,6 +473,7 @@ public class WorldHG implements Serializable {
             }
         }
     }
+        
 
     // ─── Helpers ──────────────────────────────────────────────────────────────
 
@@ -540,29 +510,8 @@ public class WorldHG implements Serializable {
         return true;
     }
 
-    /**
-     * The player dies: increments the death counter and teleports them to the
-     * respawn point in pixels.
-     * Velocity is reset to zero to prevent the player from moving immediately upon
-     * respawning.
-     */
-    private void playerDies(Player player) {
-        deaths++;
-        player.setX(player.getRespawnX());
-        player.setY(player.getRespawnY());
-        player.setPosx((int) (player.getRespawnX() / CELL_SIZE));
-        player.setPosy((int) (player.getRespawnY() / CELL_SIZE));
-        player.setVelX(0);
-        player.setVelY(0);
-        player.setState(player.getOriginalState());
-        player.getState().onPlayerDeath(player);
-    }
 
     // --- Getters de estado del juego ---
-
-    public int getDeaths() {
-        return deaths;
-    }
 
     public int getTimeRemaining() {
         return timeRemaining;
@@ -576,14 +525,10 @@ public class WorldHG implements Serializable {
         return levelComplete;
     }
 
-    public Player getPlayer1() {
-        return player1;
+    public Player getPlayer(int numberPlayer) {
+        return players.get(numberPlayer-1);
     }
 
-    public Player getPlayer2() {
-        return player2;
-    }
-    
     public String getWinner() {
         return winner;
     }
@@ -603,13 +548,22 @@ public class WorldHG implements Serializable {
     public String getInfo() {
         int mins = timeRemaining / 60;
         int secs = timeRemaining % 60;
-        
+        int deaths=0;
         String livesText = "";
-        if (player1 != null) livesText += " | Vidas J1: " + player1.getState().getVidas();
-        if (player2 != null) livesText += " | Vidas J2: " + player2.getState().getVidas();
-
-        return String.format("Tiempo: %d:%02d | Muertes: %d | Monedas: %s%s",
-                mins, secs, deaths, allCoinsCollected() ? "Todas" : "Faltan", livesText);
+        for(Player player:players) {
+	        if (player != null) {
+	        	livesText += " | Vidas J"+ (players.indexOf(player) +1) +
+	        			":" + player.getVidas();
+	        	deaths += player.getDeaths();
+	        	
+	        }
+	        	
+        }
+	        
+	
+	        return String.format("Tiempo: %d:%02d | Muertes: %d | Monedas: %s%s",
+	                mins, secs, deaths, allCoinsCollected() ? "Todas" : "Faltan", livesText);
+        
     }
 
     public void saveAs(File file) throws WorldHGException {
@@ -697,5 +651,21 @@ public class WorldHG implements Serializable {
         ois.defaultReadObject();
         this.tokenHandlers = new HashMap<>();
         initTokenHandlers();
+    }
+    
+    public int getDeaths() {
+    	int deaths=0;
+        for(Player player:players) {
+        	deaths += player.getDeaths();
+        }
+        return deaths;
+    }
+    
+    private void addColideEnemis() {
+    	for(Player player:players) {
+    		for(Enemy enemy:enemies) {
+    			player.addColideWith(enemy.getClass());
+    		}
+    	}
     }
 }

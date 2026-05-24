@@ -1,4 +1,5 @@
 package dominio;
+import java.util.ArrayList;
 
 /**
  * Represents the user-controlled player.
@@ -9,11 +10,12 @@ package dominio;
  * - velX / velY variables reside in the Object base class and are activated 
  *   from GamePanel upon detecting key presses.
  */
-public class Player extends Hero {
+public class Player extends Hero implements interactWEnemy {
 
     private String name;
     private PlayerState state;
     private PlayerState originalState;
+    private int deaths;
 
     /** Respawn point in pixels (column × CELL_SIZE). */
     private double respawnX;
@@ -73,6 +75,58 @@ public class Player extends Hero {
     public void setOriginalState(PlayerState state) {
     	originalState = state;
     }
+    
+    /**
+     * Checks if any enemy (Ball or Mine) overlaps with the player
+     * using AABB detection matching their visual representations.
+     */
+    public void checkEnemyPlayerCollisions(double cellSize,ArrayList<Enemy> enemies) {
+
+        // Player's visual bounding box
+        double pSize = this.getSize();
+        double pOffset = (cellSize - pSize) / 2.0;
+        double pLeft = this.getX() + pOffset;
+        double pTop = this.getY() + pOffset;
+
+        for (Enemy enemy : enemies) {
+        	if( shouldInteract(enemy) ) {
+	            double eSize = cellSize - 10;
+	            double eOffset = (cellSize - eSize) / 2.0;
+	            double eLeft = enemy.getX() + eOffset;
+	            double eTop = enemy.getY() + eOffset;
+	
+	            if (aabbOverlap(pLeft, pTop, pSize, eLeft, eTop, eSize)) {
+	                if (this.isImmune()) {
+	                    continue;
+	                }
+	                
+	                this.handleEnemyContact();
+	                if (this.getVidas() == 0)
+	                	playerDies(cellSize);
+	                    return; // Si muere, dejamos de revisar colisiones en este frame
+	                }
+	            }
+	        }
+        }
+    
+    
+    /**
+    * The player dies: increments the death counter and teleports them to the
+    * respawn point in pixels.
+    * Velocity is reset to zero to prevent the player from moving immediately upon
+    * respawning.
+    */
+   private void playerDies(double CELL_SIZE) {
+       deaths++;
+       setX(getRespawnX());
+       setY(getRespawnY());
+       setPosx((int) (getRespawnX() / CELL_SIZE));
+       setPosy((int) (getRespawnY() / CELL_SIZE));
+       setVelX(0);
+       setVelY(0);
+       setState(getOriginalState());
+       onPlayerDeath();
+   }
 
     // ─── Behaviour hooks ──────────────────────────────────────────────────────
 
@@ -105,4 +159,43 @@ public class Player extends Hero {
     public void onTick(){
         state.onTick();
     }
+    
+    public double getSize() {
+    	return state.getSize();
+    }
+    
+    public boolean isImmune() {
+    	return state.isImmune();
+    }
+    
+    public int getVidas() {
+    	return state.getVidas();
+    }
+    	
+    public void handleEnemyContact() {
+    	 state.handleEnemyContact();
+    }
+    
+    public void onPlayerDeath() {
+    	state.onPlayerDeath();
+    }
+    
+    public boolean shouldInteract(Object enemy) {
+    	return canColideWith(enemy);
+    	
+    }
+    
+    public boolean isWithinExplosionRadius(Object other) {
+    	return true;
+    }
+    
+    public void setDeaths(int newDeath) {
+    	deaths = newDeath;
+    }
+    
+    public int getDeaths() {
+    	return deaths;
+    }
+    
+    public  void interact(Enemy other) {}
 }
